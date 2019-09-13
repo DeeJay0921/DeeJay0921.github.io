@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Java中的Collections工具类及Comparator和Comparable的区别.md | DeeJay&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Collections类的常见方法为了处理Collection类的实例对象，java提供了Collections工具类来进行操作。该类为工具类，内部都为static方法。来看常见的几种使用： Collections.sort()对一个有序的List做排序。可以自定义排序规则。来看最基本的一个使用： 12345678910111213141516import java.util.ArrayList;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中的Collections工具类及Comparator和Comparable的区别.md">
+<meta property="og:url" content="https://deejay0921.github.io/2019/04/20/Java中的Collections工具类及Comparator和Comparable的区别/index.html">
+<meta property="og:site_name" content="DeeJay&#39;s Blog">
+<meta property="og:description" content="Collections类的常见方法为了处理Collection类的实例对象，java提供了Collections工具类来进行操作。该类为工具类，内部都为static方法。来看常见的几种使用： Collections.sort()对一个有序的List做排序。可以自定义排序规则。来看最基本的一个使用： 12345678910111213141516import java.util.ArrayList;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-13T05:16:41.155Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java中的Collections工具类及Comparator和Comparable的区别.md">
+<meta name="twitter:description" content="Collections类的常见方法为了处理Collection类的实例对象，java提供了Collections工具类来进行操作。该类为工具类，内部都为static方法。来看常见的几种使用： Collections.sort()对一个有序的List做排序。可以自定义排序规则。来看最基本的一个使用： 12345678910111213141516import java.util.ArrayList;">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">DeeJay&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">学习路上的一些笔记整理</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://deejay0921.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java中的Collections工具类及Comparator和Comparable的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/20/Java中的Collections工具类及Comparator和Comparable的区别/" class="article-date">
+  <time datetime="2019-04-20T11:22:24.000Z" itemprop="datePublished">2019-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java中的Collections工具类及Comparator和Comparable的区别.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Collections类的常见方法"><a href="#Collections类的常见方法" class="headerlink" title="Collections类的常见方法"></a>Collections类的常见方法</h2><p>为了处理Collection类的实例对象，java提供了Collections工具类来进行操作。该类为工具类，内部都为static方法。来看常见的几种使用：</p>
+<h3 id="Collections-sort"><a href="#Collections-sort" class="headerlink" title="Collections.sort()"></a>Collections.sort()</h3><p>对一个有序的List做排序。可以自定义排序规则。<br>来看最基本的一个使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;&gt;();</span><br><span class="line">        arr.add(3);</span><br><span class="line">        arr.add(1);</span><br><span class="line">        arr.add(4);</span><br><span class="line">        arr.add(2);</span><br><span class="line"></span><br><span class="line">        System.out.println(arr); // [3, 1, 4, 2]</span><br><span class="line">        Collections.sort(arr);</span><br><span class="line">        System.out.println(arr); // [1, 2, 3, 4]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果不指定排序规则会按照默认排序进行排列。再来看自定义规则的一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;&gt;();</span><br><span class="line">        arr.add(3);</span><br><span class="line">        arr.add(1);</span><br><span class="line">        arr.add(4);</span><br><span class="line">        arr.add(2);</span><br><span class="line"></span><br><span class="line">        System.out.println(arr); // [3, 1, 4, 2]</span><br><span class="line">        Collections.sort(arr, new Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public int compare(Integer o1, Integer o2) &#123;</span><br><span class="line">                return o2 - o1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        System.out.println(arr); // [4, 3, 2, 1]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Comparator是一个接口，实现其内部的compare方法即可按照给定规则排序。</p>
+<blockquote>
+<p>上述排序例子中new Comparator<integer>() {}是Java的内部匿名类，本身接口是不能直接new的，这个就表示实际上现在new的是这个<strong>接口的实现类</strong>。</integer></p>
+</blockquote>
+<h3 id="Comparator和Comparable的区别"><a href="#Comparator和Comparable的区别" class="headerlink" title="Comparator和Comparable的区别"></a>Comparator和Comparable的区别</h3><p>上述例子中使用了Comparator，和前者一样，Comparable也是一个接口，二者表示的不同的地方在于：</p>
+<ul>
+<li>Comparable是排序接口。若一个类实现了Comparable接口，就意味着该类支持排序</li>
+<li>Comparator是比较接口，我们如果需要控制某个类的次序，而该类本身不支持排序(即没有实现Comparable接口)，那么我们就可以建立一个“该类的比较器”来进行排序，这个“比较器”只需要实现Comparator接口即可。</li>
+</ul>
+<p>举个例子来说，我们这次创建一个自定义的可以排序的类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;SortDemo&gt; arr = new ArrayList&lt;&gt;();</span><br><span class="line">        arr.add(new SortDemo(3));</span><br><span class="line">        arr.add(new SortDemo(1));</span><br><span class="line">        arr.add(new SortDemo(2));</span><br><span class="line">        arr.add(new SortDemo(4));</span><br><span class="line"></span><br><span class="line">        System.out.println(arr); // [sortDemo_3, sortDemo_1, sortDemo_2, sortDemo_4]</span><br><span class="line"></span><br><span class="line">        Collections.sort(arr);</span><br><span class="line"></span><br><span class="line">        System.out.println(arr); // [sortDemo_1, sortDemo_2, sortDemo_3, sortDemo_4]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class SortDemo implements Comparable &#123;</span><br><span class="line">    int num;</span><br><span class="line"></span><br><span class="line">    public SortDemo(int num) &#123;</span><br><span class="line">        this.num = num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int compareTo(Object o) &#123;</span><br><span class="line">        SortDemo s = (SortDemo) o;</span><br><span class="line">        return this.num - s.num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;sortDemo_&quot; + this.num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述例子中，SortDemo类实现了Comparable接口1，重写了compareTo方法，从而使得SortDemo类的实例对象可以相互比较排序，直接调用<code>Collections.sort()</code>即可按照实现的compareTo方法进行排序，不需要传入额外的比较逻辑。<br>再来看使用Comparator的例子，这次我们的SortDemo类并不支持排序，调用<code>Collections.sort()</code>传入一个实现Comparator的内部匿名类来指定排序规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line">import java.util.Comparator;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;SortDemo&gt; arr = new ArrayList&lt;&gt;();</span><br><span class="line">        arr.add(new SortDemo(3));</span><br><span class="line">        arr.add(new SortDemo(1));</span><br><span class="line">        arr.add(new SortDemo(2));</span><br><span class="line">        arr.add(new SortDemo(4));</span><br><span class="line"></span><br><span class="line">        System.out.println(arr); // [sortDemo_3, sortDemo_1, sortDemo_2, sortDemo_4]</span><br><span class="line"></span><br><span class="line">        Collections.sort(arr, new Comparator&lt;SortDemo&gt;() &#123;  // 此处为内部匿名类</span><br><span class="line">            @Override</span><br><span class="line">            public int compare(SortDemo o1, SortDemo o2) &#123;</span><br><span class="line">                return o1.num - o2.num;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        System.out.println(arr); // [sortDemo_1, sortDemo_2, sortDemo_3, sortDemo_4]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class SortDemo&#123;</span><br><span class="line">    int num;</span><br><span class="line"></span><br><span class="line">    public SortDemo(int num) &#123;</span><br><span class="line">        this.num = num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;sortDemo_&quot; + this.num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Collections-binarySearch"><a href="#Collections-binarySearch" class="headerlink" title="Collections.binarySearch"></a>Collections.binarySearch</h3><p>返回指定List和key的index。关于这个方法有地方需要注意:</p>
+<blockquote>
+<p>要进行查找，要<strong>先调用Collections.sort()进行自然顺序排序</strong>，不然返回的结果会有问题<br>要调用Collections.sort()，那<strong>要保证List内部的类型是实现了Comparable接口的</strong>。</p>
+</blockquote>
+<p>对于Integer这种Java已经实现了Comparable的类是可以不做处理的，但是我们自定义的类要进行实现Comparable。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;&gt;();</span><br><span class="line">        arr.add(3);</span><br><span class="line">        arr.add(1);</span><br><span class="line">        arr.add(2);</span><br><span class="line">        arr.add(4);</span><br><span class="line"></span><br><span class="line">        Collections.sort(arr); // 调用binarySearch之前要先进行sort</span><br><span class="line">        System.out.println(Collections.binarySearch(arr, 3));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Collections-copy-destList-targetList"><a href="#Collections-copy-destList-targetList" class="headerlink" title="Collections.copy(destList, targetList)"></a>Collections.copy(destList, targetList)</h3><p>这个方法需要注意的地方是，目的List的长度要保证不短于要被克隆的targetList</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;&gt;();</span><br><span class="line">        arr.add(3);</span><br><span class="line">        arr.add(1);</span><br><span class="line">        arr.add(2);</span><br><span class="line">        arr.add(4);</span><br><span class="line">        ArrayList&lt;Integer&gt; arr2 = new ArrayList&lt;&gt;();</span><br><span class="line">        arr2.add(null);</span><br><span class="line">        arr2.add(null);</span><br><span class="line">        arr2.add(null);</span><br><span class="line">        arr2.add(null);</span><br><span class="line">        Collections.copy(arr2, arr);</span><br><span class="line">        System.out.println(arr2); // [3, 1, 2, 4]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Collections-fill-Collections-reverse-Collections-shuffle"><a href="#Collections-fill-Collections-reverse-Collections-shuffle" class="headerlink" title="Collections.fill() Collections.reverse() Collections.shuffle()"></a>Collections.fill() Collections.reverse() Collections.shuffle()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;&gt;();</span><br><span class="line">        arr.add(3);</span><br><span class="line">        arr.add(1);</span><br><span class="line">        arr.add(2);</span><br><span class="line">        arr.add(4);</span><br><span class="line">        Collections.sort(arr);</span><br><span class="line">        System.out.println(arr);// [1, 2, 3, 4]</span><br><span class="line">        Collections.reverse(arr);</span><br><span class="line">        System.out.println(arr); // [4, 3, 2, 1]</span><br><span class="line">        Collections.shuffle(arr);</span><br><span class="line">        System.out.println(arr); // [1, 3, 2, 4] 随机打乱次序</span><br><span class="line">        Collections.fill(arr, null);</span><br><span class="line">        System.out.println(arr); // [null, null, null, null]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://deejay0921.github.io/2019/04/20/Java中的Collections工具类及Comparator和Comparable的区别/" data-id="ck0hpiiki0000l4vxkg07mv3l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/22/对XML以及Tomcat的简单了解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          对XML以及Tomcat的简单了解.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/20/sql多表查询/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">sql多表查询.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/25/JDBC的简单了解/">JDBC的简单了解.md</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/22/对XML以及Tomcat的简单了解/">对XML以及Tomcat的简单了解.md</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/20/Java中的Collections工具类及Comparator和Comparable的区别/">Java中的Collections工具类及Comparator和Comparable的区别.md</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/20/sql多表查询/">sql多表查询.md</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/14/mysql的简单了解/">mysql的简单了解.md</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 DeeJay<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
