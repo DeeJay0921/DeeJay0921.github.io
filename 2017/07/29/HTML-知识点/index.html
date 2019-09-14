@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="HTML-知识点">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">HTML-知识点</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-07-29</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/HTML/">#HTML</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>HTML-知识点</p>
+<a id="more"></a>
+<h3 id="HTML，XML，XHTML的区别"><a href="#HTML，XML，XHTML的区别" class="headerlink" title="HTML，XML，XHTML的区别"></a>HTML，XML，XHTML的区别</h3><ul>
+<li>XML<br>XML是可扩展标记语言，（eXtensible Markup Language），XML和HTML一样，都是处于SGML（Standard Generalized Markup language）即标准通用置标语言，XML极其简单易于掌握和使用，是一种简单的数据存储的语言，可以跨平台，能有效的处理结构化文档信息。</li>
+<li>XHTML<br>XHTML是可扩展超文本标识语言，（The Extensible HyperText Markup Language），是一种基于XML的置标语言，与HTML相似，略有微小的差异，是一种过渡技术，像一种类似HTML的XML。</li>
+<li>HTML<br>HTML是超文本标记语言，（HyperText Mark-up Language），是目前网络上，应用最广泛的组成网页文档的语言。</li>
+</ul>
+<p>###怎样理解HTML语义化</p>
+<ul>
+<li>HTML语义化<br>HTML语义化就是用正确的标签做正确的事情，使得整个HTML页面结构清晰，便于开发者阅读以及机器更好的解析。</li>
+<li>HTML语义化带来的优点<ol>
+<li>结构和样式是分离的，在没有CSS的情况下，HTML语义化可以使得整个页面也能很好的反映出页面结构，仍然具有良好的可读性（即裸奔时也好看）。</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>便于SEO（Search Engine Optimization），即搜索引擎优化，可以和搜索引擎建立良好沟通，由于爬虫是依赖标签来确定上下文和各个关键字的权重的，采取优化策略或程序，提高网站在搜索结果中的排名。</li>
+<li>在团队开发的情况下，语义化的HTML结构可以使得一起开发的开发者更加容易的阅读，能提高团队的工作效率，并且也便于后期的维护。</li>
+<li>语义化的HTML结构同时也方便其他多种设备进行解析，例如最常用的移动端以及屏幕阅读器和盲人阅读器等等。</li>
+</ol>
+<ul>
+<li>平时在写代码的过程中怎么注意HTML的语义化</li>
+</ul>
+<ol>
+<li><div>和<span>是无语义的，尽量少避免。</span></div></li>
+<li>在语义不明显时，既可以使用&lt;&gt;div或者<p>时，尽量用</p><p>, </p><p> 中的文字会自动换行，不需要使用<br>而且换行的效果优于 <br>。段落与段落之间的空隙也可以利用 CSS 来控制，很容易而且清晰的区分出段落与段落。</p></li>
+<li><h1>~<h6> ，作为标题使用，并且依据重要性递减，<h1> 是最高的等级。</h1></h6></h1></li>
+<li>有使用<input>标签时，必须要有相应的<label>标签，通过使用label标签的for属性和input的id属性配对起来。</label></li>
+<li>书写表格时，标题使用<caption>，表头使用<thead>，主题部分使用<tbody>，而底部使用<tfoot>，具体的单元格也要区分开来，表头是<th>，一般的单元格是</th><td>。</td></tfoot></tbody></thead></caption></li>
+<li>需要使用强调和斜体的情况时，使用<strong>和<em>标签，不使用<b> <i>。</i></b></em></strong></li>
+</ol>
+<p>###怎样理解内容与样式分离的原则</p>
+<ul>
+<li>一个页面由HTML，CSS和JS三部分组成，HTML表示了页面的结构和内容，CSS控制着页面内容显示的样式，JS控制着页面的交互功能行为等。<ul>
+<li>在写一个HTML页面的时候，只需要考虑页面的结构和语义化即可，不需要考虑CSS样式的问题，让HTML能够充分体现页面的结构和内容，之后再去考虑写CSS控制样式。另外要注意，HTML中不允许出现元素样式，也不建议出现行内样式。</li>
+</ul>
+</li>
+<li>同样的，在写JS的时候，不要通过JS直接操作样式，而是通过给元素增加一个class来控制样式的变化。</li>
+</ul>
+<p>###有哪些常见的meta标签</p>
+<ul>
+<li>关键词<br><code>&lt;meta name=&quot;keywords&quot; content=&quot;your tags&quot; /&gt;</code></li>
+<li>页面描述<br><code>&lt;meta name=&quot;description&quot; content=&quot;150 words&quot; /&gt;</code></li>
+<li>搜索引擎索引方式<br><code>&lt;meta name=&quot;robots&quot; content=&quot;index,follow&quot; /&gt;</code><br>　　all：文件将被检索，且页面上的链接可以被查询；<br>　　none：文件将不被检索，且页面上的链接不可以被查询；<br>　　index：文件将被检索；<br>　　follow：页面上的链接可以被查询；<br>　　noindex：文件将不被检索；<br>　　nofollow：页面上的链接不可以被查询。</li>
+<li>页面重定向和刷新<br><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=&quot; /&gt;</code></li>
+<li>定义网页作者<br><code>&lt;meta name=&quot;author&quot; content=&quot;author name&quot; /&gt;</code><br>###文档声明的作用?严格模式和混杂模式指什么?<!doctype html> 的作用?</li>
+<li>Doctype作用<!DOCTYPE>声明叫做文件类型定义（DTD），声明的作用为了告诉浏览器该文件的类型。让浏览器解析器知道应该用哪个规范来解析文档。&lt;!DOCTYPE&gt;声明必须在 HTML 文档的第一行，这并不是一个 HTML 标签。</li>
+<li>严格模式和混杂模式</li>
+</ul>
+<ol>
+<li>严格模式：又称标准模式，是指浏览器按照 W3C 标准解析代码。</li>
+<li>混杂模式：又称怪异模式或兼容模式，是指浏览器用自己的方式解析代码。</li>
+</ol>
+<ul>
+<li><!doctype html>
+<!doctype html>是HTML5的声明，HTML5 没有 DTD ，因此也就没有严格模式与混杂模式的区别，HTML5 有相对宽松的语法，实现时，已经尽可能大的实现了向后兼容。（ HTML5 没有严格和混杂之分）</li>
+</ul>
+<p>###浏览器乱码的原因是什么？如何解决</p>
+<ul>
+<li>乱码的原因、<br>乱码的原因是你编写HTML文件之后保存的时候，采用的编码格式（一般编码格式有ASCII，ISOLatin-1，UNICODE，UTF-8，GBK）和在浏览器运行这个HTML文件时候的解码格式不匹配导致出现了乱码。</li>
+<li>解决方法<br>一般英文的编码方式都是一致的，所以出现乱码时尽量采用英文，可以避免出现乱码情况。<br>###常见的浏览器有哪些，什么内核</li>
+<li>IE       Trident内核</li>
+<li>Firefox       Gecko内核</li>
+<li>Safari、Chrome      WebKit内核</li>
+<li>Opera        Presto内核</li>
+</ul>
+<h3 id="列出常见的标签，并简单介绍这些标签用在什么场景"><a href="#列出常见的标签，并简单介绍这些标签用在什么场景" class="headerlink" title="列出常见的标签，并简单介绍这些标签用在什么场景"></a>列出常见的标签，并简单介绍这些标签用在什么场景</h3><ul>
+<li>文档标题 <title></title></li>
+<li>标题<h1>～<h6>不同级别的标题</h6></h1></li>
+<li>段落<p> 段落</p></li>
+<li><div>
+划分区域</div></li>
+<li>换行 <br></li>
+<li>表单 <form></form></li>
+<li><a>
+链接，跳转到指定地址</a></li>
+<li>有序列表<ol><li> 和 无序列表 <ul><li><br>列表</li>
+</ul>
+</li></ol></li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

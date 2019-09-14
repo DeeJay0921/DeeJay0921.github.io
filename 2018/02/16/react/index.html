@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="react">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">react</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-02-16</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/React/">#React</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>初步理解react</p>
+<a id="more"></a>
+
+<p>webpack –help -p :<br><code>shortcut for --optimize-minimize --define
+               process.env.NODE_ENV=&quot;production&quot;</code></p>
+<h2 id="理解JSX语法"><a href="#理解JSX语法" class="headerlink" title="理解JSX语法"></a><a href="https://babeljs.io/repl/" target="_blank" rel="noopener">理解JSX语法</a></h2><p>JSX语法注意点：</p>
+<ul>
+<li>是 XML 不是 HTML，所以所有的标签都要闭合，如 <img> 或 <div>。</div></li>
+<li>每段 JSX 里的 XML 只能有一个根元素，不然就报错。</li>
+<li>XML 里面可以用 <code>{}</code> 混入 任何 JS 代码</li>
+</ul>
+<p>JSX语法的理解：分为tagname,attributes,children三项来理解</p>
+<p>例如： <code>const jsx = &lt;div&gt;Hello Jsx&lt;/div&gt;</code><br>经过babel之后为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var jsx = React.createElement(</span><br><span class="line">  &quot;div&quot;,</span><br><span class="line">  null,</span><br><span class="line">  &quot;Hello Jsx&quot;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>这样可以理解为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  tagname: &quot;div&quot;,</span><br><span class="line">  attributes: null,</span><br><span class="line">  children: &quot;Hello Jsx&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>组件的tagname就不是标准的html标签了，如果有props，那么attributes也不是null了，对于children来说，如果内部还有嵌套标签，那么依次做一个递归。</p>
+<p>##组件<br>react声明组件时，<strong>第一个字母必须大写</strong>。</p>
+<p>两种写法：</p>
+<ol>
+<li>class component<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Welcome extends React.Component &#123;</span><br><span class="line">    render () &#123;</span><br><span class="line">        return &lt;h1&gt;hello,&#123;this.props.name&#125;&lt;/h1&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>或者：<br>2.functional component</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function Welcome(props) &#123;</span><br><span class="line">    return &lt;h1&gt;hello,&#123;props.name&#125;&lt;/h1&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>##组件中的数据源</p>
+<ol>
+<li><p>props (props是父组件到子组件的，props should be pure,即不予许直接修改props）</p>
+</li>
+<li><p>state （state是自身维护的数据状态，但也只可以通过setState修改）</p>
+</li>
+</ol>
+<p>组件中不可以改变props的值，state是组件中可以改变的东西</p>
+<p>但是要使用this.setState()方法才能改变state的值</p>
+<p>关于setState() , <a href="https://zhuanlan.zhihu.com/p/25954470" target="_blank" rel="noopener">参考</a></p>
+<p>要理解2点：</p>
+<ul>
+<li><strong>setState不会立刻改变React组件中state的值</strong></li>
+<li>函数式的setState用法(即setState()方法可以接受一个函数作为参数)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">class Welcome extends React.Component &#123;</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.state = &#123;</span><br><span class="line">            date: new Date()</span><br><span class="line">        &#125;</span><br><span class="line">        setInterval(() =&gt; &#123;</span><br><span class="line">            this.setState(&#123;</span><br><span class="line">                date: new Date()</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    render () &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;h1&gt;hello, &#123;this.props.name&#125;&lt;/h1&gt;</span><br><span class="line">                &lt;h2&gt;&#123;this.state.date.toString()&#125;&lt;/h2&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Welcome;</span><br></pre></td></tr></table></figure>
+
+<p>##生命周期</p>
+<p><a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank" rel="noopener">声明周期英文文档</a></p>
+<p>React 的生命周期包括三个阶段：mount（挂载）、update（更新）和 unmount（移除）</p>
+<p>####mount<br>mount 就是第一次让组件出现在页面中的过程。这个过程的关键就是 render 方法。React 会将 render 的返回值（一般是虚拟 DOM，也可以是 DOM 或者 null）插入到页面中。</p>
+<p>这个过程会暴露几个钩子（hook）方便你往里面加代码：</p>
+<ul>
+<li>constructor()   初始化props 和 state</li>
+<li>componentWillMount() 准备插入render中return的内容</li>
+<li>render()  开始插入</li>
+<li>componentDidMount()  插入之后想进行的操作</li>
+</ul>
+<p>####update</p>
+<p>mount 之后，如果数据有任何变动，就会来到 update 过程，这个过程有 5 个钩子：</p>
+<ul>
+<li>1.componentWillReceiveProps(nextProps) - 我要读取 props 啦！</li>
+<li><ol start="2">
+<li>shouldComponentUpdate(nextProps, nextState) - 请问要不要更新组件？true / false</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>componentWillUpdate() - 我要更新组件啦！</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>render() - 更新！</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>componentDidUpdate() - 更新完毕啦！</li>
+</ol>
+</li>
+</ul>
+<p>####unmount<br>当一个组件将要从页面中移除时，会进入 unmount 过程，这个过程就一个钩子：</p>
+<ul>
+<li>componentWillUnmount() - 我要死啦！</li>
+</ul>
+<p>你可以在这个组件死之前做一些清理工作。</p>
+<h4 id="一般在下列钩子中应用setState"><a href="#一般在下列钩子中应用setState" class="headerlink" title="一般在下列钩子中应用setState():"></a>一般在下列钩子中应用setState():</h4><ul>
+<li>componentWillMount</li>
+<li>componentDidMount</li>
+<li>componentWillReceiveProps</li>
+</ul>
+<h2 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h2><ul>
+<li>首先明确一个概念，就是在<code>&lt;div onClick=fn&gt;&lt;/div&gt;</code>这个DOM绑定中，<code>onClick</code>后面的<code>fn</code><strong>是一个函数，而不是一个函数执行的结果</strong>，所以<strong>不能写成</strong><code>&lt;div onClick=fn()&gt;&lt;/div&gt;</code>。（重点！）</li>
+</ul>
+<p>明确了函数绑定时，写的<strong>是一个函数而不是函数运行的结果</strong>之后，继续明确第二个概念：</p>
+<ul>
+<li>bind（），对于一个函数<code>fn</code>来说,<code>fn.bind(window)</code>同样是一个函数，只不过运行的Context指定为了window。<code>fn.bind(window)</code>本身<strong>并没有执行</strong>（所以仍然是一个函数而不是函数运行的结果！）</li>
+</ul>
+<p>明确了上述2点之后，再来看react中的事件绑定。</p>
+<p>先来看一个App组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import ReactDom from &apos;react-dom&apos;</span><br><span class="line">import &apos;./index.css&apos;</span><br><span class="line"></span><br><span class="line">const rootDom = document.querySelector(&apos;#root&apos;)</span><br><span class="line"></span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      isOn: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  render () &#123;</span><br><span class="line">    return (</span><br><span class="line">      //这里点击的时候的this已经不是当前组件了，所以要bind为当前组件，不然是没有testClick函数的</span><br><span class="line">      &lt;div onClick=&#123;this.testClick.bind(this)&#125;&gt; </span><br><span class="line">        &lt;button&gt;&#123;this.state.isOn ? &apos;ON&apos; : &apos;OFF&apos; &#125;&lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  testClick () &#123;</span><br><span class="line">    this.setState( (prevState) =&gt; &#123; //setState()也能传函数作为参数，没什么好说的</span><br><span class="line">      return &#123;</span><br><span class="line">        isOn: !prevState.isOn</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDom.render(&lt;App&gt;&lt;/App&gt;,rootDom)</span><br></pre></td></tr></table></figure>
+
+<p>这么一看就能理解react中的事件绑定了。</p>
+<ul>
+<li>还有一个小问题，对于标签默认行为的阻止，不像Vue一样有<code>.prevent</code>这种修饰符，还是要自己写的。<br>来看个例子： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import ReactDom from &apos;react-dom&apos;</span><br><span class="line">import &apos;./index.css&apos;</span><br><span class="line"></span><br><span class="line">const rootDom = document.querySelector(&apos;#root&apos;)</span><br><span class="line"></span><br><span class="line">let App = () =&gt; &#123;</span><br><span class="line">  function preventClick (e) &#123; // 注意这里的e，是react自己传过来的  本身没做任何操作</span><br><span class="line">    e.preventDefault() //</span><br><span class="line">    console.log(&apos;default click has been prevent&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &#123;/*上面已经说过，绑定事件只能写函数，不能写函数的运行结果，所以如果写了preventClick()就会报错*/&#125;</span><br><span class="line">      &lt;a href=&quot;http://www.baidu.com&quot; onClick=&#123;preventClick&#125;&gt;click me&lt;/a&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line">ReactDom.render(&lt;App&gt;&lt;/App&gt;,rootDom)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>对于上述问题  又引申出了一个小问题，如果我想在阻止a标签的同时，事件处理函数还想接收一些其他的参数进行处理怎么写呢。</p>
+<p>对于React，上面例子的<code>e.preventDefault()</code>中的e是React自己传过来的。我们如果既想写e，还想有自己规定的一些参数的话，要这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let App = () =&gt; &#123;</span><br><span class="line">  function preventClick (str,e) &#123; // 如果有其他自定义的参数，那么e永远是最后一项，而且同样也是React自己传过来的。</span><br><span class="line">    e.preventDefault() //</span><br><span class="line">    console.log(str)</span><br><span class="line">  &#125;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &#123;/*上面已经说过，绑定事件只能写函数，不能写函数的运行结果，所以如果写了preventClick()就会报错*/&#125;</span><br><span class="line">      &lt;a href=&quot;http://www.baidu.com&quot; onClick=&#123;preventClick.bind(this,&apos;testString&apos;)&#125;&gt;click me&lt;/a&gt;</span><br><span class="line">      &#123;/*这里的preventClick.bind(this,&apos;testString&apos;)同样也是一个函数，并不是函数运行结果*/&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子中，我们想在preventClick()中传一些自己用的参数，那么<strong>在点击的时候，就要bind到组件本身上，然后再传入想要的参数</strong>，注意e是不用我们自己写到参数中去的，回到函数本身的参数上，自定义的参数在前，<strong>e永远是最后一项。</strong></p>
+<h2 id="摆脱React中操蛋的bind-this-的方法"><a href="#摆脱React中操蛋的bind-this-的方法" class="headerlink" title="摆脱React中操蛋的bind(this)的方法"></a>摆脱React中操蛋的bind(this)的方法</h2><p>上面的事件绑定中已经提到了bind，因为<strong>事件触发时的this已经不是当前组件本身了，所以我们要将处理函数的this重新设置为当前组件</strong>，所以有了随便一个函数后面都要<code>bind(this)</code>的情况。</p>
+<p>先来看个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">  &#125;</span><br><span class="line">  render ()&#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;this.testClick.bind(this)&#125;&gt;click me&lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  testClick() &#123; // 普通函数在被调用的时候，就有了this，所以要加bind()到App组件上</span><br><span class="line">    console.log(this) </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述例子中，<code>testClick</code>是App组件上的函数，点击时的this已经不是App组件了，所以不能正确调用。要将其写为<code>this.testClick.bind(this)</code>而不是<code>this.testClick</code>。</p>
+<p>为了摆脱上述这种烦人的写法，我们可以有如下几种方法：</p>
+<ol>
+<li>在<code>constructor</code>中将当前函数重新赋值。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">    this.testClick = this.testClick.bind(this) //这的this是App组件，直接将testClick重新赋值一下</span><br><span class="line">  &#125;</span><br><span class="line">  render ()&#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;this.testClick&#125;&gt;click me&lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  testClick() &#123; // 普通函数在被调用的时候，就有了this，所以要加bind()到App组件上</span><br><span class="line">    console.log(this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>我们在constructor中给testClick重新赋了一次值，testClick变为了一个运行上下文为App组件的函数，下面直接<code>onClick={this.testClick}</code>即可。</p>
+<ol start="2">
+<li>public class fields syntax（不知道怎么翻译，就是利用箭头函数没有this的特性）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">  &#125;</span><br><span class="line">  render ()&#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;this.testClick&#125;&gt;click me&lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  testClick = () =&gt; &#123; //箭头函数没有本身的this 所以定义的时候this已经确定为App组件了，所以不用bind</span><br><span class="line">    console.log(this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>我们利用箭头函数本身没有this的特性，在App中定义testClick的时候，testClick的this就已经确定为当前上下文App组件了。所以后面直接调用<code>onClick={this.testClick}</code>即可。</p>
+<ol start="3">
+<li>在回调中使用箭头函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">  &#125;</span><br><span class="line">  render ()&#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;(e) =&gt; &#123;return this.testClick(e)&#125;&#125;&gt;click me&lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  testClick() &#123; </span><br><span class="line">    console.log(this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每次渲染组件时，都会生成一个全新的回调。但在有时候将其作为prop传给子组件时，会引发一次额外的渲染。所以，<strong>建议用constructor 和public class fields syntax</strong>两种方式避免<code>bind(this)</code>这种写法。</p>
+<p>##值得一提的是：</p>
+<p>上面说的想给事件处理函数传递另外自定义的参数时，<strong>绑定事件的时候是不用写e的，因为react是自动帮你把e作为最后一个参数传递的</strong>。</p>
+<p> <code>&lt;button onClick={this.testClick.bind(this, id)}&gt;click me&lt;/button&gt;</code></p>
+<p>就像上述例子一样，我们想传一个额外的参数id，在id后面是不需要写e的，<code>this.testClick.bind(this, id,e)</code>这种是不用写的。</p>
+<p><strong>但是！</strong>  在我们提到的第3种方法，回调中使用函数的情况下，<strong>是需要开发者自己写上e的！</strong></p>
+<p><code>&lt;button onClick={(e) =&gt; this.testClick(id, e)}&gt;click me&lt;/button&gt;</code></p>
+<p>就像这样，自定义参数id的后面还要写上e。</p>
+<p>详情参考文档：With an arrow function, we have to pass it explicitly, but with bind any further arguments are automatically forwarded.</p>
+<p><a href="https://reactjs.org/docs/handling-events.html" target="_blank" rel="noopener">文档地址</a></p>
+<h3 id="React中的ref"><a href="#React中的ref" class="headerlink" title="React中的ref"></a>React中的ref</h3><p>想直接修改原生DOM或者是组件的时候，可以使用ref。</p>
+<ol>
+<li>原生DOM上</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &#123;/*ref callback*/&#125;</span><br><span class="line">        &lt;input type=&quot;text&quot; ref=&#123;(input) =&gt; this.testRef = input&#125; /&gt;</span><br><span class="line">        &lt;input type=&quot;button&quot; onClick=&#123;this.focus.bind(this)&#125; value=&quot;Click&quot; /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  focus() &#123;</span><br><span class="line">    this.testRef.focus();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述例子就是一个原生DOM上使用ref的例子，react在原生的input加载完成后，通过一个回调函数，<code>(input) =&gt; this.testRef = input</code>,这里的<strong>回调参数input就是底层的DOM，接受DOM作为参数，存到testRef中。引用的时候，直接就引用到了原生的DOM</strong>。</p>
+<ol start="2">
+<li>ref ====&gt; class Component <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// ref ===&gt; class Component</span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;TestComponent ref=&#123;(testComponent) =&gt; this.classCom = testComponent&#125;&gt;&lt;/TestComponent&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidMount () &#123;</span><br><span class="line">    console.log(this.classCom.state)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class TestComponent extends React.Component &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    super()</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      name: &apos;children Component&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input type=&quot;text&quot;/&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>这里的ref回调函数中，<code>(testComponent) =&gt; this.classCom = testComponent</code>的参数为<strong>已经加载的 React 实例</strong>，我们可以在父组件中通过this.classCom访问到它。</p>
+<ol start="3">
+<li>ref ====&gt; functional Component </li>
+</ol>
+<p><strong>你不能在函数式组件上使用 ref 属性，因为它们没有实例</strong>,但是可以对其内部的原生DOM使用ref，参见第一条。</p>
+<h1 id="React中突变数据的处理"><a href="#React中突变数据的处理" class="headerlink" title="React中突变数据的处理"></a>React中突变数据的处理</h1><p>经常会遇到设置了state之后，进行setState()了之后，页面没有进行渲染的情况。（尤其是使用PureComponent的时候）。</p>
+<p>这种情况经常是由于操作习惯不好造成了<strong>原数据结构的突变</strong>。</p>
+<ul>
+<li>先来解释什么是原数据突变</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1]</span><br><span class="line">arr.push(2)</span><br><span class="line">console.log(arr) //[1, 2]</span><br></pre></td></tr></table></figure>
+
+<p>我们有一个数组，进行了<strong>push操作</strong>之后，<strong>原先的数组的值改变了</strong>，由<code>[1]</code>变为了<code>[1,2]</code>。</p>
+<p>看下一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let arr2 = [1]</span><br><span class="line">let arr3 = arr2.concat([2])</span><br><span class="line">console.log(arr2) //[1]</span><br><span class="line">console.log(arr3) //[1, 2]</span><br></pre></td></tr></table></figure>
+
+<p>同样是一个数组，进行了<strong>concat操作</strong>之后，<strong>原先的arr2的值并没有发生改变</strong>，我们把concat之后的结果赋给了一个新变量arr3来储存。</p>
+<ul>
+<li>React中setState()时我们该怎么写数据</li>
+</ul>
+<p>上面我们提到了<strong>push操作会改变原数据，这在React中是不应该的。</strong></p>
+<p>setState时，我们<strong>应该return的是一个新对象，而不是原对象</strong>。所以我们要避免那些会修改原数据的操作，例如<strong>push</strong>。</p>
+<p>比如说，我们在一个组件中通过push()修改了数组，然后有一个PureComponent子组件把这个数组作为props渲染页面，这时候虽然我们在父组件中修改了数组的值，但是setState()return的时候，原数据结构已经变了，这时候虽然本身的state已经改变了，但是传到子组件的props并没有改变。</p>
+<p>为了避免这种情况发生，我们<strong>一般可以采用concat</strong>等不会引起原数据突变的操作。</p>
+<p>如果非要用push的话，可以通过<code>Object.assgin()</code>或者<code>...spread语法</code>来进行一份数据的拷贝，在进行操作。</p>
+<p>比如说上述的arr，我们可以这么操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    this.state = &#123;</span><br><span class="line">      arr: [1]</span><br><span class="line">    &#125;;</span><br><span class="line">//进行setState()</span><br><span class="line">    this.setState( (prevState) =&gt; &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        arr: [...prevState.arr,2]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果目标数据是对象的话，可以通过<code>Object.assgin()</code>来进行操作</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

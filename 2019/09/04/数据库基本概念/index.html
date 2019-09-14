@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="数据库基本概念">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">数据库基本概念</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-09-04</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/DataBase/">DataBase</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/mysql/">#mysql</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>数据库基本概念</p>
+<a id="more"></a>
+
+<h2 id="数据库原理"><a href="#数据库原理" class="headerlink" title="数据库原理"></a>数据库原理</h2><p>如果要想把数据持久化，除了写到文件里，就是存到数据库里了。</p>
+<ul>
+<li>存在文件里：<br>CSV： Comma Seperated Value文件，即逗号分隔符文件<br><a href="http://commons.apache.org/proper/commons-csv/user-guide.html" target="_blank" rel="noopener">相关库Apache Commons CSV </a></li>
+</ul>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><ul>
+<li>数据库提供结构化数据的持久化存储</li>
+<li>索引保证数据查询的速度</li>
+<li>事务的原子性保证数据不丢失</li>
+</ul>
+<h4 id="数据库中的类型"><a href="#数据库中的类型" class="headerlink" title="数据库中的类型"></a>数据库中的类型</h4><ul>
+<li>整数类型：int/bigint</li>
+<li>字符串类型：varchar(100)/TEXT</li>
+<li>时间类型： timestamp</li>
+</ul>
+<h4 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h4><p>Java DataBase Connection,给一个连接字符串，就可以读取到数据库的信息</p>
+<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><p><a href="https://www.jianshu.com/p/3f3315a453d7" target="_blank" rel="noopener">基本的SQL使用</a></p>
+<blockquote>
+<p>sql中有内置函数，当前时间即为<code>now()</code></p>
+</blockquote>
+<h4 id="SELECT膜法"><a href="#SELECT膜法" class="headerlink" title="SELECT膜法"></a>SELECT膜法</h4><ul>
+<li>SELECT *</li>
+<li>SELECT count(*) count(1)</li>
+<li>select max/min/avg</li>
+<li>select limit 分页</li>
+<li>select order by 排序</li>
+<li>select is null/not null </li>
+</ul>
+<h4 id="使用JDBC连接数据库"><a href="#使用JDBC连接数据库" class="headerlink" title="使用JDBC连接数据库"></a>使用JDBC连接数据库</h4><ul>
+<li>Java DataBase Connection<ul>
+<li>连接串：即类似于 jdbc:h2:file://xxxx.db</li>
+<li>用户名</li>
+<li>密码</li>
+</ul>
+</li>
+<li>Statement</li>
+<li>PrepareStatement： 防止SQL注入</li>
+<li>ResultSet</li>
+</ul>
+<h4 id="使用Docker安装数据库"><a href="#使用Docker安装数据库" class="headerlink" title="使用Docker安装数据库"></a>使用Docker安装数据库</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

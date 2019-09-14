@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的泛型以及常见数据结构">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的泛型以及常见数据结构</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-08-11</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/泛型/">#泛型</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的泛型以及常见数据结构</p>
+<a id="more"></a>
+
+<p>####集合的体系结构形成的原因：<br>  由于不同的数据结构，所以Java提供了不同的集合，但是不同的集合他们的功能都是相似的，向上提取共性，这就是集合体系结构形成的原因。</p>
+<h4 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h4><p>从最顶层开始学习，因为其包含了所有的共性。使用从最底层开始使用，因为最底层才是最具体的实现。</p>
+<p>来看集合体系结构中的最顶层 Collection：</p>
+<p>##Collection<br>几个共性的API</p>
+<p><code>boolean add(E e)</code></p>
+<p><code>boolean contains(Object o)</code></p>
+<p><code>boolean isEmpty()</code></p>
+<p><code>boolean remove(Object o)</code></p>
+<p><code>int size()</code></p>
+<p><code>Object[] toArray()</code></p>
+<p><code>Iterator&lt;E&gt; iterator()</code> // 返回一个迭代器对象</p>
+<p>##Interface Iterator<e></e></p>
+<p>用于迭代Collection</p>
+<p><code>boolean hasNext()</code> 如果有下一项，返回true</p>
+<p><code>E next()</code> 返回下一个元素，如果迭代完成继续迭代，会抛出异常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line"></span><br><span class="line">public class IteratorDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Collection c = new ArrayList();</span><br><span class="line">		</span><br><span class="line">		for(int i = 0 ; i &lt; 10; i ++) &#123;</span><br><span class="line">			c.add(i);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		Iterator it = c.iterator(); // 返回一个迭代器对象</span><br><span class="line">		</span><br><span class="line">		while(it.hasNext()) &#123;</span><br><span class="line">			System.out.println(it.next());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于迭代器，迭代器是依赖于集合的，相当于集合的一个副本。</p>
+<p>当在迭代器在进行操作的时候，如果对集合进行改动，造成<strong>迭代器和集合不一样的时候，迭代器会抛出异常。</strong></p>
+<p>解决方案：</p>
+<ul>
+<li>不使用迭代器</li>
+<li>改动集合时，不对集合直接操作，而是操作迭代器<br>对于这种情况，我们不能使用Collectionl来创建集合对象，而是要使用List,因为要使用List中的<code>ListIterator &lt;E&gt;ListIterator()</code>中的方法来进行操作Iterator，不然Iterator中是没有操作方法的，只有hasNext() next() remove()</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line"></span><br><span class="line">public class IteratorDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Collection&lt;String&gt; c = new ArrayList&lt;String&gt;();</span><br><span class="line">		c.add(&quot;Hello&quot;);</span><br><span class="line">		c.add(&quot;java&quot;);</span><br><span class="line">		</span><br><span class="line">		Iterator&lt;String&gt; it = c.iterator();</span><br><span class="line">		while(it.hasNext()) &#123;</span><br><span class="line">			if(it.next().equals(&quot;java&quot;)) &#123;</span><br><span class="line">				c.add(&quot;world&quot;); // java.util.ConcurrentModificationException</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(c);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上例所示，抛出了并发处理异常。</p>
+<p>要使用迭代器完成对集合的改变，就不能使用Iterator<e>,因为其没有add方法，要使用ListIterator<e>。 要使用ListIterator，就得使用Collection的子体系结构List的ListIterator()方法来得到一个迭代器对象。具体来看例子：</e></e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.ListIterator;</span><br><span class="line"></span><br><span class="line">public class IteratorDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">//		Collection&lt;String&gt; c = new ArrayList&lt;String&gt;();</span><br><span class="line">//		c.add(&quot;Hello&quot;);</span><br><span class="line">//		c.add(&quot;java&quot;);</span><br><span class="line">		// 使用List 而不是 Collection</span><br><span class="line">		List&lt;String&gt; li = new ArrayList&lt;String&gt;();</span><br><span class="line">		li.add(&quot;Hello&quot;);</span><br><span class="line">		li.add(&quot;java&quot;);</span><br><span class="line">		</span><br><span class="line">//		Iterator&lt;String&gt; it = c.iterator();</span><br><span class="line">		ListIterator&lt;String&gt; listIt = li.listIterator(); // ListIterator 具有add方法</span><br><span class="line">//		while(it.hasNext()) &#123;</span><br><span class="line">//			if(it.next().equals(&quot;java&quot;)) &#123;</span><br><span class="line">//				c.add(&quot;world&quot;); // java.util.ConcurrentModificationException</span><br><span class="line">//			&#125;</span><br><span class="line">//		&#125;</span><br><span class="line">		while(listIt.hasNext()) &#123;</span><br><span class="line">			if(listIt.next().equals(&quot;java&quot;)) &#123;</span><br><span class="line">				listIt.add(&quot;world&quot;); // 这样就可以操作迭代器而不是直接操作集合  就不会抛出异常</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(li); // [Hello, java, world] 正常输出</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="集合的遍历方式"><a href="#集合的遍历方式" class="headerlink" title="集合的遍历方式"></a>集合的遍历方式</h4><ol>
+<li><code>toArray()</code>,将集合转换为数组，遍历数组</li>
+<li><code>iterator()</code>,可以返回一个迭代器对象，可以通过迭代器对象来迭代集合<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line"></span><br><span class="line">public class IteratorDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Collection c = new ArrayList();</span><br><span class="line">		</span><br><span class="line">		for(int i = 0 ; i &lt; 10; i ++) &#123;</span><br><span class="line">			c.add(i);</span><br><span class="line">		&#125;</span><br><span class="line">		// method1();</span><br><span class="line">		// method2();</span><br><span class="line">	&#125;</span><br><span class="line">	public void method1(Collection c) &#123; // 使用Iterator</span><br><span class="line">		Iterator it = c.iterator(); // 返回一个迭代器对象</span><br><span class="line">		</span><br><span class="line">		while(it.hasNext()) &#123;</span><br><span class="line">			System.out.println(it.next());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void method2(Collection c) &#123; // 使用toArray()</span><br><span class="line">		Object[] objArr = c.toArray();</span><br><span class="line">		for(int i = 0 ; i &lt; objArr.length; i ++) &#123;</span><br><span class="line">			System.out.println(objArr[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="泛型的概述和体现"><a href="#泛型的概述和体现" class="headerlink" title="泛型的概述和体现"></a>泛型的概述和体现</h3><p>由于集合是可以存储任意类型的对象的，所以当存储了不同类型的对象时，就有可能在进行转换时出现类型转换类型异常<code>ClassCastException</code>。所以Java提供了泛型。</p>
+<p>泛型：是一种广泛的类型，将明确数据类型的工作提前到了编译时期，借鉴了数组的特点。</p>
+<p>泛型的优点：</p>
+<ul>
+<li>避免了类型转换的问题</li>
+<li>简化代码书写</li>
+</ul>
+<p>使用泛型的场景：</p>
+<ul>
+<li>带<e>的api都可以使用泛型</e></li>
+</ul>
+<p>来看一个简单的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line"></span><br><span class="line">public class GenericDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Person p1 = new Person(&quot;zhangsan&quot;,18);</span><br><span class="line">		Person p2 = new Person(&quot;lisi&quot;,20);</span><br><span class="line">		</span><br><span class="line">		Collection&lt;Person&gt; c = new ArrayList&lt;Person&gt;(); // 使用泛型 表明集合中存储Person类型的对象</span><br><span class="line">		c.add(p1);</span><br><span class="line">		c.add(p2);</span><br><span class="line">		</span><br><span class="line">		Iterator&lt;Person&gt; it = c.iterator(); // 使用泛型  表明迭代器中的类型也是Person类</span><br><span class="line">		while(it.hasNext()) &#123;</span><br><span class="line">			it.next().show(); // 注意使用了泛型之后  这边的it.next() 返回的已经是Person类的对象了  直接直接调用方法。</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Person &#123;</span><br><span class="line">	String name;</span><br><span class="line">	int age;</span><br><span class="line">	public void show() &#123;</span><br><span class="line">		System.out.println(name + &quot;---&quot; + age);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach()"></a>foreach()</h3><p>增强for循环，一般用于遍历集合或者数组</p>
+<p>语法: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(Type var : CollectionOrArray) &#123;</span><br><span class="line">    // 可以直接使用var</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>来看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; c = new ArrayList&lt;String&gt;();</span><br><span class="line">c.add(&quot;hello&quot;);</span><br><span class="line">c.add(&quot;java&quot;);</span><br><span class="line"></span><br><span class="line">for(String str : c) &#123;</span><br><span class="line">    System.out.print(str.toUpperCase()); // HELLO JAVA</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意点： 在增强for循环中不可以修改集合，否则也会出现并发修改异常，因为其底层结构就是迭代器。</p>
+<h1 id="常见数据结构："><a href="#常见数据结构：" class="headerlink" title="常见数据结构："></a>常见数据结构：</h1><h3 id="数组："><a href="#数组：" class="headerlink" title="数组："></a>数组：</h3><p><code>int[] arr = {1,2,3,4,5};</code></p>
+<p>数组的特点：</p>
+<ul>
+<li>长度一旦定义，则不可改变</li>
+<li>元素都有整数索引</li>
+<li>只能存储同一类型的元素</li>
+<li>既能存储基本类型也能存储引用类型。</li>
+</ul>
+<p>一些问题：</p>
+<ul>
+<li>如何获取元素3：<ul>
+<li><code>arr[2]</code></li>
+</ul>
+</li>
+<li>在元素3后面添加一个新的元素8：<ul>
+<li>创建一个新的数组，长度为原数组+1，遍历原数组，以此插入新数组，到3时，再后面插入8</li>
+</ul>
+</li>
+</ul>
+<p>可以看到，数组<strong>查找快</strong>，但是<strong>增删慢</strong></p>
+<h3 id="链表："><a href="#链表：" class="headerlink" title="链表："></a>链表：</h3><p>由链连接起来的一堆结点</p>
+<p>结点分为三部分：</p>
+<ol>
+<li>地址值</li>
+<li>值</li>
+<li>下一个结点的地址值</li>
+</ol>
+<p>假设现在有一个链表：<br>按照地址值，值，下一个地址值来表示：</p>
+<table>
+<thead>
+<tr>
+<th>0x0011</th>
+<th>1</th>
+<th>0x0022</th>
+</tr>
+</thead>
+</table>
+<table>
+<thead>
+<tr>
+<th>0x0022</th>
+<th>2</th>
+<th>0x0033</th>
+</tr>
+</thead>
+</table>
+<table>
+<thead>
+<tr>
+<th>0x0033</th>
+<th>3</th>
+<th>0x0044</th>
+</tr>
+</thead>
+</table>
+<table>
+<thead>
+<tr>
+<th>0x0044</th>
+<th>4</th>
+<th>0x0055</th>
+</tr>
+</thead>
+</table>
+<table>
+<thead>
+<tr>
+<th>0x0055</th>
+<th>5</th>
+<th>最后一个结点</th>
+</tr>
+</thead>
+</table>
+<p>一些问题：</p>
+<ul>
+<li>如何获取结点3<ul>
+<li>只能遍历链表，一个个查看，到第3个</li>
+</ul>
+</li>
+<li>要在结点2后面添加一个结点8，怎么操作：<ul>
+<li>把结点2的下一个地址值修改为结点8的地址值，然后把结点8的地址值改为结点3的地址值</li>
+</ul>
+</li>
+<li>如何删除结点4<ul>
+<li>直接把结点3的下一个地址值改为结点5即可</li>
+</ul>
+</li>
+</ul>
+<p>可以看到： 链表<strong>查找慢，增删快</strong></p>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>java中运行方法就会进栈，运行完后就会出栈。</p>
+<p>特点：<strong>先进后出</strong></p>
+<p>跟弹夹差不多，先压进去的子弹最后被射出来。</p>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p>特点： <strong>先进先出</strong></p>
+<p>类比现实生活中排队</p>
+<h2 id="java-util-List"><a href="#java-util-List" class="headerlink" title="java.util.List"></a>java.util.List</h2><p>List是Collection的子体系结构</p>
+<p>并发修改异常处理中就使用过List的ListIterator()方法。简单介绍一下：</p>
+<p>特点：</p>
+<ul>
+<li>有序的</li>
+<li>有整数索引</li>
+<li>允许重复</li>
+</ul>
+<p>List由于具有索引，所以相比于Collection具有一些特有功能：</p>
+<ul>
+<li><code>void add(int index, E element)</code></li>
+<li><code>E get(int index)</code></li>
+<li><code>E remove(int index)</code></li>
+<li><code>E set(int index, E element)</code><br>即增删改查</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package ListDemo;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class ListDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		List&lt;String&gt; li = new ArrayList&lt;String&gt;();</span><br><span class="line">		</span><br><span class="line">		// void add(int index, E element)</span><br><span class="line">		li.add(&quot;Hello&quot;);</span><br><span class="line">		li.add(0,&quot;world&quot;);</span><br><span class="line">		li.add(0,&quot;java&quot;);</span><br><span class="line">		System.out.println(li); // [java, world, Hello] 每次指定索引时，之前的元素向后移动</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		// E get(int index)</span><br><span class="line">		System.out.println(li.get(2)); // Hello</span><br><span class="line">		</span><br><span class="line">		// E remove(int index)</span><br><span class="line">		System.out.println(li.remove(2)); // Hello</span><br><span class="line">		System.out.println(li); // [java, world]</span><br><span class="line">		</span><br><span class="line">		// E set(int index, E element) </span><br><span class="line">		System.out.println(li.set(0,&quot;Python&quot;)); // java</span><br><span class="line">		System.out.println(li); // [Python, world]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="关于java-util-List常见的子类"><a href="#关于java-util-List常见的子类" class="headerlink" title="关于java.util.List常见的子类"></a>关于java.util.List常见的子类</h4><p>一般常见的子类有俩：</p>
+<ul>
+<li><code>ArrayList</code><ul>
+<li>底层是数组结构，查询快，增删慢</li>
+</ul>
+</li>
+<li><code>LinkedList</code><ul>
+<li>底层是链表结构，查询慢，增删快</li>
+</ul>
+</li>
+</ul>
+<p>根据使用场景来使用不同的子类，一般不确定使用啥就使用ArrayList</p>
+<h3 id="java-util-LinkedList"><a href="#java-util-LinkedList" class="headerlink" title="java.util.LinkedList"></a>java.util.LinkedList</h3><p>链表结构常见的几个api：</p>
+<ul>
+<li><code>void addFirst(E e)</code></li>
+<li><code>void addLast(E e)</code></li>
+<li><code>E getFirst()</code></li>
+<li><code>E getLast()</code></li>
+<li><code>E removeFirst()</code></li>
+<li><code>E removeLast()</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package ListDemo;</span><br><span class="line"></span><br><span class="line">import java.util.LinkedList;</span><br><span class="line"></span><br><span class="line">public class LinkedListDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		LinkedList&lt;Integer&gt; li = new LinkedList&lt;Integer&gt;();</span><br><span class="line">		</span><br><span class="line">		for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">			li.add(i);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.println(li); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span><br><span class="line">		</span><br><span class="line">		// void addFirst(E e)</span><br><span class="line">		li.addFirst(-1);</span><br><span class="line">		System.out.println(li); // [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span><br><span class="line">		</span><br><span class="line">		// void addLast(E e)</span><br><span class="line">		li.addLast(10);</span><br><span class="line">		System.out.println(li); // [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br><span class="line"></span><br><span class="line">		// E getFirst() E getLast()</span><br><span class="line">		System.out.println(li.getFirst());// -1</span><br><span class="line">		System.out.println(li.getLast()); // 10</span><br><span class="line">		</span><br><span class="line">		// E removeFirst() E removeLast()</span><br><span class="line">		System.out.println(li.removeFirst()); // -1</span><br><span class="line">		System.out.println(li); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br><span class="line">		System.out.println(li.removeLast()); // 10</span><br><span class="line">		System.out.println(li); //[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="BOM">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">BOM</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-20</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/BOM/">#BOM</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>BOM</p>
+<a id="more"></a>
+
+
+<p>##BOM</p>
+<p>Browser Object Model</p>
+<ul>
+<li><p><strong>window.history</strong><br>控制浏览器的前进后退<br>console内输入,可以观察到效果<br><code>window.history.back()</code><br><code>window.history.forward()</code><br><code>window.history.go(-1) // === back()</code></p>
+</li>
+<li><p>window.innerHeight<br>浏览器窗口内容区域高度</p>
+</li>
+<li><p>window.length<br>针对页面中的iframe，有几个长度就是几</p>
+</li>
+<li><p><strong>window.location</strong><br>操纵浏览器的刷新按钮和地址栏<br><code>window.location.href = &#39;http://www.baidu.com&#39;</code> 在当前页面打开百度,也可以写成<code>window.location = &#39;http://www.baidu.com&#39;</code><br><code>location.protocol</code> 协议<br><code>location.hostname</code> 域名<br><code>location.port</code>端口<br><code>location.host</code> 域名加端口<br><code>location.pathname</code> 路径<br><code>location.search</code> 返回？后面的东西<br><code>location.hash</code> #后面的 锚点fragment  哈希<br><code>location.origin</code> 协议加域名加端口</p>
+</li>
+<li><p>window.name<br>a标签内设置target就能修改window.name</p>
+</li>
+<li><p><strong>window.navigator</strong><br>浏览器的所有信息<br><code>window.navigator.useragent</code> 可以用来区别不同浏览器</p>
+</li>
+<li><p>window.screen<br>屏幕相关信息<br><code>window.screen.availHeight</code><br><code>window,screen.height</code></p>
+</li>
+<li><p>window.self<br>window.self是一个全局属性，var一个self变量就会覆盖window.self </p>
+</li>
+</ul>
+<p>##打开新窗口</p>
+<ul>
+<li>window.open(“<a href="http://www.baidu.com&quot;,&#39;_self&#39;" target="_blank" rel="noopener">http://www.baidu.com&quot;,&#39;_self&#39;</a>);<br>第一个参数为URL,第二个参数为windowName，第三个参数是window的一些属性features</li>
+<li>window.opener.location.reload()<br>用在iframe页面中，让打开这个iframe页面的页面刷新。</li>
+<li>在页面正中央打开一个指定宽高的窗口<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot;</span><br><span class="line">          content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;script src=&quot;test.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;button id=&quot;btn&quot;&gt;弹出窗口&lt;/button&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var btn = document.querySelector(&apos;#btn&apos;);</span><br><span class="line">    btn.addEventListener(&apos;click&apos;,function () &#123;</span><br><span class="line">        $.bom.openWindowAtCenter(1000,800,&apos;http://baidu.com&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>test.js写为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">window.$ = function () &#123;&#125;</span><br><span class="line">$.bom = &#123;</span><br><span class="line">    openWindowAtCenter : function (width,height,url) &#123;</span><br><span class="line">        window.open(url,&apos;_blank&apos;,`</span><br><span class="line">            width = $&#123;width&#125;px,</span><br><span class="line">            height = $&#123;height&#125;px,</span><br><span class="line">            screenX = $&#123;screen.width/2 - width/2&#125;px,</span><br><span class="line">            screenY = $&#123;screen.height/2 - height/2&#125;px,</span><br><span class="line">`)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>##修改查询参数</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

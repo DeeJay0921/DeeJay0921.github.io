@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Python中的可变类型，不可变类型，以及变量引用">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Python中的可变类型，不可变类型，以及变量引用</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-06-09</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Python/">Python</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Python/">#Python</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Python中的可变类型，不可变类型，以及变量引用</p>
+<a id="more"></a>
+<h1 id="Python中的可变类型，不可变类型，以及变量引用"><a href="#Python中的可变类型，不可变类型，以及变量引用" class="headerlink" title="Python中的可变类型，不可变类型，以及变量引用"></a>Python中的可变类型，不可变类型，以及变量引用</h1><h1 id="可变与不可变"><a href="#可变与不可变" class="headerlink" title="可变与不可变"></a>可变与不可变</h1><ul>
+<li>不可变类型：<br>即一旦定义不支持修改的类型，在Py中，<code>Number</code>,<code>String</code>以及<code>tuple</code>是不可变类型。</li>
+</ul>
+<p>先来看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str1 = &apos;hello Py&apos;</span><br><span class="line">print(id(str1)) # 140378141772080</span><br><span class="line">str1 = &apos;hello Python&apos;</span><br><span class="line">print(id(str1)) # 140000092443568</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，对str1进行重新赋值，id即指向内存的地址改变了，即str1是换了一块指向的地址，而不是对原来地址指向的值进行修改。所以可以证明string类型确实是不可变类型，只能重新赋值，而不能修改原来的值，比如进行<code>str1[0] = &#39;H&#39;</code>的操作就会进行报错。</p>
+<p>Number类型也是同理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">num1 = 100</span><br><span class="line">beforeId = id(num1)</span><br><span class="line">num1 = 99</span><br><span class="line">afterId = id(num1)</span><br><span class="line"></span><br><span class="line">print(beforeId == afterId) # False</span><br></pre></td></tr></table></figure>
+
+<p>tuple就不用多说，定义之后不支持修改。</p>
+<ul>
+<li>可变类型<br>指的是支持修改的那些数据类型，即<code>list</code>和<code>dict</code>。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">li = [1,2,3]</span><br><span class="line">beforeId = id(li)</span><br><span class="line"></span><br><span class="line">li[0] = 0</span><br><span class="line">li.append(4)</span><br><span class="line">afterId = id(li)</span><br><span class="line"></span><br><span class="line">print(li) # [0,2,3,4]</span><br><span class="line">print(beforeId == afterId) # True</span><br></pre></td></tr></table></figure>
+
+<p>dict也是同理:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">di = &#123;&apos;name&apos;: &apos;DeeJay&apos;&#125;</span><br><span class="line">beforeId = id(di)</span><br><span class="line"></span><br><span class="line">di[&apos;name&apos;] = &apos;yang&apos;</span><br><span class="line">di[&apos;age&apos;] = 21</span><br><span class="line">afterId = id(di)</span><br><span class="line"></span><br><span class="line">print(di) # &#123;&apos;name&apos;: &apos;yang&apos;, &apos;age&apos;: 21&#125;</span><br><span class="line">print(beforeId == afterId) # True</span><br></pre></td></tr></table></figure>
+
+<p>说完了可变和不可变类型，在Python中，只有不可变类型才能作为dict的key值，比如str,num,tuple,而list和dict不能作为key值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">di = &#123;</span><br><span class="line">    &apos;name&apos;: &apos;DeeJay&apos;,</span><br><span class="line">    3.14: &apos;PI&apos;,</span><br><span class="line">    (1,2,3): &apos;tupleValue&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不可变的类型作为key值都是合法的。</p>
+<h2 id="变量的赋值都是引用"><a href="#变量的赋值都是引用" class="headerlink" title="变量的赋值都是引用"></a>变量的赋值都是引用</h2><p>在Python中，<strong>所有的赋值操作</strong>，都是让变量指向内存中存储值的空间。</p>
+<p>先来看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = 100</span><br><span class="line">b = a</span><br><span class="line"></span><br><span class="line">print( id(a) ) # 11036256</span><br><span class="line">print( id(b) ) # 11036256</span><br><span class="line"></span><br><span class="line"># 可以看到a和b的地址是一样的 即只有一份空间存储了100这个值，而a和b都仅仅是</span><br><span class="line"># 一个引用  存储了指向100这个值的地址</span><br></pre></td></tr></table></figure>
+
+<p>上述例子中，内存中只有一个存储100这个值的空间，但是有2个变量a,b都指向了它，这就是<code>b = a</code>做的事情。</p>
+<p>那么有了上面的认知，加上可变和不可变类型的知识。接着看下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 对于不可变的类型</span><br><span class="line">a = &apos;abc&apos;</span><br><span class="line">b = a</span><br><span class="line">print(id(a)) # 139673935449312</span><br><span class="line"></span><br><span class="line">a = &apos;def&apos;</span><br><span class="line">print(id(a)) # 139673934789352  a两次的地址已经发生了改变</span><br><span class="line">print(id(b)) # 139673935449312</span><br><span class="line">print(b) # abc</span><br></pre></td></tr></table></figure>
+
+<p>来分析上面的例子，对于不可变的类型，每次赋值都是使该变量指向另外一个地址，所以a在重新赋值之后，id(a)就改变了，但是对于b来说，b指向的a赋值前的那个地址，所以id(b)没变，相应的b指向的值也没有改变，还是abc,即赋值之后，再给a赋值，b并没有改变。</p>
+<p>对于num来说也是同理。</p>
+<p>再来看可变类型的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 对于可变类型</span><br><span class="line"></span><br><span class="line">A = [1,2,3]</span><br><span class="line">B = A</span><br><span class="line">print(id(A)) # 140395751312840</span><br><span class="line">A.append(4)</span><br><span class="line">print(id(A)) # 140395751312840</span><br><span class="line">print(id(B)) # 140395751312840</span><br><span class="line">print(B) # [1,2,3,4]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C = &#123;&apos;name&apos;: &apos;DeeJay&apos;&#125;</span><br><span class="line">D = C</span><br><span class="line">print(id(C)) # 140678783125544</span><br><span class="line">C[&apos;age&apos;] = 21</span><br><span class="line">print(id(C)) # 140678783125544</span><br><span class="line">print(id(D)) # 140678783125544</span><br><span class="line">print(D) # &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;age&apos;: 21&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述可变类型的例子也很好理解，可变类型支持修改，所以每次修改之后，id(A)并没有发生改变, 而<code>B = A</code>之后，B和A也是指向了同一地址，所以A的改变会引起B的改变。</p>
+<p>这就是Python中的引用，其实可以类比与JS中的基本类型和引用类型,写个例子加深下理解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var a = &apos;123&apos;</span><br><span class="line">var b = a</span><br><span class="line">a = &apos;hello JS&apos;</span><br><span class="line">console.log(b) // 123  基本类型</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var obj1 = &#123;name: &apos;DeeJay&apos;&#125;</span><br><span class="line">var obj2 = obj1</span><br><span class="line">obj1[&apos;age&apos;] = 21</span><br><span class="line">console.log(obj2) // 引用类型 &#123; name: &apos;DeeJay&apos;, age: 21 &#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

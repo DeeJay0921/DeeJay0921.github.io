@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="mongoDB中聚合(aggregate)的具体使用">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">mongoDB中聚合(aggregate)的具体使用</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-05-30</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/DataBase/">DataBase</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/mongoDB/">#mongoDB</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>mongoDB中聚合(aggregate)的具体使用</p>
+<a id="more"></a>
+
+<p>最近在学习mongoDB的使用，本文来介绍一下其中aggregate的具体使用</p>
+<p>先来看一个分组的例子，本例中$group是一个管道操作符，获得的结果可以接着输出到下一个管道，而内部的$sum是一个表达式操作符。</p>
+<h2 id="用-group-举个例子"><a href="#用-group-举个例子" class="headerlink" title="用$group 举个例子"></a>用$group 举个例子</h2><pre><code>将document分组，用作统计结果
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.Ubisoft.aggregate([ // aggregate方法接收的是一个数组</span><br><span class="line">    &#123;</span><br><span class="line">        $group: &#123;</span><br><span class="line">            _id: &apos;$time&apos;, </span><br><span class="line">            num: &#123;$sum: 1&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br><span class="line">// 这里的_id字段表示你要基于哪个字段来进行分组(即制定字段值相同的为一组)，这里的$time就表示要基于time字段来进行分组</span><br><span class="line"></span><br><span class="line">// 下面的num字段的值$sum: 1表示的是获取满足time字段相同的这一组的数量乘以后面给定的值(本例为1，那么就是同组的数量)。</span><br></pre></td></tr></table></figure></code></pre><p>那么看完这个例子之后，mongoDB中还有其他的一些管道操作符和表达式操作符：</p>
+<h3 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符"></a>管道操作符</h3><table>
+<thead>
+<tr>
+<th>常用管道</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$group</td>
+<td>将collection中的document分组，可用于统计结果</td>
+</tr>
+<tr>
+<td>$match</td>
+<td>过滤数据，只输出符合结果的文档</td>
+</tr>
+<tr>
+<td>$project</td>
+<td>修改输入文档的结构(例如重命名，增加、删除字段，创建结算结果等)</td>
+</tr>
+<tr>
+<td>$sort</td>
+<td>将结果进行排序后输出</td>
+</tr>
+<tr>
+<td>$limit</td>
+<td>限制管道输出的结果个数</td>
+</tr>
+<tr>
+<td>$skip</td>
+<td>跳过制定数量的结果，并且返回剩下的结果</td>
+</tr>
+<tr>
+<td>$unwind</td>
+<td>将数组类型的字段进行拆分</td>
+</tr>
+</tbody></table>
+<h3 id="表达式操作符"><a href="#表达式操作符" class="headerlink" title="表达式操作符"></a>表达式操作符</h3><table>
+<thead>
+<tr>
+<th>常用表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$sum</td>
+<td>计算总和，{$sum: 1}表示返回总和×1的值(即总和的数量),使用{$sum: ‘$制定字段’}也能直接获取制定字段的值的总和</td>
+</tr>
+<tr>
+<td>$avg</td>
+<td>平均值</td>
+</tr>
+<tr>
+<td>$min</td>
+<td>min</td>
+</tr>
+<tr>
+<td>$max</td>
+<td>max</td>
+</tr>
+<tr>
+<td>$push</td>
+<td>将结果文档中插入值到一个数组中</td>
+</tr>
+<tr>
+<td>$first</td>
+<td>根据文档的排序获取第一个文档数据</td>
+</tr>
+<tr>
+<td>$last</td>
+<td>同理，获取最后一个数据</td>
+</tr>
+</tbody></table>
+<p>了解完这些操作符之后，继续拿<code>$group</code>来试试看：<br>我们现在有一个名为Ubisoft的一个collection，内部的文档为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/* 1 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0cf67270e4fa02d31de42e&quot;),</span><br><span class="line">    &quot;name&quot; : &quot;rainbowSix Siege&quot;,</span><br><span class="line">    &quot;time&quot; : 400.0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 2 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0cf69270e4fa02d31de42f&quot;),</span><br><span class="line">    &quot;name&quot; : &quot;Assassin&apos;s creed&quot;,</span><br><span class="line">    &quot;time&quot; : 20.0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 3 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0cf6ad70e4fa02d31de430&quot;),</span><br><span class="line">    &quot;name&quot; : &quot;ghost Recon&quot;,</span><br><span class="line">    &quot;time&quot; : 0.0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 4 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0d14c870e4fa02d31de436&quot;),</span><br><span class="line">    &quot;name&quot; : &quot;farCry&quot;,</span><br><span class="line">    &quot;time&quot; : 0.0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们现在来试试其他的表达式操作符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.Ubisoft.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $group: &#123;</span><br><span class="line">            _id: &apos;$time&apos;,</span><br><span class="line">            gameName: &#123;$push: &apos;$name&apos;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>返回结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/* 1 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : 20.0,</span><br><span class="line">    &quot;gameName&quot; : [ </span><br><span class="line">        &quot;Assassin&apos;s creed&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 2 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : 0.0,</span><br><span class="line">    &quot;gameName&quot; : [ </span><br><span class="line">        &quot;ghost Recon&quot;, </span><br><span class="line">        &quot;farCry&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 3 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : 400.0,</span><br><span class="line">    &quot;gameName&quot; : [ </span><br><span class="line">        &quot;rainbowSix Siege&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到time字段相同的document被分为了一组，而且使用<code>$push</code>表达式，将我们制定的document的name字段的值也放到了一个数组中作为我们在mongoDB语句中制定的gameName的值。</p>
+<p><em>另外$group中可以制定_id:null, 即可以把所有的document分为一组，可以用于计算平均值之类的操作</em></p>
+<p><em>我们可以用<code>$指定字段</code>来表示选定的document的field,另外可以使用<code>$$ROOT</code>来表示选定的document的所有内容（例如:<code>chosenDocument: {$push: &#39;$$ROOT&#39;}</code>）</em></p>
+<p>上述例子基本介绍了表达式操作符的用法。</p>
+<p>接着来看<code>$match</code></p>
+<h2 id="match"><a href="#match" class="headerlink" title="$match"></a>$match</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.Ubisoft.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $match: &#123;</span><br><span class="line">            time: &#123;$gte: 20&#125; //选取time字段 &gt;=20的document</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>这就拿到了所有time&gt;=20的document,然后可以通过再接个管道来进行其他操作，比如说我们再接一个<code>$group</code>来进行分组，显示筛选出来的所有time&gt;=20的document的个数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">db.Ubisoft.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $match: &#123;</span><br><span class="line">            time: &#123;$gte: 20&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        $group: &#123;</span><br><span class="line">            _id: null, // _id: null表示全选</span><br><span class="line">            totalNum: &#123;$sum: 1&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/* 1 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : null,</span><br><span class="line">    &quot;totalNum&quot; : 2.0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到time&gt;=20的document的个数为2</p>
+<h2 id="project-投影"><a href="#project-投影" class="headerlink" title="$project  投影"></a>$project  投影</h2><p>修改输入文档的结构(例如重命名，增加、删除字段，创建结算结果等)</p>
+<p>$project和直接使用find()的写法一样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.Ubisoft.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $project: &#123;</span><br><span class="line">            _id: 0,  //不显示_id字段</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>和我们直接写<code>db.Ubisoft.find({},{&#39;_id&#39;: 0})</code>写法一样</p>
+<p>输出结果为： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/* 1 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;name&quot; : &quot;rainbowSix Siege&quot;,</span><br><span class="line">    &quot;time&quot; : 400.0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 2 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;name&quot; : &quot;Assassin&apos;s creed&quot;,</span><br><span class="line">    &quot;time&quot; : 20.0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 3 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;name&quot; : &quot;ghost Recon&quot;,</span><br><span class="line">    &quot;time&quot; : 0.0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 4 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;name&quot; : &quot;farCry&quot;,</span><br><span class="line">    &quot;time&quot; : 0.0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到没有_id字段了。</p>
+<p>那么我们现在如果想拿到所有time&gt;=20的document的name字段的话，可以把管道搭配起来用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">db.Ubisoft.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $match: &#123;</span><br><span class="line">            time: &#123;$gte: 20&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        $project: &#123;</span><br><span class="line">            _id: 0, // _id不显示</span><br><span class="line">            name: 1 // name是要显示的</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        $group: &#123;</span><br><span class="line">            _id: null,</span><br><span class="line">            name: &#123;$push: &apos;$name&apos;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/* 1 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : null,</span><br><span class="line">    &quot;name&quot; : [ </span><br><span class="line">        &quot;rainbowSix Siege&quot;, </span><br><span class="line">        &quot;Assassin&apos;s creed&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="sort"><a href="#sort" class="headerlink" title="$sort"></a>$sort</h2><p><code>$sort</code>和我们find()中排序的写法也是一样的。</p>
+<p>现在我们想将所有的document按照time降序来排列的话：</p>
+<p>和<code>db.Ubisoft.find().sort({time: -1})</code>写法是一样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.Ubisoft.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $sort: &#123;</span><br><span class="line">            time: -1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>同理，<code>$sort</code>也可以和其他管道搭配使用</p>
+<h2 id="limit-skip"><a href="#limit-skip" class="headerlink" title="$limit $skip"></a>$limit $skip</h2><p>和limit()以及skip()的写法也是一样的。</p>
+<p><code>db.Ubisoft.find().skip(1).limit(2)</code></p>
+<p>使用聚合可以写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.Ubisoft.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $skip: 1</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        $limit: 2</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>limit和skip搭配使用可以达到分页的效果。</p>
+<p><em>注意先写skip在写limit</em></p>
+<h2 id="unwind"><a href="#unwind" class="headerlink" title="$unwind"></a>$unwind</h2><p><code>$unwind</code>管道可以document中的数组类型的字段进行拆分，每条包含数组中的一个值。</p>
+<ul>
+<li>基本使用</li>
+</ul>
+<p>在Ubisoft这个集合里新增如下一条document:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/* 5 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0e242ed85f6f9cc56da7cc&quot;),</span><br><span class="line">    &quot;name&quot; : &quot;gameList&quot;,</span><br><span class="line">    &quot;list&quot; : [ </span><br><span class="line">        &quot;dota2&quot;, </span><br><span class="line">        &quot;csgo&quot;, </span><br><span class="line">        &quot;ow&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们针对这个document中的list字段来进行<code>$unwind</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.Ubisoft.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $unwind: &apos;$list&apos; // 指定list字段</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/* 1 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0e242ed85f6f9cc56da7cc&quot;),</span><br><span class="line">    &quot;name&quot; : &quot;gameList&quot;,</span><br><span class="line">    &quot;list&quot; : &quot;dota2&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 2 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0e242ed85f6f9cc56da7cc&quot;),</span><br><span class="line">    &quot;name&quot; : &quot;gameList&quot;,</span><br><span class="line">    &quot;list&quot; : &quot;csgo&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 3 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0e242ed85f6f9cc56da7cc&quot;),</span><br><span class="line">    &quot;name&quot; : &quot;gameList&quot;,</span><br><span class="line">    &quot;list&quot; : &quot;ow&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到unwind是将文档中的数组字段进行拆分，如果有其他文档的list字段也是数组，也会一并拆分。</p>
+<ul>
+<li>特殊情况下的unwind(空数组，null,非数组，无指定字段)</li>
+</ul>
+<p>针对特殊情况，新建一个colletion,内容为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/* 1 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0e27fdd85f6f9cc56da7ce&quot;),</span><br><span class="line">    &quot;list&quot; : null</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 2 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0e2827d85f6f9cc56da7cf&quot;),</span><br><span class="line">    &quot;list&quot; : []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 3 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0e2834d85f6f9cc56da7d0&quot;),</span><br><span class="line">    &quot;list&quot; : &quot;notArray&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 4 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0e2844d85f6f9cc56da7d1&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>来进行<code>$unwind</code>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.unwind.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $unwind: &apos;$list&apos;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/* 1 */</span><br><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b0e2834d85f6f9cc56da7d0&quot;),</span><br><span class="line">    &quot;list&quot; : &quot;notArray&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到<code>[]</code>,<code>null</code>,以及无指定字段的数据都丢失了，</p>
+<p>为了不丢失数据，我们可以写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.unwind.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $unwind: &#123;</span><br><span class="line">            path: &apos;$list&apos;, // path是指定字段</span><br><span class="line">            preserveNullAndEmptyArrays: true //该属性为true即保留</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>这次输出结果就保留了null以及空数组，值得关注的就是<code>preserveNullAndEmptyArrays</code>这个属性，为true的时候就保留。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

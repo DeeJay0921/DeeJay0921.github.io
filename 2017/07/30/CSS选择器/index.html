@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="CSS选择器">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">CSS选择器</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-07-30</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/CSS/">#CSS</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>CSS选择器</p>
+<a id="more"></a>
+
+<p>###一，class 和 id 的使用场景?<br>id选择器，匹配特定id的元素。<br>class是类选择器，匹配class包含（<strong>不是等于</strong>）特定类的元素。</p>
+<ul>
+<li>两者的区别<br>id选择器是唯一的，一个id在一个页面中只可以使用一次，不允许出现相同id的两个元素，但是同个class在一个页面中可以有多个。<br>在选择器优先级上，id的优先级要高于class。</li>
+<li>应用的场景</li>
+</ul>
+<ol>
+<li>id</li>
+</ol>
+<p>根据提供的唯一的id，快速获取标签对象。例如<br><code>document.getElementById(id);</code><br>在<label>标签中使用，用id和label标签的for属性进行配对,例如</label></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;label for=&quot;username&quot;&gt;用户名&lt;/label&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;username&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>class</li>
+</ol>
+<p>把一些要用到的特定的样式放到一个class类中，当需要用到这些特定的样式的时候，给相应的元素加上这个class类就好。</p>
+<p>id一般多用于外部结构，例如header，content，footer等有着唯一特定id的元素上，而class一般是用于内部结构的可能需要相同样式的一些元素（比如说几个需要相同样式的div）上。另外一般让class做id的子元素。</p>
+<p>###二，CSS选择器常见的有几种?</p>
+<p>常见的选择器可以分为：</p>
+<p>1, 基础选择器</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>通用元素选择器，匹配页面任何元素（很少使用）</td>
+</tr>
+<tr>
+<td>#id</td>
+<td>id选择器，匹配特定id的元素</td>
+</tr>
+<tr>
+<td>.class</td>
+<td>类选择器，匹配class包含（不是等于）特定类的元素</td>
+</tr>
+<tr>
+<td>element</td>
+<td>标签选择器</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li>组合选择器</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>E,F</td>
+<td>多元素选择器，用逗号,分隔，<strong>同时选中</strong>元素E或元素F</td>
+</tr>
+<tr>
+<td>E F</td>
+<td>后代选择器，用空格分隔，匹配E元素所有的后代，（不只是子元素，子元素向下递归）元素F</td>
+</tr>
+<tr>
+<td>E&gt;F</td>
+<td>子元素选择器，用&gt;分隔，匹配E元素的所有<strong>直接子元素</strong>，和E F相区别点在于只会选择<strong>向下一级</strong>的子元素，再向下的不会被选中</td>
+</tr>
+<tr>
+<td>E+F</td>
+<td>直接相邻选择器，匹配E元素之后的<strong>相邻的同级元素F</strong>，只匹配相邻的</td>
+</tr>
+<tr>
+<td>E~F</td>
+<td>普通相邻选择器（弟弟选择器），匹配E元素之后的同级元素F（无论直接相邻与否），会匹配所有的同级元素，无论是否直接相邻。</td>
+</tr>
+<tr>
+<td>.class1.class2</td>
+<td>id和class选择器和选择器连写的时候，<strong>中间没有分隔符</strong>， .和 #本身充当分隔符的元素</td>
+</tr>
+<tr>
+<td>element#id</td>
+<td>id和class选择器和选择器连写的时候，<strong>中间没有分隔符</strong>，.和#本身充当分隔符的元素，表示既满足第一个选择器又满足第二个选择器的元素。</td>
+</tr>
+</tbody></table>
+<p>E&gt;F使用的比E F多，因为E F可能选择多了一些元素，导致一些误操作。</p>
+<ol start="3">
+<li>属性选择器</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>E[attr]</td>
+<td>匹配所以<strong>具有属性attr</strong>的元素，例如div[id]就能取到所有id属性的div</td>
+</tr>
+<tr>
+<td>E[attr=value]</td>
+<td>匹配属性attr的<strong>值为value</strong>的元素，div[id=test]，匹配id=test的div</td>
+</tr>
+<tr>
+<td>E[attr~=value]</td>
+<td>匹配所有属性attr具有多个空格分隔，<strong>其中一个值等于value</strong>的元素</td>
+</tr>
+<tr>
+<td>E[attr^=value]</td>
+<td>匹配属性attr的值以value<strong>开头</strong>的元素</td>
+</tr>
+<tr>
+<td>E[attr$=value]</td>
+<td>匹配属性attr的值以value<strong>结尾</strong>的元素</td>
+</tr>
+<tr>
+<td>E[attr*=value]</td>
+<td>匹配属性attr的<strong>值包含value</strong>的元素</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li>伪类选择器<br>可以理解为一个元素的另外一种状态</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>E:firsr-child</td>
+<td>匹配元素E的<strong>第一个</strong>子元素</td>
+</tr>
+<tr>
+<td>E:link</td>
+<td>匹配所有<strong>未被点击</strong>过的链接</td>
+</tr>
+<tr>
+<td>E:visited</td>
+<td>匹配所有<strong>已被点击</strong>的链接</td>
+</tr>
+<tr>
+<td>E:active</td>
+<td>匹配鼠标<strong>已经其上按下，还没有释放</strong>的E元素</td>
+</tr>
+<tr>
+<td>E:hover</td>
+<td>匹配鼠标<strong>悬停其上</strong>的E元素</td>
+</tr>
+<tr>
+<td>E:focus</td>
+<td>匹配<strong>获得当前焦点</strong>的E元素</td>
+</tr>
+<tr>
+<td>E:lang(c)</td>
+<td>匹配<strong>lang属性等于c</strong>的E元素</td>
+</tr>
+<tr>
+<td>E:enabled</td>
+<td>匹配<strong>表单中可用</strong>的元素</td>
+</tr>
+<tr>
+<td>E:disabled</td>
+<td>匹配<strong>表单中禁用</strong>的元素</td>
+</tr>
+<tr>
+<td>E:checked</td>
+<td>匹配表单中<strong>被选中的radio或checkbox</strong>元素</td>
+</tr>
+<tr>
+<td>E::selection</td>
+<td>匹配用户<strong>当前选中</strong>的元素</td>
+</tr>
+<tr>
+<td>E:nth-child(n)</td>
+<td>匹配其<strong>父元素下</strong>的的第n个子元素，第一个编号为1</td>
+</tr>
+<tr>
+<td>E:nth-last-child(n)</td>
+<td>匹配其<strong>父元素下</strong>的倒数的第n个子元素,第一个编号为1</td>
+</tr>
+<tr>
+<td>E:nth-of-type(n)</td>
+<td>和nth_child(n)类似，但是仅匹配<strong>同种标签</strong>的元素</td>
+</tr>
+<tr>
+<td>E:nth-last-of-type(n)</td>
+<td>和nth-last-of-child(n)类似，但是仅匹配<strong>同种标签</strong>的元素</td>
+</tr>
+<tr>
+<td>E:first-of-type</td>
+<td>匹配<strong>父元素下</strong>使用同种标签的第一个子元素，等同于nth-of-type(1)</td>
+</tr>
+<tr>
+<td>E:last-of-type</td>
+<td>匹配<strong>父元素下</strong>使用同种标签的最后一个子元素，等同于nth-last-of-type(1)</td>
+</tr>
+<tr>
+<td>E:root</td>
+<td>匹配文档的根元素，对于HTML文档，就是HTML元素</td>
+</tr>
+</tbody></table>
+<p>选择器使用举例分析(first-child)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .child:first-child&#123;</span><br><span class="line">        color: red;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;warp&quot;&gt;</span><br><span class="line">    &lt;h1 class=&quot;child&quot;&gt;h1&lt;/h1&gt;</span><br><span class="line">    &lt;h2 class=&quot;child&quot;&gt;h2&lt;/h2&gt;</span><br><span class="line">    &lt;div class=&quot;ct&quot;&gt;</span><br><span class="line">        &lt;h1 class=&quot;child&quot;&gt;ct-h1&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，.warp的div中包含了.child的h1和h2，以及.ct的div，.ct的div中有.child的ct-h1。<br>当给当前结构加上上述样式的时候, .child的元素有三个，前2个为h1和h2，他们的父元素是.warp的div，所以父元素下的第一个子元素为.child的h1,然后第三个.child的ct-h1的父元素为.ct的div，.ct的div的第一个子元素是.child的ct-h1,所以，在本例中，<strong>.child的h1和.child的ct-h1会应用样式</strong>。<br>first-of-type举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .child:first-of-type&#123;</span><br><span class="line">        color: red;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;warp&quot;&gt;</span><br><span class="line">    &lt;h1 class=&quot;child&quot;&gt;h1&lt;/h1&gt;</span><br><span class="line">    &lt;h2 class=&quot;child&quot;&gt;h2&lt;/h2&gt;</span><br><span class="line">    &lt;div class=&quot;ct&quot;&gt;</span><br><span class="line">        &lt;h1 class=&quot;child&quot;&gt;ct-h1&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;h2 class=&quot;child&quot;&gt;h2-btm&lt;/h2&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，应用first-of-type选择器的时候，.child的元素有h1,h2,ct-h1,h2-btm四个元素。h1,h2，h2-btm的父元素为.warp的div，其中h1和h2都是父元素下的同种标签的第一个元素，所以会被选中，而后面的h2-btm因为前面已经有h2了，所以不是第一个h2标签而是第二个h2标签，故此不会被选中。而ct-h1的父元素是ct， ct-h1是父元素下的第一个同类标签，故此也会被选中。</p>
+<p>nth-child(n)和nth-of-type(n)当n=1时，和first-child，first-of-type相同。<br>对于n的取值：</p>
+<ul>
+<li>1,2,3,4,5</li>
+<li>2n+1(奇数),2n(偶数),4n-1</li>
+<li>odd(奇数),even(偶数)</li>
+</ul>
+<ol start="5">
+<li>伪元素选择器</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>E::first-line</td>
+<td>匹配E元素内容的第一行</td>
+</tr>
+<tr>
+<td>E::first-letter</td>
+<td>匹配E元素内容的第一个字母</td>
+</tr>
+<tr>
+<td>E::before</td>
+<td>在E元素之前插入生成的内容</td>
+</tr>
+<tr>
+<td>E::after</td>
+<td>在E元素之后插入生成的内容</td>
+</tr>
+</tbody></table>
+<p>before和after使用的时候必须要有<strong>content属性</strong>。<br>应用举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .warp::before&#123;</span><br><span class="line">        content: &apos;before&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;warp&quot;&gt;</span><br><span class="line">    &lt;h1 class=&quot;child&quot;&gt;h1&lt;/h1&gt;</span><br><span class="line">    &lt;h2 class=&quot;child&quot;&gt;h2&lt;/h2&gt;</span><br><span class="line">    &lt;div class=&quot;ct&quot;&gt;</span><br><span class="line">        &lt;h1 class=&quot;child&quot;&gt;ct-h1&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;h2 class=&quot;child&quot;&gt;h2-btm&lt;/h2&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>###三，选择器的优先级是怎样的?对于复杂场景如何计算优先级？</p>
+<p>多种样式应用在同一元素上时：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    #text&#123;</span><br><span class="line">        color: red;</span><br><span class="line">    &#125;</span><br><span class="line">    p&#123;</span><br><span class="line">        color: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;p id=&quot;text&quot;&gt;text&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>CSS优先级排序（从高到底）：</li>
+</ul>
+<ol>
+<li><p><strong>！important</strong>加到元素后，会覆盖掉页面中任何位置定义的元素样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p&#123;</span><br><span class="line">    color: red!important;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>作为style属性写在元素标签上的<strong>内联样式</strong></p>
+</li>
+<li><p>id选择器</p>
+</li>
+<li><p>类选择器</p>
+</li>
+<li><p>伪类选择器</p>
+</li>
+<li><p>属性选择器</p>
+</li>
+<li><p>标签选择器</p>
+</li>
+<li><p>通配符选择器</p>
+</li>
+<li><p>浏览器自定义</p>
+</li>
+</ol>
+<ul>
+<li>复杂情景下的优先级计算</li>
+</ul>
+<p>我们给<strong>行内样式</strong><code>&lt;div style=&quot;xxx&quot;&gt;&lt;/div&gt;</code>设为==&gt;a<br><strong>ID</strong>选择器设为==&gt;b<br><strong>类</strong>，<strong>属性</strong>选择器和<strong>伪类</strong>选择器设为==&gt;c<br><strong>标签</strong>选择器，<strong>伪元素</strong>设为==&gt;d<br>*选择器不计数</p>
+<p>计算举例：</p>
+<ol>
+<li><ul>
+<li>a=0 b=0 c=0 d=0  —&gt;0,0,0,0</li>
+</ul>
+</li>
+<li>p    a=0 b=0 c=0 d=1 —&gt;0,0,0,1</li>
+<li>a:hover a=0 b=0 c=1 d=1(a算一个标签选择器所以d=1，hover算伪类，c=1)  —&gt; 0,0,1,1</li>
+<li>ul li  a=0 b=0 c=0 d=2(2个标签选择器) —&gt; 0,0,0,2</li>
+<li>ul ol+li  a=0 b=0 c=0 d=3(3个标签选择器)  —&gt;0,0,0,3</li>
+<li>h1+input[type=hidden]  a=0 b=0 c=1(type=hidden一个属性选择器) d=2(h1和input 2个标签选择器)  —&gt; 0,0,1,2</li>
+<li>ul ol li:active a=0 b=0 c=1(active c=1) d=3(3个标签选择器) —&gt; 0,0,1,3</li>
+<li>#ct .box p   a=0 b=1(#ct) c=1(.box) d=1(p)  —&gt;0,1,1,1</li>
+<li>div#header:after   a=0 b=1(#header) c=0 d=2(divh和：after)  —&gt;0,1,0,2</li>
+<li>style=””   a=1 b=0 c=0 d=0 —-&gt; 1,0,0,0</li>
+</ol>
+<p>通过比较计算得到的值来确定优先级，先比较a的大小，a相等再比较b，b相等再比较c，以此类推。</p>
+<ul>
+<li>样式覆盖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">div&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line">div&#123;</span><br><span class="line">    color: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>后面的样式会覆盖前面的样式，只有后面的样式会起作用</p>
+<ul>
+<li>选择器使用经验</li>
+</ul>
+<ol>
+<li>遵守CSS书写规范</li>
+<li>使用合理的命名空间，<strong>不建议使用标签选择器</strong></li>
+<li>合理的复用class</li>
+</ol>
+<p>###四，a:link, a:hover, a:active, a:visited 的顺序是怎样的？ 为什么？</p>
+<ul>
+<li><p>标签伪类的作用：<br>“:link”: a标签还未被访问的状态；<br>“:visited”: a标签已被访问过的状态；<br>“:hover”: 鼠标悬停在a标签上的状态；<br>“:active”: a标签被鼠标按着时的状态；</p>
+</li>
+<li><p>写样式时候的顺序：</p>
+</li>
+</ul>
+<p><strong>LVHA</strong><br>1.a:link<br>2.a:visited<br>3.a:hover<br>4.a:active</p>
+<ul>
+<li>这样写的原因：<br>这样写的原因是由两点决定的，第一点”相同优先级的样式，后面的会覆盖前面的样式”，第二点是鼠标点击动作的先后顺序。<br>link和visited是常态，而hover和active是即时状态，h和a触发时，即时状态会覆盖l和v的常态，所以即时状态要放在常态的后面。<br>常态情况下：访问过之后，就要呈现出visited的样式，所以visited要放到Link后面。<br>即时状态下：要让active覆盖hover的样式，所以要将active放到后面。</li>
+</ul>
+<p>###五，以下选择器分别是什么意思?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#header&#123;</span><br><span class="line">&#125;</span><br><span class="line">.header&#123;</span><br><span class="line">&#125;</span><br><span class="line">.header .logo&#123;</span><br><span class="line">&#125;</span><br><span class="line">.header.mobile&#123;</span><br><span class="line">&#125;</span><br><span class="line">.header p, .header h3&#123;</span><br><span class="line">&#125;</span><br><span class="line">#header .nav&gt;li&#123;</span><br><span class="line">&#125;</span><br><span class="line">#header a:hover&#123;</span><br><span class="line">&#125;</span><br><span class="line">#header .logo~p&#123;</span><br><span class="line">&#125;</span><br><span class="line">#header input[type=&quot;text&quot;]&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>#header</code>   id为header的元素<br><code>.header</code>  class为header的元素<br><code>.header .log</code>  class为header的元素下的class为log的子元素<br><code>.header.mobile</code>   同时具有header类的和mobile类的元素<br><code>.header p, .header h3</code>   同时选中header类的元素下的p标签元素和h3标签元素<br><code>#header .nav&gt;li</code>  id为header的元素下的nav类的元素下的直接标签为li的子元素<br><code>#header a:hover</code>   表示id为header的元素下的标签为a的元素鼠标悬浮下的元素<br><code>#header .logo~p</code>   表示id为header的元素下的类为logo的元素之后的所有同级的标签为p的元素<br><code>#header input[type=&quot;text&quot;]</code>  表示id为header的元素下的拥有值为text的type属性的input标签</p>
+<p>###六，列出你知道的伪类选择器</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>E:firsr-child</td>
+<td>匹配元素E的<strong>第一个</strong>子元素</td>
+</tr>
+<tr>
+<td>E:link</td>
+<td>匹配所有<strong>未被点击</strong>过的链接</td>
+</tr>
+<tr>
+<td>E:visited</td>
+<td>匹配所有<strong>已被点击</strong>的链接</td>
+</tr>
+<tr>
+<td>E:active</td>
+<td>匹配鼠标<strong>已经其上按下，还没有释放</strong>的E元素</td>
+</tr>
+<tr>
+<td>E:hover</td>
+<td>匹配鼠标<strong>悬停其上</strong>的E元素</td>
+</tr>
+<tr>
+<td>E:focus</td>
+<td>匹配<strong>获得当前焦点</strong>的E元素</td>
+</tr>
+<tr>
+<td>E:lang(c)</td>
+<td>匹配<strong>lang属性等于c</strong>的E元素</td>
+</tr>
+<tr>
+<td>E:enabled</td>
+<td>匹配<strong>表单中可用</strong>的元素</td>
+</tr>
+<tr>
+<td>E:disabled</td>
+<td>匹配<strong>表单中禁用</strong>的元素</td>
+</tr>
+<tr>
+<td>E:checked</td>
+<td>匹配表单中<strong>被选中的radio或checkbox</strong>元素</td>
+</tr>
+<tr>
+<td>E::selection</td>
+<td>匹配用户<strong>当前选中</strong>的元素</td>
+</tr>
+<tr>
+<td>E:nth-child(n)</td>
+<td>匹配其<strong>父元素下</strong>的的第n个子元素，第一个编号为1</td>
+</tr>
+<tr>
+<td>E:nth-last-child(n)</td>
+<td>匹配其<strong>父元素下</strong>的倒数的第n个子元素,第一个编号为1</td>
+</tr>
+<tr>
+<td>E:nth-of-type(n)</td>
+<td>和nth_child(n)类似，但是仅匹配<strong>同种标签</strong>的元素</td>
+</tr>
+<tr>
+<td>E:nth-last-of-type(n)</td>
+<td>和nth-last-of-child(n)类似，但是仅匹配<strong>同种标签</strong>的元素</td>
+</tr>
+<tr>
+<td>E:first-of-type</td>
+<td>匹配<strong>父元素下</strong>使用同种标签的第一个子元素，等同于nth-of-type(1)</td>
+</tr>
+<tr>
+<td>E:last-of-type</td>
+<td>匹配<strong>父元素下</strong>使用同种标签的最后一个子元素，等同于nth-last-of-type(1)</td>
+</tr>
+<tr>
+<td>E:root</td>
+<td>匹配文档的根元素，对于HTML文档，就是HTML元素</td>
+</tr>
+</tbody></table>
+<p>###七，div:first-child、div:first-of-type、div :first-child和div :first-of-type的作用和区别 （注意空格的作用）</p>
+<p><code>div:first-child</code>表示div同级的第一个而且是div元素<br><code>div:first-of-type</code> 表示div元素的父元素下的第一个标签为div的子元素<br><code>div :first-child</code> 表示div元素下的作为其父元素下的所有第一个子元素<br><code>div :first-of-type</code> 表示div元素下的作为其父元素下的所有标签和其父元素相同的子元素</p>
+<p>###八，运行如下代码，解析下输出样式的原因。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">.item1:first-child&#123;</span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br><span class="line">.item1:first-of-type&#123;</span><br><span class="line">  background: blue;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"> &lt;div class=&quot;ct&quot;&gt;</span><br><span class="line">   &lt;p class=&quot;item1&quot;&gt;aa&lt;/p&gt;</span><br><span class="line">   &lt;h3 class=&quot;item1&quot;&gt;bb&lt;/h3&gt;</span><br><span class="line">   &lt;h3 class=&quot;item1&quot;&gt;ccc&lt;/h3&gt;</span><br><span class="line"> &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果为aa应用了<code>color: red</code>的样式，aa和bb应用了<code>background: blue</code>的样式。</p>
+<p>结果分析：</p>
+<ul>
+<li>first-child<br>.item1的元素有aa，bb和ccc，他们三个元素的父元素都为.ct的div，.ct的div下的第一个元素为.item1的aa，所以只有aa应用了该样式。</li>
+<li>first-of-type<br>.item1的元素有标签为p的aa，标签为h3的bb和ccc。对于p标签的aa，其父元素.ct下的第一个标签为p的元素就是aa,对于标签为h3的bb和ccc，其父元素.ct下的第一个标签为h3的为bb，所以只有aa和bb应用了样式。</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

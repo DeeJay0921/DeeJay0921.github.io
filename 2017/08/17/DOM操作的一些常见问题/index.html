@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="DOM操作的一些常见问题">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">DOM操作的一些常见问题</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-17</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/DOM/">#DOM</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>DOM操作的一些常见问题</p>
+<a id="more"></a>
+
+<p>###1,dom对象的innerText和innerHTML有什么区别？</p>
+<ul>
+<li>innerText<br>innerText是一个可写属性，返回元素内包含的文本内容，在多层次的时候会按照元素由浅到深的顺序拼接其内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">        123</span><br><span class="line">        &lt;span&gt;456&lt;/span&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>外层div的innerText的返回内容是”123456”</p>
+<ul>
+<li>innerHTML<br>innerHTML属性作用和innerText属性类似，但是不是返回元素的文本内容，而是返回元素的HTML结构，在写入的时候也会自动构建DOM<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">        123</span><br><span class="line">        &lt;span&gt;456&lt;/span&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>外层div的innerHTML的返回内容是<code>&lt;p&gt;123&lt;span&gt;456&lt;/span&gt;&gt;&lt;/p&gt;</code></p>
+<p>###2,elem.children和elem.childNodes的区别？</p>
+<ul>
+<li>elem.childNodes返回所有的子节点，包括HTML元素，属性，文本 </li>
+<li>elem.children只返回HTML元素节点<br>###3,查询元素有几种常见的方法？ES5的元素选择方法是什么?</li>
+<li>getElementById() </li>
+<li>getElementByClassName() </li>
+<li>getElementsByTagName() </li>
+<li>getElementsByName()</li>
+</ul>
+<p>ES5:</p>
+<ul>
+<li>querySelector() </li>
+<li>querySelectorAll()<br>###4,如何创建一个元素？如何给元素设置属性？如何删除属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var ct = document.querySelector(&apos;#ct&apos;);</span><br><span class="line">document.querySelectorAll(&quot;#ct .title&quot;);</span><br><span class="line">var img = document.createElement(&apos;img&apos;);</span><br><span class="line">img.setAttribute(&apos;src&apos;,&apos;http://wx1.sinaimg.cn/mw690/4abc2d1fgy1fim303kdwdj208m08cgly.jpg&apos;);</span><br><span class="line">ct.appendChild(img);</span><br><span class="line">img.getAttribute(&apos;src&apos;);</span><br><span class="line">img.removeAttribute(&apos;src&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>###5,如何给页面元素添加子元素？如何删除页面元素下的子元素?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var ct = document.querySelector(&apos;#ct&apos;);</span><br><span class="line">var img = document.createElement(&apos;img&apos;);</span><br><span class="line">var p = document.createElement(&apos;p&apos;);</span><br><span class="line">ct.appendChild(img);</span><br><span class="line">ct.appendChild(p);</span><br><span class="line">ct.removeChild(img);</span><br><span class="line">ct.removeChild(p);</span><br></pre></td></tr></table></figure>
+
+<p>###6,element.classList有哪些方法？如何判断一个元素的 class 列表中是包含某个 class？如何添加一个class？如何删除一个class?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;p class=&quot;title&quot;&gt;&lt;/p&gt;</span><br><span class="line">var p = document.querySelector(&apos;.title&apos;);</span><br><span class="line">console.log(p.classList); //[&quot;title&quot;] 输出一个数组，内容为元素的class</span><br><span class="line">p.classList.add(&apos;active&apos;); // 给p元素增加一个叫active的类</span><br><span class="line">p.classList.remove(&apos;active&apos;); //删除active类</span><br><span class="line">p.classList.contains(&apos;active&apos;); //判断p元素是否有active这个类</span><br></pre></td></tr></table></figure>
+
+<p>###7,如何选中如下代码所有的li元素？ 如何选中btn元素？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;mod-tabs&quot;&gt;</span><br><span class="line">   &lt;ul&gt;</span><br><span class="line">       &lt;li&gt;list1&lt;/li&gt;</span><br><span class="line">       &lt;li&gt;list2&lt;/li&gt;</span><br><span class="line">       &lt;li&gt;list3&lt;/li&gt;</span><br><span class="line">   &lt;/ul&gt;</span><br><span class="line">   &lt;button class=&quot;btn&quot;&gt;点我&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var allLi = document.querySelectorAll(&quot;.mod-tabs ul li&quot;);</span><br><span class="line">var btn = document.querySelector(&apos;.btn&apos;);</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

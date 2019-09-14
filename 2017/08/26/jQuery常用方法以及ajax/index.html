@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="jQuery常用方法以及ajax">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">jQuery常用方法以及ajax</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-26</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/Ajax/">#Ajax</a> <a class="tag" href="/tags/jQuery/">#jQuery</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>jQuery常用方法以及ajax</p>
+<a id="more"></a>
+
+
+<p>##jQuery常用函数</p>
+<p>####.each(function(index,Element))<br>遍历一个<strong>jQuery对象</strong>，为每个匹配元素执行一个函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    $(&apos;li&apos;).each(function (index,element) &#123;</span><br><span class="line">//        需要注意的是这里的element是原生DOM对象,其实这里的element就等价于这个this</span><br><span class="line">        console.log(index + &apos;:&apos; + $(this).text());</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>####.map(callback(index,domElement))<br>通过一个函数匹配当前集合中的每个元素，产生一个包含新的jQuery对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arrValue = $(&apos;li&apos;).map(function () &#123;</span><br><span class="line">    return $(this).text();</span><br><span class="line">&#125;)</span><br><span class="line">console.log(arrValue)</span><br></pre></td></tr></table></figure>
+
+<p>####jQuery.extend([deep,]target[,object1][,objectN])</p>
+<ul>
+<li>当我们提供两个或多个对象给$.extend(),对象的所有属性都添加到目标对象(target参数)。</li>
+<li>如果只有一个参数提供给$.extend()。这意味着目标参数被省略；在这种情况下，jquery对象本身被默认为目标对象。这样，我们可以在jQuery的命名空间下添加新的功能。这对于插件开发者希望向jquery中添加新函数时是很有用的</li>
+</ul>
+<p>目标对象(第一个参数)将被修改，并且将通过$.extend()返回。然而，如果我们想保留原对象，我们可以通过传递一个空对象作为目标对象：<br><code>var object = $.extend({},object1,oject2);</code></p>
+<p>在默认情况下，通过$.extend()合并操作不是递归的。</p>
+<p>如果第一个对象的属性本身是一个对象或者数组，那么它将完全用第二个对象相同的key重写一个属性。这些值不会被合并。如果将true作为该函数的第一个参数，那么会在对象上进行递归的合并。</p>
+<p><strong>使用范例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    var obj1 = &#123;a:1&#125;;</span><br><span class="line">    var obj2 = &#123;b:2,c:3&#125;;</span><br><span class="line">    var obj3 = &#123;b:3,d:5&#125;;</span><br><span class="line">    $.extend(obj1,obj2); //把obj2扩展到obj1上去，作一个遍历，如果obj2里面有的属性obj1里面也有，会进行覆盖，如果obj1里面没有，会做一次新增</span><br><span class="line">    // obj1 == &#123;a:1,b:2,c:3&#125;</span><br><span class="line">    $.extend(obj1,obj2,obj3);//修改的还是obj1，此时obj1 == &#123;a:1,b:3,c:3,d:5&#125; 已经存在的属性进行覆盖，没有的进行新增</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">//    如果想得到三个属性扩展的值，但是又不想修改obj1的话</span><br><span class="line">    var obj4 = &#123;&#125;;</span><br><span class="line">    $.extend(obj4,obj1,obj2,obj3);</span><br><span class="line">    //也可以向下面这么写，直接写个空对象，将扩展完成的对象赋给新定义的对象就好</span><br><span class="line">    var obj5 = $.extend(&#123;&#125;,obj1,obj2,obj3);</span><br></pre></td></tr></table></figure>
+
+<p>####.clone([withDataAndEvents])<br>.clone方法<strong>深度复制</strong>所有匹配的元素的集合，包括所有匹配元素，匹配元素的下级元素，文字节点<br>通常我们将页面上一个元素插入到DOM里一个地方，他会被从老地方带走，类似于剪切的效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;ct&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;goodbye&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">            hello</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        goodbye</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    $(&apos;.hello&apos;).appendTo($(&apos;.goodbye&apos;)); // 进行了剪切</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>但是如果我们需要的是复制不是剪切,就可以写为：<br><code>$(&#39;.hello&#39;).clone().appendTo(&#39;.goodbye&#39;);</code></p>
+<p>####.index()  /.index(selector)/.index(element)<br>从给定集合中查找特定元素index</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li class=&quot;active&quot;&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    $(&apos;.active&apos;).index(); //1</span><br></pre></td></tr></table></figure>
+
+<p>.index()中也可以传入参数，selector或者是element，表示在特定选择器或者元素下的index是多少</p>
+<p>####.ready(handler)</p>
+<p>当DOM准备就绪的时候，指定一个函数执行<br>等价于下面这两种写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$.(document).ready(handler)</span><br><span class="line">$(handler)</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(function () &#123;</span><br><span class="line">    console.log(&apos;ready&apos;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>##jQuery的ajaxAPI用法：</p>
+<p>###jQuery.ajax([settings])</p>
+<p>范例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: &apos;xxx.php&apos;,</span><br><span class="line">    method: &apos;GET&apos;,</span><br><span class="line">    data: &#123;</span><br><span class="line">        name: &apos;bayon&apos;,</span><br><span class="line">        age: 24,</span><br><span class="line">        sex: &apos;male&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).done(function(result) &#123;</span><br><span class="line">    console.log(result);</span><br><span class="line">&#125;).fail(function (jqXHR,textStatus) &#123;</span><br><span class="line">    console.log(textStatus);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>关于settings中的具体一些参数参考<a href="http://www.css88.com/jqapi-1.9/jQuery.ajax/" target="_blank" rel="noopener">jquery ajax文档</a>，注意async,beforeSend,cache,complete,dataType</p>
+<p>###对于jsonp的ajax写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: &apos;deejay&apos;,</span><br><span class="line">    dataType: &apos;jsonp&apos;, // dataType写成jsonp</span><br><span class="line">    jsonp: &apos;callback&apos;, // </span><br><span class="line">    jsonpCallback: &apos;agfjkhahj&apos;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>####jQuery.param(obj)<br>创建一个数组，一个普通的对象，或者一个jQuery对象的序列化表示形式，用于URL查询字符串或者Ajax请求。<br>使用解析：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var myObject = &#123;</span><br><span class="line">    a: &#123;</span><br><span class="line">        one: 1,</span><br><span class="line">        two: 2,</span><br><span class="line">        three: 3,</span><br><span class="line">    &#125;,</span><br><span class="line">    b: [1,2,3]</span><br><span class="line">&#125;;</span><br><span class="line">$.param(myObject); //结果为&quot;a%5Bone%5D=1&amp;a%5Btwo%5D=2&amp;a%5Bthree%5D=3&amp;b%5B%5D=1&amp;b%5B%5D=2&amp;b%5B%5D=3&quot;  序列化的对象</span><br><span class="line">decodeURIComponent($.param(myObject)); //&quot;a[one]=1&amp;a[two]=2&amp;a[three]=3&amp;b[]=1&amp;b[]=2&amp;b[]=3&quot;</span><br></pre></td></tr></table></figure>
+
+<p>###.serialize()<br>用做将提交的表单元素的值编译成字符串，不接受任何参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;form&apos;).on(&apos;submit&apos;,function (event) &#123;</span><br><span class="line">    event.preventDefault();</span><br><span class="line">    console.log($(this).serialize());</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>###jQuery ajax使用举例<br>实现新闻页面加载：<br>在进行ajax的书写过程中，要和后端约定好<strong>接口名称（如/getNews）</strong>和<strong>请求方式（get/post）</strong>,然后数据格式要根据实际需求来决定，比如说实现新闻页面，那么返回的应该是一个数组，数组中的每一项都是个对象，存放一些信息，应该是个json对象。<br>确定好返回数据的大致格式后，前端再看页面具体需要什么信息，即返回数组的每一项中的json中的信息应该包括哪些，在本例中，需要新闻页面的链接url，图片链接url，h2标题中的文字，新闻段落p中的文字，那么前端需要的数据<strong>应该是：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        link: &apos;&apos;,</span><br><span class="line">        img: &apos;&apos;,</span><br><span class="line">        h2: &apos;&apos;,</span><br><span class="line">        p: &apos;&apos;,</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>那么约定好这些之后，进行ajax的书写就不会出错了。<br>来具体实现新闻页面。<br>后端代码为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">app.get(&apos;/getNews&apos;,function(req,res) &#123;</span><br><span class="line">    var news = [</span><br><span class="line">        &#123;</span><br><span class="line">            link: &apos;http://view.inews.qq.com/a/20160830A02SEB00&apos;,</span><br><span class="line">            img: &apos;http://inews.gtimg.com/newsapp_match/0/530686980/0&apos;,</span><br><span class="line">            h2: &apos;中国轰6K研发险些被俄罗斯发动机厂商卡脖子&apos;,</span><br><span class="line">            p: &apos;近日，轰6K＂战神＂轰炸机首次公开亮相。在中国空军长春“追梦空天”活动中，轰6K轰炸机进行了公开展出，配套武器装备逐一亮相。殊不知轰-6K这一战略性的国产战机，险些也被外国供应商卡了脖子！&apos;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            link: &apos;https://kuaibao.qq.com/s/ENT2017082601127604&apos;,</span><br><span class="line">            img: &apos;http://inews.gtimg.com/newsapp_match/0/1963668798/0&apos;,</span><br><span class="line">            h2: &apos;凤凰传奇的玲花素颜长这样 认得出来吗&apos;,</span><br><span class="line">            p: &apos;视觉中国讯 8月25日，凤凰传奇玲花现身广州白云机场，素颜现身的她头戴棒球帽，黄色T恤上的老虎图案十分抢眼，下身着白色短裤，大秀美腿，等待保姆车时与助理热聊不断，看似心情相当好！ (来自:视觉中国)&apos;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            link: &apos;https://kuaibao.qq.com/s/20170826A00BDJ00&apos;,</span><br><span class="line">            img: &apos;http://inews.gtimg.com/newsapp_match/0/1963495052/0&apos;,</span><br><span class="line">            h2: &apos;59岁冯小刚坦言人生三大遗憾：对不起前妻和徐帆，后悔捧红宝强&apos;,</span><br><span class="line">            p: &apos;今年已经59岁的冯小刚人生堪称完美，作为导演，冯小刚执导了《甲方乙方》《大腕》《不见不散》等经典，作为演员，冯小刚凭《老炮》问鼎金马影帝，然而这样完美的人生却也充满遗憾，最近冯小刚就爆出了自己人生中的三大憾事。&apos;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            link: &apos;https://kuaibao.qq.com/s/20170825A05HUK00&apos;,</span><br><span class="line">            img: &apos;http://inews.gtimg.com/newsapp_match/0/1960889798/0&apos;,</span><br><span class="line">            h2: &apos;叛逆17年，害谢霆锋抛弃张柏芝，如今37岁当爸爸过成这样&apos;,</span><br><span class="line">            p: &apos;在2000年，陈冠希首次出演电影《特警新人类2》，算是正式进入了娱乐圈，其实在年轻的时候，陈冠希的事业发展相当好，公司给了他不错的资源，无论是在电影还是音乐上，陈冠希都发展得不错。&apos;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            link: &apos;https://kuaibao.qq.com/s/20170826A003L900&apos;,</span><br><span class="line">            img: &apos;http://inews.gtimg.com/newsapp_match/0/1963334820/0&apos;,</span><br><span class="line">            h2: &apos;谢霆锋未婚妻瞬间秒变美食厨娘，做饭有模有样，谁说不如张柏芝？&apos;,</span><br><span class="line">            p: &apos;谢霆锋和王菲的早年故事，想必是人尽皆知，当年也是娱乐圈最看好的一对，但是因各种原因各自结婚。&apos;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            link: &apos;https://view.inews.qq.com/a/SSH2017082605027004&apos;,</span><br><span class="line">            img: &apos;http://inews.gtimg.com/newsapp_match/0/1964287533/0&apos;,</span><br><span class="line">            h2: &apos;三兄妹为减轻父母负担离家出走 草丛过夜后被找回&apos;,</span><br><span class="line">            p: &apos;8月24日，山西运城盐湖区东留村三兄妹为减轻父母负担离家出走，并在草丛里睡了一晚。26日，运城市公安局盐湖分局工作人经警民联合寻找，三人已被父母接回家。&apos;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            link: &apos;https://view.inews.qq.com/a/SSH2017082604728808&apos;,</span><br><span class="line">            img: &apos;http://inews.gtimg.com/newsapp_match/0/1964237194/0&apos;,</span><br><span class="line">            h2: &apos;女子开车撞上公交车 却爱上了公交司机&apos;,</span><br><span class="line">            p: &apos;今天咱们来讲一段爱情故事，故事的主人公是咱济南的一个公交司机小郭，今年在驾驶公交车的时候，被一辆私家车追尾了。&apos;,</span><br><span class="line">        &#125;</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    var index = req.query.index;</span><br><span class="line">    var length = req.query.length;</span><br><span class="line"></span><br><span class="line">    var sliceNews = news.slice(index*length,(parseInt(index*length))+(parseInt(length)));</span><br><span class="line"></span><br><span class="line">    res.send(</span><br><span class="line">        &#123;</span><br><span class="line">            status: 0,</span><br><span class="line">            data: sliceNews,</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>前端代码为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot;</span><br><span class="line">          content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;script src=&quot;http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    * &#123;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">        list-style: none;</span><br><span class="line">    &#125;</span><br><span class="line">    a &#123;</span><br><span class="line">        color: #333;</span><br><span class="line">        text-decoration: none;</span><br><span class="line">    &#125;</span><br><span class="line">    .container &#123;</span><br><span class="line">        max-width: 600px;</span><br><span class="line">        margin: 0 auto;</span><br><span class="line">    &#125;</span><br><span class="line">    .item &#123;</span><br><span class="line">        margin-top: 20px;</span><br><span class="line">    &#125;</span><br><span class="line">    .clearfix:after &#123;</span><br><span class="line">        content: &apos;&apos;;</span><br><span class="line">        display: block;</span><br><span class="line">        clear: both;</span><br><span class="line">    &#125;</span><br><span class="line">    .item .thumb img &#123;</span><br><span class="line">        width: 50px;</span><br><span class="line">        height: 50px;</span><br><span class="line">    &#125;</span><br><span class="line">    .item .thumb &#123;</span><br><span class="line">        float: left;</span><br><span class="line">    &#125;</span><br><span class="line">    .item h2 &#123;</span><br><span class="line">        margin-left: 60px;</span><br><span class="line">        font-size: 14px;</span><br><span class="line">    &#125;</span><br><span class="line">    .item p &#123;</span><br><span class="line">        margin-left: 60px;</span><br><span class="line">        font-size: 14px;</span><br><span class="line">        margin-top: 10px;</span><br><span class="line">        color: #ccc;</span><br><span class="line">    &#125;</span><br><span class="line">    .load-more &#123;</span><br><span class="line">        margin-top: 20px;</span><br><span class="line">        padding: 8px 16px;</span><br><span class="line">        border: none;</span><br><span class="line">        outline: none;</span><br><span class="line">        cursor: pointer;</span><br><span class="line">    &#125;</span><br><span class="line">    .load-more:hover &#123;</span><br><span class="line">        background: #fe6629;</span><br><span class="line">        border-radius: 5px;</span><br><span class="line">        transition: all .5s;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;ul class=&quot;news&quot;&gt;</span><br><span class="line">        &lt;li class=&quot;item&quot;&gt;</span><br><span class="line">            &lt;a href=&quot;#&quot;&gt;</span><br><span class="line">                &lt;div class=&quot;thumb&quot;&gt;</span><br><span class="line">                    &lt;img src=&quot;&quot; alt=&quot;&quot;&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                &lt;h2&gt;&lt;/h2&gt;</span><br><span class="line">                &lt;p&gt;&lt;/p&gt;</span><br><span class="line">            &lt;/a&gt;</span><br><span class="line">        &lt;/li&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">    &lt;button class=&quot;load-more&quot;&gt;加载更多&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var Pageindex = 0;</span><br><span class="line">    var Pagelength = 2;</span><br><span class="line">    $(&apos;.load-more&apos;).on(&apos;click&apos;,function () &#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: &apos;/getNews&apos;,</span><br><span class="line">            method: &apos;get&apos;,</span><br><span class="line">            data : &#123;</span><br><span class="line">                index: Pageindex,</span><br><span class="line">                length: Pagelength,</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;).done(function (ret) &#123;</span><br><span class="line">//          ret为接收到的后端返回的数据</span><br><span class="line">            if (ret.status === 0) &#123; //返回数据我们和后端约定好加个status值来确定是否正常</span><br><span class="line">                render(ret.data); // 写一个渲染函数把后端拿到的数据append到html上</span><br><span class="line">                Pageindex++;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                alert(&apos;后端获取新闻出错&apos;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).fail(function () &#123;</span><br><span class="line">            alert(&apos;系统异常&apos;);</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        function render (arr) &#123; // 设置渲染函数，把后端得到的数据拼接成html字符串然后放到页面上</span><br><span class="line">            if (arr.length === 0) &#123;</span><br><span class="line">                $(&apos;.load-more&apos;).remove();</span><br><span class="line">                $(&apos;.container&apos;).append($(&apos;&lt;p&gt;没有更多数据了&lt;/p&gt;&apos;));</span><br><span class="line">            &#125;</span><br><span class="line">            var html = &apos;&apos;; //进行拼接html字符串</span><br><span class="line">            $.each(arr, function () &#123; // 遍历得到的数据</span><br><span class="line">                html += &apos;&lt;li class=&quot;item&quot;&gt;&apos;;</span><br><span class="line">                html += &apos;&lt;a href=&quot;&apos; + this.link + &apos;&quot;&gt;&apos;;</span><br><span class="line">                html += &apos;&lt;div class=&quot;thumb&quot;&gt; ![]( &apos; + this.img + &apos; ) &lt;/div&gt;&apos;;</span><br><span class="line">                html += &apos;&lt;h2&gt;&apos; + this.h2 + &apos;&lt;/h2&gt;&apos;;</span><br><span class="line">                html += &apos;&lt;p&gt;&apos; + this.p + &apos;&lt;/p&gt;&apos;;</span><br><span class="line">                html += &apos;&lt;/a&gt;&lt;/li&gt;&apos;;</span><br><span class="line">            &#125;)</span><br><span class="line">            $(&apos;.news&apos;).append(html);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

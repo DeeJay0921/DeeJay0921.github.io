@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Python中的浅拷贝和深拷贝">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Python中的浅拷贝和深拷贝</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-06-09</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Python/">Python</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Python/">#Python</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Python中的浅拷贝和深拷贝</p>
+<a id="more"></a>
+
+<h1 id="浅拷贝-赋值-和-copy-copy"><a href="#浅拷贝-赋值-和-copy-copy" class="headerlink" title="浅拷贝 赋值 和 copy.copy()"></a>浅拷贝 赋值 和 <code>copy.copy()</code></h1><p>Python中的浅拷贝分为直接赋值和使用<code>copy</code>模块的<code>copy</code>方法来进行浅拷贝。</p>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>先来看直接赋值的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = [1,2,3]</span><br><span class="line"></span><br><span class="line">b = a</span><br><span class="line"></span><br><span class="line">print( b is a) # True</span><br></pre></td></tr></table></figure>
+
+<p>很简单，就是两个变量指向同一个内存地址。</p>
+<h3 id="copy-copy"><a href="#copy-copy" class="headerlink" title="copy.copy()"></a><code>copy.copy()</code></h3><ul>
+<li>对于不可变类型来说<br>对于不可变类型，<code>copy.copy()</code>的表现形式和直接赋值是一样的，并不会重新创建一个新的对象，而是仅仅把新的变量指向原先的同一个地址上：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line"></span><br><span class="line">a = [1,2,3]</span><br><span class="line">b= [4,5,6]</span><br><span class="line"></span><br><span class="line">c = (a,b) # c为不可变类型</span><br><span class="line"></span><br><span class="line">print( id(c) ) # 140065869930632</span><br><span class="line"></span><br><span class="line">d = copy.copy(c)</span><br><span class="line">print( id(d) ) # 140065869930632</span><br><span class="line">print(d is c) # True</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>可以看到，对于不可变类型，使用<code>d = copy.copy(c)</code>就相当于直接赋值<code>d = c</code></p>
+<ul>
+<li>对于可变类型来说<br>对于可变类型，<code>copy.copy()</code>会创建于一块新的内存地址，然后<strong>仅仅拷贝目标对象的第一层</strong>,来看例子：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line"></span><br><span class="line">a = [1,2,3]</span><br><span class="line">b= [4,5,6]</span><br><span class="line"></span><br><span class="line">c = [a,b] # c为可变类型</span><br><span class="line"></span><br><span class="line">d = copy.copy(c)</span><br><span class="line"></span><br><span class="line">print( id(c) ) # 140393314515528</span><br><span class="line">print( id(d) ) # 140393343993800</span><br><span class="line">print(d is c) # False</span><br><span class="line"># 说明创建了一块新的内存地址</span><br><span class="line"></span><br><span class="line">a.append(4)</span><br><span class="line">print(c) # [[1, 2, 3, 4], [4, 5, 6]]</span><br><span class="line">print(d) # [[1, 2, 3, 4], [4, 5, 6]]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>上述例子中，可以看到<code>copy()</code>是创建了一个新的内存地址的，但是并没有将内部的a和b的两个引用也一起拷贝，而是仅仅拷贝了第一层，所以改变了a指向的对象之后，浅拷贝出来的d也会相应的改变。</p>
+<h3 id="深拷贝-copy-deepcopy"><a href="#深拷贝-copy-deepcopy" class="headerlink" title="深拷贝 copy.deepcopy()"></a>深拷贝 <code>copy.deepcopy()</code></h3><p>针对上面对于可变类型，<code>copy.copy()</code>仅仅会拷贝第一层的问题，我们可以使用<code>copy.deepcopy()</code>来进行深度拷贝，进行<code>deepcopy()</code>时，对象内部的引用指向的内存地址也会被拷贝，即会重新创建一份目标对象中的引用指向的内存地址。 来看下面例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line"></span><br><span class="line">a = [1,2,3]</span><br><span class="line">b = [4,5,6]</span><br><span class="line"></span><br><span class="line">c = [a,b]</span><br><span class="line"></span><br><span class="line">d = c</span><br><span class="line">e = copy.deepcopy(c)</span><br><span class="line"></span><br><span class="line">a.append(4)</span><br><span class="line">print(c) # [[1, 2, 3, 4], [4, 5, 6]]</span><br><span class="line">print(e) # [[1, 2, 3], [4, 5, 6]]</span><br><span class="line"></span><br><span class="line"># 说明深拷贝deepcopy的时候，如果拷贝的对象内部还接着有引用，那么依次进行内部的拷贝</span><br></pre></td></tr></table></figure>
+
+<p>如果上面例子不够直观，那么可以这么来理解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line"></span><br><span class="line">a = [1,2,3]</span><br><span class="line">b = [4,5,6]</span><br><span class="line"></span><br><span class="line">c = [a,b]</span><br><span class="line"></span><br><span class="line">d = c</span><br><span class="line">e = copy.deepcopy(c)</span><br><span class="line"></span><br><span class="line">print( id(c[0]) ) # 140623323590920</span><br><span class="line">print( id(e[0]) ) # 140623323492232</span><br><span class="line"># e的第一个元素的地址，和c第一个元素的地址是不一样的</span><br><span class="line"></span><br><span class="line">print( c[0] is a ) # True</span><br><span class="line">print( e[0] is a ) # False</span><br><span class="line"># 意味着e内部将a和b两个变量指向的对象也进行了一份拷贝，而不是跟copy.copy()一样沿用</span><br><span class="line"># c内部的a和b的地址(即只拷贝第一层)</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

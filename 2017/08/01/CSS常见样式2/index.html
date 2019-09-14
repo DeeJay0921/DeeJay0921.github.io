@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="CSS常见样式2">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">CSS常见样式2</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-01</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/CSS/">#CSS</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>CSS常见样式</p>
+<a id="more"></a>
+
+<p>###一，text-align: center的作用是什么，作用在什么元素上？能让什么元素水平居中</p>
+<p>作用在块级元素上面，可以使得块级元素的子元素<strong>水平居中显示</strong>。</p>
+<p>###二，IE 盒模型和W3C盒模型有什么区别?</p>
+<p>盒模型从外到内分别是：margin border padding content(width和height)</p>
+<ul>
+<li><p>w3c盒模型:设置宽高的时候，是给content设置的width和height，不考虑元素的margin,padding,border，所以实际的元素要比width和height规定的大</p>
+</li>
+<li><p>IE盒模型：设置宽高的时候，是给content,padding以及border设置的width和height,这时的content的宽高要小与给定的width和height。</p>
+</li>
+<li><p>总结：w3c中盒模型padding,border不占width,height。IE盒模型中，width和height包括content,padding和border。</p>
+</li>
+</ul>
+<p>###三，*{ box-sizing: border-box;}的作用是什么？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">box-sizing: content-box; /*w3c标准盒模型*/ </span><br><span class="line">box-sizing: border-box;  /*IE盒模型*/</span><br></pre></td></tr></table></figure>
+
+<p>给整个页面应用IE盒模型</p>
+<p>###四，line-height: 2和line-height: 200%有什么区别?</p>
+<ul>
+<li><p>line-height: 2 是相对于<strong>文字本身</strong>的2倍。</p>
+</li>
+<li><p>line-height: 200%是父元素文字高度的2倍。</p>
+</li>
+<li><p>给父元素增加line-height: 2和line-height: 200%两个属性时，line-height: 2下的子元素的文字不管自身的文字font-size多大，继承父元素的line-height: 2之后，行高都是自身文字大小的2倍，而在line-height: 200%下的子元素的font-size的大小不会改变行高的大小，因为line-height: 200%在计算的时候只计算父元素当时的font-size，然后应用为一个固定的值，不会因为子元素的font-size的值的大小而改变。所以，如果想要父元素下的子元素的行高无论自身font-size为多少，都有行高为自身的2倍的时候，<strong>应该应用line-height:2</strong>。</p>
+</li>
+<li><p>另外可以通过<strong>height=line-height</strong>来垂直居中<strong>单行文本</strong>。</p>
+</li>
+</ul>
+<p>###五，inline-block有什么特性？如何去除缝隙？高度不一样的inline-block元素如何顶端对齐?</p>
+<ul>
+<li><p>inline-block 既呈现出Inline的特性（不占据一整行，宽度由内容宽度决定），又呈现出block特性（可以设置宽高，内外边距）</p>
+</li>
+<li><p>缝隙问题：元素之间有空白字符（回车换行等）会导致两个inline-block元素产生缝隙</p>
+</li>
+<li><p>消除缝隙的办法：</p>
+</li>
+</ul>
+<ol>
+<li>可以通过修改html文件的方式来消除缝隙。</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .wrap&#123;</span><br><span class="line">        font-size: 0;</span><br><span class="line">    &#125;</span><br><span class="line">    span&#123;</span><br><span class="line">        display: inline-block;</span><br><span class="line">        border: 1px solid;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 50px;</span><br><span class="line">        font-size: 14px;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">    &lt;span&gt;deejay&lt;/span&gt;</span><br><span class="line">    &lt;span&gt;deejay&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">``` </span><br><span class="line">通过使用父元素包裹，**设置font-size为0之后，再在inline-block元素中将font-size设回来**，但是这种方式具有一定的副作用。</span><br><span class="line">3. 多个元素时不设置inline-block，而是增加一个div包裹这些元素，让里面的元素浮动，然后给包裹的这个div清除浮动，再给这个div设置为inline-block，这样可以清除缝隙，通过外部设置text-align等属性还能设置居中等。</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<style>
+    body{
+        margin: 0;
+    }
+    .clearfix::after{
+        content: '';
+        display: block;
+        clear: both;
+    }
+    .p{
+        border: 1px solid red;
+        text-align: center;
+        /*4.设置textalign使其居中*/
+    }
+    .c{
+        display: inline-block;
+        /*3.设置c为inline-block*/
+    }
+    span{
+        border: 1px solid;
+        padding: 8px 16px;
+        float: left;
+        /*1.让两个span浮动*/
+    }
+</style>
+
+<div class="p">
+    <div class="c clearfix">
+        <!--2.给.c清除浮动使其回归文档流-->
+        <span>YES</span>
+        <span>NO</span>
+    </div>
+</div>
+```
+4. 使用css3 flex布局可以消除缝隙,display:flex;justify-content:center居中。
+- 高度不一样的inline-block元素如何顶端对齐?
+
+<p>通过增加<code>vertical-align: top;</code>来进行顶部对齐。</p>
+<p>###六，CSS sprite 是什么?</p>
+<p>CSS雪碧图（精灵图）：指将不同的小图片/图标合并在一张图上面，使用CSS sprite可以减少网络请求，提高网页加载性能</p>
+<p>###七，让一个元素”看不见”有几种方式？有什么区别?</p>
+<ul>
+<li>opacity: 0; 透明度为0，整体</li>
+<li>visibility: hidden; 和 opacity: 0类似。</li>
+<li>display: none; 消失，<strong>不占用位置</strong>。<br>background-color: rgba(0,0,0,0) 只是背景色透明</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

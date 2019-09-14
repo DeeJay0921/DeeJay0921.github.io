@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Python中的文件操作">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Python中的文件操作</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-06-09</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Python/">Python</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Python/">#Python</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Python中的文件操作</p>
+<a id="more"></a>
+
+<h1 id="Python中的文件操作"><a href="#Python中的文件操作" class="headerlink" title="Python中的文件操作"></a>Python中的文件操作</h1><h2 id="文件的打开与关闭"><a href="#文件的打开与关闭" class="headerlink" title="文件的打开与关闭"></a>文件的打开与关闭</h2><p>一般操作文件的流程都很简单：</p>
+<ul>
+<li>打开/新建 一个文件</li>
+<li>读/写 文件</li>
+<li>关闭文件</li>
+</ul>
+<h3 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h3><p>使用<code>open()</code>函数来打开/新建一个文件</p>
+<p>示例：<code>file = open(&#39;test.py&#39;,&#39;w&#39;)</code></p>
+<p>file表示<code>open()</code>的返回值，即已经访问到的文件</p>
+<p>第二个选项,’w’表示只能写，’r’表示只能读，’a’表示追加等等，具体见：</p>
+<table>
+<thead>
+<tr>
+<th>访问模式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>只读方式打开文件</td>
+</tr>
+<tr>
+<td>w</td>
+<td>只写方式打开文件</td>
+</tr>
+<tr>
+<td>a</td>
+<td>追加方式打开/新建一个文件  如果已有内容，新内容追加在文件内容末尾</td>
+</tr>
+<tr>
+<td>rb</td>
+<td>默认模式，以二进制的格式只读的打开一个文件  文件指针在文件开头</td>
+</tr>
+<tr>
+<td>wb</td>
+<td>二进制只写访问文件  如果之前有内容则覆盖  文件不存在则先创建</td>
+</tr>
+<tr>
+<td>ab</td>
+<td>同理，二进制追加</td>
+</tr>
+<tr>
+<td>r+</td>
+<td>打开一个文件用于读写，文件指针放在文件开头</td>
+</tr>
+<tr>
+<td>w+</td>
+<td>打开一个文件用于读写，文件存在则覆盖，不存在则先创建</td>
+</tr>
+<tr>
+<td>a+</td>
+<td>打开一个文件用于读写  文件内容存在则新内容追加到末尾  文件指针在文件末尾</td>
+</tr>
+<tr>
+<td>rb+</td>
+<td>二进制打开文件用于读写 文件指针在开头</td>
+</tr>
+<tr>
+<td>wb+</td>
+<td>二进制打开文件用于读写 有覆盖 没有先新建</td>
+</tr>
+<tr>
+<td>ab+</td>
+<td>二进制打开文件用于读写  指针在末尾 有则追加 没有先新建</td>
+</tr>
+</tbody></table>
+<h3 id="关闭文件-file-close"><a href="#关闭文件-file-close" class="headerlink" title="关闭文件 file.close()"></a>关闭文件 file.close()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;test.py&apos;,&apos;w+&apos;) # 打开文件 f为open()返回值即打开的文件</span><br><span class="line">f.close() # 关闭文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件的读写-read-write"><a href="#文件的读写-read-write" class="headerlink" title="文件的读写 read() write()"></a>文件的读写 read() write()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;test.js&apos;,&apos;r&apos;)</span><br><span class="line">con = f.read() # read()方法表示一次性把目标文件全部读完</span><br><span class="line">print(con) # console.log(&apos;test.js&apos;)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"># 如果给read()传递了参数， 那么read(n)可以读到指定n长度的内容</span><br><span class="line"># 可以一直调用read(n)直到读完目标文件 之后read()返回空字符串</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>read()</code>一次性读完文件的内容之后，再次调用<code>read()</code>返回的是空字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;test.js&apos;,&apos;r&apos;)</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    content = f.read(1) # read(n)即一次读取n字节长度的内容</span><br><span class="line">    print(content)</span><br><span class="line"></span><br><span class="line">    if len(content) == 0: # 等到读取完后 read()返回的空字符串，可以跳出循环</span><br><span class="line">        break</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;test.js&apos;,&apos;a+&apos;)</span><br><span class="line"></span><br><span class="line">length = f.write(&apos;\nconsole.log(&quot;hello world&quot;)&apos;) </span><br><span class="line"></span><br><span class="line">print(length) # 27</span><br><span class="line"># write()函数返回的是写入的字符长度</span><br><span class="line"></span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">g = open(&apos;test.js&apos;,&apos;r&apos;)</span><br><span class="line"></span><br><span class="line">print(g.read()) # 输出为：</span><br><span class="line"># console.log(&apos;test.js&apos;)</span><br><span class="line"># console.log(&quot;hello world&quot;)</span><br><span class="line"></span><br><span class="line">g.close()</span><br></pre></td></tr></table></figure>
+
+<p>可以利用<code>read()</code>和<code>write()</code>来进行文件的复制：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;test.js&apos;,&apos;r&apos;)</span><br><span class="line">content = f.read()</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">g = open(&apos;test_backup.js&apos;,&apos;w&apos;)</span><br><span class="line">g.write(content)</span><br><span class="line">g.close()</span><br></pre></td></tr></table></figure>
+
+<p>其实还有其他读文件的方法：</p>
+<ul>
+<li><p><code>readlines()</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;test.js&apos;,&apos;r&apos;)</span><br><span class="line"></span><br><span class="line">content = f.readlines()</span><br><span class="line"></span><br><span class="line">print(content) # [&quot;console.log(&apos;test.js&apos;)\n&quot;, &apos;console.log(&quot;hello world&quot;)&apos;]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>readline()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;test.js&apos;,&apos;r&apos;)</span><br><span class="line"></span><br><span class="line">line1 = f.readline()</span><br><span class="line">line2 = f.readline()</span><br><span class="line">line3 = f.readline()</span><br><span class="line"></span><br><span class="line">print(line1)  # console.log(&apos;test.js&apos;)\n</span><br><span class="line">print(line2) # console.log(&quot;hello world&quot;)</span><br><span class="line">print(line3) # &apos;&apos;  空字符串</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><code>readline()</code>是按照行来一行一行读取，而<code>readlines()</code>是连续调用<code>readline()</code>然后将结果组成一个list返回。</p>
+<h3 id="对于大文件的读写"><a href="#对于大文件的读写" class="headerlink" title="对于大文件的读写"></a>对于大文件的读写</h3><p>对于大文件，肯定不能使用<code>read()</code>一下子都读到内存里。</p>
+<p>我们可以使用合适的字节数，每次读取一点点，示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;test.js&apos;,&apos;r&apos;)</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    content = f.read(1024) # 假如一次读取1024字节</span><br><span class="line">    print(content)</span><br><span class="line"></span><br><span class="line">    if len(content) == 0:</span><br><span class="line">        break</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件的定位"><a href="#文件的定位" class="headerlink" title="文件的定位"></a>文件的定位</h3><ul>
+<li><p>获取当前的位置 <code>tell()</code><br>在读写文件的过程中，可以使用<code>tell()</code>来获取当前的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">f = open(&apos;test.js&apos;,&apos;r&apos;)</span><br><span class="line"></span><br><span class="line">f.read(5)</span><br><span class="line"></span><br><span class="line">position = f.tell()</span><br><span class="line">print(position) # 5</span><br><span class="line"></span><br><span class="line">f.read(5)</span><br><span class="line"></span><br><span class="line">position2 = f.tell()</span><br><span class="line">print(position2) # 10</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定位到文件的某个位置 <code>seek(offset,from)</code><br>如果在读写文件的过程中，需要从另外一个位置进行操作的话，可以使用<code>seek()</code></p>
+</li>
+</ul>
+<p><code>seek(offset,from)</code>:<br>    - offset:偏移量<br>    - from：方向(0表示文件开头，1表示当前位置，2表示文件末尾)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 假设我们现在从test.js的第二行开始读,即离文件开头23字节的地方开始读</span><br><span class="line">f = open(&apos;test.js&apos;)</span><br><span class="line"></span><br><span class="line">f.seek(23,0) # 23表示offset,0表示从文件开头开始</span><br><span class="line"></span><br><span class="line">print(f.read()) # console.log(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>关于<code>seek()</code>,我们在<code>read()</code>方法读完文件后，如果还想在读一遍，可以使用<code>seek(0,0)</code>将文件指针重新设为开头，再调用<code>read()</code>就又可以读取一遍。</p>
+<h3 id="文件的其他相关操作"><a href="#文件的其他相关操作" class="headerlink" title="文件的其他相关操作"></a>文件的其他相关操作</h3><p>还有一些文件的常规操作介绍一下：</p>
+<ul>
+<li>文件重命名<br><code>os</code>模块的<code>rename(old_file_name,new_file_name)</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">os.rename(&apos;test_backup.js&apos;,&apos;test_rename.js&apos;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除文件<br><code>os</code>模块的<code>remove(file_name)</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">os.remove(&apos;test_rename.js&apos;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>创建文件夹<br><code>os.mkdir(dir_name)</code></p>
+</li>
+<li><p>获取当前目录<br><code>os.getcwd()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">print(os.getcwd()) # /home/deejay/learn-python</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>改变默认目录<br><code>os.chdir()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">print(os.getcwd()) # /home/deejay/learn-python</span><br><span class="line"></span><br><span class="line">os.chdir(&apos;/usr/bin&apos;)</span><br><span class="line"></span><br><span class="line">print(os.getcwd()) # /usr/bin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取目录列表<br><code>os.listdir(&#39;./&#39;)</code>改方法返回的是一个list,每个元素都是<code>ls</code>命令下的一个文件</p>
+</li>
+<li><p>删除文件夹<br><code>os.rmdir(dir_name)</code></p>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

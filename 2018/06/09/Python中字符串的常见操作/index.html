@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Python中字符串的常见操作">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Python中字符串的常见操作</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-06-09</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Python/">Python</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Python/">#Python</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Python中字符串的常见操作</p>
+<a id="more"></a>
+
+<h2 id="字符串切片和逆序问题"><a href="#字符串切片和逆序问题" class="headerlink" title="字符串切片和逆序问题"></a>字符串切片和逆序问题</h2><p>先来了解切片操作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;hello world&apos;</span><br><span class="line"></span><br><span class="line">print(myStr[0:3])  # 输出为hel</span><br></pre></td></tr></table></figure>
+
+<p>myStr[0:3] 0表示切片开始位置，3表示切到下标为3的位置就停止 但是<strong>不包含myStr[3]</strong></p>
+<p>然后我们在切片的时候，可以传入<strong>第三个参数来表示每次切片的间隔</strong>,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;abcdefg&apos;</span><br><span class="line"></span><br><span class="line">print(myStr[0:4:1]) # abcd  等价于myStr[0:4]</span><br><span class="line"></span><br><span class="line">print(myStr[0:4:2]) # ac</span><br></pre></td></tr></table></figure>
+
+<p>第三个参数代表每次取到字符之后，间隔指定值之后再去取下一个字符，不传的话，默认就是为1。</p>
+<p>此外，第三个参数，如果为正，那么代表从下标0开始取，往后取到下标为-1的字符（即字符串最后一项)，**如果为负，代表从后往前取，即从下标-1到下标0这个方向开始切片,来看个例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;abcdefg&apos;</span><br><span class="line"></span><br><span class="line">print(myStr[0:4:1]) # abcd</span><br><span class="line"></span><br><span class="line">print(myStr[0:4:-1]) # 输出为空</span><br><span class="line"></span><br><span class="line">print(myStr[4:0:-1]) # ebcd</span><br></pre></td></tr></table></figure>
+
+<p>来分析myStr[0:4:-1]为何是空，指定第三个参数为-1之后，是从<strong>右往左</strong>开始取的，开始下标为4，截止下标为0，那么自然就取不到字符了，需要修改起始位置和截止位置。</p>
+<p>那么现在我们得到了一个逆序的字符串，值得注意的是，输出的是：<code>ebcd</code>,因为我们截止的下标是0，那么切片就取不到第一个值，我们需要修改一下截止的下标。</p>
+<p>有了上述知识，我们就可以实现字符的逆序操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;abcdefg&apos;</span><br><span class="line"></span><br><span class="line">print(myStr[-1:0:-1]) # gfedcb</span><br><span class="line"></span><br><span class="line"># 截止下标为0，所以取不到myStr[0],需要修改为：</span><br><span class="line"></span><br><span class="line">print(myStr[-1::-1]) # gfedcba</span><br><span class="line"></span><br><span class="line"># 删掉指定的截止下标之后，切片就会一直截取到整个字符串结束，我们就实现了逆序的操作</span><br><span class="line"></span><br><span class="line"># 那么有了上面的思路，我们想到，其实开始的下标也是可以省略的，只要指定了截取的方向(即第三个参数)</span><br><span class="line"></span><br><span class="line">print(myStr[::]) # abcdefg 等价于myStr[::1]</span><br><span class="line"></span><br><span class="line">print(myStr[::-1]) # gfedcba</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串常用api"><a href="#字符串常用api" class="headerlink" title="字符串常用api:"></a>字符串常用api:</h2><p>介绍一些Python中常用的操作字符串的api</p>
+<ul>
+<li><strong>find</strong>  检测str是否包含在myStr中，如果包含返回<strong>开始的下标</strong>，不包含返回-1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;Hello&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.find(&apos;He&apos;)) # 0</span><br><span class="line"></span><br><span class="line">print(myStr.find(&apos;llo&apos;)) # 2</span><br><span class="line"></span><br><span class="line">print(mtStr.find(&apos;none&apos;)) # -1</span><br></pre></td></tr></table></figure>
+
+<p><code>find()</code>默认是从左边开始查找，想从右边开始查找的话，可以使用<code>rfind()</code></p>
+<p>相似的api还有<code>index()</code>以及<code>rindex()</code>,不同的是,index如果没找到指定字符串的话会直接产生异常。</p>
+<ul>
+<li><strong>count</strong> 返回str在指定start和end之间出现了多少次</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;Hello world world&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.count(&apos;world&apos;)) # 2</span><br><span class="line"></span><br><span class="line">print(myStr.count(&apos;world&apos;,0,5)) # 0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>replace</strong> 把myStr中的str1替换成str2,如果count 指定，则替换不超过count次</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;hello world world&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.replace(&apos;world&apos;,&apos;WORLD&apos;)) # hello WOLRD WORLD  </span><br><span class="line"></span><br><span class="line">print(myStr) # hello world world  原字符串并不会改变</span><br><span class="line"></span><br><span class="line">print(myStr.replace(&apos;world&apos;,&apos;WORLD&apos;,1)) # hello WORLD world  指定count</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>split</strong> 以str作为分隔符切片myStr,如果maxSplit有指定值，那就切成指定值个切片</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;hello world world&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.split(&apos; &apos;)) # 按照空格切割 [&apos;hello&apos;,&apos;world&apos;,&apos;world&apos;]</span><br><span class="line"></span><br><span class="line">print(myStr) # hello world world </span><br><span class="line"></span><br><span class="line">print(myStr.split(&apos; &apos;, 1)) # [&apos;hello&apos;, &apos;world world&apos;]</span><br></pre></td></tr></table></figure>
+
+<p><em>关于<code>split</code>,直接写<code>str.split()</code>的话，意味着程序会自动按照空格，\t等分隔符来智能分割字符串</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;abc dag \t dahj afh \t&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.split()) # [&apos;abc&apos;, &apos;dag&apos;, &apos;dahj&apos;, &apos;afh&apos;]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>capitalize</strong> 和 <strong>title</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;hello world world&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.capitalize()) # Hello world world</span><br><span class="line"></span><br><span class="line">print(myStr.title()) # Hello World World </span><br><span class="line"></span><br><span class="line">print(myStr) # hello world world</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>startswith/endswith</strong> 检查字符串是否已obj开头/结尾，是返回True,否返回False</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;hello world world&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.startswith(&apos;hello&apos;)) # True</span><br><span class="line"></span><br><span class="line">print(myStr.startswith(&apos;world&apos;)) # False</span><br><span class="line"></span><br><span class="line">print(myStr.endswith(&apos;world&apos;)) # True</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>lower/upper</strong> 转换为小写/大写</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;Hello World World&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.lower()) # hello world world</span><br><span class="line"></span><br><span class="line">print(myStr.upper()) # HELLO WORLD WORLD </span><br><span class="line"></span><br><span class="line">print(myStr) # Hello World World</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>ljust/rjust/center</strong> 返回一个字符串左对齐/右对齐/居中，并使用空格填充至长度width的新字符串</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;hello world&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.ljust(20)) #  &apos;hello world         &apos;</span><br><span class="line"></span><br><span class="line">print( len(myStr.ljust(20)) ) # 20 长度已经改变 </span><br><span class="line"></span><br><span class="line">print(myStr.rjust(20)) # &apos;         hello world&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.center(20)) # &apos;    hello world     &apos;</span><br><span class="line"></span><br><span class="line">print(myStr) # 原字符串不改变</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>lstrip/rstrip</strong> 删除字符串左边/右边的空白字符  strip 删除两端的空白字符</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">myStr1 = &apos;  hello world&apos;</span><br><span class="line"></span><br><span class="line">print(myStr1.lstrip()) # hello world</span><br><span class="line"></span><br><span class="line">myStr2 = &apos;hello world   &apos;</span><br><span class="line"></span><br><span class="line">print(myStr2.rstrip()) # hello world</span><br><span class="line"></span><br><span class="line">myStr3 = &apos;  hello world    &apos;</span><br><span class="line"></span><br><span class="line">print(myStr3.strip()) # hello world</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>partition/rpartition</strong> 将myStr分为三部分，str前,str,以及str后</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;hello world world&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.partition(&apos;world&apos;)) # (&apos;hello &apos;, &apos;world&apos;, &apos; world&apos;)</span><br><span class="line"></span><br><span class="line">print(myStr.rpartition(&apos;world&apos;)) # (&apos;hello world &apos;, &apos;world&apos;, &apos;&apos;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>splitlines</strong>  按照行分隔，返回一个包含各行作为元素的列表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myStr = &apos;hello\nworld&apos;</span><br><span class="line"></span><br><span class="line">print(myStr.splitlines()) # [&apos;hello&apos;, &apos;world&apos;]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>isaplha/isdigit/isalnum</strong> 所有字符都是字母/数字/数字或者字母</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">str1 = &apos;1&apos;</span><br><span class="line"></span><br><span class="line">print(str1.isalpha()) # False 所有字符都是字母</span><br><span class="line"></span><br><span class="line">print(str1.isdigit()) # True 所有字符都是数字</span><br><span class="line"></span><br><span class="line">print(str1.isalnum()) # True 所有字符都是数字或者字母</span><br><span class="line"></span><br><span class="line">str2 = &apos;123hello&apos;</span><br><span class="line"></span><br><span class="line">print(str2.isalpha()) # False</span><br><span class="line"></span><br><span class="line">print(str2.isdigit()) # False </span><br><span class="line"></span><br><span class="line">print(str2.isalnum()) # True</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>islower/isupper/istitle/isspace</strong> 所有字符都是小写/大写/单词首字母大写/空白字符</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">print(&apos;hello&apos;.islower()) # True</span><br><span class="line"></span><br><span class="line">print(&apos;HELLO&apos;.isupper()) # True</span><br><span class="line"></span><br><span class="line">print(&apos;Hello&apos;.istitle()) # True</span><br><span class="line"></span><br><span class="line">print(&apos;&apos;.isspace()) # False</span><br><span class="line"></span><br><span class="line">print(&apos; &apos;.isspace()) # True</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>join</strong> myStr中每个字符后面加入str,构造出一个新的字符串</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">li = [&apos;start&apos;,&apos;learning&apos;,&apos;Python&apos;]</span><br><span class="line"></span><br><span class="line">str1 = &apos; &apos;</span><br><span class="line"></span><br><span class="line">print(str1.join(li)) # start learning Python</span><br><span class="line"></span><br><span class="line">str2 = &apos;_&apos;</span><br><span class="line"></span><br><span class="line">print(str2.join(li)) # start_learning_Python</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

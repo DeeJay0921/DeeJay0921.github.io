@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的集合类的简单介绍">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的集合类的简单介绍</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-07-19</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/集合/">#集合</a> <a class="tag" href="/tags/Collection/">#Collection</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的集合类的简单介绍</p>
+<a id="more"></a>
+
+<p>面向对象语言对事物的描述都是通过对象来体现的，那么肯定要涉及到对多个对象的操作。</p>
+<p>其中肯定免不了对多个对象的存储，目前只有StringBuilder和数组可以作为容器来存储对象，但是StringBuilder存储的只能是字符串，而数组长度又是固定的，不能适应变化的需求。 所以Java中提供了集合类。</p>
+<p>集合类的特点就是<strong>长度可变</strong>。</p>
+<p>来看最常用的集合类<code>java.util.ArrayList&lt;E&gt;</code>.</p>
+<p>##ArrayList</p>
+<ul>
+<li>创建对象<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">public class ArrayListDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; arr = new ArrayList&lt;String&gt;();</span><br><span class="line">        System.out.println(arr); // 输出: []</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>注意这边输出的不是arr的内存地址，而是ArrayList类的对象中的内容。</p>
+<ul>
+<li>添加元素<br><code>public boolean add(E e)</code><br><code>public void add(int index, E element)</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayListDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        </span><br><span class="line">        arr.add(1);</span><br><span class="line">        arr.add(2);</span><br><span class="line">        arr.add(3);</span><br><span class="line">        </span><br><span class="line">        arr.add(1,4);</span><br><span class="line">        System.out.println(arr); // 输出: [1,4,2,3]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>获取元素<br><code>public E get(int index)</code></p>
+</li>
+<li><p>集合长度<br><code>public int size()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayListDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        </span><br><span class="line">        arr.add(1);</span><br><span class="line">        arr.add(2);</span><br><span class="line">        arr.add(3);</span><br><span class="line">        </span><br><span class="line">        System.out.println(arr.get(0)); // 输出: 1</span><br><span class="line">        System.out.println(arr.size()); // 输出: 3</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除元素<br><code>public boolean remove(Object obj)</code><br><code>public E remove(int remove)</code> 返回被删除的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayListDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; arr = new ArrayList&lt;String&gt;();</span><br><span class="line">        </span><br><span class="line">        arr.add(&quot;Hello&quot;);</span><br><span class="line">        arr.add(&quot;Java&quot;);</span><br><span class="line">        arr.add(&quot;world&quot;);</span><br><span class="line">        </span><br><span class="line">        String deletedElement = arr.remove(0);</span><br><span class="line">        </span><br><span class="line">        System.out.println(deletedElement); // 输出: Hello</span><br><span class="line">        System.out.println(arr); // 输出: [Java, world]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayListDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; arr = new ArrayList&lt;String&gt;();</span><br><span class="line">        </span><br><span class="line">        arr.add(&quot;Hello&quot;);</span><br><span class="line">        arr.add(&quot;Java&quot;);</span><br><span class="line">        arr.add(&quot;world&quot;);</span><br><span class="line">        </span><br><span class="line">        boolean isDeleted = arr.remove(&quot;Java&quot;);</span><br><span class="line">        </span><br><span class="line">        System.out.println(isDeleted); // 输出: true</span><br><span class="line">        System.out.println(arr); // 输出: [Hello, world]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>修改元素<br><code>public E set(int index, E element)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayListDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; arr = new ArrayList&lt;String&gt;();</span><br><span class="line">        </span><br><span class="line">        arr.add(&quot;Hello&quot;);</span><br><span class="line">        arr.add(&quot;Java&quot;);</span><br><span class="line">        arr.add(&quot;world&quot;);</span><br><span class="line">        </span><br><span class="line">        String modElement = arr.set(1,&quot;Python&quot;);</span><br><span class="line">        </span><br><span class="line">        System.out.println(modElement); // 输出: Java 返回被修改的元素</span><br><span class="line">        System.out.println(arr); // 输出: [Hello, Python, world]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>遍历操作 <code>size()</code>       <code>E get(int index)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayListDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; arr = new ArrayList&lt;String&gt;();</span><br><span class="line">        </span><br><span class="line">        arr.add(&quot;Hello&quot;);</span><br><span class="line">        arr.add(&quot;Java&quot;);</span><br><span class="line">        arr.add(&quot;world&quot;);</span><br><span class="line">        </span><br><span class="line">        for(int i = 0; i &lt; arr.size(); i ++) &#123;</span><br><span class="line">            String s = arr.get(i);</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

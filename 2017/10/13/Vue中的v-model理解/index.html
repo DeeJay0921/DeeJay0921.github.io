@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Vue中的v-model理解">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Vue中的v-model理解</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-10-13</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/Vue/">#Vue</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Vue中的v-model理解</p>
+<a id="more"></a>
+
+<p>官方文档讲的比较模糊，自己通过例子进行理解。</p>
+<h1 id="v-model是语法糖"><a href="#v-model是语法糖" class="headerlink" title="v-model是语法糖"></a>v-model是语法糖</h1><p>首先明确一点，v-model仅仅是语法糖。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">        &lt;input</span><br><span class="line">                type=&quot;text&quot;</span><br><span class="line">                v-model=&quot;something&quot;&gt;</span><br><span class="line">        &lt;!--等价于--&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">                type=&quot;text&quot;</span><br><span class="line">                v-bind:value=&quot;something&quot;</span><br><span class="line">                v-on:input=&quot;something = $event.target.value&quot;&gt;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+
+<p>还要理解$emit的用法：</p>
+<p><code>vm.$emit(event,[...args])</code></p>
+<p> 触发当前实例上的事件。附加参数都会传给监听器回调。</p>
+<h1 id="v-model在-普通input上"><a href="#v-model在-普通input上" class="headerlink" title="v-model在 普通input上"></a>v-model在 普通input上</h1><p>一定要明确在给 <input> 元素添加 v-model 属性时，<strong>默认会把 value 作为元素的属性，然后把 ‘input’ 事件作为实时传递 value 的触发事件</strong>（具体参考语法糖的解释）</p>
+<h1 id="v-model用在组件上"><a href="#v-model用在组件上" class="headerlink" title="v-model用在组件上"></a>v-model用在组件上</h1><p>这里是一个自定义组件currency-input,父组件的 price 的初始值是 100，更改子组件的值能实时更新父组件的 price</p>
+<p>html:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;demo&quot;&gt;</span><br><span class="line"> &lt;currency-input v-model=&quot;price&quot;&gt;&lt;/currentcy-input&gt;</span><br><span class="line"> &lt;span&gt;&#123;&#123;price&#125;&#125;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>js:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;currency-input&apos;, &#123;</span><br><span class="line"> template: `</span><br><span class="line">  &lt;span&gt;</span><br><span class="line">   &lt;input</span><br><span class="line">    ref=&quot;input&quot;</span><br><span class="line">    :value=&quot;value&quot;</span><br><span class="line">    &lt;!--为什么这里把 &apos;input&apos; 作为触发事件的事件名？`input` 在哪定义的？--&gt;</span><br><span class="line">    @input=&quot;$emit(&apos;input&apos;, $event.target.value)&quot;</span><br><span class="line">   &gt;</span><br><span class="line">  &lt;/span&gt;</span><br><span class="line"> `,</span><br><span class="line"> props: [&apos;value&apos;],// 为什么这里要用 value 属性，value在哪里定义的？貌似没找到啊？</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">var demo = new Vue(&#123;</span><br><span class="line"> el: &apos;#demo&apos;,</span><br><span class="line"> data: &#123;</span><br><span class="line">  price: 100,</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这里的js代码，props中接受了value，但是在组件中<code>&lt;currency-input v-model=&quot;price&quot;&gt;&lt;/currentcy-input&gt;</code>并没有传入value，而且在input中是监听了input事件，但是并没有在父组件中定义input。</p>
+<p>要理解这个，就要回到语法糖的问题上，<br><code>&lt;currency-input v-model=&quot;price&quot;&gt;&lt;/currentcy-input&gt;</code><br>本质上等价于：<br><code>&lt;currency-input :value=&quot;price&quot; @input=&quot;price = arguments[0]&quot;&gt;&lt;/currency-input&gt;</code><br>所以可以看到value和input了</p>
+<p>理解v-model在组件中的实现，给组件添加 v-model 属性时，<strong>默认会把 value 作为组件的属性，然后把 ‘input’ 值作为给组件绑定事件时的事件名</strong></p>
+<p>###代码分析</p>
+<p>所以这里在js中<code>@input=&quot;$emit(&#39;input&#39;, $event.target.value)&quot;</code> 子组件在监听input事件发生的时候（即@input）,向父组件传递了input($emit中的input)事件，并且传递了当前子组件的price值。</p>
+<p>而在父组件中，监听了自定义事件input，当自定义事件input触发后，将当前父组件自身的price值改为子组件中$emit上来的值（$event.target.value 是作为$emit传递的参数，所以是arguments[0]）</p>
+<p>##v-model存在的问题</p>
+<p>对于复选框或者单选框的常见组件时，由于v-model默认传的是value，不是checked，触发事件也不是oninput而是onchange</p>
+<ul>
+<li>对于单纯的input type=’checkbox’<br><code>&lt;input type=&quot;checkbox&quot; :checked=&quot;status&quot; @change=&quot;status = $event.target.checked&quot; /&gt;</code></li>
+<li>当用到组件上时：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-checkbox v-model=&quot;foo&quot;&gt;&lt;/my-checkbox&gt;</span><br><span class="line"></span><br><span class="line">Vue.component(&apos;my-checkbox&apos;, &#123;</span><br><span class="line"> tempalte: `&lt;input </span><br><span class="line">        type=&quot;checkbox&quot;</span><br><span class="line">        @change=&quot;$emit(&apos;input&apos;, $event.target.checked)&quot;</span><br><span class="line">        :checked=&quot;value&quot;</span><br><span class="line">       /&gt;`</span><br><span class="line"> props: [&apos;value&apos;],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这个时候需要Vue的<strong>model</strong>选项<br>model选项可以指定当前的事件类型和传入的props</p>
+<p>所以可以通过这么改进：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-checkbox v-model=&quot;foo&quot;&gt;&lt;/my-checkbox&gt;</span><br><span class="line"></span><br><span class="line">Vue.component(&apos;my-checkbox&apos;, &#123;</span><br><span class="line"> tempalte: `&lt;input </span><br><span class="line">        type=&quot;checkbox&quot;</span><br><span class="line">        &lt;!--这里就不用 input 了，而是 balabala--&gt;</span><br><span class="line">        @change=&quot;$emit(&apos;balabala&apos;, $event.target.checked)&quot;</span><br><span class="line">        :checked=&quot;value&quot;</span><br><span class="line">       /&gt;`</span><br><span class="line"> props: [&apos;checked&apos;], //这里就不用 value 了，而是 checked</span><br><span class="line"> model: &#123; // model选项来指定</span><br><span class="line">  prop: &apos;checked&apos;,</span><br><span class="line">  event: &apos;balabala&apos;</span><br><span class="line"> &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

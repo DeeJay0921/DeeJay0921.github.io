@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JSONP--跨域">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JSONP--跨域</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-23</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/跨域/">#跨域</a> <a class="tag" href="/tags/JSONP/">#JSONP</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>JSONP–跨域</p>
+<a id="more"></a>
+
+<p>######如何在本地伪装一个网站<br>1.编辑hosts<br>mac：sudo vi /etc/hosts<br>windows:  C:\Windows\System32\drivers\etc下修改hosts文件，注意管理员权限</p>
+<ol start="2">
+<li>添加一行 127.0.0.1 xxx.com</li>
+<li>保存关闭</li>
+<li>访问xxx.com:端口号<br>######如何监听80端口<br>mac： sudo http-server -c-1 -p 80<br>windows:<br>1,管理员身份运行git bash<br>2,http-server -c-1 -p 80</li>
+</ol>
+<p>##1.浏览器的同源策略</p>
+<ul>
+<li>同源策略（Same origin Policy）<br>浏览器出于安全发面的考虑，只允许本域下的接口交互。不同源的客户端脚本在没有明确授权的情况下，不能读写对方的资源。</li>
+</ul>
+<p>本域（同源）指的是：</p>
+<ul>
+<li>同协议： 如都是http或者https</li>
+<li>同域名： 如都是<a href="http://123.com/a和http://123.com/b" target="_blank" rel="noopener">http://123.com/a和http://123.com/b</a></li>
+<li>同端口： 如都是80端口</li>
+</ul>
+<p>同源的比如：<br><a href="http://123/com/a/b.js和http://123/com/index.php（同源）" target="_blank" rel="noopener">http://123/com/a/b.js和http://123/com/index.php（同源）</a></p>
+<p>不同源的例子：<br>1 <a href="http://123/com/main.js" target="_blank" rel="noopener">http://123/com/main.js</a> 和 <a href="https://123/com/a.php" target="_blank" rel="noopener">https://123/com/a.php</a> (协议不同，http和https)<br>2 <a href="http://123/com/main.js" target="_blank" rel="noopener">http://123/com/main.js</a> 和 <a href="http://bbs.123/com/a.php(域名不同，必须完全相同才可以)" target="_blank" rel="noopener">http://bbs.123/com/a.php(域名不同，必须完全相同才可以)</a><br>3 <a href="http://123/com/main.js" target="_blank" rel="noopener">http://123/com/main.js</a> 和 <a href="http://123/com:8080/a.php（端口不同，第一个默认是80）" target="_blank" rel="noopener">http://123/com:8080/a.php（端口不同，第一个默认是80）</a><br>需要注意的是，<strong>对于当前页面来说，页面存放的JS文件的域不重要， 重要的是加载该JS页面所在的什么域</strong></p>
+<p>下面这4组<strong>都不是同源的：</strong></p>
+<ol>
+<li><a href="http://zhihu.com" target="_blank" rel="noopener">http://zhihu.com</a>  VS  <a href="http://www.zhihu.com" target="_blank" rel="noopener">http://www.zhihu.com</a>    没有任何关系，两个网站</li>
+<li><a href="http://zhihu.com" target="_blank" rel="noopener">http://zhihu.com</a>  VS  <a href="https://zhihu.com" target="_blank" rel="noopener">https://zhihu.com</a>   </li>
+<li><a href="http://zhihu.com" target="_blank" rel="noopener">http://zhihu.com</a> VS <a href="http://zhihu.com:81" target="_blank" rel="noopener">http://zhihu.com:81</a>  端口不一样</li>
+<li><a href="http://zhihu.com" target="_blank" rel="noopener">http://zhihu.com</a>  VS  <a href="http://zhihu.com.cn" target="_blank" rel="noopener">http://zhihu.com.cn</a>  </li>
+</ol>
+<p>只有<strong>字符串完全匹配的才算同源</strong></p>
+<p>不同源的不允许调用ajax</p>
+<p>#2.跨域<br>跨域：跨域就是向不同源的地址请求资源或者是进行操作</p>
+<p>##3.几种跨域方式</p>
+<p>##JSONP</p>
+<p>html标签中script标签可以引入其他域下的JS，比如引入线上的jQuery库。利用这个特性，可以实现跨域访问接口。需要后端支持<br><code>echo $cb . &#39;&amp;&amp;&#39; . $cb . &#39;(&#39; . json_encoded($ret) . &#39;)&#39;;</code></p>
+<ol>
+<li>定义数据处理函数_fun</li>
+<li>创建script标签，src的地址执行后端参数，最后加个参数callback=_fun</li>
+<li>服务端在接收请求后，解析参数，计算返回数据，输出fun(data)字符串</li>
+<li>fun(data)会放到script标签作为js执行。此时会调用fun函数，将data作为参数</li>
+</ol>
+<p>JSONP跨域举例：<br>JSONP的使用思路是可以通过使用<strong>新增script标签的src来访问其他域上的js</strong>来进行的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;内容1&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;内容2&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;内容3&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;button&gt;换一组&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var btn = document.querySelector(&apos;button&apos;);</span><br><span class="line">    var ul = document.querySelector(&apos;ul&apos;);</span><br><span class="line">    var body = document.querySelector(&apos;body&apos;);</span><br><span class="line">    btn.addEventListener(&apos;click&apos;,function () &#123;</span><br><span class="line">        var newScript = document.createElement(&apos;script&apos;);</span><br><span class="line">        newScript.src = &apos;http://localhost:8080/jsonp/?callback=getNews&apos;;</span><br><span class="line">        body.appendChild(newScript);</span><br><span class="line">        body.removeChild(newScript);</span><br><span class="line">    &#125;)</span><br><span class="line">    function getNews (arr) &#123;</span><br><span class="line">        var html = &apos;&apos;;</span><br><span class="line">        for (var i = 0; i &lt; arr.length; i ++) &#123;</span><br><span class="line">            html += &apos;&lt;li&gt;&apos; + arr[i] + &apos;&lt;/li&gt;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">        ul.innerHTML = html;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上面的是前端代码，那么核心思想在于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">newScript.src = &apos;http://localhost:8080/jsonp/?callback=getNews&apos;;</span><br><span class="line">body.appendChild(newScript);</span><br></pre></td></tr></table></figure>
+
+<p>创建一个script标签，设置src可以请求别的域的js，在src中设置好域，接口和回调参数等。在后端代码中做相应的处理即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/jsonp&apos;,function (req,res) &#123;</span><br><span class="line">    var content = [</span><br><span class="line">        &quot;内容10&quot;,</span><br><span class="line">        &quot;内容4&quot;,</span><br><span class="line">        &quot;内容5&quot;,</span><br><span class="line">        &quot;内容6&quot;,</span><br><span class="line">        &quot;内容7&quot;,</span><br><span class="line">        &quot;内容8&quot;,</span><br><span class="line">        &quot;内容9&quot;,</span><br><span class="line">    ];</span><br><span class="line">    var data = [];</span><br><span class="line">    for (var i = 0; i &lt; 3; i ++) &#123;</span><br><span class="line">        var index = parseInt(Math.random()*content.length);</span><br><span class="line">        data.push(content[index]);</span><br><span class="line">        content.splice(index,1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //进行后端的jsonp跨域处理</span><br><span class="line">    var cb = req.query.callback;</span><br><span class="line">    if (cb) &#123; //如果存在回调函数的话</span><br><span class="line">        res.send(cb + &apos;(&apos; + JSON.stringify(data) + &apos;)&apos; ); //拼接成最后能调用的语法格式</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        res.send(data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在后端中，我们拼接成回调函数调用的形式返回给前端，进行执行。<br>由于返回的是字符串要进行解析执行，所以<strong>JSONP格式的跨域有被XSS注入的风险。处理也较为麻烦</strong>。</p>
+<p>##CORS<br>跨域资源共享（Cross-origin Resource Sharing）,<strong>是一种ajax跨域请求资源的方式</strong>，IE10以上支持。<br>实现方式：当使用XMLHttpRequest发送请求时，浏览器发现该请求不符合同源策略，会给该请求加一个请求头：Origin，后台进行一系列处理，如果确定接受请求的话就在返回结果中加入一个响应头:Access-Control-Allow-Origin;浏览器判断该响应头中是否包含Origin的值，如果有则处理响应，就能拿到响应数据，如果不包含浏览器直接驳回，无法拿到响应数据。<br>所以CORS的表象就是让你觉得它和同源的ajax请求没啥区别，代码完全一样</p>
+<p>cors使用举例：<br>修改我们的hosts，使得当前域名可以通过index1.com:8080进行访问</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;内容1&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;内容2&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;内容3&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;button&gt;换一组&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var btn = document.querySelector(&apos;button&apos;);</span><br><span class="line">    var ul = document.querySelector(&apos;ul&apos;);</span><br><span class="line">    btn.addEventListener(&apos;click&apos;,function () &#123;</span><br><span class="line">        var xhr = new XMLHttpRequest();</span><br><span class="line">        xhr.open(&apos;get&apos;,&apos;http://localhost:8080/cors&apos;,true);</span><br><span class="line">        xhr.send();</span><br><span class="line">        xhr.onreadystatechange = function () &#123;</span><br><span class="line">            if (xhr.readyState === 4 &amp;&amp; (xhr.status ===200 || xhr.status === 304)) &#123;</span><br><span class="line">                var news = JSON.parse(xhr.responseText);</span><br><span class="line">                render(news);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    function render (arr) &#123;</span><br><span class="line">        var html = &apos;&apos;;</span><br><span class="line">        for (var i = 0; i &lt; arr.length; i ++) &#123;</span><br><span class="line">            html += &apos;&lt;li&gt;&apos; + arr[i] + &apos;&lt;/li&gt;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">        ul.innerHTML = html;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这是前端代码，注意到我们在ajax发送中规定的接口是<code>xhr.open(&#39;get&#39;,&#39;http://localhost:8080/cors&#39;,true);</code>向<a href="http://localhost:8080发起请求，我们当前的hosts经过修改，url为http://index1.com:8080,所以为不同源，此时就会报错。这时候我们需要在后端进行设置，以server-mock为例，后端代码如下：" target="_blank" rel="noopener">http://localhost:8080发起请求，我们当前的hosts经过修改，url为http://index1.com:8080,所以为不同源，此时就会报错。这时候我们需要在后端进行设置，以server-mock为例，后端代码如下：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/cors&apos;,function (req,res) &#123;</span><br><span class="line">    var content = [</span><br><span class="line">        &quot;内容10&quot;,</span><br><span class="line">        &quot;内容4&quot;,</span><br><span class="line">        &quot;内容5&quot;,</span><br><span class="line">        &quot;内容6&quot;,</span><br><span class="line">        &quot;内容7&quot;,</span><br><span class="line">        &quot;内容8&quot;,</span><br><span class="line">        &quot;内容9&quot;,</span><br><span class="line">    ];</span><br><span class="line">    var data = [];</span><br><span class="line">    for (var i = 0; i &lt; 3; i ++) &#123;</span><br><span class="line">        var index = parseInt(Math.random()*content.length);</span><br><span class="line">        data.push(content[index]);</span><br><span class="line">        content.splice(index,1);</span><br><span class="line">    &#125;</span><br><span class="line">    res.header(&quot;Access-Control-Allow-Origin&quot;,&quot;http://index1.com:8080&quot;);// 后端设置一个响应头，第二个参数代表只允许规定的域访问</span><br><span class="line">    // res.header(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;);//写成*代表不管什么域都允许请求数据</span><br><span class="line">    res.send(data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>我们在后端中增加了<code>res.header(&quot;Access-Control-Allow-Origin&quot;,&quot;http://index1.com:8080&quot;);</code>设置了一个响应头，第二个参数代表只允许规定的域访问，也可以写成<code>*</code>代表所有其他域都允许请求数据。我们这时候就能在Network里面看到Response Headers里面的Access-Control-Allow-Origin被设置成了<a href="http://index1.com:8080，而Request" target="_blank" rel="noopener">http://index1.com:8080，而Request</a> Headers里面也有当浏览器发现该请求不符合同源策略，该请求加一个请求头Origin，其值为<a href="http://index1.com:8080。有了这个响应头，我们就能成功的跨域请求数据了。" target="_blank" rel="noopener">http://index1.com:8080。有了这个响应头，我们就能成功的跨域请求数据了。</a><br>CORS 的优点是使用ajax，<strong>处理特别简单</strong>。缺点是<strong>ie10之后才兼容</strong>。</p>
+<p>##降域<br>对于同一网站下的二级域名等可以使用降域方法进行跨域<br><code>document.domain = xxx.com;</code></p>
+<p>比如说<a href="http://b.123.com:8080/b.html的iframe嵌套在http://a.123.com:8080/a.html的页面内，此时两个子域不能进行跨域，但是只要给2个子域都加上" target="_blank" rel="noopener">http://b.123.com:8080/b.html的iframe嵌套在http://a.123.com:8080/a.html的页面内，此时两个子域不能进行跨域，但是只要给2个子域都加上</a><br><code>document.domain = &#39;123.com&#39;;</code><br>就能实现跨域</p>
+<p>##postMessage</p>
+<p>对于不同的域下发送一个数据，如果对方接受任何一个数据，那就可以去使用，没有监听数据的话则不使用。<br>由页面A向页面B发送请求，在页面B中监听这个message事件，监听请求并且获取A发送的数据，即可实现跨域请求。</p>
+<p>应用举例：<br>由<a href="http://127.0.0.1:8080/post.html页面进行发送数据" target="_blank" rel="noopener">http://127.0.0.1:8080/post.html页面进行发送数据</a><br>由<a href="http://localhost:8080/receive.html进行监听数据" target="_blank" rel="noopener">http://localhost:8080/receive.html进行监听数据</a></p>
+<p><a href="http://127.0.0.1:8080/post.html为" target="_blank" rel="noopener">http://127.0.0.1:8080/post.html为</a>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;ct&quot;&gt;</span><br><span class="line">    &lt;h1&gt;使用postMessage实现跨域&lt;/h1&gt;</span><br><span class="line">    &lt;div class=&quot;main&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;text&quot; placeholder=&quot;http://127.0.0.1:8080/post.html&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;iframe src=&quot;http://localhost:8080/receive.html&quot; frameborder=&quot;0&quot; &gt;&lt;/iframe&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var input = document.querySelector(&apos;input&apos;);</span><br><span class="line">    input.addEventListener(&apos;input&apos;,function () &#123;</span><br><span class="line">        console.log(this.value);</span><br><span class="line">        window.frames[0].postMessage(this.value,&quot;*&quot;);</span><br><span class="line">//        window.frame[0]代表receive.html</span><br><span class="line">    &#125;)</span><br><span class="line">    window.addEventListener(&apos;message&apos;,function (e) &#123;// 注意监听数据时对象是window</span><br><span class="line">        input.value = e.data;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>receive.html为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; placeholder=&quot;http://localhost:8080/receive.html&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var input = document.querySelector(&apos;input&apos;);</span><br><span class="line">    window.addEventListener(&apos;message&apos;,function (e) &#123; // 注意监听数据时对象是window</span><br><span class="line">        input.value = e.data;</span><br><span class="line">    &#125;)</span><br><span class="line">    input.addEventListener(&apos;input&apos;,function() &#123;</span><br><span class="line">        window.parent.postMessage(this.value,&quot;*&quot;);</span><br><span class="line">//        window.parent代表包含当前iframe的页面，即post.html</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

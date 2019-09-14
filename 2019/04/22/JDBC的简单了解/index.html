@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JDBC的简单了解">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JDBC的简单了解</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-04-22</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/JDBC/">#JDBC</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java DataBase Connectivity  java数据库连接</p>
+<a id="more"></a>
+
+<h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><blockquote>
+<p>Java DataBase Connectivity  java数据库连接</p>
+</blockquote>
+<p>是一种数据库访问规则规范。</p>
+<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>基本步骤：</p>
+<ul>
+<li>注册driver</li>
+<li>建立连接</li>
+<li>创建statement对象进行交互</li>
+<li>执行sql 获取结果</li>
+<li>释放资源</li>
+</ul>
+<p>代码举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package com;</span><br><span class="line"></span><br><span class="line">import java.sql.*;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Driver driver;</span><br><span class="line">        Connection connection;</span><br><span class="line">        Statement statement;</span><br><span class="line">        ResultSet res;</span><br><span class="line">        try &#123;</span><br><span class="line">            driver = new com.mysql.cj.jdbc.Driver();</span><br><span class="line">            DriverManager.registerDriver(driver);</span><br><span class="line">            connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/base1?serverTimezone=GMT&amp;useSSL=false&quot;, &quot;root&quot;, &quot;Admin@123&quot;);</span><br><span class="line">            statement = connection.createStatement();</span><br><span class="line">            String sql = &quot;select * from product&quot;;</span><br><span class="line">            res =  statement.executeQuery(sql);</span><br><span class="line">            while(res.next()) &#123;</span><br><span class="line">                System.out.println(&quot;pname: &quot; + res.getString(&quot;pname&quot;)</span><br><span class="line">                        + &quot;price: &quot; + res.getDouble(&quot;price&quot;));</span><br><span class="line">            &#125;</span><br><span class="line">            res.close();</span><br><span class="line">            statement.close();</span><br><span class="line">            connection.close();</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>maven依赖添加地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;8.0.15&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="释放资源代码整理"><a href="#释放资源代码整理" class="headerlink" title="释放资源代码整理"></a>释放资源代码整理</h3><p>将释放资源的逻辑可以提出来，写出一个工具类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">package com;</span><br><span class="line"></span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.ResultSet;</span><br><span class="line">import java.sql.Statement;</span><br><span class="line"></span><br><span class="line">public class JDBCUtils &#123;</span><br><span class="line"></span><br><span class="line">    public static void close(ResultSet res, Statement statement, Connection connection) &#123;</span><br><span class="line">        closeRes(res);</span><br><span class="line">        closeStatement(statement);</span><br><span class="line">        closeConnection(connection);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void closeRes(ResultSet res) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if(res != null) &#123;</span><br><span class="line">                res.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            res = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void closeStatement(Statement statement) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if(statement != null) &#123;</span><br><span class="line">                statement.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            statement = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void closeConnection(Connection connection) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if(connection != null) &#123;</span><br><span class="line">                connection.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            connection = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>优化之后，上面的例子就可以写成这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com;</span><br><span class="line"></span><br><span class="line">import java.sql.*;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Driver driver;</span><br><span class="line">        Connection connection = null;</span><br><span class="line">        Statement statement = null;</span><br><span class="line">        ResultSet res = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            driver = new com.mysql.cj.jdbc.Driver();</span><br><span class="line">            DriverManager.registerDriver(driver);</span><br><span class="line">            connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/base1?serverTimezone=GMT&amp;useSSL=false&quot;, &quot;root&quot;, &quot;Admin@123&quot;);</span><br><span class="line">            statement = connection.createStatement();</span><br><span class="line">            String sql = &quot;select * from product&quot;;</span><br><span class="line">            res =  statement.executeQuery(sql);</span><br><span class="line">            while(res.next()) &#123;</span><br><span class="line">                System.out.println(&quot;pname: &quot; + res.getString(&quot;pname&quot;)</span><br><span class="line">                        + &quot;price: &quot; + res.getDouble(&quot;price&quot;));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            JDBCUtils.close(res, statement, connection);// 在finally里去close()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="关于注册driver的优化"><a href="#关于注册driver的优化" class="headerlink" title="关于注册driver的优化"></a>关于注册driver的优化</h3><p>看下源码可以发现其内部有个static代码块:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        DriverManager.registerDriver(new Driver()); // 已经注册了一个Driver</span><br><span class="line">    &#125; catch (SQLException var1) &#123;</span><br><span class="line">        throw new RuntimeException(&quot;Can&apos;t register driver!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>内部已经进行了driver的注册，所以没必要重复注册第二个driver，按照文档中的示例，可以采用<code>Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance()</code>（其实没必要去newInstance()已经有driver,这个操作浪费空间）;</p>
+<p>优化过后的代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package com;</span><br><span class="line"></span><br><span class="line">import java.sql.*;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Driver driver;</span><br><span class="line">        Connection connection = null;</span><br><span class="line">        Statement statement = null;</span><br><span class="line">        ResultSet res = null;</span><br><span class="line">        try &#123;</span><br><span class="line">//            driver = new com.mysql.cj.jdbc.Driver(); // 改用动态加载一个driver类</span><br><span class="line">            Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</span><br><span class="line">//            DriverManager.registerDriver(driver); // com.mysql.cj.jdbc.Driver内部已经注册过driver了  没必要重复注册</span><br><span class="line">            connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/base1?serverTimezone=GMT&amp;useSSL=false&quot;, &quot;root&quot;, &quot;Admin@123&quot;);</span><br><span class="line">            statement = connection.createStatement();</span><br><span class="line">            String sql = &quot;select * from product&quot;;</span><br><span class="line">            res =  statement.executeQuery(sql);</span><br><span class="line">            while(res.next()) &#123;</span><br><span class="line">                System.out.println(&quot;pname: &quot; + res.getString(&quot;pname&quot;)</span><br><span class="line">                        + &quot;price: &quot; + res.getDouble(&quot;price&quot;));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            JDBCUtils.close(res, statement, connection);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>关于Class.forName(className), 在一些应用中，无法事先知道使用者将加载什么类(比如本例中使用jdbc可能是其他数据库)，而必须让使用者指定类名称以加载类，可以使用 Class 的静态 forName() 方法实现动态加载类。详见<a href="https://www.cnblogs.com/sunzn/p/3187868.html" target="_blank" rel="noopener">Class.forName</a></p>
+</blockquote>
+<h3 id="jdbc-properties"><a href="#jdbc-properties" class="headerlink" title="jdbc.properties"></a>jdbc.properties</h3><p>上述例子中的数据库配置等信息都是写在代码中的，我们一般是要从配置文件中读取的，所以我们创建一个名为jdbc.properties的文件,如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">driverClass=com.mysql.cj.jdbc.Driver</span><br><span class="line">url=jdbc:mysql://localhost:3306/base1?serverTimezone=GMT&amp;useSSL=false</span><br><span class="line">userName=root</span><br><span class="line">password=Admin@123</span><br></pre></td></tr></table></figure>
+
+<p>然后我们修改JDBCUtils里面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">package com;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.DriverManager;</span><br><span class="line">import java.sql.ResultSet;</span><br><span class="line">import java.sql.Statement;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"></span><br><span class="line">public class JDBCUtils &#123;</span><br><span class="line">    static String driverClass = null; // 数据库类型</span><br><span class="line">    static String url = null; // 数据库地址</span><br><span class="line">    static String userName = null;</span><br><span class="line">    static String password = null;</span><br><span class="line"></span><br><span class="line">    static &#123; // 默认static代码块  读取properties配置</span><br><span class="line">        try &#123;</span><br><span class="line">            Properties properties = new Properties(); // 获取Properties对象</span><br><span class="line">            InputStream setting = new FileInputStream(&quot;src/jdbc.properties&quot;); // 获取文件流</span><br><span class="line">            properties.load(setting);// properties对象加载读取到的配置</span><br><span class="line">            driverClass = properties.getProperty(&quot;driverClass&quot;); // 从配置中读取特定的配置</span><br><span class="line">            url = properties.getProperty(&quot;url&quot;);</span><br><span class="line">            userName = properties.getProperty(&quot;userName&quot;);</span><br><span class="line">            password = properties.getProperty(&quot;password&quot;);</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//    注册驱动并且并且获取连接Connection</span><br><span class="line">    public static Connection getConnection() &#123;</span><br><span class="line">        Connection connection = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            Class.forName(driverClass);</span><br><span class="line">            connection = DriverManager.getConnection(url, userName, password);</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            return connection;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//     释放资源</span><br><span class="line">    public static void close(ResultSet res, Statement statement, Connection connection) &#123;</span><br><span class="line">        closeRes(res);</span><br><span class="line">        closeStatement(statement);</span><br><span class="line">        closeConnection(connection);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void closeRes(ResultSet res) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if(res != null) &#123;</span><br><span class="line">                res.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            res = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void closeStatement(Statement statement) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if(statement != null) &#123;</span><br><span class="line">                statement.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            statement = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void closeConnection(Connection connection) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if(connection != null) &#123;</span><br><span class="line">                connection.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            connection = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JDBC对数据库的CRUD"><a href="#JDBC对数据库的CRUD" class="headerlink" title="JDBC对数据库的CRUD"></a>JDBC对数据库的CRUD</h3><ul>
+<li>insert<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">   public void testInsert() &#123;</span><br><span class="line">       Connection connection = null;</span><br><span class="line">       Statement statement = null;</span><br><span class="line">       ResultSet res = null;</span><br><span class="line">       try&#123;</span><br><span class="line">           connection =  JDBCUtils.getConnection();</span><br><span class="line">           statement = connection.createStatement();</span><br><span class="line">           String sql = &quot;insert into product values(null, &apos;泡椒凤爪&apos;, 3, null, 5);&quot;;</span><br><span class="line">           int result = statement.executeUpdate(sql); // 执行insert update  delete的时候使用executeUpdate return int</span><br><span class="line">           if(result &gt; 0) &#123; // result为影响的行数</span><br><span class="line">               System.out.println(&quot;insert successfully!&quot;);</span><br><span class="line">           &#125;else &#123;</span><br><span class="line">               System.out.println(&quot;insert failed&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;catch (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;finally &#123;</span><br><span class="line">           JDBCUtils.close(res, statement, connection);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>update和delete同理</p>
+<h3 id="使用junit进行单元测试"><a href="#使用junit进行单元测试" class="headerlink" title="使用junit进行单元测试"></a>使用junit进行单元测试</h3><ol>
+<li><p>添加junit依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/junit/junit --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加一个类，定义测试方法，给其加上@Test注解</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import com.JDBCUtils;</span><br><span class="line">import org.junit.Test;</span><br><span class="line"></span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.ResultSet;</span><br><span class="line">import java.sql.Statement;</span><br><span class="line"></span><br><span class="line">public class TestDemo &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testQuery() &#123;</span><br><span class="line">        Connection connection = null;</span><br><span class="line">        Statement statement = null;</span><br><span class="line">        ResultSet res = null;</span><br><span class="line">        try&#123;</span><br><span class="line">            connection =  JDBCUtils.getConnection();</span><br><span class="line">            statement = connection.createStatement();</span><br><span class="line">            String sql = &quot;select * from product;&quot;;</span><br><span class="line">            res = statement.executeQuery(sql);</span><br><span class="line">        &#125;catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            JDBCUtils.close(res, statement, connection);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="伪类及伪元素">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">伪类及伪元素</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-06</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/CSS/">#CSS</a> <a class="tag" href="/tags/CSS伪类/">#CSS伪类</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>伪类及伪元素</p>
+<a id="more"></a>
+
+<p>##伪类</p>
+<p>伪类用于当已有元素处于某个状态时，为其添加对应的样式，这个状态是根据用户行为而动态变化</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7113407-433562a1d5595c5e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="伪类列举"></p>
+<ul>
+<li><p>LVHA顺序：link visited hover active。<br>这样写的原因：<br>这样写的原因是由两点决定的，第一点”相同优先级的样式，后面的会覆盖前面的样式”，第二点是鼠标点击动作的先后顺序。<br>link和visited是常态，而hover和active是即时状态，h和a触发时，即时状态会覆盖l和v的常态，所以即时状态要放在常态的后面。<br>常态情况下：访问过之后，就要呈现出visited的样式，所以visited要放到Link后面。<br>即时状态下：要让active覆盖hover的样式，所以要将active放到后面。</p>
+</li>
+<li><p>first-child VS first-of-type<br>例如：   h1:first-child选择的是h1并且他是长子的元素<br>h1:first-of-type选择的是h1并且他是他父亲里h1类型中的长子的元素</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    h1:first-of-type &#123;</span><br><span class="line">        background: yellow;</span><br><span class="line">    &#125;</span><br><span class="line">    h1:first-child &#123;</span><br><span class="line">        color: red;</span><br><span class="line">    &#125;</span><br><span class="line">    p:first-of-type &#123;</span><br><span class="line">        background: pink;</span><br><span class="line">    &#125;</span><br><span class="line">    p:first-child &#123;</span><br><span class="line">        color: blue;</span><br><span class="line">        /*本条样式不会生效，因为p标签不是父元素下的第一个元素*/</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;h1&gt;大标题1&lt;/h1&gt;</span><br><span class="line">    &lt;p&gt;段落2&lt;/p&gt;</span><br><span class="line">    &lt;h1&gt;大标题3&lt;/h1&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h2><p> 伪元素用于创建一些<strong>不在文档流的中的元素</strong>，并为其添加样式</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7113407-df607ca6aab9fc68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="伪元素举例"></p>
+<ul>
+<li>:before和:after</li>
+</ul>
+<ol>
+<li>element:before 是在element内部创建一个<strong>行内元素</strong>(默认为行内元素)，作为element的<strong>第一个孩子</strong>。</li>
+<li>element:after 是在element内部创建一个<strong>行内元素</strong>(默认为行内元素)，作为element的<strong>最后一个孩子</strong>。</li>
+<li>用:before :after的目的是为了省标签</li>
+<li>其中<strong>content属性时必不可少</strong>的。</li>
+</ol>
+<ul>
+<li>应用举例：</li>
+</ul>
+<ol>
+<li><p>清除浮动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.clearfix:after &#123;</span><br><span class="line">	content: &apos;&apos;;</span><br><span class="line">	display: block</span><br><span class="line">	clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用-替换标签</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .bubble &#123;</span><br><span class="line">        display: inline-block;</span><br><span class="line">        padding: 8px 16px;</span><br><span class="line">        background: red;</span><br><span class="line">        position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    .bubble:before &#123;</span><br><span class="line">        content: &apos;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    .bubble:before &#123;</span><br><span class="line">        display: inline-block;</span><br><span class="line">        width: 10px;</span><br><span class="line">        height: 10px;</span><br><span class="line">        border-top: 1px solid red;</span><br><span class="line">        border-right: 1px solid red;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: -6px;</span><br><span class="line">        transform: rotateZ(-45deg);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div class=&quot;bubble&quot;&gt;hello,bubble&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/7113407-dd0ba6bd6269f284.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行结果"></p>
+<ol start="3">
+<li>css icon</li>
+</ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

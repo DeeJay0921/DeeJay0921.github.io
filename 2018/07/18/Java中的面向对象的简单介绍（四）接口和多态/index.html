@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的面向对象的简单介绍（四）接口和多态">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的面向对象的简单介绍（四）接口和多态</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-07-18</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/面向对象/">#面向对象</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的面向对象的简单介绍（四）接口和多态</p>
+<a id="more"></a>
+
+<p>因为Java中继承具有单一性，只能继承一个父类，所以为了处理这种局限性，Java又提供了接口。</p>
+<h1 id="接口interface"><a href="#接口interface" class="headerlink" title="接口interface"></a>接口interface</h1><p>是一个比抽象类还要抽象的类，因为其内部的所有方法全部都是抽象方法。<br>同时接口和类的关系也不再是继承(extends)而是实现(implements)</p>
+<p>接口的特点：</p>
+<ul>
+<li><strong>只能有</strong>抽象方法</li>
+<li>只能有<strong>常量</strong>，默认使用<code>public static final</code>修饰</li>
+<li>方法默认就被<code>public abstract</code>修饰,并且也只能被<code>public abstract</code>修饰</li>
+<li>一样的，接口也不能实例化</li>
+<li>类和接口的关系不再是extends，而是implements，并且也要实现它所有的方法(@Override)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class InterfaceDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		Cat c = new Cat();</span><br><span class="line">		c.eat(); // 猫吃鱼</span><br><span class="line">		System.out.println(Animal.num); // 3 可以直接访问接口内部的常量</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Animal &#123; // 声明接口和声明类很相似</span><br><span class="line">	public static final int num = 3; // 接口内部只支持使用常量，并且默认使用public static final来修饰  当然可以直接写出int num = 3;</span><br><span class="line">	public abstract void eat(); // 内部的方法默认使用public abstract修饰，同时也只允许使用public abstract修饰，也可以直接写成void eat();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Cat implements Animal &#123; // 类和接口的关系是implements</span><br><span class="line">	@Override</span><br><span class="line">	public void eat() &#123; // 必须要重写接口中的所有方法</span><br><span class="line">		System.out.println(&quot;猫吃鱼&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>###梳理一下接口和类之间的各种关系：</p>
+<ul>
+<li>类和类： <code>extends</code>, 单一继承，多层继承</li>
+<li>类和接口： <code>implements</code>, 多实现(可以实现多个接口)</li>
+<li>接口和接口： <code>extends</code>，接口之间不可以实现只可以继承，同时也是单一继承，多层继承</li>
+</ul>
+<p>###接口的优点:</p>
+<ul>
+<li>一个类可以实现多个接口，解决了extends的单一性问题</li>
+<li>接口的所有成员都是public，可以对外提供一套规范</li>
+<li>降低了程序的耦合性</li>
+</ul>
+<p>###接口和抽象类的比较：</p>
+<ul>
+<li>相似点：<ul>
+<li>都是不断的抽取出抽象的概念</li>
+</ul>
+</li>
+<li>不同点：<ul>
+<li>抽象类也是类，只能单一继承，而类可以实现多个接口</li>
+<li>成员方面，抽象类可以有常量和成员变量，但是接口只能有变量。抽象类还可以有非抽象方法，接口必须都是抽象方法并且修饰符默认为<code>public abstract</code></li>
+<li>构造方法方面，抽象类是有构造函数的，但是接口没有构造函数</li>
+</ul>
+</li>
+</ul>
+<h1 id="匿名对象"><a href="#匿名对象" class="headerlink" title="匿名对象"></a>匿名对象</h1><p>没有变量引用的对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class AnooymousObjDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		new Test(&quot;DeeJay&quot;).show(); // name: DeeJay</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Test &#123;</span><br><span class="line">	String name;</span><br><span class="line">	public Test(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void show() &#123;</span><br><span class="line">		System.out.println(&quot;name: &quot;+ name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一般当方法只调用一次的时候可以使用匿名对象。</p>
+<h2 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h2><p>修饰符，可以修饰类，成员方法，以及成员变量</p>
+<ul>
+<li>final修饰的类不可以被继承。</li>
+<li>final修饰的成员方法不可以被重写</li>
+<li>final修饰的成员变量不可以被赋值，哪怕赋的是原值。即是常量</li>
+</ul>
+<p>另外自定义常量必须初始化，可以直接赋值，或者在构造方法中初始化都可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class FinalDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Animal3 a3 = new Animal3();</span><br><span class="line">		// a3.num = 10; // the final fields cannot be assigned  final修饰的成员变量不可以被赋值，哪怕赋的是原值。即是常量,一般命名使用大写。</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">final class Animal &#123;</span><br><span class="line">	public void eat()&#123;</span><br><span class="line">		System.out.println(&quot;eating&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// class Dog extends Animal &#123;&#125; // cannot subclass the final class   final修饰的类不可以被继承</span><br><span class="line"></span><br><span class="line">class Animal2 &#123;</span><br><span class="line">	final public void eat()&#123; // final修饰成员方法</span><br><span class="line">		System.out.println(&quot;eating&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Dog2 extends Animal2 &#123;</span><br><span class="line">	// public void eat() &#123;&#125; // cannot Override the final method  final修饰的成员方法不可以被重写</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Animal3 &#123;</span><br><span class="line">	final int num = 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>###多态的前提：</p>
+<ul>
+<li>子父类的继承关系</li>
+<li>方法的重写</li>
+<li>父类引用指向子类对象 <code>Dad d = new Child();</code></li>
+</ul>
+<p>###多态的成员特点：</p>
+<ul>
+<li>成员变量：成员变量在继承时没有重写的概念，也没有动态绑定的概念，所以运行时指向的是父类的成员变量。</li>
+<li>成员方法： 成员方法运行时，指向的是子类中被重写的方法</li>
+<li>静态方法： 调用的静态方法是父类的静态方法，因为static是跟着类型走的。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class PolymorphismDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		Dad d = new Child();</span><br><span class="line">		System.out.println(d.num); // 20 成员变量在继承时没有重写的概念，也没有动态绑定的概念。 所以这边的是父类的成员变量。</span><br><span class="line">		d.show(); // child 成员方法运行时，指向的是子类中被重写的方法</span><br><span class="line">		d.show2(); // dad static  d变量类型还是Dad型，所以调用的静态方法是Dad类的静态方法</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Dad &#123;</span><br><span class="line">	int num = 20;</span><br><span class="line">	public void show() &#123;</span><br><span class="line">		System.out.println(&quot;dad&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	public static void show2() &#123;</span><br><span class="line">		System.out.println(&quot;dad static&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Child extends Dad &#123;</span><br><span class="line">	int num = 10;</span><br><span class="line">	public void show() &#123;</span><br><span class="line">		System.out.println(&quot;child&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	public static void show2() &#123;</span><br><span class="line">		System.out.println(&quot;child static&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>###多态中的类型转换: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class PolymorphismDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		//向下转型</span><br><span class="line">		Dad2 d2 = new Child2();</span><br><span class="line">		Child2 c2 = (Child2)d2; // 强制的进行了类型转换  从Dad2类型到了Child2类型。 向下转型</span><br><span class="line">		c2.show(); // child 向下转型了之后就可以调用子类的方法</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 关于多态中引用类型的转换  向上转换Dad d = new Child(); 已经隐式的进行了转换，从小到大向上转换即从子类型到父类型</span><br><span class="line">// 对于向下转换即从父类转到子类，一般是由于想访问子类中特有的成员才执行的，需要强制进行类型转换</span><br><span class="line">class Dad2 &#123;&#125;</span><br><span class="line">class Child2 extends Dad2&#123;</span><br><span class="line">	public void show() &#123;</span><br><span class="line">		System.out.println(&quot;child&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多态的优缺点："><a href="#多态的优缺点：" class="headerlink" title="多态的优缺点："></a>多态的优缺点：</h3><p>缺点：</p>
+<ul>
+<li>无法直接访问子类特有的成员，如果非要访问，需要向下转型<br>优点：</li>
+<li>提高可维护性和可扩展性</li>
+</ul>
+<p>对于提高可扩展性，来写一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">package com.polymorphism;</span><br><span class="line"></span><br><span class="line">public class PolymorphismDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Factory f = new Factory();</span><br><span class="line">		f.createPhone(new MiPhone());</span><br><span class="line">		f.createPhone(new MeiZuPhone());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Factory &#123;</span><br><span class="line">	public void createPhone(MiPhone mp) &#123; </span><br><span class="line">		System.out.println(&quot;create phone&quot;);</span><br><span class="line">		mp.call();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void createPhone(MeiZuPhone mzp) &#123; // 随着手机类越来越多    Factory类中要一直新增createPhone的重载方法</span><br><span class="line">		System.out.println(&quot;create phone&quot;);</span><br><span class="line">		mzp.call();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MiPhone &#123;</span><br><span class="line">	public void call() &#123;</span><br><span class="line">		System.out.println(&quot;MI phone is calling&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MeiZuPhone &#123;</span><br><span class="line">	public void call () &#123;</span><br><span class="line">		System.out.println(&quot;MeiZuPhone is calling&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这个例子中，Factory类中的方法随着手机类的增多，被迫要一次次的新增一个重载的方法。</p>
+<p>我们可以使用多态来改写这个例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package com.polymorphism;</span><br><span class="line"></span><br><span class="line">public class PolymorphismDemo2 &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Factory2 f2 = new Factory2();</span><br><span class="line">		f2.createPhone(new MiPhone2());</span><br><span class="line">		f2.createPhone(new MeiZuPhone2());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Factory2 &#123;</span><br><span class="line">	public void createPhone(Phone p) &#123;  // 不需要每新增一个手机类就实现一次重载 </span><br><span class="line">		System.out.println(&quot;create phone&quot;);</span><br><span class="line">		p.call();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Phone &#123; // 创建一个公共的接口  让其他的手机类来实现这个接口   在Factory2的方法中就可以只传人实现了这个Phone 类型的变量</span><br><span class="line">	public abstract void call(); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MiPhone2 implements Phone &#123; // 实现公共接口   具体的方法在类内部进行定义</span><br><span class="line">	public void call() &#123;</span><br><span class="line">		System.out.println(&quot;MI phone is calling&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MeiZuPhone2 implements Phone &#123; // 实现公共接口   具体的方法在类内部进行定义</span><br><span class="line">	public void call () &#123;</span><br><span class="line">		System.out.println(&quot;MeiZuPhone is calling&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在改进的例子中，我们写了一个公共的接口Phone，所有的手机类都来实现这个接口，最后在Factory2中的方法中，我们只需要传入<code>Phone p</code>的参数就可以了，<strong>不用关心它具体是什么类型</strong>，从而就避免了一直重载方法的尴尬。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="sql多表查询">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">sql多表查询</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-04-19</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/DataBase/">DataBase</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/mysql/">#mysql</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>sql多表查询</p>
+<a id="more"></a>
+
+<h1 id="sql会创建多表以及多表的关系"><a href="#sql会创建多表以及多表的关系" class="headerlink" title="sql会创建多表以及多表的关系"></a>sql会创建多表以及多表的关系</h1><h2 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h2><p><a href="https://www.jianshu.com/p/3f3315a453d7" target="_blank" rel="noopener">上篇文章</a>中的商品表和分类表之间存在着所属关系，在数据库如何表示这种关系</p>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><h3 id="多表之间的关系如何来维护"><a href="#多表之间的关系如何来维护" class="headerlink" title="多表之间的关系如何来维护"></a>多表之间的关系如何来维护</h3><ul>
+<li>外键约束：假设现在在product表中插入一条cno为99的数据，但是cno为99的列在category中并不存在。这时候就需要<strong>外键约束</strong>，<code>foreign key</code><ul>
+<li>给product这个表中的cno添加一个外键约束: <code>alter table product add foreign key(cno) references category(cid);</code> 添加外键约束之后，再向product中插入category中没有的种类会失败。<blockquote>
+<p>添加外键约束之后，如果想删除category中的某一列，也会报错，因为product中有记录在引用。首先得去product表中删除引用该种类的所有记录，才能去删除category中的相应列。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>在下面的例子中，有如下2张表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from product;</span><br><span class="line">+-----+--------------+-------+---------------------+------+</span><br><span class="line">| pid | pname        | price | pdate               | cno  |</span><br><span class="line">+-----+--------------+-------+---------------------+------+</span><br><span class="line">|   4 | 小米mix2s    |  2700 | 2019-04-14 13:14:31 |    1 |</span><br><span class="line">|   5 | 华为p30      |  4788 | 2019-04-14 13:14:32 |    1 |</span><br><span class="line">|   6 | 阿迪王       |    99 | 2019-04-14 13:14:32 |    2 |</span><br><span class="line">|   7 | 老村长       |    88 | 2019-04-14 13:14:32 |    3 |</span><br><span class="line">|   8 | 劲酒         |    35 | 2019-04-14 13:14:32 |    3 |</span><br><span class="line">|   9 | 小熊饼干     |     3 | 2019-04-14 13:14:32 |    4 |</span><br><span class="line">|  10 | 卫龙辣条     |     1 | 2019-04-14 13:14:32 |    5 |</span><br><span class="line">|  11 | 旺旺雪饼     |     1 | 2019-04-14 13:14:32 |    5 |</span><br><span class="line">+-----+--------------+-------+---------------------+------+</span><br><span class="line">8 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from category;</span><br><span class="line">+-----+--------------+-----------------------+</span><br><span class="line">| cid | cname        | cdesc                 |</span><br><span class="line">+-----+--------------+-----------------------+</span><br><span class="line">|   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">+-----+--------------+-----------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>其中2张表存在CONSTRAINT <code>product_ibfk_1</code> FOREIGN KEY (<code>cno</code>) REFERENCES <code>category</code> (<code>cid</code>)外键约束</p>
+<h3 id="建立数据库的原则"><a href="#建立数据库的原则" class="headerlink" title="建立数据库的原则"></a>建立数据库的原则</h3><p>通常情况下，一个应用一个数据库。</p>
+<h3 id="多表之间的建表原则"><a href="#多表之间的建表原则" class="headerlink" title="多表之间的建表原则"></a>多表之间的建表原则</h3><h4 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h4><p>例子中提到的product和category就是一对多的关系，一个种类对应多个商品</p>
+<ul>
+<li>建表原则： 在<strong>多的一方(product)添加一个外键(cno)指向一的一方(category)的主键(cid)</strong><h4 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h4>例如：老师和学生，学生和课程等<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from student;</span><br><span class="line">+----+--------+--------+-----+</span><br><span class="line">| id | name   | gender | age |</span><br><span class="line">+----+--------+--------+-----+</span><br><span class="line">|  1 | 张三   | 男     |  18 |</span><br><span class="line">|  2 | 李四   | 男     |  20 |</span><br><span class="line">|  3 | 王五   | 女     |  19 |</span><br><span class="line">+----+--------+--------+-----+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from subject;</span><br><span class="line">+----+--------+-----------+</span><br><span class="line">| id | name   | teacher   |</span><br><span class="line">+----+--------+-----------+</span><br><span class="line">|  1 | 英语   | 张老师    |</span><br><span class="line">|  2 | 语文   | 李老师    |</span><br><span class="line">|  3 | 数学   | 杨老师    |</span><br><span class="line">+----+--------+-----------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>假设现在学生开始选课，选课结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">张三： 英语，语文</span><br><span class="line">李四： 数学</span><br><span class="line">王五： 英语，语文</span><br></pre></td></tr></table></figure>
+
+<p>student表中的学生选了不固定的subject表里的科目，这种关系为多对多<br>这时候我们就需要建立如下表:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `stu-submiddletable` (</span><br><span class="line">  `stu-subId` int(11) NOT NULL AUTO_INCREMENT COMMENT &apos;中间表主键&apos;,</span><br><span class="line">  `subjectId` int(11) DEFAULT NULL COMMENT &apos;外键&apos;,</span><br><span class="line">  `studentId` int(11) NOT NULL COMMENT &apos;外键&apos;,</span><br><span class="line">  PRIMARY KEY (`stu-subId`),</span><br><span class="line">  KEY `studentId` (`studentId`),</span><br><span class="line">  KEY `subjectId` (`subjectId`),</span><br><span class="line">  CONSTRAINT `studentId` FOREIGN KEY (`studentId`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,</span><br><span class="line">  CONSTRAINT `subjectId` FOREIGN KEY (`subjectId`) REFERENCES `subject` (`id`) ON DELETE CASCADE ON UPDATE CASCADE</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>建表原则： 需要多建一张中间表，将多对多的关系拆为一对多的关系，中间表<strong>至少要有2个外键</strong>，这2个外键分别指向原来的那张表。<br>在上述中间表中，至少需要2个外键，即学生的id和科目的id，其中对于中间表的学生id来说，student表中和中间表的学生id为一对多(即category和product的关系，student为一，中间表学生id为多)，而对于中间表中课程编号，跟subject，也是一样的(subject的id对中间表的科目编号也为一对多)。<br>在这张中间表中，对于上述选择结果，就可以这么存储：<br><img src="https://upload-images.jianshu.io/upload_images/7113407-dba751f62f36155f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="中间表存储实例"></li>
+</ul>
+<h4 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h4><p>例如公民和身份证的关系：<br>People表： id name income<br>IDcard表：sid 头像 性别</p>
+<ul>
+<li>可以直接合并2张表</li>
+<li>可以在一张表中新增列，作为外键，当初一对多的情况来处理，这个外键指向另外一张表。</li>
+<li>将2张表的主键建立起连接，让2张表主键相等。</li>
+</ul>
+<blockquote>
+<p>实际用途不多，比如说拆表操作(将表中的一些列拆分出来)</p>
+</blockquote>
+<blockquote>
+<p>关于主键约束和唯一约束的区别：<br>主键约束：默认不能为空且唯一，并且不能有多个主键<br>唯一约束：默认为空且唯一，可以有多个唯一约束键<br>外键都是指向另一张表的<strong>主键</strong>,而唯一的约束不可以作为其他表的外键</p>
+</blockquote>
+<h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><p>对于上述的product表和category表来进行下面的举例：</p>
+<h4 id="多表查询的几种类型："><a href="#多表查询的几种类型：" class="headerlink" title="多表查询的几种类型："></a>多表查询的几种类型：</h4><ul>
+<li>交叉连接查询 笛卡尔积<br>对于上述的product表以及category表，如果想要一次查询2张表的内容，我们可以输入：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from product,category;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * from product,category;</span><br><span class="line">+-----+--------------+-------+---------------------+------+-----+--------------+-----------------------+</span><br><span class="line">| pid | pname        | price | pdate               | cno  | cid | cname        | cdesc                 |</span><br><span class="line">+-----+--------------+-------+---------------------+------+-----+--------------+-----------------------+</span><br><span class="line">|   4 | 小米mix2s    |  2700 | 2019-04-14 13:14:31 |    1 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   4 | 小米mix2s    |  2700 | 2019-04-14 13:14:31 |    1 |   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|   4 | 小米mix2s    |  2700 | 2019-04-14 13:14:31 |    1 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   4 | 小米mix2s    |  2700 | 2019-04-14 13:14:31 |    1 |   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|   4 | 小米mix2s    |  2700 | 2019-04-14 13:14:31 |    1 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|   5 | 华为p30      |  4788 | 2019-04-14 13:14:32 |    1 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   5 | 华为p30      |  4788 | 2019-04-14 13:14:32 |    1 |   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|   5 | 华为p30      |  4788 | 2019-04-14 13:14:32 |    1 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   5 | 华为p30      |  4788 | 2019-04-14 13:14:32 |    1 |   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|   5 | 华为p30      |  4788 | 2019-04-14 13:14:32 |    1 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|   6 | 阿迪王       |    99 | 2019-04-14 13:14:32 |    2 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   6 | 阿迪王       |    99 | 2019-04-14 13:14:32 |    2 |   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|   6 | 阿迪王       |    99 | 2019-04-14 13:14:32 |    2 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   6 | 阿迪王       |    99 | 2019-04-14 13:14:32 |    2 |   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|   6 | 阿迪王       |    99 | 2019-04-14 13:14:32 |    2 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|   7 | 老村长       |    88 | 2019-04-14 13:14:32 |    3 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   7 | 老村长       |    88 | 2019-04-14 13:14:32 |    3 |   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|   7 | 老村长       |    88 | 2019-04-14 13:14:32 |    3 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   7 | 老村长       |    88 | 2019-04-14 13:14:32 |    3 |   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|   7 | 老村长       |    88 | 2019-04-14 13:14:32 |    3 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|   8 | 劲酒         |    35 | 2019-04-14 13:14:32 |    3 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   8 | 劲酒         |    35 | 2019-04-14 13:14:32 |    3 |   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|   8 | 劲酒         |    35 | 2019-04-14 13:14:32 |    3 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   8 | 劲酒         |    35 | 2019-04-14 13:14:32 |    3 |   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|   8 | 劲酒         |    35 | 2019-04-14 13:14:32 |    3 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|   9 | 小熊饼干     |     3 | 2019-04-14 13:14:32 |    4 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   9 | 小熊饼干     |     3 | 2019-04-14 13:14:32 |    4 |   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|   9 | 小熊饼干     |     3 | 2019-04-14 13:14:32 |    4 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   9 | 小熊饼干     |     3 | 2019-04-14 13:14:32 |    4 |   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|   9 | 小熊饼干     |     3 | 2019-04-14 13:14:32 |    4 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|  10 | 卫龙辣条     |     1 | 2019-04-14 13:14:32 |    5 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|  10 | 卫龙辣条     |     1 | 2019-04-14 13:14:32 |    5 |   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|  10 | 卫龙辣条     |     1 | 2019-04-14 13:14:32 |    5 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|  10 | 卫龙辣条     |     1 | 2019-04-14 13:14:32 |    5 |   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|  10 | 卫龙辣条     |     1 | 2019-04-14 13:14:32 |    5 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|  11 | 旺旺雪饼     |     1 | 2019-04-14 13:14:32 |    5 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|  11 | 旺旺雪饼     |     1 | 2019-04-14 13:14:32 |    5 |   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|  11 | 旺旺雪饼     |     1 | 2019-04-14 13:14:32 |    5 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|  11 | 旺旺雪饼     |     1 | 2019-04-14 13:14:32 |    5 |   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|  11 | 旺旺雪饼     |     1 | 2019-04-14 13:14:32 |    5 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">+-----+--------------+-------+---------------------+------+-----+--------------+-----------------------+</span><br><span class="line">40 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述例子中查出来的结果称为笛卡尔积即2张表的乘积，没什么实际意义。其实我们需要的就是cno等于cid的那些数据，所以需要做一下过滤。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from  product,category where cno=cid;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对于上述查询，经常会发现cno和cid属于哪个表不明确，可以通过起个别名的方式来指明是哪个表: <code>select * from product as P,category as C where p.cno=c.cid;</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from product as P,category as C where p.cno=c.cid;</span><br><span class="line">+-----+--------------+-------+---------------------+------+-----+--------------+-----------------------+</span><br><span class="line">| pid | pname        | price | pdate               | cno  | cid | cname        | cdesc                 |</span><br><span class="line">+-----+--------------+-------+---------------------+------+-----+--------------+-----------------------+</span><br><span class="line">|   4 | 小米mix2s    |  2700 | 2019-04-14 13:14:31 |    1 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   5 | 华为p30      |  4788 | 2019-04-14 13:14:32 |    1 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   6 | 阿迪王       |    99 | 2019-04-14 13:14:32 |    2 |   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|   7 | 老村长       |    88 | 2019-04-14 13:14:32 |    3 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   8 | 劲酒         |    35 | 2019-04-14 13:14:32 |    3 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   9 | 小熊饼干     |     3 | 2019-04-14 13:14:32 |    4 |   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|  10 | 卫龙辣条     |     1 | 2019-04-14 13:14:32 |    5 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|  11 | 旺旺雪饼     |     1 | 2019-04-14 13:14:32 |    5 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">+-----+--------------+-------+---------------------+------+-----+--------------+-----------------------+</span><br><span class="line">8 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>内连接查询<br>对于上述例子，使用where进行条件过滤的为隐式内连接，</p>
+<ul>
+<li><p>隐式内连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from product p,category c where p.cno=c.cid;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显式内链接（使用inner join）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from product p inner join category on p.cno=c.cid;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from product as P join category as C on p.cno=c.cid;</span><br><span class="line">+-----+--------------+-------+---------------------+------+-----+--------------+-----------------------+</span><br><span class="line">| pid | pname        | price | pdate               | cno  | cid | cname        | cdesc                 |</span><br><span class="line">+-----+--------------+-------+---------------------+------+-----+--------------+-----------------------+</span><br><span class="line">|   4 | 小米mix2s    |  2700 | 2019-04-14 13:14:31 |    1 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   5 | 华为p30      |  4788 | 2019-04-14 13:14:32 |    1 |   1 | 手机数码     | 电子产品              |</span><br><span class="line">|   6 | 阿迪王       |    99 | 2019-04-14 13:14:32 |    2 |   2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|   7 | 老村长       |    88 | 2019-04-14 13:14:32 |    3 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   8 | 劲酒         |    35 | 2019-04-14 13:14:32 |    3 |   3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   9 | 小熊饼干     |     3 | 2019-04-14 13:14:32 |    4 |   4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|  10 | 卫龙辣条     |     1 | 2019-04-14 13:14:32 |    5 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|  11 | 旺旺雪饼     |     1 | 2019-04-14 13:14:32 |    5 |   5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">+-----+--------------+-------+---------------------+------+-----+--------------+-----------------------+</span><br><span class="line">8 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述2种方式查询出来的结果都是一样的，但是区别在于，隐式内连接是在查询出的结果基础上进行的where条件过滤，但是显式内连接是带着条件去查询结果的，<strong>执行效率是比较高的</strong>。</p>
+</blockquote>
+<ul>
+<li>左外连接（使用 left join）<br>左(外)连接，左表的记录将会全部表示出来，而右表<strong>只会显示符合搜索条件的记录</strong>。右表记录不足的地方均为NULL。<br>对于上述例子，我们先给product表插入一条没有对应cno的数据。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into product values(null, &quot;一条没有cno的记录&quot;, 100, null, null);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>然后执行左外连接查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from product p left join category c on p.cno=c.cid;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from product as P left outer join category as C on p.cno=c.cid;</span><br><span class="line">+-----+--------------------------+-------+---------------------+------+------+--------------+-----------------------+</span><br><span class="line">| pid | pname                    | price | pdate               | cno  | cid  | cname        | cdesc                 |</span><br><span class="line">+-----+--------------------------+-------+---------------------+------+------+--------------+-----------------------+</span><br><span class="line">|   4 | 小米mix2s                |  2700 | 2019-04-14 13:14:31 |    1 |    1 | 手机数码     | 电子产品              |</span><br><span class="line">|   5 | 华为p30                  |  4788 | 2019-04-14 13:14:32 |    1 |    1 | 手机数码     | 电子产品              |</span><br><span class="line">|   6 | 阿迪王                   |    99 | 2019-04-14 13:14:32 |    2 |    2 | 鞋靴箱包     | 江南皮鞋厂打造        |</span><br><span class="line">|   7 | 老村长                   |    88 | 2019-04-14 13:14:32 |    3 |    3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   8 | 劲酒                     |    35 | 2019-04-14 13:14:32 |    3 |    3 | 香烟酒水     | 芙蓉王，茅台          |</span><br><span class="line">|   9 | 小熊饼干                 |     3 | 2019-04-14 13:14:32 |    4 |    4 | 酸奶饼干     | 哇哈哈                |</span><br><span class="line">|  10 | 卫龙辣条                 |     1 | 2019-04-14 13:14:32 |    5 |    5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|  11 | 旺旺雪饼                 |     1 | 2019-04-14 13:14:32 |    5 |    5 | 馋嘴零食     | 瓜子花生              |</span><br><span class="line">|  13 | 一条没有cno的记录        |   100 | NULL                | NULL | NULL | NULL         | NULL                  |</span><br><span class="line">+-----+--------------------------+-------+---------------------+------+------+--------------+-----------------------+</span><br><span class="line">9 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到右表的这一条的输出都为null，而左表的数据都输出了。</p>
+<ul>
+<li>右外连接（使用right join）<br>和左外连接相对的，右外连接查询会将右表的所有数据查询出来，如果左表没有对应数据的话会用null代替</li>
+</ul>
+<blockquote>
+<p>left join和right join分别为left outer join和right outer join的缩写 inner/outer在语句中可以省略</p>
+</blockquote>
+<blockquote>
+<p>简单理解： 内连接查出来的是2个表的交集，左外和右外其实查询了左表或者右表的全部，并且如果有相对应的左表记录的话也会显示。</p>
+</blockquote>
+<ul>
+<li>全连接（使用union /union all）<br>全连接指的是将2个表合并。<br>语句：<br><code>(select colum1,colum2...columN from tableA ) union (select colum1,colum2...columN from tableB );</code><br><code>(select colum1,colum2...columN from tableA ) union all (select colum1,colum2...columN from tableB );</code></li>
+</ul>
+<blockquote>
+<p> 通过union连接的SQL它们分别单独取出的列数必须相同；不要求合并的表列名称相同时，以第一个sql 表列名为准；使用union 时，完全相等的行，将会被合并，由于合并比较耗时，一般不直接使用 union 进行合并，而是通常采用union all 进行合并；</p>
+</blockquote>
+<blockquote>
+<p>被union 连接的sql 子句，单个子句中不用写order by ，因为不会有排序的效果。但可以对最终的结果集进行排序；<br><code>(select id,name from A order by id) union all (select id,name from B order by id); //没有排序效果</code><br><code>(select id,name from A ) union all (select id,name from B ) order by id; //有排序效果</code></p>
+</blockquote>
+<h4 id="分页查询-使用limit"><a href="#分页查询-使用limit" class="headerlink" title="分页查询(使用limit)"></a>分页查询(使用limit)</h4><p>假设规定pageSize为3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from product limit 0,3; // 第一页</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from product limit 3,3; // 第二页</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from product limit 6,3; // 第一页</span><br></pre></td></tr></table></figure>
+
+<p>即每次查询根据page和pageSize计算一个起始的索引位置即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from product limit (page-1)*pageSize,pageSize;</span><br></pre></td></tr></table></figure>
+
+<h4 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h4><p>即sql语句中再嵌套sql语句</p>
+<ol>
+<li>如果要查询分类名为“手机数码”的商品，需要动态查询出在category中的cid<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from product where cno=(select cid from category where cname=&quot;手机数码&quot;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * from product as p WHERE p.cno=(SELECT cid from category WHERE cname=&quot;手机数码&quot;);</span><br><span class="line">+-----+-------------+-------+---------------------+------+</span><br><span class="line">| pid | pname       | price | pdate               | cno  |</span><br><span class="line">+-----+-------------+-------+---------------------+------+</span><br><span class="line">|   4 | 小米mix2s   |  2700 | 2019-04-14 13:14:31 |    1 |</span><br><span class="line">|   5 | 华为p30     |  4788 | 2019-04-14 13:14:32 |    1 |</span><br><span class="line">+-----+-------------+-------+---------------------+------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>如果要查询出商品名称(pname)和商品分类名称(cname)的信息<br>选用左右链接查询都可达到目的，在这介绍下子查询的写法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select pname,(select cname from category as c where p.cno=c.cid) from product as p;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT pname,(SELECT cname from category as C WHERE p.cno=c.cid) from product as P;</span><br><span class="line">+--------------------------+-----------------------------------------------------+</span><br><span class="line">| pname                    | (SELECT cname from category as C WHERE p.cno=c.cid) |</span><br><span class="line">+--------------------------+-----------------------------------------------------+</span><br><span class="line">| 小米mix2s                | 手机数码                                            |</span><br><span class="line">| 华为p30                  | 手机数码                                            |</span><br><span class="line">| 阿迪王                   | 鞋靴箱包                                            |</span><br><span class="line">| 老村长                   | 香烟酒水                                            |</span><br><span class="line">| 劲酒                     | 香烟酒水                                            |</span><br><span class="line">| 小熊饼干                 | 酸奶饼干                                            |</span><br><span class="line">| 卫龙辣条                 | 馋嘴零食                                            |</span><br><span class="line">| 旺旺雪饼                 | 馋嘴零食                                            |</span><br><span class="line">| 一条没有cno的记录        | NULL                                                |</span><br><span class="line">+--------------------------+-----------------------------------------------------+</span><br><span class="line">9 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

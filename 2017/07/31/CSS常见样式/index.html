@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="CSS常见样式">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">CSS常见样式</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-07-31</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/CSS/">#CSS</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>CSS常见样式</p>
+<a id="more"></a>
+
+<p>###一，块级元素和行内元素分别有哪些？动手测试并列出4条以上的特性区别</p>
+<ul>
+<li><p>块级元素(block-level element)<br>div h1 h2h h3 h4 h5 h6 p hr<br>form ul dl ol pre table<br>li dd dt tr td th</p>
+</li>
+<li><p>行内元素(inline-level element)<br>em strong span a br img<br>button input label  select textarea<br>code script</p>
+</li>
+</ul>
+<p>-区别</p>
+<ol>
+<li>块级可以包含块级和行内元素，行内只能包含文本和行内</li>
+<li>块级占据一整行空间，行内占据自身宽度空间</li>
+<li>宽高只对块级元素设置生效，对行内样式不起作用</li>
+<li>对于块级元素来说，可以给其设置margin,padding，而对于行内元素来说，对于margin-top,margin-bottom,padding-top,padding-bottom是<strong>不生效</strong>的，只有<strong>左右外内边距才生效</strong>。</li>
+</ol>
+<p>###二，什么是 CSS 继承? 哪些属性能继承，哪些不能？</p>
+<ul>
+<li><p>css继承<br>css继承就是子标签继承了上级标签的css样式的属性</p>
+</li>
+<li><p>能继承的属性<br>color font-size font-family font-weight line-height list-style text-indent text-align text-transform letter-spacing</p>
+</li>
+<li><p>不能继承的属性<br>display border margin padding background height min-height max-height<br>width min-width max-width overflow position left right top bottom z-index float clear table-layout vertical-align </p>
+</li>
+</ul>
+<p>###三，如何让块级元素水平居中？如何让行内元素水平居中?</p>
+<ul>
+<li><p>块级元素居中<br>margin: 0 auto;</p>
+</li>
+<li><p>行内元素居中</p>
+</li>
+</ul>
+<p>给包含行内元素的<strong>块级元素</strong>应用text-align,例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .box&#123;</span><br><span class="line">        text-align: center;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;box&quot;&gt;</span><br><span class="line">    &lt;span&gt;hello deejay!&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>###四，用 CSS 实现一个三角形</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .box&#123;</span><br><span class="line">        width: 0;</span><br><span class="line">        height: 0;</span><br><span class="line">        border-top: 30px solid red;</span><br><span class="line">        border-right: 30px solid transparent;</span><br><span class="line">        border-bottom: 30px solid transparent;</span><br><span class="line">        border-left: 30px solid transparent;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div class=&quot;box&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将width和height设为0，利用border来实现</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7113407-44a945179825b089.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="css实现三角形"></p>
+<p>###五，单行文本溢出加 …如何实现?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">        white-space: nowrap;   /*不折行*/</span><br><span class="line">        overflow: hidden;   /*超出部分隐藏*/</span><br><span class="line">        text-overflow: ellipsis;  /*文本溢出之后用...代替*/</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>###六，px, em, rem 有什么区别</p>
+<p>px:固定单位<br>em:相对单位，相对于<strong>父元素</strong>字体大小<br>rem:相对单位， 相对于<strong>根元素（html）</strong>字体大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    </span><br><span class="line">    .em span&#123;</span><br><span class="line">        font-size: 2em;</span><br><span class="line">    &#125;</span><br><span class="line">    .rem span&#123;</span><br><span class="line">        font-size: 2rem;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;em&quot;&gt;</span><br><span class="line">    &lt;span&gt;deejay&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;rem&quot;&gt;</span><br><span class="line">    &lt;span&gt;deejay&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>对于.em&gt;span来说，他的父元素为.em的div，默认字体大小为16px,给其设置2em，则现在大小为32px，当父元素大小改变时也会相应的改变。<br>对于.rem&gt;span,由于其是相对于html的，所以不会产生变化。</p>
+<p>###七，解释下面代码的作用?为什么要加引号? 字体里\5b8b\4f53代表什么?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">body&#123;</span><br><span class="line">  font: 12px/1.5 tahoma,arial,&apos;Hiragino Sans GB&apos;,&apos;\5b8b\4f53&apos;,sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用浏览器打开页面时，会读取HTML文件进行解码渲染，当读到文字时会转换成对应的unicode码，然后根据HTML文件中的设置的font-family去查找对应的字体文件。找到文件之后依据unicode码去查找绘制外形到页面上。</p>
+<p>在CSS中设置字体时，直接写字体中文或英文名称浏览器都能识别，直接写中文的时候编码不匹配的时候会产生乱码。所以为了保险起见，我们将<strong>字体名称用Unicode码来表示</strong>。</p>
+<p>上述代码中，加引号的作用是因为所选字体之间有空格，不加的话会被当成多个对象。<br>\5b8b\4f53代表的是“宋”和“体”。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

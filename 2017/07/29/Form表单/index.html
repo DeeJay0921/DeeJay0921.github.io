@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Form表单">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Form表单</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-07-29</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/Form/">#Form</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Form表单</p>
+<a id="more"></a>
+
+<p>###一.form表单有什么作用？有哪些常用的input 标签，分别有什么作用？</p>
+<ul>
+<li>Form表单的作用是：收集用户通过页面填写的信息，然后传给后台。</li>
+<li>常见的<input>标签及其作用<br>首先要注意<strong>所有的表单都必须要放到<form></form>中</strong>，否则提交是无效的。<br>下面列举出常见的<input>的type类型：<br>单行文本输入框type=”text”：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;text&quot;&gt;</span><br><span class="line">            &lt;label for=&quot;username&quot;&gt;&lt;/label&gt;</span><br><span class="line">            &lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;username&quot; placeholder=&quot;输入用户名&quot;&gt;</span><br><span class="line">            &lt;!--普通的单行文本输入框--&gt;</span><br><span class="line">        &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>密码输入type=”password”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;password&quot;&gt;</span><br><span class="line">    &lt;label for=&quot;password&quot;&gt;&lt;/label&gt;</span><br><span class="line">    &lt;input type=&quot;password&quot; name=&quot;password&quot; id=&quot;password&quot; placeholder=&quot;输入密码&quot;&gt;</span><br><span class="line">    &lt;!--密码输入框，输入时默认是小圆黑点--&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>复选框type=’checkbox’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;checkbox&quot;&gt;</span><br><span class="line">    &lt;label&gt;喜欢的运动&lt;/label&gt;</span><br><span class="line">    &lt;input type=&quot;checkbox&quot; name=&quot;sports&quot; value=&quot;basketball&quot;&gt;篮球</span><br><span class="line">    &lt;input type=&quot;checkbox&quot; name=&quot;sports&quot; value=&quot;baseball&quot;&gt;棒球</span><br><span class="line">    &lt;input type=&quot;checkbox&quot; name=&quot;sports&quot; value=&quot;football&quot;&gt; 足球</span><br><span class="line">    &lt;!--复选框，使用的时候name要设置一致表明是一组选项。 value的值会根据用户填写选项返回给后台--&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>单选框type=”radio”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;radio&quot;&gt;</span><br><span class="line">    &lt;label&gt;性别&lt;/label&gt;</span><br><span class="line">    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot;&gt;man</span><br><span class="line">    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;female&quot;&gt;woman</span><br><span class="line">    &lt;!--单选框，其中name属性相同的为同一组选项，value的值会根据用户填写选项返回给后台--&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上传文件 type=”file”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;file&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;file&quot; name=&quot;myFile&quot; accept=&quot;image/gif&quot;&gt;</span><br><span class="line">    &lt;!--用于上传文件--&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>隐藏域type=”hidden”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;hidden&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;hidden&quot; name=&quot;csrf&quot; value=&quot;12u31uhuhdsg1dsyu12ghe1&quot;&gt;</span><br><span class="line">    &lt;!--页面上用户看不到的隐藏域，可以用于防止csrf攻击，通过检查传到后台的value判断用户是否合法--&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>下面是提交和重置的type类型<br>提交</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;submit&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; value=&quot;submit&quot;&gt;</span><br><span class="line">    &lt;!--提交--&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;button&quot;&gt;</span><br><span class="line">    &lt;button value=&quot;提交&quot;&gt;&lt;/button&gt;</span><br><span class="line">    &lt;!--提交--&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>重置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;reset&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;reset&quot; value=&quot;reset&quot;&gt;</span><br><span class="line">    &lt;!--重置已经输入的内容--&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>下面介绍其他相关标签：<br>下拉选择框select：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;select&quot;&gt;</span><br><span class="line">    &lt;select name=&quot;sports&quot;&gt;</span><br><span class="line">        &lt;option value=&quot;basketball&quot;&gt;篮球&lt;/option&gt;</span><br><span class="line">        &lt;option value=&quot;baseball&quot;&gt;棒球&lt;/option&gt;</span><br><span class="line">        &lt;option value=&quot;football&quot; selected&gt;足球&lt;/option&gt;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">    &lt;!--下拉选择框，其中&lt;option&gt;的 selected 表示初始默认选择项--&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>多行文本输入框textarea：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;textarea&quot;&gt;</span><br><span class="line">    &lt;textarea name=&quot;textarea&quot; id=&quot;textarea&quot; cols=&quot;30&quot; rows=&quot;10&quot;&gt;</span><br><span class="line">        可以输入多行的文本,而type=&quot;text&quot;只允许输入单行文本</span><br><span class="line">    &lt;/textarea&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>###二.post 和 get 方式的区别？<br>在form标签中，一般属性有action和method，action表示的是表单提交信息的地址，而method是表示用何种方式传递数据，有get和post两种方式，下面比较两种方式的区别。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;form&quot;&gt;</span><br><span class="line">    &lt;form action=&quot;/deejay&quot; method=&quot;post&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>get一般用于获取和查询数据信息，post一般用于更新资源。<br>get一般就像数据库查询一样，仅仅获取资源信息，并不会修改服务器上的值，post是用于更新资源的，可能会修改服务器上的资源。</p>
+<ul>
+<li>两种提交方式的区别</li>
+</ul>
+<ol>
+<li>get<br>get请求的数据会加到URL之后，请求多个参数的时候用&amp;隔开，传输的数据和URL依靠?分隔开来，例如<br><code>[http://www.it315.org/counter.jsp?name=zhangsan&amp;password=123]</code>。另外url的编码格式为ASCII码，所有的非ASCII字符都需要重新编码在进行传输。</li>
+<li>post<br>用post方式提交数据的时候，请求的数据是放到HTTP包的包体中的，所以post提交的情况浏览器的地址栏不会改变。</li>
+</ol>
+<ul>
+<li>传输数据的大小差异<br>由于上述方式的差异，get方式一般提交的数据<strong>最多为1kb</strong>（1024字节），而post没有限制，可以传输较多的数据。</li>
+<li>安全性问题<br>使用get请求发送数据的时候，你的username和password都会出现在URL上，很容易泄露，并且get请求可以被缓存。post请求不可以被缓存，相比之下<strong>post安全性要比get的安全性高</strong>。<br>所以要满足<strong>get是向服务器发送索取数据的一种请求，post是向服务器提交数据的一种请求</strong>这一条件。</li>
+</ul>
+<p>###三.在input里，name 有什么作用？<br>在input标签中，name属性表示的是input元素的名称，只有设置了name属性的表单元素才能成功传递他们的值。另外在单选框中，name属性还起到分组的作用。</p>
+<h3 id="四-radio-如何-分组"><a href="#四-radio-如何-分组" class="headerlink" title="四.radio 如何 分组?"></a>四.radio 如何 分组?</h3><p>在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;radio&quot;name=&quot;sex1&quot; value=&quot;man&quot;&gt;男</span><br><span class="line">&lt;input type=&quot;radio&quot; name=&quot;sex1&quot; value=&quot;woman&quot;&gt;女</span><br><span class="line"></span><br><span class="line">&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;man&quot;&gt;男</span><br><span class="line">&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;woman&quot;&gt;女</span><br></pre></td></tr></table></figure>
+
+<p>中，<strong>通过设置name的值来确定分组，name属性的值相同的为同一组</strong>，同一组的只允许单选。</p>
+<p>###五.placeholder 属性有什么作用?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;text&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; name=&quot;username&quot; placeholder=&quot;请输入用户名&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>运行效果为<br><img src="http://upload-images.jianshu.io/upload_images/7113407-7313f2095d938bc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="placeholder效果">,会给用户一个提示内容引导用户输入数据。</p>
+<p>###六.type=hidden隐藏域有什么作用? 举例说明<br><code>&lt;input type=&quot;hidden&quot;&gt;</code>称作表单隐藏域，对于用户来说是不可见的。用来传递参数和一些特殊的功能。可以暂时存储网站安全的信息以及一些其他数据。<br>隐藏域的优势在于支持所有的浏览器，在用户禁用cookie的时候也能使用。<br>一些具体的应用举例：</p>
+<ol>
+<li>一般页面中form中有多个提交按钮时，如果要判断用户是通过哪一个按钮提交，就可以在每一个按钮上加上一个隐藏域来确定。</li>
+<li>再或者要确定用户登录本页面时间长短，也可以通过设置隐藏域。</li>
+<li>可以防止CSRF攻击，请求时，通过在隐藏域value中存储一个后台提供的随机数，来判断登录的用户是否合法。</li>
+</ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

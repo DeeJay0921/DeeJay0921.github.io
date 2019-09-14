@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Node之Stream">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Node之Stream</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-04-23</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Node/">Node</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Node/">#Node</a> <a class="tag" href="/tags/Stream/">#Stream</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Node之Stream</p>
+<a id="more"></a>
+
+<p>最近在学习Node，本篇文章针对与Node中的stream模块做了一些个人学习过程中的理解与介绍。</p>
+<h2 id="Node中Stream的几种类型"><a href="#Node中Stream的几种类型" class="headerlink" title="Node中Stream的几种类型"></a>Node中Stream的几种类型</h2><p>Node中stream类型有：<code>Readable</code>,<code>Writable</code>,<code>Duplex</code>,<code>Transform</code>以及<code>&quot;classic&quot;</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const Stream = require(&apos;stream&apos;)</span><br><span class="line"></span><br><span class="line">const Readable = Stream.Readable</span><br><span class="line">const Writable = Stream.Writable</span><br><span class="line">const Duplex = Stream.Duplex</span><br><span class="line">const Transform = Stream.Transform</span><br></pre></td></tr></table></figure>
+
+<h2 id="stream的优势"><a href="#stream的优势" class="headerlink" title="stream的优势"></a>stream的优势</h2><p>来看一个简单的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;)</span><br><span class="line">const stream = require(&apos;stream&apos;)</span><br><span class="line"></span><br><span class="line">fs.readFile(`./test.txt`,(err,chunk) =&gt; &#123;</span><br><span class="line">    if(err) return</span><br><span class="line">    console.log(chunk.toString())</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上述例子中，我们想读取目标文件的内容，是先将<strong>所有内容</strong>都读取到内存中，然后再进行处理。这么做的坏处是：</p>
+<ol>
+<li>如果目标文件过大，内存会装不下</li>
+<li>用户在读取文件完成之前是根本拿不到内容的，体验也会很差。</li>
+</ol>
+<p>再来看如果使用stream的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fs.createReadStream(`./test.txt`)</span><br><span class="line">    .pipe(process.stdout)</span><br></pre></td></tr></table></figure>
+
+<p>使用了stream之后，程序不必把目标文件的所有内容都放到内存中等读取完之后再进行输出，而是可以读一点消费一点到<code>process.stdout</code>(或者是其他Writeable流)。节省了内存也不需要过长的等待。</p>
+<p>下面来看几种基本类型的流。</p>
+<h3 id="Readable-可读流"><a href="#Readable-可读流" class="headerlink" title="Readable 可读流"></a>Readable 可读流</h3><h5 id="Readable使用push-推送数据到流中"><a href="#Readable使用push-推送数据到流中" class="headerlink" title="Readable使用push()推送数据到流中"></a>Readable使用push()推送数据到流中</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;)</span><br><span class="line">const stream = require(&apos;stream&apos;)</span><br><span class="line"></span><br><span class="line">let rs = new stream.Readable</span><br><span class="line">rs.push(`hello `)</span><br><span class="line">rs.push(`Readable stream \n`)</span><br><span class="line">rs.push(null) // push(null)告诉rs输出数据结束了</span><br><span class="line"></span><br><span class="line">rs.pipe(process.stdout)</span><br></pre></td></tr></table></figure>
+
+<p>通过调用push()将数据放入Readable流中供下游消耗，当全部数据都生产出来后，<strong>必须</strong>调用<code>push(null)</code>来结束可读流，并且当调用了<code>push(null)</code>之后，就不能再调用<code>push(chunk)</code>来添加数据了。</p>
+<h5 id="使用-read-函数"><a href="#使用-read-函数" class="headerlink" title="使用_read()函数"></a>使用_read()函数</h5><p>可读流可以通过push将数据传给流。但是直接push会导致就算没有数据消耗方的时候，数据也会都存在缓存中。更多时候我们会写一个<code>_read()</code>函数来进行<strong>按需推送数据</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let n = 97</span><br><span class="line">rs._read = () =&gt; &#123;</span><br><span class="line">    rs.push(String.fromCharCode(n))</span><br><span class="line">    n += 1</span><br><span class="line">    if ( n &gt; &apos;z&apos;.charCodeAt(0)) &#123;</span><br><span class="line">        rs.push(`\n`)</span><br><span class="line">        rs.push(null)</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rs.pipe(process.stdout)</span><br></pre></td></tr></table></figure>
+
+<p>我们在<code>_read()</code>中将abcde…z推送到了流中，但是只有当数据消耗者(本例中<code>process.stdout</code>)出现时，数据才会真正实现推送。我们可以通过Readable流的<strong><code>rs._readableState.buffer</code></strong>来进行查看。如果设置了_read()的话，BufferList中head,tail都是null。说明确实是按需推送的。<br>此外，在<code>_read()</code>中还可以<strong>异步</strong>push数据到流中。</p>
+<h5 id="Readable流的消耗"><a href="#Readable流的消耗" class="headerlink" title="Readable流的消耗"></a>Readable流的消耗</h5><p>Readable流实际上存在2种模式，flowing和paused，具体可以查看<a href="http://nodejs.cn/api/stream.html#stream_two_modes" target="_blank" rel="noopener">文档</a><br>对于大部分开发情况，都应该使用flowing为true的情况(我们在开发时，一般是使用rs.pipe(dist)，所以一般都是flowing模式)<br>一般不建议使用<code>readable事件</code>和<code>read(n)</code>方法（适用于paused的readable stream）,而是使用<code>data事件</code>或者<code>rs.pipe()</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let rs = new stream.Readable(&#123;objectMode: true&#125;)</span><br><span class="line">let n = 97</span><br><span class="line">rs._read = function () &#123;</span><br><span class="line">    if(n &gt;= `z`.charCodeAt()) &#123;</span><br><span class="line">        rs.push(`\n`)</span><br><span class="line">        rs.push(null)</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        setTimeout(() =&gt; &#123;</span><br><span class="line">            rs.push(String.fromCharCode(n))</span><br><span class="line">            n += 1</span><br><span class="line">        &#125;,200)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">rs.pipe(process.stdout)</span><br><span class="line">rs.on(&apos;data&apos;, (chunk) =&gt; &#123;</span><br><span class="line">    console.log(`\tdata: $&#123;chunk&#125;`)</span><br><span class="line">&#125;)</span><br><span class="line">rs.on(&apos;end&apos;, () =&gt; &#123;</span><br><span class="line">    console.log(`end!\n`)</span><br><span class="line">&#125;)</span><br><span class="line">console.log(rs._readableState.buffer)</span><br><span class="line">console.log(rs._readableState.flowing)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Writeable-可写流"><a href="#Writeable-可写流" class="headerlink" title="Writeable 可写流"></a>Writeable 可写流</h3><p>Writeable stream作为下游来接受数据,只能流进，不能流出。</p>
+<h5 id="Writeable-stream使用write-chunk-写入数据"><a href="#Writeable-stream使用write-chunk-写入数据" class="headerlink" title="Writeable stream使用write(chunk)写入数据"></a>Writeable stream使用write(chunk)写入数据</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let ws = fs.createWriteStream(`./test.txt`)</span><br><span class="line">ws.write(&apos;hello&apos;)</span><br><span class="line">ws.write(`Writeable stream\n`)</span><br><span class="line">ws.end() // end()中还可以传想write的参数  但是end之后不可以继续write</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>write(chunk)</code>可以写入数据到Writeable stream中，写完之后要调用<code>end()</code>方法，<code>end()</code>方法中还可以最后传入想传的数据，但是调用了<code>end()</code>之后就不可以再次调用<code>write(chunk)</code></p>
+<p>关于back-pressure,<code>ws.write(chunk)</code>返回false的时候，我们可以监听<code>drain事件</code></p>
+<h5 id="定义-write-函数"><a href="#定义-write-函数" class="headerlink" title="定义_write()函数"></a>定义_write()函数</h5><p>定义一个<code>_write()</code>可以将上游的数据释放到当前可写流中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let ws = new stream.Writable</span><br><span class="line">ws._write = (chunk,encoding,next) =&gt; &#123;</span><br><span class="line">    console.log(chunk) // 输出的是buffer</span><br><span class="line">    next()</span><br><span class="line">&#125;</span><br><span class="line">process.stdin.pipe(ws)</span><br></pre></td></tr></table></figure>
+
+<p><code>_write()</code>中的next()是一个callback,可以选择传递一个err对象给callback.例如<code>next(err)</code></p>
+<h3 id="Duplex流和Transform流"><a href="#Duplex流和Transform流" class="headerlink" title="Duplex流和Transform流"></a>Duplex流和Transform流</h3><p>Duplex 流是同时实现了 Readable 和 Writable 接口的流。</p>
+<p>Transform 流是一种 Duplex 流。它的输出与输入是通过某种方式关联的。和所有 Duplex 流一样，变换流同时实现了 Readable 和 Writable 接口。</p>
+<p>一般我们通过使用封装好的<code>through2模块</code>来使用transform流</p>
+<p><code>sudo npm install through2</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const through = require(`through2`)</span><br><span class="line">let ws = fs.createWriteStream(`./test.txt`)</span><br><span class="line">process.stdin</span><br><span class="line">    .pipe(through( function (chunk,enc,next) &#123;</span><br><span class="line">        chunk = chunk.toString().toUpperCase()</span><br><span class="line">        this.push(chunk)</span><br><span class="line">        next()</span><br><span class="line">    &#125;))</span><br><span class="line">    .pipe(ws)</span><br></pre></td></tr></table></figure>
+
+<p>上述例子就是使用了一个封装的transform流来进行数据的处理，处理之后又可以输出给ws使用。这样以来,stdin中的输入会在transform流中转换为大写然后传给ws。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

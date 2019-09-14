@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="对ES6的再次补充理解">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">对ES6的再次补充理解</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-07-04</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/ES6/">#ES6</a> <a class="tag" href="/tags/Vue/">#Vue</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>对ES6的再次补充理解</p>
+<a id="more"></a>
+
+<h1 id="let"><a href="#let" class="headerlink" title="let"></a>let</h1><h4 id="for-中的let"><a href="#for-中的let" class="headerlink" title="for(){}中的let"></a>for(){}中的let</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (let i = 0; i &lt; 3; i ++) &#123;</span><br><span class="line">    let i = &apos;ddd&apos; </span><br><span class="line">    console.log(i) // 输出3次 ddd</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>for循环有一个特别之处，就是<strong>设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域</strong></p>
+<p>所以可以在循环体内部可以再次声明一个i，和设置循环变量的i不是同一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (let i = 0; i &lt; 3; i ++) &#123;</span><br><span class="line">    console.log(i)  // 输出 0 1 2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这次在循环体内部输出的i其实是for()中的i，即<strong>它父作用域中的i</strong></p>
+<h4 id="let的暂时死区"><a href="#let的暂时死区" class="headerlink" title="let的暂时死区"></a>let的暂时死区</h4><p>看一个例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var t = &apos;123&apos;</span><br><span class="line">if(true) &#123;</span><br><span class="line">    t = &apos;456&apos; // ReferenceError</span><br><span class="line">    let t</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>存在全局变量t，但是块级作用域内let又声明了一个局部变量t，导致后者<strong>绑定这个块级作用域</strong>，所以<strong>在let声明变量前，对t赋值会报错</strong>。</p>
+<p>暂时死区（temporal dead zone，TDZ）的意思是：** 如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错**。</p>
+<p>只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var t = &apos;123&apos;</span><br><span class="line">if(true) &#123;</span><br><span class="line">    // TDZ开始</span><br><span class="line">    t = &apos;456&apos; // ReferenceError</span><br><span class="line">    console.log(t) // ReferenceError</span><br><span class="line"></span><br><span class="line">    let t // 这时候TDZ才结束</span><br><span class="line">    console.log(t) // undefined</span><br><span class="line"></span><br><span class="line">    t = &apos;abc&apos;</span><br><span class="line">    console.log(t) // abc</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述例子显示的很明显，只要该作用域中有let，那么<strong>从作用域开始的地方，TDZ就开始，一直到let声明，TDZ才结束。</strong></p>
+<p>暂时性死区的本质：只要一进入当前作用域，所要使用的变量<strong>就已经存在了，但是不可获取</strong>，只有等到声明变量的那一行代码出现，才可以获取和使用该变量。</p>
+<h1 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h1><p>ES6可以<strong>从数组和对象</strong>中提取值，按照一定的格式对变量进行赋值，称为<strong>解构赋值</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let [a,b,c] = [1,2,3]</span><br><span class="line">console.log(a,b,c)// 1 2 3</span><br></pre></td></tr></table></figure>
+
+<p>从数组[1,2,3]中提取值，按照对应位置，对变量赋值。</p>
+<p>解构赋值中需要注意的点: </p>
+<ul>
+<li>不完全解构</li>
+<li>带默认值的解构赋值</li>
+</ul>
+<p>#函数拓展</p>
+<ul>
+<li>参数可以设置默认值（默认值的（）也是一个作用域）</li>
+<li>rest参数</li>
+<li>箭头函数的this </li>
+</ul>
+<p>#数组扩展</p>
+<ul>
+<li>扩展运算符</li>
+<li>Array.from()</li>
+<li>Array.of()</li>
+</ul>
+<p>#对象扩展</p>
+<ul>
+<li>对象属性和方法的简写</li>
+<li>Object.assign()</li>
+</ul>
+<p>#Symbol</p>
+<ul>
+<li>Symbol() / Symbol.for()</li>
+<li>Symbol.keyFor()</li>
+</ul>
+<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><ul>
+<li><p>构造函数上prototype的属性：<br>1，constructor,没什么好说的，所有构造函数的prototype上的constructor都指向该构造函数本身，Set也不例外。<br>2，size，Set.prototype.size 返回Set的实例对象的成员总数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// Set数据结构</span><br><span class="line">let set = new Set()</span><br><span class="line">let arr = [2,1,1,1,1,2,3,4,5,4,5]</span><br><span class="line">arr.forEach((e) =&gt; &#123;</span><br><span class="line">    set.add(e) // Set和数组类似  但是所有成员都是唯一的</span><br><span class="line">&#125;)</span><br><span class="line">log(set) //Set &#123; 2, 1, 3, 4, 5 &#125;</span><br><span class="line">log(set.constructor) // constructor默认指向Set构造函数</span><br><span class="line">log(set.size) // 返回实例的成员总数</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对实例的操作方法<br>1, add(value) 添加某个值，返回 <strong>Set 结构本身</strong>。<br>2, delete(value) 删除某个值，返回一个<strong>布尔值</strong>，表示删除是否成功。<br>3, has(value) 返回一个<strong>布尔值</strong>，表示该值是否为Set的成员。<br>4, clear()：清除所有成员，没有返回值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let set = new Set([1,2,3,5])</span><br><span class="line">set.delete(2) // 返回一个boolean值 删除传入的值</span><br><span class="line">log(set) //Set &#123; 1, 3, 4, 5 &#125;</span><br><span class="line">log(set.has(3)) //true  返回一个boolean值</span><br><span class="line">set.clear() // clear() 清空实例中的所有值</span><br><span class="line">log(set) // Set &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对Set实力的遍历操作<br>1, keys()：返回键名的遍历器    由于Set实例没有键值只有键名，所以keys()和values()的行为完全一致<br>2, values()：返回键值的遍历器<br>3, entries()：返回键值对的遍历器<br>4, forEach()：使用回调函数遍历每个成员  可以有第二个参数，表示<strong>绑定处理函数内部的this对象</strong>。<br>Set的<strong>遍历顺序就是插入顺序</strong>，所以可以在Set里保存一些回调函数，遍历的时候就会按照添加时的顺序进行遍历。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Set的遍历操作  Set的遍历顺序就是添加顺序，所以添加一些回调函数进行遍历时，就会按照添加的顺序进行遍历</span><br><span class="line">let cbList = new Set();</span><br><span class="line">let cb1 = () =&gt; &#123;console.log(&apos;cb1&apos;)&#125;;</span><br><span class="line">let cb2 = () =&gt; &#123;console.log(&apos;cb2&apos;)&#125;;</span><br><span class="line">let cb3 = () =&gt; &#123;console.log(&apos;cb3&apos;)&#125;;</span><br><span class="line">cbList.add(cb1)</span><br><span class="line">cbList.add(cb2)</span><br><span class="line">cbList.add(cb3)</span><br><span class="line">cbList.forEach((cb) =&gt; &#123;</span><br><span class="line">    cb() // cb1 cb2 cb3</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>另外可以通过Array.from() / …(或者扩展运算符) 将Set实例转换为数组  实现<strong>数组去重</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Array.from()可以转换Set实例为数组  实现数组去重</span><br><span class="line">let dupeArr = [1,1,1,2,2,3]</span><br><span class="line">let dedupeArr = Array.from(new Set(dupeArr)) // let dedupeArr = [...new Set(dupeArr)];</span><br><span class="line">log(dedupeArr) // [1,2,3]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h1><p>WeakSet 和 Set有两个区别</p>
+<ol>
+<li><p>WeakSet 的成员<strong>只能是对象</strong>，而不能是其他类型的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let ws = new WeakSet();</span><br><span class="line">// ws.add(1); //  Invalid value used in weak set</span><br><span class="line">// ws.add(Symbol()); //Invalid value used in weak set</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>WeakSet 中的对象都是<strong>弱引用</strong>（垃圾回收机制不考虑 WeakSet 对该对象的引用，也就是说，如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于 WeakSet 之中）,同时WeakSet也不可遍历。</p>
+</li>
+</ol>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>针对ES5中的对象结构（都是key/value格式），而key只可以是字符串的情况，ES6提出了全新的Map数据结构。Map结构类似于对象，也是键值对的形式，但是键值的范围不仅仅限于字符串。<br>Object: ‘字符串 - 值’<br>Map: ‘值 - 值’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const o = &#123;greet: &quot;hello, Map&apos;s key&quot;&#125;;</span><br><span class="line">const m = new Map();</span><br><span class="line">m.set(o,&quot;hello, Map&apos;s value&quot;);</span><br><span class="line">log(m);</span><br><span class="line">log(m.get(o)); //hello, Map&apos;s value</span><br><span class="line">m.has(o) // true</span><br><span class="line">m.delete(o) // true</span><br><span class="line">m.has(o) // false</span><br></pre></td></tr></table></figure>
+
+<p>上述例子，介绍了将一个对象o <code>{greet: &quot;hello, Map&#39;s key&quot;}</code>作为Map结构的key进行操作。</p>
+<p>Map()构造函数也可以接收一个数组作为参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const arr = [</span><br><span class="line">    [&apos;name&apos;,&apos;DeeJay&apos;],</span><br><span class="line">    [&apos;title&apos;,&apos;Learn Map&apos;]</span><br><span class="line">];  // 数组是包含了一个个表示key/value对的数组的数组集合</span><br><span class="line">const m = new Map(arr);</span><br><span class="line">log(m.size); // 2</span><br><span class="line">log(m.has(&apos;name&apos;)); // true</span><br><span class="line">log(m.get(&apos;name&apos;)); // DeeJay</span><br></pre></td></tr></table></figure>
+
+<p>在新建Map时，指定了name和title作为key。</p>
+<p>关于这一点，不仅仅是数组，<strong>任何具有 Iterator 接口、且每个成员都是一个双元素的数组的数据结构</strong>都可以当作Map构造函数的参数。</p>
+<p>试一下用Set作为Map的参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let s = new Set([</span><br><span class="line">    [&apos;name&apos;,&apos;yang&apos;],</span><br><span class="line">    [&apos;age&apos;,21]</span><br><span class="line">]);</span><br><span class="line">let m = new Map(s); //Set作为Map()的参数</span><br><span class="line">log(m.size); // 2</span><br><span class="line">log(m.get(&apos;age&apos;)); // 21</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let m1 = new Map([</span><br><span class="line">    [&quot;name&quot;,&quot;yang&quot;],[&quot;age&quot;,21]</span><br><span class="line">]);</span><br><span class="line">let m2 = new Map(m1); //Map也可以用来作为参数生成Map</span><br><span class="line">console.log(m2); </span><br><span class="line">console.log(m2.get(&apos;age&apos;)); // 21</span><br></pre></td></tr></table></figure>
+
+<p>Map结构只有对于是<strong>同一个对象的引用</strong>，才将其视为<strong>同一个键</strong>。来看下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let m = new Map();</span><br><span class="line">m.set(&apos;age&apos;,21); // 对于不是对象的&apos;age&apos;  因为地址不会变  就是同样的引用，可以get到</span><br><span class="line">console.log(m.get(&apos;age&apos;)); // 21</span><br><span class="line">m.set([&apos;age&apos;],21); // 这次存入的key为一个对象 [&apos;age&apos;],下面虽然也在get[&apos;age&apos;],但是其实不是同一个对象，地址不一样。 所以get的值是undefined</span><br><span class="line">console.log(m.get([&apos;age&apos;])); // undefined</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const obj1 = &#123;name: &apos;DeeJay&apos;&#125;; //两个对象的地址不一样  虽然值是一样的  但是在Map中被视为两个键</span><br><span class="line">const obj2 = &#123;name: &apos;DeeJay&apos;&#125;;  // 说明了在Map中的键实际上是跟内存地址绑定的，只要内存地址不一样，就视为两个键。</span><br><span class="line">let m = new Map();</span><br><span class="line">m.set(obj1,111);</span><br><span class="line">m.set(obj2,222)</span><br><span class="line">console.log(m.get(obj1)); // 111</span><br><span class="line">console.log(m.get(obj2)); // 222</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的例子可以看出：<strong>Map中的键实际上是跟内存地址绑定的，只要内存地址不一样，就视为两个键。</strong><br>对于简单类型的键值(Number,String,Boolean)来说，只要二者是严格相等的，那么Map就视为同一个键(0和-0 视为同一个键，NaN和NaN虽然不相等，但是在Map中视为同一个键)。</p>
+<ul>
+<li><p>Map的遍历<br>keys()：返回键名的遍历器。<br>values()：返回键值的遍历器。<br>entries()：返回所有成员的遍历器。<br>forEach()：遍历 Map 的所有成员。<br>一样的，Map遍历的顺序也是插入的顺序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let m = new Map();</span><br><span class="line">m.set(&apos;a&apos;,500);</span><br><span class="line">m.set(&apos;b&apos;,600);</span><br><span class="line">m.forEach( e =&gt; &#123;</span><br><span class="line">    console.log(e); // 500 600 遍历顺序就是插入顺序</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一样的，使用…扩展运算符或者Array.from可以将Map转换为数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let m = new Map();</span><br><span class="line">m.set(&apos;a&apos;,500);</span><br><span class="line">m.set(&apos;b&apos;,600);</span><br><span class="line">// let arr = [...m];</span><br><span class="line">let arr = Array.from(m);</span><br><span class="line">log(arr); //[ [ &apos;a&apos;, 500 ], [ &apos;b&apos;, 600 ] ]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h1><p><code>let p = new Proxy(target, handler);</code></p>
+<p>如上，Proxy也是一个构造函数，接受两个<strong>对象</strong>作为参数，target为要进行代理的目标对象，handler也为对象，是一个配置对象，对于每一个要代理的操作，提供一个方法拦截对应的请求。</p>
+<p>先来理解代理：对target目标对象的访问，都设置一层拦截层，可以对外界的操作进行过滤和改写，这就是代理Proxy。</p>
+<p>先来看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let targetObj = &#123;&#125;; // 目标对象</span><br><span class="line">let p = new Proxy(targetObj, &#123; // 为目标对象设置代理</span><br><span class="line">    get() &#123;</span><br><span class="line">        return &quot;U are getting TargetObj&apos;s values~&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">let res = p.time; // 设置了代理之后，要通过创建的Proxy实例来访问，直接访问targetObj不会通过代理</span><br><span class="line">console.log(res); // U are getting TargetObj&apos;s values~</span><br></pre></td></tr></table></figure>
+
+<p>上述例子中：通过给target设置代理，通过Proxy的实力访问目标对象时，会执行我们在handler中规定的方法。</p>
+<p>需要注意的是： <strong>一定要通过Proxy实例来访问</strong>，才会通过代理。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

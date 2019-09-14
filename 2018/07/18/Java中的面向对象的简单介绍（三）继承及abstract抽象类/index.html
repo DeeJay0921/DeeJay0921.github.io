@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的面向对象的简单介绍（三）继承及abstract抽象类">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的面向对象的简单介绍（三）继承及abstract抽象类</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-07-18</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/面向对象/">#面向对象</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的面向对象的简单介绍（三）继承及abstract抽象类</p>
+<a id="more"></a>
+
+<h1 id="继承-extends"><a href="#继承-extends" class="headerlink" title="继承 extends"></a>继承 extends</h1><p>多个类有共同的成员变量和成员方法，可以抽取到另外一个类(父类)，再让多个类去继承这个父类，这些类就可以获取到父类中的成员。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class ExtendsDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Dota dead = new Dota();</span><br><span class="line">		dead.start(); // 启动游戏</span><br><span class="line">		Lol l = new Lol();</span><br><span class="line">		l.start(); // 启动游戏</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Game &#123;</span><br><span class="line">	String name;</span><br><span class="line">	double version;</span><br><span class="line">	String agent;</span><br><span class="line">	</span><br><span class="line">	public void start() &#123;</span><br><span class="line">		System.out.println(&quot;启动游戏&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void exit() &#123;</span><br><span class="line">		System.out.println(&quot;退出游戏&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Dota extends Game &#123;&#125; // Dota继承Game类</span><br><span class="line">class Lol extends Game &#123;&#125; // Lol继承Game类</span><br></pre></td></tr></table></figure>
+
+<h3 id="Java中继承的特点"><a href="#Java中继承的特点" class="headerlink" title="Java中继承的特点"></a>Java中继承的特点</h3><ul>
+<li>只支持单继承，不支持多继承（即只可以有一个父类）<br><code>class sub extends Demo{} // ok</code><br><code>class sub extends Demo1,Demo2{} // error</code></li>
+<li>支持多层继承(继承体系)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;&#125;</span><br><span class="line">class B extends A&#123;&#125;</span><br><span class="line">class C extends B&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Java中成员变量继承的特点"><a href="#Java中成员变量继承的特点" class="headerlink" title="Java中成员变量继承的特点"></a>Java中成员变量继承的特点</h3><ul>
+<li>子类中只能获取父类中<strong>非private</strong>的成员变量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class ExtendsDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Child c = new Child();</span><br><span class="line">		c.sayName();</span><br><span class="line">		c.sayAge();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Dad &#123;</span><br><span class="line">	String name = &quot;dad&quot;;</span><br><span class="line">	private int age = 40;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Child extends Dad &#123;</span><br><span class="line">	public void sayName () &#123;</span><br><span class="line">		System.out.println(name); </span><br><span class="line">	&#125;</span><br><span class="line">	public void sayAge () &#123;</span><br><span class="line">		System.out.println(age); </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>上述例子中，提示<code>Dad.age</code>这个字段不可见。所以子类中只能获取父类中<strong>非private的成员变量</strong></p>
+<ul>
+<li><p>如果子类和父类中的成员变量名字一样，那么遵循<strong>就近原则</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class ExtendsDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Child c = new Child();</span><br><span class="line">		c.sayName(); // child	就近原则  输出子类中的成员属性</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Dad &#123;</span><br><span class="line">	String name = &quot;dad&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Child extends Dad &#123;</span><br><span class="line">	String name = &quot;child&quot;;</span><br><span class="line">	public void sayName () &#123;</span><br><span class="line">		System.out.println(name); </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于上述的就近原则，可以通过<code>super</code>关键字来获取父类中的成员变量和方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class ExtendsDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Child c = new Child();</span><br><span class="line">		c.sayName(); // dad	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Dad &#123;</span><br><span class="line">	String name = &quot;dad&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Child extends Dad &#123;</span><br><span class="line">	String name = &quot;child&quot;;</span><br><span class="line">	public void sayName () &#123;</span><br><span class="line">		System.out.println(super.name);  // super.name 获取父类中的成员</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当涉及到局部变量和成员变量重名时，得使用<code>this</code>来获取当前类中的成员</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class ExtendsDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Child c = new Child();</span><br><span class="line">		c.sayName(); 	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Dad &#123;</span><br><span class="line">	String name = &quot;dad&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Child extends Dad &#123;</span><br><span class="line">	String name = &quot;child&quot;;</span><br><span class="line">	public void sayName () &#123;</span><br><span class="line">		String name = &quot;testName&quot;;</span><br><span class="line">		System.out.println(&quot;父类：&quot; + super.name);  // super.name 获取父类中的成员</span><br><span class="line">		System.out.println(&quot;当前类：&quot; + this.name);  // this.name 获取当前类中的成员</span><br><span class="line">		System.out.println(&quot;局部变量：&quot; + name);  // name 获取当前作用域中的局部变量</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Java中成员方法继承的特点"><a href="#Java中成员方法继承的特点" class="headerlink" title="Java中成员方法继承的特点"></a>Java中成员方法继承的特点</h3><p>方法继承支持重写(不是重载)，子类中的方法和父类中。的方法完全一致时，可以在子类中重写这个方法。子类的对象调用时调用的是子类重写的方法</p>
+<p>关于重写有一些注意点：</p>
+<ul>
+<li>在子类重写的方法中，可以使用<code>super.methodName()</code>来执行父类中的方法，这么写既可以使用父类的功能，也可以追加子类的逻辑。</li>
+<li>重写前可以添加注解<code>@Override</code>加强规范</li>
+<li>不能重写父类中private的成员变量，子类中方法的权限(如：public)必须要比父类中的权限等级高。</li>
+</ul>
+<p><em>定义方法的时候，可以不写权限修饰(比如: public), 那么就代表默认权限(如<code>void show() {}</code>)</em></p>
+<h3 id="Java中构造方法的执行顺序"><a href="#Java中构造方法的执行顺序" class="headerlink" title="Java中构造方法的执行顺序"></a>Java中构造方法的执行顺序</h3><ol>
+<li><p>如果子类的构造方法中的<strong>第一行代码中没有调用父类或者子类的构造方法时</strong>，那么会<strong>默认调用父类的无参构造方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class ExtendsDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Child c = new Child();// Super Constructor---no Args 	Sub Constructor---no Args</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Dad &#123;</span><br><span class="line">	public Dad () &#123;</span><br><span class="line">		System.out.println(&quot;Super Constructor---no Args&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	public Dad (int num) &#123;</span><br><span class="line">		System.out.println(&quot;Super Constructor---have Args&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Child extends Dad &#123;</span><br><span class="line">	public Child () &#123;</span><br><span class="line">		System.out.println(&quot;Sub Constructor---no Args&quot;); // 第一行没有调用父类构造方法，默认调用父类无参构造</span><br><span class="line">	&#125;</span><br><span class="line">	public Child (int num) &#123;</span><br><span class="line">		System.out.println(&quot;Sub Constructor---have Args&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以使用<code>super()</code>来在子类的构造方法的第一行中调用父类的构造方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class ExtendsDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Child c = new Child();// Super Constructor---have Args 	Sub Constructor---no Args</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Dad &#123;</span><br><span class="line">	public Dad () &#123;</span><br><span class="line">		System.out.println(&quot;Super Constructor---no Args&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	public Dad (int num) &#123;</span><br><span class="line">		System.out.println(&quot;Super Constructor---have Args&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Child extends Dad &#123;</span><br><span class="line">	public Child () &#123;</span><br><span class="line">		super(1); // 调用了父类的构造方法</span><br><span class="line">		System.out.println(&quot;Sub Constructor---no Args&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	public Child (int num) &#123;</span><br><span class="line">		System.out.println(&quot;Sub Constructor---have Args&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不管有没有参数，父类的构造方法总是优先于子类的构造方法被执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class ExtendsDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Child c = new Child();// Super Constructor---no Args 	Sub Constructor---have Args		Sub Constructor---no Args</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Dad &#123;</span><br><span class="line">	public Dad () &#123;</span><br><span class="line">		System.out.println(&quot;Super Constructor---no Args&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	public Dad (int num) &#123;</span><br><span class="line">		System.out.println(&quot;Super Constructor---have Args&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Child extends Dad &#123;</span><br><span class="line">	public Child () &#123;</span><br><span class="line">		this(1); // 调用了子类的有参构造方法</span><br><span class="line">		System.out.println(&quot;Sub Constructor---no Args&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	public Child (int num) &#123;</span><br><span class="line">		System.out.println(&quot;Sub Constructor---have Args&quot;);//有参构造第一行中没调用父类的构造方法，于是默认调用父类的无参构造</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>###this 和 super的区别<br>this： 当前对象的引用<br>super：子类对象的父类引用</p>
+<p>在构造方法中的第一行中，直接写<code>this()</code>或者<code>super()</code>就是默认调用构造方法。</p>
+<p><em>如果子类中没有制定的成员属性，而只有父类中有的时候，调用<code>this.xxx</code>就是访问的父类的成员属性</em></p>
+<p>###继承的优缺点<br>优点：</p>
+<ul>
+<li>提高代码的复用性和可维护性</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>类的耦合性增强了</li>
+<li>开发的原则：高内聚低耦合</li>
+<li>内聚：就是自己完成某件事的能力</li>
+<li>耦合：类和类的关系</li>
+</ul>
+<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>abstract: 关键字，用于修饰方法和类</p>
+<p>抽象方法：不同类的方法是相似的，但是具体逻辑不太一样，只能抽取声明，没有具体的方法体。 即没有方法体的方法就是抽象方法，抽象方法只能在抽象类中使用。</p>
+<p>抽象类： 有抽象方法的类必须是抽象类。</p>
+<p>如果有其他类继承了抽象类，那<strong>必须要重写其中的抽象方法</strong>，<strong>或者这个类必须也是抽象类</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class ExtendsDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">abstract class Animal &#123; // 有抽象方法的类必须是抽象类</span><br><span class="line">	public abstract void eat(); // abstract修饰的是方法是抽象方法  没有方法体</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Cat extends Animal &#123; // 如果一个类继承了抽象类，而且同时还不也是一个抽象类的话，那么必须要重写抽象类中的抽象方法</span><br><span class="line">	@Override</span><br><span class="line">	public void eat() &#123; // 重写抽象类中的抽象方法</span><br><span class="line">		System.out.println(&quot;猫吃鱼&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">abstract class Dog extends Animal &#123;&#125; // 抽象类的Dog  本身也是一个抽象类  就不需要重写抽象方法了</span><br></pre></td></tr></table></figure>
+
+<p>抽象类的特点：</p>
+<ul>
+<li>抽象方法只能在抽象类中</li>
+<li>抽象类不能实例化(不能new)</li>
+<li>抽象类可以有非抽象类(非抽象类被继承不需要强制重写)</li>
+</ul>
+<p>抽象类的成员的特点：</p>
+<ol>
+<li>成员变量<ul>
+<li>可以有成员变量</li>
+<li>可以有常量(被final修饰)</li>
+</ul>
+</li>
+<li>成员方法<ul>
+<li>可以有抽象方法和非抽象方法</li>
+</ul>
+</li>
+<li>构造方法<ul>
+<li>可以有构造方法(但是不能创建对象)，因为需要对类中的成员变量进行初始化</li>
+</ul>
+</li>
+</ol>
+<p><strong>final</strong>: 修饰类、成员变量、成员方法，修饰了之后不能被继承</p>
+<p>抽象类的细节：</p>
+<ul>
+<li>abstract 不可以和 final, private 共存</li>
+<li>可以有构造函数(因为有成员变量，要初始化成员变量，同时还要被继承，子类继承父类也要调用父类的构造函数)</li>
+<li>内部也可以没有抽象方法(当不想让这个不可以类实例化的时候，当然也可以使用private构造函数来达到一样的效果)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

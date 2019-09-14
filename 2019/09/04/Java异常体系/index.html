@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java异常体系">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java异常体系</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-09-04</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Web/">#Web</a> <a class="tag" href="/tags/异常/">#异常</a> <a class="tag" href="/tags/Exception/">#Exception</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java异常体系</p>
+<a id="more"></a>
+
+<p>从IOException中引出的问题：</p>
+<ul>
+<li>Java的异常体系<ul>
+<li>在return语句之外，为方法提供了一种额外的出口，即 throw Exception</li>
+<li>IOException通常代表<strong>预期之内</strong>的异常</li>
+</ul>
+</li>
+<li>万能解决方案<ol>
+<li>继续throw</li>
+<li>try/catch</li>
+</ol>
+</li>
+</ul>
+<h3 id="try-catch-finally"><a href="#try-catch-finally" class="headerlink" title="try/catch/finally"></a>try/catch/finally</h3><ul>
+<li>如果没有try，异常将击穿所有的栈帧</li>
+<li>catch可以将一个异常捕获到</li>
+<li>finally可以执行清理工作</li>
+<li>try-with-resources （JDK7以上）<br>对于所有实现了AutoCloseable接口的对象，可以直接声明在try()中，可以不必写finally，JDK会自动关闭该对象</li>
+</ul>
+<blockquote>
+<p>如果当前的方法中throw了Exception，但是又没有可以处理的逻辑(try/catch)，那么这个异常会一直击穿所有的栈帧一直到被捕获。</p>
+</blockquote>
+<blockquote>
+<p>关于finally，无论在前面的try/catch里面做了什么样的操作(例如return xxx;等)，Java中的finally都一定会被执行。且finally里面不建议使用return语句。还可以不写catch(不建议)，直接只写try和finally</p>
+</blockquote>
+<h2 id="throw-throws"><a href="#throw-throws" class="headerlink" title="throw/throws"></a>throw/throws</h2><ul>
+<li>throw抛出一个异常</li>
+<li>throws只是一个声明，代表方法可能会丢出一个异常</li>
+</ul>
+<h2 id="Java的异常体系"><a href="#Java的异常体系" class="headerlink" title="Java的异常体系"></a>Java的异常体系</h2><ul>
+<li>Throwable： 可以被抛出的东西（有毒），为所有的错误和异常的父类<ul>
+<li>Exception： checked exception （受检异常，有毒，代表预料之中的异常）<ul>
+<li>RuntimeException：（运行时异常，无毒，代表预料之外的异常）</li>
+</ul>
+</li>
+<li>Error：错误（无毒，代表严重的错误）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>有毒和无毒的判定标准为，任何调用该方法的方法是否需要被迫继续进行throw或者try/catch，有毒的即为checked exception,无毒的为unchecked exception</p>
+</blockquote>
+<ul>
+<li>catch的级联与合并<br>catch可以连续写多个catch语句，其中的异常类型顺序要按照子类到父类即从小到大的来写。另外对于相同的处理逻辑，catch语句还可以合并：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  doSomething();</span><br><span class="line">&#125;catch(NullPointerException | IllegalAccessException e) &#123;</span><br><span class="line">  similarHandle();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Java的异常的栈轨迹"><a href="#Java的异常的栈轨迹" class="headerlink" title="Java的异常的栈轨迹"></a>Java的异常的栈轨迹</h2><ul>
+<li>栈轨迹：stack trace 排查问题最重要的信息</li>
+<li>异常链：查看报错信息，caused by即为原始的异常，如有多个caused by，即最底层的为最原始的异常，其余的都是对异常进行了包装处理。</li>
+</ul>
+<h2 id="异常的处理原则"><a href="#异常的处理原则" class="headerlink" title="异常的处理原则"></a>异常的处理原则</h2><ul>
+<li>能用if/else处理的，不要用异常<br>因为没有办法保证捕获到的异常是你期望的异常</li>
+<li>尽早抛出异常<br>如果当前方法不能处理异常，那么该立即抛出，不应该再继续写之后的错误的处理逻辑</li>
+<li>异常要准确，带有详细的信息</li>
+<li>抛出异常也比不处理悄悄的执行错误的逻辑要好</li>
+<li>先判断本方法是否有责任处理该异常<ul>
+<li>不要在一个方法里处理不归自己管的异常</li>
+</ul>
+</li>
+<li>再判定本方法是否有能力处理这个异常<ul>
+<li>如果本方法不能处理，则抛出异常</li>
+</ul>
+</li>
+<li>如非万分必要，不用忽略异常</li>
+</ul>
+<h2 id="常见的JDK内置异常"><a href="#常见的JDK内置异常" class="headerlink" title="常见的JDK内置异常"></a>常见的JDK内置异常</h2><ul>
+<li>NullPointerException</li>
+<li>ClassNotFoundException/NoClassesDefFoundException</li>
+<li>IllegalStateException</li>
+<li>IllegalArgumentException</li>
+<li>IllegalAccessException</li>
+<li>ClassCastException</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

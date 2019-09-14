@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Python中关于字典的一些API">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Python中关于字典的一些API</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-06-10</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Python/">Python</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Python/">#Python</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Python中关于字典的一些API</p>
+<a id="more"></a>
+
+<h1 id="Python中关于字典的一些API"><a href="#Python中关于字典的一些API" class="headerlink" title="Python中关于字典的一些API"></a>Python中关于字典的一些API</h1><h3 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">obj = &#123;</span><br><span class="line">    &apos;name&apos;: &apos;DeeJay&apos;,</span><br><span class="line">    &apos;age&apos;: 22,</span><br><span class="line">    &apos;gender&apos;: &apos;male&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.clear()</span><br><span class="line"></span><br><span class="line">print(obj) # &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="pop-key-popitem"><a href="#pop-key-popitem" class="headerlink" title="pop(key) popitem()"></a>pop(key) popitem()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">obj = &#123;</span><br><span class="line">    &apos;name&apos;: &apos;DeeJay&apos;,</span><br><span class="line">    &apos;age&apos;: 22,</span><br><span class="line">    &apos;gender&apos;: &apos;male&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">popedGender = obj.pop(&apos;gender&apos;)</span><br><span class="line"></span><br><span class="line">print(popedGender) # male</span><br><span class="line"></span><br><span class="line">print(obj) # &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;age&apos;: 22&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">obj = &#123;</span><br><span class="line">    &apos;name&apos;: &apos;DeeJay&apos;,</span><br><span class="line">    &apos;age&apos;: 22,</span><br><span class="line">    &apos;gender&apos;: &apos;male&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">popItem = obj.popitem() # popitem()不接受参数</span><br><span class="line"></span><br><span class="line">print(popItem) # (&apos;gender&apos;, &apos;male&apos;)</span><br><span class="line"></span><br><span class="line">print(obj) # &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;age&apos;: 22&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="update-dict2"><a href="#update-dict2" class="headerlink" title="update(dict2)"></a>update(dict2)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">obj = &#123;</span><br><span class="line">    &apos;name&apos;: &apos;DeeJay&apos;,</span><br><span class="line">    &apos;age&apos;: 22,</span><br><span class="line">    &apos;gender&apos;: &apos;male&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj2 = &#123;</span><br><span class="line">    &apos;hobby&apos;: &apos;game&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.update(obj2)</span><br><span class="line"></span><br><span class="line">print(obj) # &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;age&apos;: 22, &apos;gender&apos;: &apos;male&apos;, &apos;hobby&apos;: &apos;game&apos;&#125;</span><br><span class="line"></span><br><span class="line">print(obj2) # &#123;&apos;hobby&apos;: &apos;game&apos;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="copy"><a href="#copy" class="headerlink" title="copy()"></a>copy()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">obj = &#123;</span><br><span class="line">    &apos;name&apos;: &apos;DeeJay&apos;,</span><br><span class="line">    &apos;age&apos;: 22,</span><br><span class="line">    &apos;gender&apos;: &apos;male&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj2 = obj.copy() </span><br><span class="line"></span><br><span class="line">print(obj2) # &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;age&apos;: 22, &apos;gender&apos;: &apos;male&apos;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于<code>copy()</code>的拷贝，该API返回一个字典的<em>浅拷贝</em>，关于如何深拷贝，以后再进行介绍。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">obj = &#123;</span><br><span class="line">    &apos;name&apos;: &apos;DeeJay&apos;,</span><br><span class="line">    &apos;hobby&apos;: &#123;</span><br><span class="line">        &apos;game&apos;: &apos;R6&apos;,</span><br><span class="line">        &apos;singer&apos;: &apos;krewella&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj2 = obj.copy() </span><br><span class="line"></span><br><span class="line">obj[&apos;name&apos;] = &apos;deejay&apos;</span><br><span class="line"></span><br><span class="line">print(obj2) # &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;hobby&apos;: &#123;&apos;game&apos;: &apos;R6&apos;, &apos;singer&apos;: &apos;krewella&apos;&#125;&#125;</span><br><span class="line"></span><br><span class="line"># 浅拷贝第一层是不同的引用，所有obj第一次改变，obj2并没有发生改变。</span><br><span class="line"></span><br><span class="line">obj[&apos;hobby&apos;][&apos;singer&apos;] = &apos;TaylorSwift&apos;</span><br><span class="line"></span><br><span class="line">print(obj2) # &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;hobby&apos;: &#123;&apos;game&apos;: &apos;R6&apos;, &apos;singer&apos;: &apos;TaylorSwift&apos;&#125;&#125;</span><br><span class="line"></span><br><span class="line"># 第二层就是相同的引用，所以obj改变，obj2也跟着变化了。</span><br></pre></td></tr></table></figure>
+
+<h3 id="values-keys-items"><a href="#values-keys-items" class="headerlink" title="values(),keys(),items()"></a>values(),keys(),items()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">obj = &#123;</span><br><span class="line">    &apos;name&apos;: &apos;DeeJay&apos;,</span><br><span class="line">    &apos;age&apos;: 22,</span><br><span class="line">    &apos;gender&apos;: &apos;male&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">values = obj.values()</span><br><span class="line"></span><br><span class="line">keys = obj.keys()</span><br><span class="line"></span><br><span class="line">items = obj.items()</span><br><span class="line"></span><br><span class="line">print(values) # dict_values([&apos;DeeJay&apos;, 22, &apos;male&apos;])</span><br><span class="line"></span><br><span class="line">print(keys) # dict_keys([&apos;name&apos;, &apos;age&apos;, &apos;gender&apos;])</span><br><span class="line"></span><br><span class="line">print(items) # dict_items([(&apos;name&apos;, &apos;DeeJay&apos;), (&apos;age&apos;, 22), (&apos;gender&apos;, &apos;male&apos;)])</span><br></pre></td></tr></table></figure>
+
+<p><em>对于这三个方法，如果是Python2的话返回的都是列表</em></p>
+<h3 id="fromkeys-iterable-defaultValue"><a href="#fromkeys-iterable-defaultValue" class="headerlink" title="fromkeys(iterable,[defaultValue])"></a>fromkeys(iterable,[defaultValue])</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">obj = dict.fromkeys([&apos;key1&apos;,&apos;key2&apos;,&apos;key3&apos;],&apos;default&apos;)</span><br><span class="line"></span><br><span class="line">print(obj) # &#123;&apos;key1&apos;: &apos;default&apos;, &apos;key2&apos;: &apos;default&apos;, &apos;key3&apos;: &apos;default&apos;&#125;</span><br><span class="line"></span><br><span class="line"># fromkeys() 接受1-2个参数，第一个参数是一个可以迭代的对象，比如str,dict,tuple，list。</span><br><span class="line"># 第二个参数(可选)为一个给定的默认value,不指定的话为None</span><br><span class="line"># 最后返回的是一个新的dict，key为迭代的key，value为第二参数指定值</span><br></pre></td></tr></table></figure>
+
+<h3 id="setdefault-key-defaultValue"><a href="#setdefault-key-defaultValue" class="headerlink" title="setdefault(key,defaultValue)"></a>setdefault(key,defaultValue)</h3><p><code>setdefault()</code>和<code>get()</code>类似，但是不同的地方在于，如果<code>setdefault()</code>方法没有找到指定的key，那么会相应的会创建一个key,其value为指定的第二参数，如果没指定即为<code>None</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">obj = &#123;&#125;</span><br><span class="line"></span><br><span class="line">obj.get(&apos;qq&apos;)</span><br><span class="line"></span><br><span class="line">print(obj) # &#123;&#125;</span><br><span class="line"></span><br><span class="line">obj.setdefault(&apos;qq&apos;,10086)</span><br><span class="line"></span><br><span class="line">print(obj) # &#123;&apos;qq&apos;: 10086&#125;</span><br><span class="line"></span><br><span class="line">obj.setdefault(&apos;wechat&apos;)</span><br><span class="line"></span><br><span class="line">print(obj) # &#123;&apos;qq&apos;: 10086, &apos;wechat&apos;: None&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Python中的函数">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Python中的函数</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-06-09</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Python/">Python</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Python/">#Python</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Python中的函数</p>
+<a id="more"></a>
+
+<h1 id="Python中的函数"><a href="#Python中的函数" class="headerlink" title="Python中的函数"></a>Python中的函数</h1><h2 id="定义-调用"><a href="#定义-调用" class="headerlink" title="定义/调用"></a>定义/调用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def sayHi():</span><br><span class="line">    print(&apos;hello,function in Python&apos;)</span><br><span class="line"></span><br><span class="line">sayHi()</span><br></pre></td></tr></table></figure>
+
+<p><em>注意Python中没有JS一样的声明前置，所以定义必须要在调用之前</em></p>
+<h2 id="函数中的参数"><a href="#函数中的参数" class="headerlink" title="函数中的参数"></a>函数中的参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def say(str):</span><br><span class="line">    print(str)</span><br><span class="line"></span><br><span class="line">say(&apos;hello, this is argument&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>对于Python中的函数参数，定义几个就传几个参，这个很好理解。但是也有一些高级的或者是简化的参数用法：</p>
+<ul>
+<li>默认参数：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def powerNum(num,pow=2):</span><br><span class="line">    res = 1</span><br><span class="line">    while pow&gt;0:</span><br><span class="line">        pow -= 1</span><br><span class="line">        res = res * num</span><br><span class="line">    return res</span><br><span class="line"></span><br><span class="line">print( powerNum(5) ) # 25  不传第二参数的话，默认使用pow=2来进行计算</span><br><span class="line"># 等价于 print( powerNum(5,2) )</span><br><span class="line"></span><br><span class="line">print( powerNum(2,3) ) # 8</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>默认参数使用的时候，一般放在必选参数后面，如果有多个默认参数，前面的想使用默认值，后面的想自行赋值的话，可以这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def intro(name,age=18,word=&apos;hello,nice 2 meet u&apos;):</span><br><span class="line">    print(&apos;name:%s,age:%d,%s&apos;%(name,age,word))</span><br><span class="line"></span><br><span class="line"># 我们现在想使用默认的age，但是想自行赋值word</span><br><span class="line"></span><br><span class="line">intro(&apos;DeeJay&apos;,word=&apos;this is DeeJay&apos;) # name:DeeJay,age:18,this is DeeJay</span><br><span class="line"></span><br><span class="line">#  这么一来就使用了默认的age并且自定义了word</span><br></pre></td></tr></table></figure>
+
+<p><em>值得注意的是，<strong>默认参数必须指向不变的对象</strong>,如果是个可变量的话，每次调用，默认函数指向的那个变量的也会改变</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def pushEndToList(li = []):</span><br><span class="line">    li.append(&apos;END&apos;)</span><br><span class="line">    print(li)</span><br><span class="line"></span><br><span class="line">pushEndToList() # [&apos;END&apos;]</span><br><span class="line">pushEndToList() # [&apos;END&apos;, &apos;END&apos;]</span><br><span class="line">pushEndToList() # [&apos;END&apos;, &apos;END&apos;, &apos;END&apos;]</span><br><span class="line"></span><br><span class="line"># 可以看到 默认参数li=[] 指向的不是一个不变的对象，</span><br><span class="line"># 调用函数的时候，li指向的对象的值变了，那么再次调用的时候li的值就已经改变了</span><br><span class="line"># 所以，默认参数， 必须要指向一个不变的对象(比如None)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可变参数<br>有时候我们定义函数的时候并不清楚到底需要多少个参数，就可以使用可变参数，使参数的个数不固定<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def sum(*num):</span><br><span class="line">    print(num)</span><br><span class="line">    print( type(num) ) # &lt;class &apos;tuple&apos;&gt;</span><br><span class="line">    res = 0</span><br><span class="line">    for number in num:</span><br><span class="line">        res += number</span><br><span class="line">    return res</span><br><span class="line"></span><br><span class="line">sum(1,2,3,4) # (1,2,3,4)</span><br><span class="line"></span><br><span class="line">res = sum(1,2,3,4)</span><br><span class="line">print(res) # 10</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>可变参数的用法已经很清楚了，另外我们可以看到，这个可变参数其实是一个tuple</p>
+<ul>
+<li>关键词参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def keywordFunction(name,age,**kw):</span><br><span class="line">    print(&apos;%s,%s,%s&apos;%(name,age,kw))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">keywordFunction(&apos;DeeJay&apos;,22) # DeeJay,22,&#123;&#125; 可以不传关键词参数</span><br><span class="line"></span><br><span class="line">keywordFunction(&apos;Yang&apos;,23,city=&apos;xian&apos;) # Yang,23,&#123;&apos;city&apos;: &apos;xian&apos;&#125;</span><br><span class="line"></span><br><span class="line">keywordFunction(&apos;Wen&apos;,23,city=&apos;xian&apos;,job=&apos;frontEnd&apos;) # Wen,23,&#123;&apos;city&apos;: &apos;xian&apos;, &apos;job&apos;: &apos;frontEnd&apos;&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>关于函数的参数问题，我们来看一个综合的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">def fn(a,b,c=100,*args,**kw):</span><br><span class="line">    print(a)</span><br><span class="line">    print(b)</span><br><span class="line">    print(c)</span><br><span class="line">    print(args)</span><br><span class="line">    print(kw)</span><br><span class="line"></span><br><span class="line">fn(1,2,3,4,5) # 1 2 3 (4,5) &#123;&#125;</span><br><span class="line"># 这个很好理解，因为没有传入kw,默认参数c被赋值了3，剩下的被当成args构造出一个元祖</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fn(1,2,3,4,5,name=&apos;DeeJay&apos;,age=21) # 1 2 3 (4,5) &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;age&apos;: 21&#125;</span><br><span class="line"># 这次传入了kw</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 然后来看一个例子，</span><br><span class="line">A = (4,5)</span><br><span class="line">B = &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;age&apos;: 21&#125;</span><br><span class="line"></span><br><span class="line"># 定义了A和B，然后传给fn()</span><br><span class="line">fn(1,2,3,A,B) </span><br><span class="line"># 输出结果为： </span><br><span class="line"># args == ((4, 5), &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;age&apos;: 21&#125;)</span><br><span class="line"># kw == &#123;&#125;</span><br><span class="line"></span><br><span class="line"># 出现上述结果的原因是，没有按照格式来进行传入kw,即按照key=value的形式传入</span><br><span class="line"># 所以A和B都被当成了args,那么如果我们想让A被当成args，B作为kw，可以这样写：</span><br><span class="line"></span><br><span class="line">fn(1,2,3,*A,**B) # 此时args == (4,5) kw == &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;age&apos;: 21&#125;</span><br><span class="line"># 这种方法成为拆包</span><br></pre></td></tr></table></figure>
+
+<p>注意最后的<code>fn(1,2,3,*A,**B)</code>的写法，拆包的作用就是在传参的时候，将变量分解作为参数给函数。</p>
+<h2 id="函数的return值"><a href="#函数的return值" class="headerlink" title="函数的return值"></a>函数的return值</h2><p>在Python中，函数如果没有显示的写明return值，那么函数默认<code>return None</code></p>
+<p>此外直接写<code>return</code>也等价于<code>return None</code></p>
+<p>对于想返回多个值的函数，可以将多个值组合为一个list或者tuple等返回。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def fn():</span><br><span class="line">    a = 10</span><br><span class="line">    b = 20</span><br><span class="line">    c = 30</span><br><span class="line">    return a,b,c</span><br><span class="line"></span><br><span class="line">res = fn()</span><br><span class="line">print(res) # (10, 20, 30) 是一个tuple</span><br></pre></td></tr></table></figure>
+
+<h2 id="局部变量和全局变量"><a href="#局部变量和全局变量" class="headerlink" title="局部变量和全局变量"></a>局部变量和全局变量</h2><p>Python中的函数中定义的变量为局部变量:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">num = 99</span><br><span class="line"></span><br><span class="line">def fn():</span><br><span class="line">    num = 100</span><br><span class="line"></span><br><span class="line">def printNum():</span><br><span class="line">    print(num)</span><br><span class="line"></span><br><span class="line">fn()</span><br><span class="line">printNum() # 99</span><br></pre></td></tr></table></figure>
+
+<p>上述例子中，已经在全局环境中定义了num,所以在fn()中是在拘捕作用域中定义了一个<strong>局部变量num</strong>,而不是修改全局中的num,二者仅仅是变量名相同。</p>
+<p>如果想要在fn()中修改全局的num，那么需要这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">num = 99</span><br><span class="line"></span><br><span class="line">def fn():</span><br><span class="line">    global num # 表明在内部作用域中没有定义新的局部变量num,这边的num就是全局变量</span><br><span class="line">    num = 100</span><br><span class="line"></span><br><span class="line">def printNum():</span><br><span class="line">    print(num)</span><br><span class="line"></span><br><span class="line">fn()</span><br><span class="line">printNum() # 100 此时输出的就是修改过后的全局变量num 为100</span><br></pre></td></tr></table></figure>
+
+<p><strong>上述例子使用<code>global</code>来声明是操作一个全局变量而不是需要重新定义一个局部变量</strong></p>
+<p>但是也有例外，对于dict和list，其实可以不写global，程序仍然会去使用全局变量，而不是默认先定义一个局部变量:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 对于dict和list，如果是全局变量 其实可以不用写global，</span><br><span class="line"># 也会默认使用全局的，而不是先定义一个</span><br><span class="line"></span><br><span class="line">di = &#123;&apos;name&apos;:&apos;DeeJay&apos;&#125;</span><br><span class="line">li = [1,2,3]</span><br><span class="line"></span><br><span class="line">def fn1():</span><br><span class="line">    # 这边没有声明global</span><br><span class="line">    di[&apos;age&apos;] = 21</span><br><span class="line">    li.append(4)</span><br><span class="line"></span><br><span class="line">def fn2():</span><br><span class="line">    print(di)</span><br><span class="line">    print(li)</span><br><span class="line"></span><br><span class="line">fn1()</span><br><span class="line">fn2() # &#123;&apos;name&apos;: &apos;DeeJay&apos;, &apos;age&apos;: 21&#125; [1, 2, 3, 4]</span><br><span class="line"># 直接改变了全局中的di和li</span><br></pre></td></tr></table></figure>
+
+<h3 id="Python中的递归"><a href="#Python中的递归" class="headerlink" title="Python中的递归"></a>Python中的递归</h3><p>Py中的递归没什么特别的地方，写个阶乘函数了解一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def factorial(n):</span><br><span class="line">    if(n == 1):</span><br><span class="line">        return 1</span><br><span class="line">    return n * factorial(n-1)</span><br><span class="line"></span><br><span class="line">res = factorial(4)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
+
+<h3 id="匿名函数lambda"><a href="#匿名函数lambda" class="headerlink" title="匿名函数lambda"></a>匿名函数<code>lambda</code></h3><ul>
+<li>语法<br><code>lambda args: expression</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lambda x: x*x</span><br></pre></td></tr></table></figure>
+
+<p>上述例子， <code>lambda x:</code>的<code>x</code>是参数，后面的<code>x*x</code>是作为函数return的值。</p>
+<ul>
+<li>用法</li>
+</ul>
+<p>使用匿名函数来进行<code>list.sort()</code></p>
+<p>list.sort()接受一个值为一个函数的key，将这个函数的返回值作为排序的依据，例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">li = [1,-3,2]</span><br><span class="line"></span><br><span class="line">li.sort(key=abs)</span><br><span class="line"></span><br><span class="line">print(li) # [1, 2, -3]</span><br><span class="line"></span><br><span class="line"># 将abs()的返回值作为排序依据</span><br></pre></td></tr></table></figure>
+
+<p>搭配匿名函数也可以进行排序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">li = [</span><br><span class="line">    &#123;&apos;name&apos;: &apos;xiaohong&apos;,&apos;age&apos;: 21&#125;,</span><br><span class="line">    &#123;&apos;name&apos;: &apos;xiaohong&apos;,&apos;age&apos;: 30&#125;,</span><br><span class="line">    &#123;&apos;name&apos;: &apos;xiaohong&apos;,&apos;age&apos;: 24&#125;,</span><br><span class="line">    &#123;&apos;name&apos;: &apos;xiaohong&apos;,&apos;age&apos;: 23&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># 现有如上list，想根据其中每个元素的age属性来进行排序：</span><br><span class="line"></span><br><span class="line">li.sort(key=lambda person: person[&apos;age&apos;])</span><br><span class="line"></span><br><span class="line">print(li) # 输出：</span><br><span class="line"># [&#123;&apos;name&apos;: &apos;xiaohong&apos;, &apos;age&apos;: 21&#125;, </span><br><span class="line"># &#123;&apos;name&apos;: &apos;xiaohong&apos;, &apos;age&apos;: 23&#125;, </span><br><span class="line"># &#123;&apos;name&apos;: &apos;xiaohong&apos;, &apos;age&apos;: 24&#125;, </span><br><span class="line"># &#123;&apos;name&apos;: &apos;xiaohong&apos;, &apos;age&apos;: 30&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>匿名函数也可以作为参数传入别的函数进行调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def fn(a,b,fn):</span><br><span class="line">    return fn(a,b)</span><br><span class="line"></span><br><span class="line">res = fn(1,2,lambda num1,num2: num1 + num2)</span><br><span class="line">print(res) # 3</span><br></pre></td></tr></table></figure>
+
+<p>以上就是匿名函数的基本用法</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

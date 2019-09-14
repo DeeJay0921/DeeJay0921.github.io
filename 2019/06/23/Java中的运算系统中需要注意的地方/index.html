@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的运算系统中需要注意的地方">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的运算系统中需要注意的地方</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-06-23</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/运算/">#运算</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的运算系统中需要注意的地方</p>
+<a id="more"></a>
+
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips:"></a>Tips:</h2><ol>
+<li>JDK ≈  JRE + javac</li>
+<li>JAVA_HOME:  jdk安装的文件夹</li>
+</ol>
+<h2 id="关于包名"><a href="#关于包名" class="headerlink" title="关于包名"></a>关于包名</h2><p>全限定类名 即 带包名的完整的类 防止类名冲突</p>
+<blockquote>
+<p>Full Qualified Name</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.github.DeeJay.pet1.Cat</span><br></pre></td></tr></table></figure>
+
+<h1 id="基本运算符中需要注意的："><a href="#基本运算符中需要注意的：" class="headerlink" title="基本运算符中需要注意的："></a>基本运算符中需要注意的：</h1><p>对于<code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code>等基本运算符，需要注意的一点是：</p>
+<p><strong>Java中相同类型的数据进行计算的结果也会是同一类型</strong><br>即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int res = 3 / 2;</span><br><span class="line">System.out.println(&quot;res = &quot; + res); // res = 1</span><br></pre></td></tr></table></figure>
+
+<p>而<strong>不同类型的数据进行运算，最终的结果是按最高的类型来的</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">double res = 3.0d / 2;</span><br><span class="line">System.out.println(&quot;res = &quot; + res); // res = 1.5</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 对于<code>%</code> 要注意的是，取余的结果是<strong>带符号的</strong></p>
+</blockquote>
+<p>来看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int res = -9 % 5;</span><br><span class="line">        System.out.println(&quot;res = &quot; + res); // res = -4</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;isOdd(3) = &quot; + isOdd(3)); // isOdd(3) = true</span><br><span class="line">        System.out.println(&quot;isOdd(3) = &quot; + isOdd(-3)); // isOdd(3) = false</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//    判断一个数字是奇数</span><br><span class="line">    public static boolean isOdd(int number) &#123;</span><br><span class="line">        return number % 2 == 1;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于<code>%</code>带有符号，导致判断是否奇数的函数出现了bug<br>可以改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//    判断一个数字是奇数</span><br><span class="line">    public static boolean isOdd(int number) &#123;</span><br><span class="line">//        下面2种方式都行</span><br><span class="line">//        return Math.abs(number) % 2 == 1;</span><br><span class="line">        return number % 2 != 0;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>a = a + 1;真实的运算过程为 1.将内存中存储的a的值传给CPU中的寄存器(register) 2.CPU执行+1计算 3.将计算后的结果重新写回存储之前a的内存中。</p>
+</blockquote>
+<h3 id="关于自增-减"><a href="#关于自增-减" class="headerlink" title="关于自增/减:"></a>关于自增/减:</h3><p>跟其他语言一样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    int a = 0;</span><br><span class="line">    int b = 0;</span><br><span class="line">    System.out.println(&quot;a++ = &quot; + a++); // a++ = 0</span><br><span class="line">    System.out.println(&quot;++b = &quot; + ++b); // ++b = 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="关于字符串中的"><a href="#关于字符串中的" class="headerlink" title="关于字符串中的+"></a>关于字符串中的<code>+</code></h2><p>对于字符串中的<code>+</code>操作会进行字符串的拼接（即调用默认的toString()），但是由于<strong>Java中的String不可变</strong>，所以JDK会偷偷使用StringBuider来进行字符串的拼接，从而避免了创建很多零碎的小String对象。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

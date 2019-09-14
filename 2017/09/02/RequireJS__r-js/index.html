@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="RequireJS__r-js">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">RequireJS__r-js</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-09-02</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS-module/">#JS module</a> <a class="tag" href="/tags/RequireJS/">#RequireJS</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>RequireJS以一个相对于baseUrl的地址来加载所有的代码</p>
+<a id="more"></a>
+
+<p>RequireJS以一个相对于baseUrl的地址来加载所有的代码。页面顶层<script>标签中含有一个特殊的属性data-main，require.js来使用它来启动脚本加载过程，而baseUrl一般设置到与该属性相一致的目录。</p>
+<p><code>&lt;script data-main=&quot;scripts/main.js&quot; src=&quot;scripts/require.js&quot;&gt;&lt;/script&gt;</code></p>
+<p>这样，使用requireJS之后就只需要写一个script标签即可，浏览器在执行的时候，不会识别data-main中的入口js文件，只会识别src中的require.js框架文件，然后在require.js的执行过程中，会去查找data-main中的入口文件，再去执行入口文件。</p>
+<p>也可以手动在入口js中设置requirejs.config,在里面设置baseUrl和path，可以相对方便一点。<br>比如说有如下结构的文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-project/</span><br><span class="line">    -index.html</span><br><span class="line">    -js/</span><br><span class="line">        -app/</span><br><span class="line">            -sub.js</span><br><span class="line">        -lib/</span><br><span class="line">            -jQuery.js</span><br><span class="line">            - canvas.js</span><br><span class="line">        -app.js</span><br></pre></td></tr></table></figure>
+
+<p>project文件夹下面有index.html和js文件夹，然后js文件夹下面又相对的有三个文件夹存放对应文件，app.js为入口文件，就可以在app.js中设置requirejs.config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">requirejs.config (&#123;</span><br><span class="line">    baseUrl: &apos;js/lib&apos;,</span><br><span class="line">    </span><br><span class="line">    path: &#123;</span><br><span class="line">        app: &apos;../app&apos;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>设置了baseUrl之后，要require模块可以直接相对于baseUrl来写，比如我们要请求js/lib下的jquery.js,直接写成require('jquery')就可以，然后path内设置其他文件夹相对于baseUrl的路径，要require的话，设置了path之后也可以直接写，例如我们设置了app文件夹的path为../app，即相对于baseUrl的地址，我们要require app文件夹下的sub.js时就可以直接写成require('sub').<br>使用举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//我们要使用上面例子中的依赖模块</span><br><span class="line">requirejs([&apos;jquery&apos;,&apos;canvas&apos;,&apos;app/sub&apos;], function ($, canvas, sub) &#123;</span><br><span class="line">    //上面三个依赖模块已经加载完，并且在这就可以使用了</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</script></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

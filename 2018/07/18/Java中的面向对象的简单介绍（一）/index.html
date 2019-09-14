@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的面向对象的简单介绍（一）">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的面向对象的简单介绍（一）</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-07-18</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/面向对象/">#面向对象</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的面向对象的简单介绍（一）</p>
+<a id="more"></a>
+
+<p>##简介<br>一个简单的示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Student &#123;</span><br><span class="line">    // 成员变量</span><br><span class="line">    String name;</span><br><span class="line">    int age;</span><br><span class="line">    </span><br><span class="line">    //成员方法</span><br><span class="line">    public void study() &#123;</span><br><span class="line">      System.out.println(&quot;学习&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">      System.out.println(&quot;吃饭&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个Student为一个事物描述类，不适合加main方法。</p>
+<p>那么如果我们想使用这个Student类中的成员变量和方法，只需要创建一个该类的对象就好了。</p>
+<p>再创建一个StudentUse类来使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class StudentUse &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student stu = new Student();</span><br><span class="line">        System.out.println(stu); // com.DeeJay.Student@4fe5e2c3</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>Student stu = new Student();</code>就使用了Student类创建了一个Student类型的对象。</p>
+<p>现在就可以通过创建的Student类的实例对象stu来使用Student类中的成员了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class StudentUse &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student stu = new Student();</span><br><span class="line">        </span><br><span class="line">        stu.study(); // 学习</span><br><span class="line">        stu.name = &quot;DeeJay&quot;;</span><br><span class="line">        System.out.println(stu.name); // DeeJay</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="关于成员变量和局部变量的区别"><a href="#关于成员变量和局部变量的区别" class="headerlink" title="关于成员变量和局部变量的区别"></a>关于成员变量和局部变量的区别</h3><p>其实这二者差别还是挺大的：</p>
+<p>首先定义位置上：</p>
+<ul>
+<li>成员变量在类中，方法外定义。</li>
+<li>局部变量在方法内部或者是传形参时定义。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line">    String p; // p 为成员变量</span><br><span class="line">    </span><br><span class="line">    public void  test(String str) &#123; // str为局部变量</span><br><span class="line">        int str1 = str.toUpperCase(); // str1 也为局部变量</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其次在内存中的位置不同：</p>
+<ul>
+<li>成员变量在堆中</li>
+<li>局部变量在栈中</li>
+</ul>
+<p>这种内存位置不同导致二者生命周期也不同：</p>
+<ul>
+<li>成员变量随着对象的创建而存在，随着对象的消失而消失</li>
+<li>局部变量随着方法开始调用被创建，随着方法调用结束而消失</li>
+</ul>
+<p>另外初始化值也有差异：</p>
+<ul>
+<li>成员变量是有默认值的(比如String型的为null,int型的为0等等)</li>
+<li>而局部变量必须先定义然后使用。</li>
+</ul>
+<h2 id="private-关键字"><a href="#private-关键字" class="headerlink" title="private 关键字"></a>private 关键字</h2><p>为了防止直接访问成员造成的问题，引入了private关键字</p>
+<p>private可以修饰成员变量和成员方法，被修饰的成员<strong>只可以在本类中才能被访问</strong></p>
+<p>对于被private修饰的成员变量，提供相应的getXxx()和setXxx()来获取和设置成员的值，方法<strong>要用public</strong>修饰。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">public class TestPrivate &#123;</span><br><span class="line">	</span><br><span class="line">	private String name; // private修饰成员属性</span><br><span class="line">	</span><br><span class="line">	// 如果想进行设置  需要定义setXxx()</span><br><span class="line">	public void setName(String argName) &#123; // 在setXxx()内部可以对要给赋的值进行操作</span><br><span class="line">		name = argName;</span><br><span class="line">	&#125;</span><br><span class="line">	// 如果想进行取值   需要定义getXxx()</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">public class TestPrivateDemo &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		TestPrivate t = new TestPrivate();</span><br><span class="line"></span><br><span class="line">//		t.name = &quot;DeeJay&quot;; // 报错 	The field TestPrivate.name is not visible</span><br><span class="line">		</span><br><span class="line">		t.setName(&quot;DeeJay&quot;);</span><br><span class="line">		</span><br><span class="line">		System.out.println(t.getName()); // DeeJay</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用private进行封装之后，必须通过方法来进行访问成员，提高了代码的安全性，同时把代码用方法进行封装，也提高了代码的复用性。</p>
+<h3 id="Java中的this关键字"><a href="#Java中的this关键字" class="headerlink" title="Java中的this关键字"></a>Java中的this关键字</h3><p>在上面这个TestPrivate 类的定义中，setName()中的赋值逻辑中，如果我们想写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void setName(String name) &#123; // 在setXxx()内部可以对要给赋的值进行操作</span><br><span class="line">    name = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>会出现问题，因为<strong>在局部作用域中，如果有成员变量(即name)和局部变量(即形参name)同名的话，那么优先是被认为是局部变量(就近原则)；</strong></p>
+<p>在这种情况下，引入了this关键字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void setName(String name) &#123; // 在setXxx()内部可以对要给赋的值进行操作</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这么一来，问题就解决了；</p>
+<p>和JS一样的，这个this指向的就是<code>TestPrivate t = new TestPrivate();</code>这条语句创建出来的<code>t</code>对象。</p>
+<p>this的使用场景一般就是上述情况。</p>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>构造方法即<strong>给对象的数据进行初始化</strong></p>
+<p>格式：<strong>方法名和类名相同</strong>,并且<strong>没有返回值(连void也不能写)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class Student &#123;</span><br><span class="line">    public Student() &#123; //这就是构造方法  没有返回值 也不能写void</span><br><span class="line">        System.out.println(&quot;构造方法被调用&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>构造函数在进行<code>new</code>操作的时候就会被调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class StudentUse &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student stu = new Student(); // 此时就会调用Student 类的构造方法</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于构造方法，有几个注意点：</p>
+<ul>
+<li>如果我们没有显式的给定构造方法，那么系统自动给一个无参的构造方法，但是显式给定了之后，系统就不再提供默认无参构造方法了；</li>
+<li>构造方法也支持重载；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class Student &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private int age;</span><br><span class="line">    public Student() &#123; //这就是构造方法  没有返回值 也不能写void</span><br><span class="line">        System.out.println(&quot;构造方法被调用&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    public Student(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public Student(int age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public Student(String name, int age) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>那么有了构造方法之后，给成员变量赋值的方法就有：</p>
+<ol>
+<li>使用setXxx();</li>
+<li>使用构造方法；</li>
+</ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="懒加载相关问题">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">懒加载相关问题</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-27</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/懒加载/">#懒加载</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>懒加载相关问题</p>
+<a id="more"></a>
+
+<p>###1：如何判断一个元素是否出现在窗口可视范围（浏览器的上边缘和下边缘之间，肉眼可视）。写一个函数 isVisible实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function isVisible ($node) &#123;</span><br><span class="line">       var scrollTop = $(window).scrollTop();</span><br><span class="line">       var windowHeight = $(window).height();</span><br><span class="line">       var targetOffsetTop = $node.offset().top;</span><br><span class="line">       </span><br><span class="line">       if (targetOffsetTop &lt; (scrollTop + windowHeight) &amp;&amp; targetOffsetTop &gt; scrollTop) &#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">       return false;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>###2,当窗口滚动时，判断一个元素是不是出现在窗口可视范围。每次出现都在控制台打印 true 。用代码实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//$node为目标元素</span><br><span class="line"></span><br><span class="line">$(window).on(&apos;scroll&apos;,function () &#123;</span><br><span class="line">    if (isVisible($node)) &#123;</span><br><span class="line">        console.log(true);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">function isVisible($node)&#123;</span><br><span class="line">    var scrollTop = $(window).scrollTop()</span><br><span class="line">    var windowHeight = $(window).height()</span><br><span class="line">    var offsetTop = $node.offset().top</span><br><span class="line"></span><br><span class="line">    if(offsetTop &lt; scrollTop + windowHeight &amp;&amp; offsetTop &gt; scrollTop)&#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>###3,当窗口滚动时，判断一个元素是不是出现在窗口可视范围。在元素第一次出现时在控制台打印 true，以后再次出现不做任何处理。用代码实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//$node为目标元素</span><br><span class="line">   function checkshow ($node) &#123;</span><br><span class="line">       var windowHeight = $(window).height();</span><br><span class="line">       var scrollTop = $(window).scrollTop();</span><br><span class="line">       var nodeOffsetTop = $node.offset().top;</span><br><span class="line"></span><br><span class="line">       if (nodeOffsetTop &lt; (windowHeight + scrollTop) &amp;&amp;　nodeOffsetTop &gt; scrollTop) &#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">       else &#123;</span><br><span class="line">           return false;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   function firstShow ($node) &#123;</span><br><span class="line">       $node.data(&apos;hasShowed&apos;,false); //自定义一个属性来标记元素是否已经被展示过了</span><br><span class="line">       if (checkshow($node)) &#123;</span><br><span class="line">           if (!$node.data(&apos;hasShowed&apos;)) &#123; //第一次时为false</span><br><span class="line">               $node.data(&apos;hasShowed&apos;,true);</span><br><span class="line">               console.log(true);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>###4,图片懒加载的原理是什么？<br>对于一个有多个图片的网站来说，访问的时候不应该直接加载所有图片，而是应该只讲浏览器窗口内的图片进行加载。当滚动的时候，在加载更多的图片。叫做图片的懒加载。</p>
+<p>我们可以通过给img自定义一个新属性，来存储图片真实的src地址，当需要加载的时候，再将这个真实的地址赋给src，进行图片加载。</p>
+<p>###整体思路：<br>所以大体的思路为：</p>
+<ul>
+<li>设置个data-src(自定义一个属性)来存放真实地址</li>
+<li>当滚动页面时，<strong>检查所有的img标签，看是否出现在视野中</strong>，如果已经出现在了视野中，那继续再进行判断，看其是否已经被加载过了，如果还没有被加载过，那就进行加载。</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

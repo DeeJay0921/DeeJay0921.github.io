@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java面向对象编程(下)抽象类，接口以及多态">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java面向对象编程(下)抽象类，接口以及多态</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-02-09</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/面向对象/">#面向对象</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java面向对象编程(下)抽象类，接口以及多态</p>
+<a id="more"></a>
+
+<h1 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h1><ul>
+<li>目的就是用于继承之后定义子类的类，必然会用于定义子类。</li>
+<li>抽象类除了<strong>不能实例化对象</strong>之外，类的其他功能依然存在，成员变量，方法，构造方法的访问方式和普通类一样。</li>
+<li>由于抽象类不能实例化对象，所以抽象类必须要被继承，才能被使用。</li>
+<li>还可以使用<code>abstract</code>修饰方法，抽象方法只有声明，没有具体实现。</li>
+<li>子类继承抽象类之后，对于父类的抽象方法必须要做Override，否则子类也必须为抽象类</li>
+<li>另外<code>static</code>方法不可以被声明为抽象方法</li>
+</ul>
+<p>来看一个抽象类的例子：<br>假设我们现在有一个抽象类Animal，内部有待子类去实现的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">public abstract class Animal &#123;</span><br><span class="line">    protected abstract void sayHi(); // 此方法即为抽象方法</span><br><span class="line">//    等待Animal的子类去实现具体的方法细节</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">public class Cat extends Animal &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void sayHi() &#123; // 子类中必须要去实现抽象父类中的抽象方法，不然子类也必须为抽象类</span><br><span class="line">        System.out.println(&quot;meow~&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">public class Dog extends Animal&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void sayHi() &#123; // 子类中必须要去实现抽象父类中的抽象方法，不然子类也必须为抽象类</span><br><span class="line">        System.out.println(&quot;wangwangwang&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述例子中，Cat和Dog都继承了相同的抽象类Animal，子类中实现不同逻辑的抽象方法。</p>
+<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><ul>
+<li>接口是一系列抽象方法的集合(隐性的被修饰为public static, 写的时候不需要写出来)</li>
+<li>语义上具有一定的特性，例如：<ul>
+<li>行走：但是没有行走的定义</li>
+<li>显示：表示可以显示，但是也没有显示的定义</li>
+</ul>
+</li>
+<li>接口内部的成员变量，只能是static final的,因为接口<strong>并不是类</strong>，不能实例化对象，所以不会有状态，只会有属性。</li>
+<li>类通过关键字<code>implements</code>表达实现一个接口，从而声明这个类具有接口定义的属性和方法</li>
+<li>一个类可以实现多个接口</li>
+</ul>
+<p>来看一个接口使用的简单例子：<br>假设我们现在有一个接口名为Displayable,所有实现该接口的类都要重写一个display方法来进行展示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">public interface Displayable &#123;</span><br><span class="line">    void display(); // 所有实现该接口的类都有一个display方法用于展示</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后其他支持展示的类都可以实现这个接口，根据自己内部不同的逻辑来实现具体方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Music implements Displayable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void display() &#123;</span><br><span class="line">        System.out.println(&quot;it\&apos;s Music&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Movie implements Displayable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void display() &#123; // 实现接口定义方法</span><br><span class="line">        System.out.println(&quot;it\&apos;s movie&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用这2个类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Music music = new Music();</span><br><span class="line">        music.display(); // it&apos;s Music</span><br><span class="line">        Movie movie = new Movie();</span><br><span class="line">        movie.display(); // it&apos;s movie</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在这边其实也可以定义一个抽象类，内部定义一个抽象方法display，然后让这2个类去继承这个抽象类，也能达到一样的效果，但是在语义上，肯定是实现接口要比继承抽象类来的贴切，只要实现了这个接口的类都可以展示，在逻辑和语义上都更加易于理解，也是推荐的做法。即<strong>抽象类和接口表达的语义是不一样的</strong>，类表示的是<strong>某种同一类的事物</strong>，而<strong>接口表达是某些事物具有相同的特性</strong>。</p>
+</blockquote>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><ul>
+<li>多态表示一个类型(父类或者接口)的变量的方法的具体实现行为由变量指向的具体对象确定。</li>
+<li>主要的实现方式：<ul>
+<li>继承和接口</li>
+<li>父类和接口类型的变量赋值子类对象</li>
+<li>调用被Override的方法</li>
+</ul>
+</li>
+</ul>
+<h4 id="多态代码举例："><a href="#多态代码举例：" class="headerlink" title="多态代码举例："></a>多态代码举例：</h4><p>先看一个简单的例子，一个父类Animal</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Animal &#123;</span><br><span class="line">    public String sayHi() &#123;</span><br><span class="line">        return &quot;Animal&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Cat extends Animal &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String sayHi() &#123;</span><br><span class="line">        return &quot;meow~&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Dog extends Animal&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String sayHi() &#123;</span><br><span class="line">        return &quot;woof~&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Cat cat = new Cat();</span><br><span class="line">        sayHiFromAnimals(cat); // meow~</span><br><span class="line">        Dog dog = new Dog();</span><br><span class="line">        sayHiFromAnimals(dog);// woof~</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void sayHiFromAnimals(Animal animal) &#123; // 此处方法接收一个Animal类型的对象</span><br><span class="line">        // 接收的对象为父类对象，但是调用sayHi方法时还是调用的具体子类的方法</span><br><span class="line">        System.out.println(animal.sayHi());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述例子中也可以直接写为<code>Animal cat = new Cat()</code>，向上转型达到的效果是一样的</p>
+</blockquote>
+<p>对于接口来说也是一样的，只要实现了某个接口，就可以通过类似上述例子中进行使用。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

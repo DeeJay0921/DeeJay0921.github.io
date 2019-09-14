@@ -100,16 +100,31 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-04-14</span>
-            <span class="time">16:57:39</span>
+            <span class="time">01:26:21</span>
           </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/DataBase/">DataBase</a>
+</span>
           
         </div>
         <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/mysql/">#mysql</a>
+
+
+          </div>
         
         <!-- Post Main Content -->
         <div class="post-content">
           <p>mysql的简单了解</p>
 <a id="more"></a>
+
 <h1 id="数据库概述"><a href="#数据库概述" class="headerlink" title="数据库概述"></a>数据库概述</h1><ul>
 <li>什么是数据库: 数据库就是一个文件系统，只不过需要通过命令(sql)来操作这个文件系统</li>
 <li>数据库的作用：存储数据，数据的仓局，带有不同访问权限的人可以有不同的操作</li>
@@ -324,7 +339,7 @@
 <h4 id="查询记录"><a href="#查询记录" class="headerlink" title="查询记录"></a>查询记录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select [distinct] [ * ] [列名1,列名2] from 表名 [where 条件];</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>distinct: 去除重复的数据</p>
+<p>distinct: 去除重复的数据 <a href="https://www.cnblogs.com/shiluoliming/p/6604407.html" target="_blank" rel="noopener">distinct详细用法</a></p>
 </blockquote>
 <p>首先创建一个商品分类的表：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">category</span>(</span><br><span class="line">  cid <span class="built_in">int</span> primary <span class="keyword">key</span> auto_increment,</span><br><span class="line">  cname <span class="built_in">varchar</span>(<span class="number">25</span>),</span><br><span class="line">  cdesc <span class="built_in">varchar</span>(<span class="number">31</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
@@ -394,7 +409,7 @@
 </li>
 <li><p>where后的关系运算符：<code>&gt; &gt;= &lt; &lt;= = != &lt;&gt;</code> &lt;&gt;和!=都为不等于，区别在于&lt;&gt;是标准sql语法而!=是非标准的sql语法</p>
 </li>
-<li><p>where后的逻辑运算符： <code>and, or, not</code></p>
+<li><p>where后的逻辑运算符： <code>and, or, not</code>，判断某一列是否为空: <code>is null</code>, <code>is not null</code></p>
 </li>
 <li><p>查询价格大于10并且小于100的商品: <code>select * from product where price &lt; 100 and price &gt; 10;</code><br>也可以使用<code>between...and...</code>,<code>select * from product where price between 10 and 100;</code></p>
 </li>

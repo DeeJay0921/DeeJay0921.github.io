@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="AMD_-CMD">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">AMD_-CMD</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-09-02</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/AMD/">#AMD</a> <a class="tag" href="/tags/CMD/">#CMD</a> <a class="tag" href="/tags/JS-module/">#JS module</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>AMD_-CMD</p>
+<a id="more"></a>
+
+<p>##模块化的价值</p>
+<ul>
+<li>最主要的目的<br>解决命名冲突<br>依赖管理</li>
+<li>其他价值<br>提高代码可读性<br>代码解耦，提高复用性</li>
+</ul>
+<p>通行的JS模块规范主要有2种：CommonJS 和 AMD</p>
+<p>##CommonJS<br>先从CommonJS说起，是由服务器端的JS应用带来的，是由NodeJS发扬光大的，标志着JS模块化编程正式登上舞台</p>
+<ul>
+<li>1.定义模块： 根据CommonJS规范，一个单独的文件就是一个模块。每一个模块都是一个单独的作用域，也就是说，<strong>在该模块内部定义的变量，无法被其他模块读取，除非定义为global对象的属性</strong>。</li>
+<li>2.模块输出： <strong>模块只有一个出口，module.exports对象</strong>，我们需要把模块希望输出的内容放到该对象</li>
+<li>3.加载模块： <strong>加载模块使用require方法，该方法读取一个文件并执行，返回文件内部的module.exports对象</strong></li>
+</ul>
+<p>使用举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//　模块定义　myModal.js</span><br><span class="line">var name = &apos;deejay&apos;;</span><br><span class="line">function sayName ()　&#123;</span><br><span class="line">    console.log(name);</span><br><span class="line">&#125;</span><br><span class="line">function sayFullName(firstName) &#123;</span><br><span class="line">    console.log(firstName + name);</span><br><span class="line">&#125;</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    sayName: sayName,</span><br><span class="line">    sayFullName: sayFullName,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 加载模块</span><br><span class="line">var nameModule = require(&apos;./myModal.js&apos;);</span><br><span class="line">nameModule.sayName();</span><br></pre></td></tr></table></figure>
+
+<p>不同的实现对require时的路径有不同要求，一般情况可以省略js扩展名，可以使用相对路径，也可以使用绝对路径，甚至可以省略路径直接使用模块名（前提是该模块是系统内置模块）</p>
+<p>####在浏览器端存在的问题<br>require是同步的，模块系统需要同步读取模块文件内容，并编译执行以得到模块接口。在服务器端实现没什么问题，但是在浏览器端实现问题却很多。</p>
+<p>浏览器端加载js最佳最容易的方式是在document中插入script标签。但是脚本标签天生异步，传统CommonJS模块在浏览器环境中无法正常加载。</p>
+<p>解决思路是之一是：开发一个服务器端的组件，对模块代码做静态分析，将模块与它的依赖列表一起返回给浏览器端。这很好用，但是需要服务器安装额外的组件，并因此要调整一系列底层架构。</p>
+<p>另一种解决思路是，用一套标准模板来封装模块定义，但是对于模块应该怎么定义和怎么加载，又产生了分歧：</p>
+<p>##AMD<br>Asynchronous Module Definition,异步模块定义。是一个在浏览器端模块化开发的规范。</p>
+<p>由于不是JS原生支持，使用AMD规范进行页面开发时需要用到相应的库函数，也就是RequireJS</p>
+<p>RequireJS主要解决2个问题：</p>
+<ul>
+<li>1，多个JS文件可能有依赖关系，被依赖的文件需要早于依赖他的文件加载到浏览器</li>
+<li>2，JS加载的时候浏览器会停止页面渲染，加载文件越多，页面失去响应时间越长</li>
+</ul>
+<p>看一个使用RequireJS的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//定义模块  比如新建一个名为myModule.js的文件</span><br><span class="line">define([&apos;依赖的JS模块&apos;],function () &#123;</span><br><span class="line">    var name = &apos;deejay&apos;;</span><br><span class="line">    function sayName() &#123;</span><br><span class="line">        console.log(name);</span><br><span class="line">    &#125;</span><br><span class="line">    return &#123;</span><br><span class="line">        sayName: sayName,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//要加载模块时</span><br><span class="line">require([&apos;myModule.js&apos;],function (my) &#123; //my就是myModule.js return的东西</span><br><span class="line">    my.sayName();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>####语法<br>RequireJS定义了一个函数define,它是全局变量，用来定义模块</p>
+<p><code>define(id?, dependencies?, factory);</code></p>
+<ul>
+<li>1,id： 可选参数，用来定义模块的标识，如果没有提供该参数，脚本文件名（）</li>
+<li>2，dependencies： 是一个<strong>当前模块依赖的模块名称数组</strong></li>
+<li>3, factory：工厂方法，模块初始化要执行的函数或者对象。如果为函数，他应该只被执行一次。如果是对象，则此对象应该为模块的输出值。</li>
+</ul>
+<p>在页面上使用require函数加载模块</p>
+<p><code>require([dependencies],function () {});</code></p>
+<p>require()函数接受2个参数</p>
+<ul>
+<li>1，第一个参数是一个数组，表示所依赖的模块</li>
+<li>2，第二个参数是一个回调函数，当前面指定的模块都加载完成之后，它将被调用。加载的模块会以参数形式传入该函数，从而在回调函数内部就可以使用这些模块。</li>
+</ul>
+<p>require()函数在加载依赖的函数的时候是异步加载的，这样浏览器不会失去响应，它指定的回调函数，只有前面的模块都加载完成之后，才会运行，解决了依赖性的问题。</p>
+<p>##CMD<br>Common Module Definition 通用模块定义,CMD规范是国内发展出来的，就像AMD有个RequireJS,CMD有个浏览器的实现SeaJS,SeaJS要解决的问题和RequireJS一样，只不过在模块定义方式和模块加载（可以说运行，解析）时机上有所不同。</p>
+<p>###语法<br>Sea.js推崇一个模块一个文件，遵循统一的写法</p>
+<p>###define</p>
+<p><code>define(id?,deps?,factory)</code></p>
+<p>因为CMD推崇：</p>
+<ul>
+<li>1.一个文件一个模块，所以经常就用文件名作为模块id</li>
+<li>2.CMD推崇依赖就近，所以一般不在define的参数中写依赖，在factory中写</li>
+</ul>
+<p>factory有三个参数<br><code>function (require,exports,module)</code></p>
+<p>###require<br>require是factory函数的第一个参数<br><code>require(id)</code><br>require是一个方法，接受模块标识作为唯一参数，用来获取其他模块提供的接口</p>
+<p>###exports<br>exports是一个对象，用来向外提供模块接口</p>
+<p>###module<br>module是一个对象，上面存储了与当前模块相关联的一些属性和方法</p>
+<p>使用举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//定义模块  比如新建一个myModule.js</span><br><span class="line">define(function (require, exports, module) &#123;</span><br><span class="line">    var $ = require(&apos;jquery.js&apos;); // 依赖就近</span><br><span class="line">    $(&apos;div&apos;).addClass(&apos;active&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//加载这个模块</span><br><span class="line">seajs.use([&apos;myModule.js&apos;],function () &#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>AMD和CMD直观的看上去，差异就是seajs可以按需的去加载模块，而RequireJS要先写好依赖。现在基本上seajs已经废弃了，都是使用RequireJS（webpack之前）。</p>
+<p>###AMD规范与CMD规范</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var modal = require(&apos;modal&apos;);</span><br><span class="line">$btn.on(&apos;click&apos;,function () &#123;</span><br><span class="line">    modal.open();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>要想实现这样的加载组件的效果：</p>
+<p>###AMD规范<br>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    denfine(id?,denpendencies?,factory) &#123;&#125;</span><br><span class="line">    </span><br><span class="line">//使用举例</span><br><span class="line">    define(&apos;modal&apos;,[&apos;jqurey,dialog&apos;],function ($,Dialog) &#123;</span><br><span class="line">        $(&apos;.modal&apos;).show();</span><br><span class="line">        Dialog.open();</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>实现AMD的库有RequireJS,curl,Dojo</p>
+<p>###CommonJS规范<br>是服务器端的规范，NodeJS采用了这个规范。</p>
+<ul>
+<li>1，在一个模块中，存在一个自由的变量’require’，它是一个函数。<br>这个require函数接受一个模块标识符<br>require返回外部模块所输出的API<br>如果出现依赖闭环，那么外部模块在被它的传递依赖所require的时候可能被并没有执行完成；在这种情况下，require返回的对象必须至少包含此外部模块在调用require函数（会进入当前模块执行环境）之前就已经准备完毕的输出。<br>如果请求的模块不能返回，那么require必须抛出一个错误。</li>
+<li>2，在一个模块中，会存在一个名为exports的自由变量，它是一个对象，模块可以在执行的时候把自身的API加入到其中。</li>
+<li>3，模块必须使用exports对象来作为输出的唯一表示。<br>###CMD规范<br>书写格式为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define(function (require,exports,module) ) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

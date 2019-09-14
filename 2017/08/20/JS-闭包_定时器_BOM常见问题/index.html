@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JS-闭包_定时器_BOM常见问题">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JS-闭包_定时器_BOM常见问题</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-20</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>JS-闭包_定时器_BOM常见问题</p>
+<a id="more"></a>
+
+
+<p>###1: 下面的代码输出多少？修改代码让 fnArr<a href>i</a> 输出 i。使用 两种以上的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var fnArr = [];</span><br><span class="line">for (var i = 0; i &lt; 10; i ++) &#123;</span><br><span class="line">    fnArr[i] =  function()&#123;</span><br><span class="line">	    return i;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">console.log( fnArr[3]() );  //</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为10，因为return i的i是全局中的i，循环结束i为10，不管fnArr[i]i为几都输出10。<br>想让fnArr[i] ()输出i，就得创建新的作用域来保存每次循环的i的值.另外需要注意，是想要<strong>fnArr[i] ()</strong>即调用的结果返回i，不是fnArr[i]。即fnArr[i] ()对应的是函数的返回值return i，fnArr[i]应该被赋值为一个可执行的函数。（如果是立即执行函数，必须要设置return一个函数，这个函数再return i），不然会导致fnArr[i]直接拿到i值，无法调用，调用结果为undefined（默认 return undefined）。</p>
+<ul>
+<li><p>第一种方法   创建个立即执行函数的新作用域，在其作用域内将fnArr[i]赋值为函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var fnArr = [];</span><br><span class="line">for (var i = 0; i &lt; 10; i ++) &#123;</span><br><span class="line">    (function (i) &#123; //接收每次循环的ｉ值，内部的ｉ即为这个ｉ</span><br><span class="line"></span><br><span class="line">        fnArr[i] = function () &#123; // 也确保了fnArr[i] 是一个可以调用的函数，不会使得fnArr[i]不经调用就直接拿到i值</span><br><span class="line">            return i; // 这个i输出的是立即执行函数内部的i，即每次循环的i</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(i); // 传入每次循环的i值</span><br><span class="line">&#125;</span><br><span class="line">console.log( fnArr[3]() );  //3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种方法： 将fnArr[i]赋值为一个立即执行函数，在立即执行函数的新的作用域内保存每次循环的i值，注意要设置返回为一个函数，再让这个函数返回i，防止fnArr[i]直接就拿到值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var fnArr = [];</span><br><span class="line">for (var i = 0; i &lt; 10; i ++) &#123;</span><br><span class="line">    fnArr[i] = (function (i) &#123;</span><br><span class="line">        return function () &#123; // 要再次设置返回为一个函数，如果直接设置return i的话，fnArr[i]就直接拿到值了</span><br><span class="line">            return i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(i);</span><br><span class="line">&#125;</span><br><span class="line">console.log( fnArr[3]() );  //3</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>###2.封装一个汽车对象，可以通过如下方式获取汽车状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var Car = (function()&#123;</span><br><span class="line">   var speed = 0;</span><br><span class="line">   function setSpeed(s)&#123;</span><br><span class="line">       speed = s</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">   return &#123;</span><br><span class="line">      setSpeed: setSpeed,</span><br><span class="line">      ...</span><br><span class="line">   &#125;</span><br><span class="line">&#125;)()</span><br><span class="line">Car.setSpeed(30);</span><br><span class="line">Car.getSpeed(); //30</span><br><span class="line">Car.accelerate();</span><br><span class="line">Car.getSpeed(); //40;</span><br><span class="line">Car.decelerate();</span><br><span class="line">Car.decelerate();</span><br><span class="line">Car.getSpeed(); //20</span><br><span class="line">Car.getStatus(); // &apos;running&apos;;</span><br><span class="line">Car.decelerate(); </span><br><span class="line">Car.decelerate();</span><br><span class="line">Car.getStatus();  //&apos;stop&apos;;</span><br><span class="line">//Car.speed;  //error</span><br></pre></td></tr></table></figure>
+
+<p>要在外部作用域中访问内部作用域中的变量，就要用到闭包，内部作用域中的变量被其内部的作用域引用着，可以在外部作用域中访问这个引用方法来得到内部作用域的变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">var Car = (function()&#123;</span><br><span class="line">    var speed = 0;</span><br><span class="line">    function setSpeed(s)&#123;</span><br><span class="line">        speed = s;</span><br><span class="line">    &#125;</span><br><span class="line">    function getSpeed() &#123;  // 设置闭包，内部的getSpeed作用域可以引用着外部的speed，在全局中使用这个getSpeed方法就能获取car作用域中的speed变量</span><br><span class="line">        return speed;</span><br><span class="line">    &#125;</span><br><span class="line">    function accelerate() &#123;</span><br><span class="line">        speed += 10;</span><br><span class="line">    &#125;</span><br><span class="line">    function decelerate () &#123;</span><br><span class="line">        speed -= 10;</span><br><span class="line">    &#125;</span><br><span class="line">    function getStatus () &#123;</span><br><span class="line">        if (speed === 0) &#123;</span><br><span class="line">            return &apos;stop&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">        else if (speed &gt; 0) &#123;</span><br><span class="line">            return &apos;running&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //因为car是个立即执行函数，执行完成之后作用域马上销毁，所以不设置return的话，无法使用内部设置的方法，所以设置返回对象。</span><br><span class="line">    //外部通过返回的对象属性来找到对应的方法</span><br><span class="line">    return &#123;</span><br><span class="line">        setSpeed: setSpeed,</span><br><span class="line">        getSpeed: getSpeed,</span><br><span class="line">        accelerate: accelerate,</span><br><span class="line">        decelerate: decelerate,</span><br><span class="line">        getStatus: getStatus</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">Car.setSpeed(30);</span><br><span class="line">Car.getSpeed(); //30</span><br><span class="line">Car.accelerate();</span><br><span class="line">Car.getSpeed(); //40;</span><br><span class="line">Car.decelerate();</span><br><span class="line">Car.decelerate();</span><br><span class="line">Car.getSpeed(); //20</span><br><span class="line">Car.getStatus(); // &apos;running&apos;;</span><br><span class="line">Car.decelerate();</span><br><span class="line">Car.decelerate();</span><br><span class="line">Car.getStatus();  //&apos;stop&apos;;</span><br><span class="line">Car.speed;  //error</span><br></pre></td></tr></table></figure>
+
+<p>###3.下面这段代码输出结果是? 为什么?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    a = 2;</span><br><span class="line">    console.log(a);</span><br><span class="line">&#125;, 0);</span><br><span class="line">var a ;</span><br><span class="line">console.log(a);</span><br><span class="line">a = 3;</span><br><span class="line">console.log(a);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果依次是1, 3,2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    a = 2;</span><br><span class="line">    console.log(a);//2</span><br><span class="line">&#125;, 0);</span><br><span class="line">var a ;</span><br><span class="line">console.log(a); //1</span><br><span class="line">a = 3;</span><br><span class="line">console.log(a); //3</span><br></pre></td></tr></table></figure>
+
+<p>上述代码为每条语句运行的结果，乍一看是输出2,1,3，但是实际情况是，<strong>setTimeout就算设置间隔为0，也是会在其他代码加载完成之后执行</strong>。再考虑上变量提升的话，实际的代码运行顺序如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var a;</span><br><span class="line">var a;</span><br><span class="line">a = 1;</span><br><span class="line"></span><br><span class="line">console.log(a); //1</span><br><span class="line">a = 3;</span><br><span class="line">console.log(a); //3</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    a = 2;</span><br><span class="line">    console.log(a); //2</span><br><span class="line">&#125;, 0);</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，每条语句的输出值已经各个语句的输出顺序就很明显了。</p>
+<p>###4.下面这段代码输出结果是? 为什么?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var flag = true;</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    flag = false;</span><br><span class="line">&#125;,0)</span><br><span class="line">while(flag)&#123;&#125;</span><br><span class="line">console.log(flag);</span><br></pre></td></tr></table></figure>
+
+<p>原理和第3题是一样的，<strong>setTimeout就算设置间隔为0，也是会在其他代码加载完成之后执行</strong>。所以在本题中，实际的运行顺序为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var flag = true;</span><br><span class="line"></span><br><span class="line">while(flag)&#123;&#125; //永远在循环</span><br><span class="line"></span><br><span class="line">console.log(flag); //不会输出true</span><br><span class="line"></span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    flag = false;</span><br><span class="line">&#125;,0)</span><br></pre></td></tr></table></figure>
+
+<p>所以可以很清楚的看到，声明flag为true之后，就进入了while的无限循环，不会执行下面的输出指令，也不会执行后面的setTimeout，flag的值一直为true</p>
+<p>###5.下面这段代码输出？如何输出delayer: 0, delayer:1…（使用闭包来实现）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">	setTimeout(function()&#123;</span><br><span class="line">         console.log(&apos;delayer:&apos; + i );</span><br><span class="line">	&#125;, 0);</span><br><span class="line">	console.log(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析代码：还是一样，setTimeout执行的时候for语句早就循环完毕了，首先for语句中下面的console.log(i);会依次输出0,1,2,3,4，然后才会开始执行setTimeout中的语句，setTimeout中的函数中的console.log(i)就是全局中已经循环结果的i值，为5，所以会连续输出5个delayer: 5。<br>想要输出delayer: 0, delayer:1…，思路就是在创建一个新的作用域保存每次循环的i值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">        (function (i) &#123; //创建一个新作用域，传入每次循环的i值</span><br><span class="line">            setTimeout(function()&#123;</span><br><span class="line">                console.log(&apos;delayer:&apos; + i ); //这里输出的i就是上一级作用域中即立即执行函数中的i值了，而不是全局中的i值</span><br><span class="line">            &#125;, 0);</span><br><span class="line">        &#125;)(i);</span><br><span class="line"></span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>###6.如何获取元素的真实宽高</p>
+<ul>
+<li>ie8及以前版本：通过currentStyle</li>
+</ul>
+<p>alert(document.getElementById(‘id’).currentStyle.width);</p>
+<ul>
+<li>ff,safari,opera,chrome,ie9及之后版本:通过window.getComputedStyle</li>
+</ul>
+<p>var el=document.getElementById(‘id’);</p>
+<p>alert(window.getComputedStyle(el,null).width);</p>
+<p>###7. URL 如何编码解码？为什么要编码？</p>
+<ul>
+<li>编码：encodeURI()  encodeURIComponent()<br>两种方法都不会对ASCII字母，数字，以及<code>~!*()&#39;</code>编码，encodeURIComponent()会对<code>@#$&amp;()=:/,;?+</code>进行编码</li>
+<li>解码： decodeURI()  decodeURIComponent()</li>
+<li>意义：由于URL的编码格式采用的是ASCII码而不是Unicode，因此URL中不能包含任何非ASCII字符（例如中文），否则在客户端和服务端浏览器支持的字符集不同的情况下，就可能出现问题。这也就意味着，如果URL中有汉字或其它非规定字符，就必须编码后使用。<br>另外，HTTP协议中通过URL传参是通过键值对形式进行的，格式上是以？、&amp;和=为特征标识进行解析，如果键或者值的内容中包含这些符号，就会造成解析错误，所以要进行编码，用不会造成歧义的符号代替有歧义的符号。</li>
+</ul>
+<p>###8.补全如下函数，判断用户的浏览器类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function isAndroid()&#123;</span><br><span class="line">&#125;</span><br><span class="line">function isIphone()&#123;</span><br><span class="line">&#125;</span><br><span class="line">function isIpad()&#123;</span><br><span class="line">&#125;</span><br><span class="line">function isIOS()&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function isAndroid()&#123;</span><br><span class="line">    var AndroidReg = /Android/;</span><br><span class="line">    return AndroidReg.test(window.navigator.userAgent);</span><br><span class="line">&#125;</span><br><span class="line">function isIphone()&#123;</span><br><span class="line">    var IphoneReg = /Iphone/;</span><br><span class="line">    return IphoneReg.test(window.navigator.userAgent);</span><br><span class="line">&#125;</span><br><span class="line">function isIpad()&#123;</span><br><span class="line">    var IpadReg = /Ipad/;</span><br><span class="line">    return IpadReg.test(window.navigator.userAgent);</span><br><span class="line">&#125;</span><br><span class="line">function isIOS()&#123;</span><br><span class="line">    var IOSReg = /IOS/;</span><br><span class="line">    return IOSReg.test(window.navigator.userAgent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

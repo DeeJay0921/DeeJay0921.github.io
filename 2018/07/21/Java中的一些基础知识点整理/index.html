@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的一些基础知识点整理">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的一些基础知识点整理</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-07-21</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/Java数据类型/">#Java数据类型</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的一些基础知识点整理</p>
+<a id="more"></a>
+
+<h3 id="Java中的数据类型："><a href="#Java中的数据类型：" class="headerlink" title="Java中的数据类型："></a>Java中的数据类型：</h3><ul>
+<li>基本数据类型：<ul>
+<li>整数: byte, short, int(default), long</li>
+<li>浮点数: float, double(default)</li>
+<li>字符： char</li>
+<li>布尔： boolean </li>
+</ul>
+</li>
+<li>引用数据类型：<br>  <code>Xxx x = new Xxx();</code> 都是引用类型</li>
+</ul>
+<h3 id="基本数据类型的转换："><a href="#基本数据类型的转换：" class="headerlink" title="基本数据类型的转换："></a>基本数据类型的转换：</h3><ul>
+<li><p>隐式转换(自动类型转换):</p>
+<ul>
+<li>转换公式： byte, short, char ===&gt; int ===&gt; long ===&gt; float ===&gt; double， 由小到大<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte b = 10;</span><br><span class="line">int a = b;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>显式转换(强制类型转换):</p>
+<ul>
+<li>一般是由大到小<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int a = 10;</span><br><span class="line">byte b = (byte)a; // 有可能损失精度</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><ul>
+<li><p>算术运算符<br>  注意<code>++</code>和<code>--</code></p>
+</li>
+<li><p>比较运算符<br>结果都是boolean类型</p>
+</li>
+<li><p>赋值运算符<br><code>+=</code>隐含了强制类型转换</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int a = 10;</span><br><span class="line">byte b = 20;</span><br><span class="line">b += a; // 隐含了强制类型转换</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>逻辑运算符<br>连接boolean类型的表达式<br>注意<code>&amp;&amp;</code>/<code>||</code> 和 <code>&amp;</code>/<code>|</code>的区别，前者如果第一个表达式就已经可以确定结果时，第二个表达式不再进行执行。</p>
+</li>
+</ul>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li><p>定义格式：<br>修饰符(例如public static)   返回值类型    方法名(参数类型  参数名) { 方法体 }</p>
+</li>
+<li><p>调用</p>
+<ul>
+<li>有明确返回值<ul>
+<li>赋值调用</li>
+<li>输出调用</li>
+<li>直接调用</li>
+</ul>
+</li>
+<li>无明确返回值<ul>
+<li>直接调用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>重载<br>重名方法，参数个数或者参数类型不同，都可以视为不同方法，和返回值无关。</p>
+</li>
+</ul>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ul>
+<li>特点<br> 类型必须一致，<br>  元素有整数索引<br>  一旦定义好长度则长度无法改变<br>  和集合相比，数组可以存基本类型，也能存引用类型，集合只能存对象。</li>
+</ul>
+<h2 id="Switch语句的注意点"><a href="#Switch语句的注意点" class="headerlink" title="Switch语句的注意点"></a>Switch语句的注意点</h2><ol>
+<li>可以Switch的那些类型？：<ul>
+<li>int/long/char/byte/short</li>
+<li>enum</li>
+<li>在JDK7+版本中 也可以Switch String</li>
+</ul>
+</li>
+<li>Switch的穿透<br>switch语句中可以多个case连写，如果不写break的话就会一直向下执行。</li>
+<li>Switch中的作用域<br>在swtich里，如果case后面没写<code>{}</code>的话，作用域就是几个case最顶层的switch的那一层的<code>{}</code>，但是如果case之后也写了<code>{}</code>的话，那作用域就是这层的<code>{}</code></li>
+</ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

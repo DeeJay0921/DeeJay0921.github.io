@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JS引用类型，对象拷贝">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JS引用类型，对象拷贝</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-12</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>JS引用类型，对象拷贝</p>
+<a id="more"></a>
+
+<p>##引用类型<br>引用类型变量<strong>保存的仅仅是一个指针</strong>，指针指向堆内存中保存对象的位置。</p>
+<ul>
+<li>所以基本类型复制的时候仅仅复制值，复制前后的两个变量<strong>相互独立</strong>。</li>
+<li>而引用类型复制的时候实质上仅仅是把保存对象的位置的地址复制传给了复制后的变量，两个变量实际上指向的还是同一个对象，所以通过一个变量改变对象的属性，另外一个变量引用对象时，属性也会发生变化。</li>
+</ul>
+<p>对于函数的参数传递，不用去考虑按值传递还是按引用传递，只需要这么理解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">     function fn (n) &#123;</span><br><span class="line">//         var n = a; // 可以视为函数参数的传递，将a中的值传给n</span><br><span class="line">         n++;</span><br><span class="line">     &#125;</span><br><span class="line">     var a = 10;</span><br><span class="line">     fn(a);</span><br><span class="line">     console.log(a);   //10   虽然n变为11，但是a仍然为10</span><br></pre></td></tr></table></figure>
+
+<p>可以理解成函数内部有一句隐式的语句var n = a; 可以视为函数参数的传递，将a中的值传给n,<strong>a是基本类型时传递的就是值，a是引用类型时a中保存的就是对象的地址，所以将地址传递给n</strong>。<br>当a是引用类型时的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     function fn (n) &#123;</span><br><span class="line">//         var n = a; // 传递的是a的对象的地址</span><br><span class="line">         n.age++;</span><br><span class="line">     &#125;</span><br><span class="line">     var a = &#123;</span><br><span class="line">         name: &apos;deejay&apos;,</span><br><span class="line">         sex: &apos;male&apos;,</span><br><span class="line">         age: 21</span><br><span class="line">     &#125;</span><br><span class="line">     fn(a);</span><br><span class="line">     console.log(a);   // n.age =22 a.age =22,都为22，因为传递的是参数，实质上改变的是同一个对象</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象拷贝"><a href="#对象拷贝" class="headerlink" title="对象拷贝"></a>对象拷贝</h2><ul>
+<li>浅拷贝：浅拷贝即<strong>仅仅拷贝一层</strong>的对象属性。举例说明：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var oldObj = &#123;</span><br><span class="line">    name: &apos;deejay&apos;,</span><br><span class="line">    age: 20,</span><br><span class="line">    friend: &#123;</span><br><span class="line">        name: &apos;dee&apos;,</span><br><span class="line">        age: 20</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function shallowCopy(oldObj) &#123;</span><br><span class="line">    var newObj = &#123;&#125;; // 要进行对象的拷贝，必须要新开辟一个空间存放对象，有不同的地址，才能相互独立。</span><br><span class="line">    for(var key in oldObj) &#123;</span><br><span class="line">        newObj[key] = oldObj[key];//创建了一个新对象之后，遍历oldObj的属性，每一项都拷贝给newObj的属性</span><br><span class="line">    &#125;</span><br><span class="line">    return newObj;</span><br><span class="line">&#125;</span><br><span class="line">var newObj = shallowCopy(oldObj);</span><br><span class="line">console.log(newObj);</span><br><span class="line">newObj.age++;</span><br><span class="line">console.log(oldObj.age);  //20  newobj的age增加，oldobj的age仍然不变</span><br><span class="line">newObj.friend.age++;</span><br><span class="line">console.log(oldObj.friend.age); // 21  newobj中的friend中的age增加，oldobj的age也跟着一起增加了</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>上述例子中的拷贝对象oldObj有两层，浅拷贝只能使得拷贝后的对象newObj的第一层属性跟oldObj相互独立。</p>
+<ul>
+<li>深拷贝： 针对浅拷贝的问题，深拷贝可以完全拷贝对象，不管有多少层属性，都可以相互独立，思路方法有：</li>
+</ul>
+<ol>
+<li>依靠递归：<br>基本思路如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function deepCopy (oldObj) &#123;</span><br><span class="line">    var newObj = &#123;&#125;; //一样，还是先创建个新对象</span><br><span class="line">    for(var key in oldObj) &#123;  // 遍历oldObj中的所有属性</span><br><span class="line">        if (typeof oldObj[key] === &apos;number&apos; || typeof oldObj[key] === &apos;string&apos;) &#123;</span><br><span class="line">            //进行判断，属性值中是不是基本类型，即没有嵌套的情况下，依然按照浅拷贝的方式复制属性到newObj中，本例中oldObj属性只有number和string，就少写几种情况</span><br><span class="line">            newObj[key] = oldObj[key];</span><br><span class="line">        &#125;</span><br><span class="line">        else if (typeof oldObj[key] === &apos;Object&apos;) &#123;  </span><br><span class="line">            //当检测到有嵌套的情况时，使用递归，调用本身函数对嵌套的属性进行拷贝，如果嵌套的属性中还有嵌套的属性，那么继续递归直到没有嵌套为止，拷贝所有属性</span><br><span class="line">            newObj[key] = deepCopy(oldObj[key]);</span><br><span class="line">        &#125;        </span><br><span class="line">    &#125;</span><br><span class="line">     return newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>上述代码仅仅表述了深拷贝的思路，那么实际书写代码的时候，还需要考虑oldObj中继承而来的属性，所以要针对我们自己定义的属性来进行拷贝，通过使用hasOwnProperty方法来判断，如果是我们自己定义的属性，那么再进行拷贝，在判断是否嵌套的条件中，typeof属性的值还可能是’number’,’string’,’boolean’,还可能是null以及undefined。所以完整的深拷贝代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">    var oldObj = &#123;</span><br><span class="line">        name: &apos;deejay&apos;,</span><br><span class="line">        age: 20,</span><br><span class="line">        friend: &#123;</span><br><span class="line">            name: &apos;dee&apos;,</span><br><span class="line">            age: 20,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    function deepCopy (oldObj) &#123;</span><br><span class="line">        var newObj = &#123;&#125;; //创建一个地址不同的新对象</span><br><span class="line">            for (var key in oldObj) &#123; //遍历oldObj中的所有属性</span><br><span class="line">                if (oldObj.hasOwnProperty(key)) &#123;  // 针对自身拥有的定义的属性进行拷贝</span><br><span class="line">                    if (typeof oldObj[key] === &apos;string&apos; || typeof oldObj[key] === &apos;number&apos; || typeof oldObj[key] === &apos;boolean&apos;</span><br><span class="line">                            || oldObj[key] === null || oldObj[key] === undefined) &#123; //完整的判断是否嵌套的条件</span><br><span class="line">                        newObj[key] = oldObj[key];</span><br><span class="line">                    &#125;</span><br><span class="line">                    else &#123;  // 不是上面判断的条件，即为嵌套的属性，通过递归进行拷贝</span><br><span class="line">                        newObj[key] = deepCopy(oldObj[key]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        return newObj;</span><br><span class="line">    &#125;</span><br><span class="line">    var newObj = deepCopy(oldObj);</span><br><span class="line">    console.log(newObj);</span><br><span class="line">    newObj.age++;</span><br><span class="line">    console.log(oldObj.age);  //20  newobj的age增加，oldobj的age仍然不变</span><br><span class="line">    newObj.friend.age++;</span><br><span class="line">    console.log(oldObj.friend.age); // 20  newobj中的friend中的age增加，oldObj仍然不变，newObj和oldObj是相互独立的</span><br><span class="line">//    不管有多少层嵌套的属性，都是相互独立的，即为深拷贝</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用JSON对象的stringify方法和parse方法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var oldObj = &#123;</span><br><span class="line">    name: &apos;deejay&apos;,</span><br><span class="line">    age: 20,</span><br><span class="line">    friend: &#123;</span><br><span class="line">        name: &apos;dee&apos;,</span><br><span class="line">        age: 20,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var newObj = JSON.parse(JSON.stringify(oldObj));</span><br><span class="line">/*stringify方法可以把一个对象转换为一个字符串，然后parse方法可以将字符串转化为一个对象，这样得到的新对象就跟原来对象完全独立了*/</span><br><span class="line">console.log(newObj);</span><br><span class="line">newObj.age = 25;</span><br><span class="line">console.log(oldObj.age);  // 20   newObj和oldObj完全独立，不受影响</span><br><span class="line">newObj.friend.age = 25;</span><br><span class="line">console.log(oldObj.friend.age); //20 newObj和oldObj完全独立，不受影响</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>###1.引用类型有哪些？非引用类型有哪些</p>
+<ul>
+<li><p>非引用类型：保存在栈内存中的简单数据段，数值，布尔值，null和undefined。</p>
+</li>
+<li><p>引用类型： 指的是那些保存在堆内存中的对象，<strong>变量中保存的实际上只是一个指针</strong>，这个<strong>指针指向内存中的另一个位置，由该位置保存对象</strong>，引用类型有对象，数组，函数，正则。</p>
+</li>
+</ul>
+<p>###2.如下代码输出什么？为什么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123;a:1, b:2&#125;;</span><br><span class="line">var obj2 = &#123;a:1, b:2&#125;;</span><br><span class="line">console.log(obj1 == obj2);</span><br><span class="line">console.log(obj1 = obj2);</span><br><span class="line">console.log(obj1 == obj2);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123;a:1, b:2&#125;;</span><br><span class="line">var obj2 = &#123;a:1, b:2&#125;;</span><br><span class="line">console.log(obj1 == obj2);  //false</span><br><span class="line">console.log(obj1 = obj2); //&#123;a:1,b:2&#125;</span><br><span class="line">console.log(obj1 == obj2); // true</span><br></pre></td></tr></table></figure>
+
+<p>解释：第一行，obj1和obj2内部保存的其实是两个对象的地址，两个对象是相互独立的，即不是同一个对象，即地址不相等，所以obj1 == obj2的值为false。<br>第二行和第三行，将obj2指向的对象的地址赋值给obj1，此时，obj1和obj2指向的是同一个对象，<strong>第二行输出obj2指向的对象</strong>，第三行，obj1和obj2指向的已经是同一个对象了，所以输出true。</p>
+<p>###3.如下代码输出什么? 为什么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> var a = 1</span><br><span class="line"> var b = 2</span><br><span class="line"> var c = &#123; name: &apos;deejay&apos;, age: 2 &#125;</span><br><span class="line"> var d = [a, b, c]</span><br><span class="line"></span><br><span class="line">var aa = a</span><br><span class="line">var bb = b</span><br><span class="line">var cc = c</span><br><span class="line">var dd = d</span><br><span class="line"></span><br><span class="line">a = 11</span><br><span class="line">b = 22</span><br><span class="line">c.name = &apos;hello&apos;</span><br><span class="line">d[2][&apos;age&apos;] = 3</span><br><span class="line"></span><br><span class="line">console.log(aa) </span><br><span class="line">console.log(bb) </span><br><span class="line">console.log(cc)</span><br><span class="line">console.log(dd)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">var b = 2</span><br><span class="line">var c = &#123; name: &apos;deejay&apos;, age: 2 &#125;</span><br><span class="line">var d = [a, b, c]</span><br><span class="line"></span><br><span class="line">var aa = a</span><br><span class="line">var bb = b</span><br><span class="line">var cc = c</span><br><span class="line">var dd = d</span><br><span class="line"></span><br><span class="line">a = 11</span><br><span class="line">b = 22</span><br><span class="line">c.name = &apos;hello&apos;</span><br><span class="line">d[2][&apos;age&apos;] = 3</span><br><span class="line"></span><br><span class="line">console.log(aa) //1</span><br><span class="line">console.log(bb) //2</span><br><span class="line">console.log(cc) //name:hello age:3</span><br><span class="line">console.log(dd) //1,2,name：hello  age: 3</span><br></pre></td></tr></table></figure>
+
+<p>基本类型和引用类型的不同，基本类型复制之后就是相对独立的，引用类型仅仅传递了一个指向对象的地址，实质上引用的还是同一个对象，所以通过指向这个对象的任何一个指针改变这个对象的属性，都会引起所有变量的变化。</p>
+<p>###4.如下代码输出什么? 为什么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">var c = &#123; name: &apos;deejay&apos;, age: 2 &#125;</span><br><span class="line"></span><br><span class="line">function f1(n)&#123;</span><br><span class="line">  ++n</span><br><span class="line">&#125;</span><br><span class="line">function f2(obj)&#123;</span><br><span class="line">  ++obj.age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f1(a) </span><br><span class="line">f2(c) </span><br><span class="line">f1(c.age) </span><br><span class="line">console.log(a) </span><br><span class="line">console.log(c)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码可以理解为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">    var a = 1</span><br><span class="line">    var c = &#123; name: &apos;deejay&apos;, age: 2 &#125;</span><br><span class="line"></span><br><span class="line">    function f1(n)&#123;</span><br><span class="line">//        var n = a;</span><br><span class="line">//        var n = c.age</span><br><span class="line">        ++n</span><br><span class="line">    &#125;</span><br><span class="line">    function f2(obj)&#123;</span><br><span class="line">//        var obj = c; 传递的是地址</span><br><span class="line">        ++obj.age</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    f1(a)</span><br><span class="line">    f2(c)</span><br><span class="line">    f1(c.age)</span><br><span class="line">    console.log(a)  //1</span><br><span class="line">    console.log(c) //&#123; name: &apos;deejay&apos;, age: 3 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用f2的时候改变了c中的age</p>
+<p>###5.过滤如下数组，只保留正数，直接在原数组上操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr = [3,1,0,-1,-3,2,-5]</span><br><span class="line">function filter(arr)&#123;</span><br><span class="line">&#125;</span><br><span class="line">filter(arr)</span><br><span class="line">console.log(arr) // [3,1,2]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var arr = [3,1,0,-1,-3,2,-5]</span><br><span class="line">function filter(arr)&#123;</span><br><span class="line">    for (var i = 0; i &lt; arr.length; i ++) &#123;</span><br><span class="line">        if (arr[i] &lt;= 0) &#123;</span><br><span class="line">            arr.splice(i,1);</span><br><span class="line">            i -= 1; //因为删除了一位，i的取值要减1</span><br><span class="line">            // 也可以使用递归，直接调用 filter(arr);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br><span class="line">filter(arr)</span><br><span class="line">console.log(arr) // [3,1,2]</span><br></pre></td></tr></table></figure>
+
+<p>###6.过滤如下数组，只保留正数，原数组不变，生成新数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr = [3,1,0,-1,-3,2,-5]</span><br><span class="line">function filter(arr)&#123;</span><br><span class="line">&#125;</span><br><span class="line">var arr2 = filter(arr)</span><br><span class="line">console.log(arr2) // [3,1,2]</span><br><span class="line">console.log(arr)  // [3,1,0,-1,-2,2,-5]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var arr = [3,1,0,-1,-3,2,-5]</span><br><span class="line">function filter(arr)&#123;</span><br><span class="line">    var arr2 = [];  //创建新数组，不会影响原数组</span><br><span class="line">    for (var i =0; i &lt; arr.length; i ++) &#123;</span><br><span class="line">        if (arr[i] &gt; 0) &#123;</span><br><span class="line">            arr2.push(arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return  arr2;</span><br><span class="line">&#125;</span><br><span class="line">var arr2 = filter(arr)</span><br><span class="line">console.log(arr2) // [3,1,2]</span><br><span class="line">console.log(arr)  // [3,1,0,-1,-2,2,-5]</span><br></pre></td></tr></table></figure>
+
+<p>###7.写一个深拷贝函数，用两种方式实现</p>
+<ul>
+<li><p>递归方式： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var oldObj = &#123;</span><br><span class="line">    name: &apos;deejay&apos;,</span><br><span class="line">    age: 20,</span><br><span class="line">    friend: &#123;</span><br><span class="line">        name: &apos;dee&apos;,</span><br><span class="line">        age: 20,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function deepCopy (oldObj) &#123;</span><br><span class="line">    var newObj = &#123;&#125;;</span><br><span class="line">    for (var key in oldObj) &#123;</span><br><span class="line">        if (oldObj.hasOwnProperty(key)) &#123;</span><br><span class="line">            if (typeof oldObj[key] === &apos;number&apos; ||　typeof oldObj[key] === &apos;string&apos; || typeof oldObj[key] ===&apos;boolean&apos; ||  oldObj[key] === null|| oldObj[[key]=== undefined]) &#123;</span><br><span class="line">                newObj[key] = oldObj[key];</span><br><span class="line">            &#125; </span><br><span class="line">            else &#123;</span><br><span class="line">                newObj[key] = deepCopy(oldObj[key]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return newObj;</span><br><span class="line">&#125;</span><br><span class="line">var newObj = deepCopy(oldObj);</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JOSN方法实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var oldObj = &#123;</span><br><span class="line">    name: &apos;deejay&apos;,</span><br><span class="line">    age: 20,</span><br><span class="line">    friend: &#123;</span><br><span class="line">        name: &apos;dee&apos;,</span><br><span class="line">        age: 20,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function deepCopy (oldObj) &#123;</span><br><span class="line">    var newObj = &#123;&#125;;</span><br><span class="line">    newObj = JSON.parse(JSON.stringify(oldObj));</span><br><span class="line">    return  newObj;</span><br><span class="line">&#125;</span><br><span class="line">var newObj = deepCopy(oldObj);</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

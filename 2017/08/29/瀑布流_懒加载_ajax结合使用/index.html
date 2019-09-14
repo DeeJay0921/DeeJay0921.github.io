@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="瀑布流_懒加载_ajax结合使用">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">瀑布流_懒加载_ajax结合使用</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-29</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/懒加载/">#懒加载</a> <a class="tag" href="/tags/Ajax/">#Ajax</a> <a class="tag" href="/tags/瀑布流/">#瀑布流</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>瀑布流_懒加载_ajax结合使用</p>
+<a id="more"></a>
+
+<p>整体的布局是瀑布流效果，然后滚动到底部进行懒加载。<br>大体的实现思路：</p>
+<ul>
+<li>获取数据</li>
+<li>将数据变为DOM，然后通过瀑布流(绝对定位)的形式将其放到页面上</li>
+<li>当页面滚动（滚动到底）时，继续执行获取数据的操作。</li>
+</ul>
+<p>需要注意的地方：</p>
+<ul>
+<li>对于判断是否滚动到底，可以<strong>预先设置一个锚点元素。当其出现在视野中时</strong>，触发获取数据的请求。但是由于我们的<strong>容器里的元素是绝对定位，高度是撑不开的，导致整个锚点元素一直在顶部</strong>，这时候我们就要在进行瀑布流布局的时候，每排放一个元素，就要<strong>手动将容器的高度撑开，让其等于瀑布流布局的数组的最大值</strong>，即最大高度。</li>
+<li>关于瀑布流布局的问题：我们的数据是ajax请求来的，所以在加载完成之前得不到整个元素的高度，不能进行判断。所以要<strong>设置等加载完成之后在执行瀑布流布局</strong>。</li>
+</ul>
+<p>进行布局的时候，先将表达思路的伪代码写好，再去一个个写好这些函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">getData (newsList) &#123;//从后端得到数据数组</span><br><span class="line">    getNode(newsList); //将得到的数组进行渲染，拼接成html字符串</span><br><span class="line">    //判断页面是否完全加载完，然后进行瀑布流布局</span><br><span class="line">    if (isLoaded) &#123;</span><br><span class="line">        waterFall(node); //waterFall()每布局一个元素，就要手动将容易高度撑开，便于进行懒加载</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">//然后监听滚动事件，滚动到底进行懒加载</span><br><span class="line">$(window).on(&apos;scroll&apos;,function () &#123;</span><br><span class="line">    //里面的代码也是一样的，只是加一个判断是否出现的函数</span><br><span class="line">    if(checkshow($(&apos;#load&apos;))) &#123;</span><br><span class="line">        getData (newsList) &#123;//从后端得到数据数组</span><br><span class="line">            getNode(newsList); //将得到的数组进行渲染，拼接成html字符串</span><br><span class="line">            //判断页面是否完全加载完，然后进行瀑布流布局</span><br><span class="line">            if (isLoaded) &#123;</span><br><span class="line">                waterFall(node); //waterFall()每布局一个元素，就要手动将容易高度撑开，便于进行懒加载</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>写好思路伪代码之后，进行其中各种函数的书写。将重复的代码进行封装，将scroll事件处理进行优化，最终结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;瀑布流_懒加载_ajax结合使用&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    * &#123;</span><br><span class="line">        margin: 0;;</span><br><span class="line">        padding: 0;</span><br><span class="line">        box-sizing: border-box;</span><br><span class="line">        list-style-type: none;</span><br><span class="line">    &#125;</span><br><span class="line">    .wrap &#123;</span><br><span class="line">        width: 900px;</span><br><span class="line">        margin: 0 auto;</span><br><span class="line">    &#125;</span><br><span class="line">    .clearfix:after &#123;</span><br><span class="line">        content: &apos;&apos;;</span><br><span class="line">        display: block;</span><br><span class="line">        clear: both;</span><br><span class="line">    &#125;</span><br><span class="line">    #pic-ct &#123;</span><br><span class="line">        position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    #pic-ct .item &#123;</span><br><span class="line">        position: absolute;</span><br><span class="line">        padding: 0 0 10px 0;</span><br><span class="line">        width: 280px;</span><br><span class="line">        margin: 10px;</span><br><span class="line">        border: 1px solid #dfdfdf;</span><br><span class="line">        background: #fff;</span><br><span class="line">        /*opacity: 0;*/</span><br><span class="line">        transition: all 1s;</span><br><span class="line">    &#125;</span><br><span class="line">    #pic-ct .item img &#123;</span><br><span class="line">        margin: 10px;</span><br><span class="line">        width: 260px;</span><br><span class="line">    &#125;</span><br><span class="line">    #pic-ct .item .header &#123;</span><br><span class="line">        height: 25px;</span><br><span class="line">        margin: 0 12px;</span><br><span class="line">        border-bottom: 1px solid #dbdbdb;</span><br><span class="line">    &#125;</span><br><span class="line">    #pic-ct .desp &#123;</span><br><span class="line">        font-size: 12px;</span><br><span class="line">        line-height: 1.8;</span><br><span class="line">        margin: 10px 15px 0;</span><br><span class="line">        color: #777371;</span><br><span class="line">    &#125;</span><br><span class="line">    #load &#123;</span><br><span class="line">        visibility: hidden;</span><br><span class="line">        height: 20px;</span><br><span class="line">    &#125;</span><br><span class="line">    .hide &#123;</span><br><span class="line">        display: none;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;ct-watefall&quot;&gt;</span><br><span class="line">        &lt;ul id=&quot;pic-ct&quot; class=&quot;clearfix&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;!--&lt;li class=&quot;item&quot;&gt;--&gt;</span><br><span class="line">                &lt;!--&lt;a href=&quot;#&quot; class=&quot;link&quot;&gt;![](http://upload-images.jianshu.io/upload_images/7113407-b30662b4652b17ae.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)&lt;/a&gt;--&gt;</span><br><span class="line">                &lt;!--&lt;h4 class=&quot;header&quot;&gt;标题&lt;/h4&gt;--&gt;</span><br><span class="line">                &lt;!--&lt;p class=&quot;desp&quot;&gt;asdasdasdasdas&lt;/p&gt;--&gt;</span><br><span class="line">            &lt;!--&lt;/li&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &lt;!--用于计算item宽度和列数进行瀑布流布局，但是其本身不展示出来--&gt;</span><br><span class="line">            &lt;li class=&quot;item hide&quot;&gt;&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">        &lt;div id=&quot;load&quot;&gt;本身看不见&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script src=&quot;../jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;!--&lt;script src=&quot;http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js&quot;&gt;&lt;/script&gt;--&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">    var currentPage = 1;</span><br><span class="line">    var waterFallArr = [];</span><br><span class="line">    var waterFallCol = parseInt($(&apos;#pic-ct&apos;).width() / $(&apos;.item&apos;).width());</span><br><span class="line">    for (var i = 0; i &lt; waterFallCol; i ++ ) &#123;</span><br><span class="line">       waterFallArr[i] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    var clock;</span><br><span class="line"></span><br><span class="line">    run();</span><br><span class="line">    $(window).on(&apos;scroll&apos;,function () &#123;</span><br><span class="line">        if (clock) &#123;</span><br><span class="line">            clearTimeout(clock);</span><br><span class="line">        &#125;</span><br><span class="line">        clock = setTimeout(function () &#123;</span><br><span class="line">            if (checkShow($(&apos;#load&apos;))) &#123;  //当这个看不见的锚点出现时，进行懒加载</span><br><span class="line">                run();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,300)</span><br><span class="line">    &#125;)</span><br><span class="line">    function run() &#123;</span><br><span class="line">        getData(function (newsList) &#123;</span><br><span class="line">            $(newsList).each(function (i,e) &#123;</span><br><span class="line">                var $node = getNode(e);</span><br><span class="line">                $node.find(&apos;img&apos;).on(&apos;load&apos;,function () &#123; //当当前元素的图片加载完成之后，才能进行瀑布流布局，否则没高度不能进行瀑布流布局</span><br><span class="line">                    $(&apos;#pic-ct&apos;).append($node); //不能在getNode()中就将其添加到页面中，得等到加载完成后再添加到页面中。否则没有width和height，不能进行瀑布流布局</span><br><span class="line">                    waterFall($node);</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function getData (callback) &#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: &apos;http://platform.sina.com.cn/slide/album_tech&apos;,</span><br><span class="line">            method: &apos;get&apos;,</span><br><span class="line">            dataType: &apos;jsonp&apos;,</span><br><span class="line">            jsonp: &apos;jsoncallback&apos;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                app_key: 1271687855,</span><br><span class="line">                num: 10,</span><br><span class="line">                page: currentPage,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).done(function (ret) &#123;</span><br><span class="line">            if (ret.status.code == 0) &#123;</span><br><span class="line">                callback(ret.data);</span><br><span class="line">                currentPage++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    function getNode (e) &#123;</span><br><span class="line">            var html = &apos;&apos;;</span><br><span class="line">            html += &apos;&lt;li class=&quot;item&quot;&gt;&apos;;</span><br><span class="line">            html += &apos;&lt;a href=&quot; &apos; +e.url + &apos; &quot; class=&quot;link&quot;&gt;![]( &apos;+e.img_url +&apos; )&lt;/a&gt;&apos;</span><br><span class="line">            html += &apos;&lt;h4 class=&quot;header&quot;&gt;&apos; +e.short_name+ &apos;&lt;/h4&gt;&apos;;</span><br><span class="line">            html += &apos;&lt;p class=&quot;desp&quot;&gt;&apos;+e.short_intro+&apos;&lt;/p&gt;&lt;/li&gt;&apos;;</span><br><span class="line">            return $(html);</span><br><span class="line">    &#125;</span><br><span class="line">    function waterFall ($node) &#123;</span><br><span class="line">        var minHeight = Math.min.apply(null,waterFallArr);</span><br><span class="line">        var minHeightIndex = waterFallArr.indexOf(minHeight);</span><br><span class="line">        $node.css(&#123;</span><br><span class="line">            left: minHeightIndex * $node.outerWidth(true),</span><br><span class="line">            top: minHeight,</span><br><span class="line">            opacity: 1,</span><br><span class="line">        &#125;)</span><br><span class="line">        waterFallArr[minHeightIndex] = $node.outerHeight(true) + waterFallArr[minHeightIndex];</span><br><span class="line">        $(&apos;#pic-ct&apos;).height(Math.max.apply(null,waterFallArr));//因为子元素都是绝对定位，高度撑不开的话顶部的锚点就一直在页面顶部。所以要手动撑开容易高度</span><br><span class="line">    &#125;</span><br><span class="line">    function checkShow($node) &#123;</span><br><span class="line">        var windowHeight = $(window).height();</span><br><span class="line">        var scrollTop = $(window).scrollTop();</span><br><span class="line">        var nodeOffsetTop = $node.offset().top;</span><br><span class="line">        if (nodeOffsetTop &lt; (windowHeight + scrollTop + 500)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其实还可以监听窗口的变化，当窗口变化时，瀑布流布局也可以相应的改变</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

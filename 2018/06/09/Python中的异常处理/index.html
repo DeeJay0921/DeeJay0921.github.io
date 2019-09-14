@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Python中的异常处理">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Python中的异常处理</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-06-09</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Python/">Python</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Python/">#Python</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Python中的异常处理</p>
+<a id="more"></a>
+
+<h2 id="异常介绍"><a href="#异常介绍" class="headerlink" title="异常介绍"></a>异常介绍</h2><p>先来看一个最简单的异常，输出一个没有定义的变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(num) # NameError: name &apos;num&apos; is not defined</span><br></pre></td></tr></table></figure>
+
+<p>那么上面就是出现异常的一个情况，<code>NameError</code>是异常的名字。</p>
+<h2 id="异常的捕获以及处理"><a href="#异常的捕获以及处理" class="headerlink" title="异常的捕获以及处理"></a>异常的捕获以及处理</h2><p>我们可以用<code>try</code>和<code>except errorName:</code> 来对异常进行处理：<br>针对上面的例子来处理异常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(num)</span><br><span class="line">except NameError:</span><br><span class="line">    print(&apos;变量未命名的异常进行处理&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>把这个例子扩展一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(num)</span><br><span class="line">    print(&apos;----try----&apos;)</span><br><span class="line">except NameError:</span><br><span class="line">    print(&apos;变量未命名的异常进行处理&apos;)</span><br><span class="line">    print(&apos;-----except----&apos;)</span><br><span class="line"></span><br><span class="line">print(&apos;----outside---&apos;)</span><br><span class="line"># 输出: </span><br><span class="line"># 变量未命名的异常进行处理</span><br><span class="line"># -----except----</span><br><span class="line"># ----outside---</span><br></pre></td></tr></table></figure>
+
+<p>程序执行的时候，在<code>try</code>中的异常之后的语句不进行执行，然后执行<code>except</code>中的语句，异常处理完成之后继续进行后面的代码。</p>
+<p><code>except</code>可以有多个  用来处理对应的异常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    # print(num)</span><br><span class="line">    open(&apos;dontExistFile.txt&apos;)</span><br><span class="line">except NameError:</span><br><span class="line">    print(&apos;变量未命名的异常进行处理&apos;)</span><br><span class="line">except FileNotFoundError:</span><br><span class="line">    print(&apos;没找到文件呀&apos;)</span><br><span class="line"></span><br><span class="line">print(&apos;----outside---&apos;)</span><br><span class="line"># 输出 </span><br><span class="line"># 没找到文件呀</span><br><span class="line"># ----outside---</span><br></pre></td></tr></table></figure>
+
+<p>可以合并写为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">except (NameError,FileNotFoundError):</span><br><span class="line">    print(&apos;处理异常&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>except在上面的异常都没捕获的到情况下，可以写一个<code>Exception</code>用来兜底：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> try:</span><br><span class="line">    233 / 0</span><br><span class="line">    # print(num)</span><br><span class="line">    # open(&apos;dontExistFile.txt&apos;)</span><br><span class="line">except NameError:</span><br><span class="line">    print(&apos;变量未命名的异常进行处理&apos;)</span><br><span class="line">except FileNotFoundError:</span><br><span class="line">    print(&apos;没找到文件呀&apos;)</span><br><span class="line">except Exception: # 上面的异常都没捕获到的话，这个Exception一定会捕获到</span><br><span class="line">    print(&apos;上面的异常都没捕获到的话，这个Exception一定会捕获到&apos;)</span><br><span class="line"></span><br><span class="line">print(&apos;----outside---&apos;)</span><br><span class="line"># 输出 </span><br><span class="line"># 上面的异常都没捕获到的话，这个Exception一定会捕获到</span><br><span class="line"># ----outside---</span><br></pre></td></tr></table></figure>
+
+<p>还可以在Exception中看到具体的异常信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    233 / 0</span><br><span class="line">    # print(num)</span><br><span class="line">    # open(&apos;dontExistFile.txt&apos;)</span><br><span class="line">except NameError:</span><br><span class="line">    print(&apos;变量未命名的异常进行处理&apos;)</span><br><span class="line">except FileNotFoundError:</span><br><span class="line">    print(&apos;没找到文件呀&apos;)</span><br><span class="line">except Exception as errName: # 上面的异常都没捕获到的话，这个Exception一定会捕获到</span><br><span class="line">    print(&apos;上面的异常都没捕获到的话，这个Exception一定会捕获到&apos;)</span><br><span class="line">    print(errName)</span><br><span class="line"></span><br><span class="line">print(&apos;----outside---&apos;)</span><br><span class="line"># 输出 </span><br><span class="line"># 上面的异常都没捕获到的话，这个Exception一定会捕获到</span><br><span class="line"># division by zero</span><br><span class="line"># ----outside---</span><br></pre></td></tr></table></figure>
+
+<p>写成<code>except Exception as var</code>，信息就在var里。</p>
+<p>如果还要对<code>try</code>中没有出现异常情况做处理，可以增加一个<code>else:</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    233 / 1</span><br><span class="line">    # 233 / 0</span><br><span class="line">    # print(num)</span><br><span class="line">    # open(&apos;dontExistFile.txt&apos;)</span><br><span class="line">except NameError:</span><br><span class="line">    print(&apos;变量未命名的异常进行处理&apos;)</span><br><span class="line">except FileNotFoundError:</span><br><span class="line">    print(&apos;没找到文件呀&apos;)</span><br><span class="line">except Exception as errName: # 上面的异常都没捕获到的话，这个Exception一定会捕获到</span><br><span class="line">    print(&apos;上面的异常都没捕获到的话，这个Exception一定会捕获到&apos;)</span><br><span class="line">    print(errName)</span><br><span class="line">else:</span><br><span class="line">    print(&apos;程序没有出现异常&apos;)</span><br><span class="line"></span><br><span class="line">print(&apos;----outside---&apos;)</span><br><span class="line"># 输出 </span><br><span class="line"># 程序没有出现异常</span><br><span class="line"># ----outside---</span><br></pre></td></tr></table></figure>
+
+<p>还有一个<code>finally</code>语句，指的是不管<code>try</code>中有没有异常 最后都会执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    233 / 1</span><br><span class="line">    # 233 / 0</span><br><span class="line">    # print(num)</span><br><span class="line">    # open(&apos;dontExistFile.txt&apos;)</span><br><span class="line">except NameError:</span><br><span class="line">    print(&apos;变量未命名的异常进行处理&apos;)</span><br><span class="line">except FileNotFoundError:</span><br><span class="line">    print(&apos;没找到文件呀&apos;)</span><br><span class="line">except Exception as errName: # 上面的异常都没捕获到的话，这个Exception一定会捕获到</span><br><span class="line">    print(&apos;上面的异常都没捕获到的话，这个Exception一定会捕获到&apos;)</span><br><span class="line">    print(errName)</span><br><span class="line">else:</span><br><span class="line">    print(&apos;程序没有出现异常&apos;)</span><br><span class="line">finally:</span><br><span class="line">    print(&apos;不管try里有没有异常 最后都会执行&apos;)</span><br><span class="line"></span><br><span class="line">print(&apos;----outside---&apos;)</span><br><span class="line"># 输出 </span><br><span class="line"># 程序没有出现异常</span><br><span class="line"># 不管try里有没有异常 最后都会执行</span><br><span class="line"># ----outside---</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    # 233 / 1</span><br><span class="line">    233 / 0</span><br><span class="line">    # print(num)</span><br><span class="line">    # open(&apos;dontExistFile.txt&apos;)</span><br><span class="line">except NameError:</span><br><span class="line">    print(&apos;变量未命名的异常进行处理&apos;)</span><br><span class="line">except FileNotFoundError:</span><br><span class="line">    print(&apos;没找到文件呀&apos;)</span><br><span class="line">except Exception as errName: # 上面的异常都没捕获到的话，这个Exception一定会捕获到</span><br><span class="line">    print(&apos;上面的异常都没捕获到的话，这个Exception一定会捕获到&apos;)</span><br><span class="line">    print(errName)</span><br><span class="line">else:</span><br><span class="line">    print(&apos;程序没有出现异常&apos;)</span><br><span class="line">finally:</span><br><span class="line">    print(&apos;不管try里有没有异常 最后都会执行&apos;)</span><br><span class="line"></span><br><span class="line">print(&apos;----outside---&apos;)</span><br><span class="line"># 输出 </span><br><span class="line"># 上面的异常都没捕获到的话，这个Exception一定会捕获到</span><br><span class="line"># divison by zero</span><br><span class="line"># 不管try里有没有异常 最后都会执行</span><br><span class="line"># ----outside---</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常的传递"><a href="#异常的传递" class="headerlink" title="异常的传递"></a>异常的传递</h2><p>先来看一个异常传递的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def fn1():</span><br><span class="line">    print(&apos;fn1-1&apos;)</span><br><span class="line">    print(num)</span><br><span class="line">    print(&apos;fn1-2&apos;)</span><br><span class="line"></span><br><span class="line">def fn2():</span><br><span class="line">    print(&apos;fn2-1&apos;)</span><br><span class="line">    fn1()</span><br><span class="line">    print(&apos;fn2-2&apos;)</span><br><span class="line"></span><br><span class="line">def fn3():</span><br><span class="line">    try:</span><br><span class="line">        fn1()</span><br><span class="line">        # fn2()</span><br><span class="line">    except Exception as result:</span><br><span class="line">        print(&quot;发生的异常为：%s&quot;%result)</span><br><span class="line"></span><br><span class="line">fn3() # 输出</span><br><span class="line"># fn1-1</span><br><span class="line"># 发生的异常为：name &apos;num&apos; is not defined</span><br></pre></td></tr></table></figure>
+
+<p>分析上述的例子：</p>
+<ol>
+<li>调用fn3(),在<code>try</code>语句中调用fn1(),然后执行到<code>print(num)</code>这一句，抛出异常</li>
+<li>但是由于fn1()中没有对异常进行捕获和处理，所以程序将异常传递出来，传递到fn3()中的<code>try</code>中，在fn3()中被捕获。</li>
+</ol>
+<p>上述例子中就存在着异常的传递，如果在fn3()中也没有使用<code>try</code>和<code>except</code>进行异常捕获和处理的话，那么就会把异常传递给程序默认的异常处理，即<strong>报错崩溃</strong>。</p>
+<p>对于上述例子，如果我们在fn3()中，调用fn2()的话：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def fn1():</span><br><span class="line">    print(&apos;fn1-1&apos;)</span><br><span class="line">    print(num)</span><br><span class="line">    print(&apos;fn1-2&apos;)</span><br><span class="line"></span><br><span class="line">def fn2():</span><br><span class="line">    print(&apos;fn2-1&apos;)</span><br><span class="line">    fn1()</span><br><span class="line">    print(&apos;fn2-2&apos;)</span><br><span class="line"></span><br><span class="line">def fn3():</span><br><span class="line">    try:</span><br><span class="line">        # fn1()</span><br><span class="line">        fn2()</span><br><span class="line">    except Exception as result:</span><br><span class="line">        print(&quot;发生的异常为：%s&quot;%result)</span><br><span class="line"></span><br><span class="line">fn3()</span><br><span class="line"># 输出：</span><br><span class="line"># fn2-1</span><br><span class="line"># fn1-1</span><br><span class="line"># 发生的异常为：name &apos;num&apos; is not defined</span><br></pre></td></tr></table></figure>
+
+<p>这次的运行顺序也是一样的：</p>
+<ol>
+<li>调用fn2(),fn2()中调用fn1(),fn1()中然后抛出异常，fn1()自身没有异常处理操作，将异常传递给fn2()</li>
+<li>fn2()中也没有异常处理，那么将异常传递给fn3()中，然后使用fn3()中的异常处理。</li>
+</ol>
+<h2 id="抛出自定义的异常"><a href="#抛出自定义的异常" class="headerlink" title="抛出自定义的异常"></a>抛出自定义的异常</h2><p>可以通过<code>raise()</code>来引发一个自定义的异常</p>
+<p>首先来明确一下<code>except</code>的用法，我们写<code>except</code>后面跟一个异常名字，其实<strong>异常本质上是一个类</strong>，我们使用<code>except</code>后面加的是这个类的名字。</p>
+<p>所以如果想抛出自定义的异常的话，我们需要先定义一个自定义的异常类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class DefinedException(Exception):</span><br><span class="line">    # DefinedException 就是我们创建的自定义的异常的类名。</span><br><span class="line">    # 注意到我们自定义的异常类是继承自Exception这个类的， Exception是所有异常类的父类</span><br><span class="line">    def __init__(self,length,atLeast):</span><br><span class="line">        self.length = length</span><br><span class="line">        self.atLeast = atLeast</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中我们就定义了一个自定义的异常类，这个异常类接收两个参数作为属性。</p>
+<p>接下来看这个自定义异常类的使用场景：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class DefinedException(Exception):</span><br><span class="line">    # DefinedException 就是我们创建的自定义的异常的类名。</span><br><span class="line">    # 注意到我们自定义的异常类是继承自Exception这个类的， Exception是所有异常类的父类</span><br><span class="line">    def __init__(self,length,atLeast):</span><br><span class="line">        self.length = length</span><br><span class="line">        self.atLeast = atLeast</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    try:</span><br><span class="line">        inputStr = input(&apos;输入一串字符: &apos;)</span><br><span class="line">        if( len(inputStr) &lt; 3):</span><br><span class="line">            raise(DefinedException( len(inputStr),3) )</span><br><span class="line">            # 注意这里的raise,传入的是异常类创建出来的一个实例对象</span><br><span class="line">        </span><br><span class="line">    except DefinedException as result:</span><br><span class="line">        print(&apos;由于输入字符串过短，自定义异常触发&apos;)</span><br><span class="line">        print(&apos;输入的字符串长度为：%d,至少应该输入的长度为：%d&apos;%(result.length,result.atLeast))</span><br><span class="line">        </span><br><span class="line">    else:</span><br><span class="line">        print(&apos;没发生异常&apos;)</span><br><span class="line"></span><br><span class="line">main()</span><br><span class="line"># 输出为：</span><br><span class="line"># 输入一串字符: we</span><br><span class="line"># 由于输入字符串过短，自定义异常触发</span><br><span class="line"># 输入的字符串长度为：2,至少应该输入的长度为：3</span><br></pre></td></tr></table></figure>
+
+<p>我们在<code>raise()</code>中传递了一个自定义异常类创建出来的实例对象，从而触发了一个我们自己定义的异常。<br>值得一提的是，例子中的<code>except DefinedException as result:</code>这一句中的<code>result</code>就是我们上面<code>raise()</code>中传入的那个对象的引用。</p>
+<h2 id="异常处理中抛出异常的情况"><a href="#异常处理中抛出异常的情况" class="headerlink" title="异常处理中抛出异常的情况"></a>异常处理中抛出异常的情况</h2><p>来看一个在异常处理中不想对异常进行处理从而再次抛出异常的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Division:</span><br><span class="line">    def __init__(self,switch):</span><br><span class="line">        self.switch = switch</span><br><span class="line">    </span><br><span class="line">    def calc(self,a,b):</span><br><span class="line">        try:</span><br><span class="line">            return a/b</span><br><span class="line">        except Exception as result:</span><br><span class="line">            # 我们在异常处理中，可以选择进行处理，也可以不做处理，再次将异常抛出</span><br><span class="line"></span><br><span class="line">            if self.switch: # 对异常进行处理的情况</span><br><span class="line">                print(&apos;对异常进行处理,异常信息为：%s&apos;%result)</span><br><span class="line">            else: # 不对异常进行处理，而是再次抛出</span><br><span class="line">                raise # 直接写raise就是将捕获的异常直接抛出</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">d1 = Division(True) # 对异常进行处理的情况</span><br><span class="line">d2 = Division(False) # 不对异常进行处理</span><br><span class="line"></span><br><span class="line">d1.calc(233,0) # 输出：对异常进行处理,异常信息为：division by zero</span><br><span class="line"></span><br><span class="line">d2.calc(233,0) # 由于没有对异常进行处理反而是再次抛出，所以采用程序默认的异常处理办法</span><br><span class="line"># 即报错，程序崩溃， ZeroDivisionError: division by zero</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

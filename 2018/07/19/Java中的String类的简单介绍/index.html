@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的String类的简单介绍">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的String类的简单介绍</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-07-19</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/String/">#String</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的String类的简单介绍</p>
+<a id="more"></a>
+
+<p>String本质上是一个<strong>字符数组</strong>;</p>
+<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>String有很多构造方法，这边只介绍几个：</p>
+<ol>
+<li>String(String original)</li>
+<li>String(char[] value);</li>
+<li>String(char[] value, int offset, int count);</li>
+</ol>
+<p>来看几个例子：<br>1: String(String original)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s1 = new String(&quot;hello&quot;);</span><br><span class="line">        System.out.println(s1); // String类的对象  直接输出时不会输出内存地址 而是内存地址指向的对象中包含的内容</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>String是一种比较<strong>特殊的引用类型</strong>,直接输出的时候输出的不是内存地址，而是其指向的对象的内容。</p>
+<p>2: String(char[] value);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        char[] chs = &#123;&apos;h&apos;,&apos;e&apos;,&apos;l&apos;,&apos;l&apos;,&apos;o&apos;&#125;;</span><br><span class="line">        String s2 = new String(chs);</span><br><span class="line">        System.out.println(s2); // hello</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.: String(char[] value, int offset, int count):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        char[] chs = &#123;&apos;h&apos;,&apos;e&apos;,&apos;l&apos;,&apos;l&apos;,&apos;o&apos;&#125;;</span><br><span class="line">        String s3 = new String(chs, 1, 3);</span><br><span class="line">        System.out.println(s3); // ell 从第1个index开始，截取长度为3的字符串</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4: 字面量方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s4 = &quot;hello&quot;;</span><br><span class="line">        System.out.println(s4); // hello</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字面量创建和使用构造方法-即-new-String-创建的区别"><a href="#字面量创建和使用构造方法-即-new-String-创建的区别" class="headerlink" title="字面量创建和使用构造方法(即 new String())创建的区别"></a>字面量创建和使用构造方法(即 new String())创建的区别</h2><p>首先明确一点，字符串的内容是存储在方法区中的常量池里面的，这么做是为了字符串的重复使用。</p>
+<p>来看例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s1 = new String(&quot;hello&quot;);</span><br><span class="line">        String s2 = new String(&quot;hello&quot;);</span><br><span class="line">        System.out.println(s1 == s2); // false</span><br><span class="line">        </span><br><span class="line">        String s3 = &quot;hello&quot;;</span><br><span class="line">        String s4 = &quot;hello&quot;;</span><br><span class="line">        System.out.println(s3 == s4); // true</span><br><span class="line">        System.out.println(s1 == s3); // false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么使用<code>new String()</code>操作的时候，只要有<code>new</code>操作，那么肯定要在堆中开辟空间，所以s1,s2指向了堆中的不同地址的对象。但是由于字符串的内容是存储在方法区中的常量池里面的，所以s1,s2中的内容，还是一个地址，指向的是常量池中的内容即”hello”，s1和s2的内存地址不同，所以<code>s1 == s2</code>为false。</p>
+<p>然而对于字面量方式创建字符串来说，并没有<code>new</code>操作，所以没有在堆中进行开辟空间，而是直接将s3,s4直接指向了常量池中的内容即”hello”,所以<code>s3 == s4</code>是true(常量池中，重复使用)。</p>
+<p>另外关于<code>s1 == s3</code>为false,是因为s1存的是指向的是堆中的对象的地址，这个堆中的对象的内容才是指向常量池中字符串的地址，而s3存的就是指向常量池中字符串的这个地址。所以二者不是一个地址。</p>
+<p>pic</p>
+<p>总结一下：<br><code>new String()</code>创建的字符串是在堆内存，其的值又指向了方法区的常量池。<br>而字面量创建的字符串，直接就指向了方法区的常量池。</p>
+<h3 id="String类常用的判断功能"><a href="#String类常用的判断功能" class="headerlink" title="String类常用的判断功能"></a>String类常用的判断功能</h3><ul>
+<li>boolean equals(Object obj)</li>
+<li>boolean equalsIgnoreCase(String str)</li>
+<li>boolean startsWith(String str)</li>
+<li>boolean endsWith(String str)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s1 = &quot;hello&quot;;</span><br><span class="line">        String s2 = &quot;Hello&quot;;</span><br><span class="line">        String s3 = &quot;hello&quot;;</span><br><span class="line">        </span><br><span class="line">        System.out.println( s1.equals(s2)); // false</span><br><span class="line">        System.out.println( s1.equals(s3)); // true</span><br><span class="line">        System.out.println( s1.equalsIgnoreCase(s2)); // true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s1 = &quot;hello&quot;;</span><br><span class="line">        </span><br><span class="line">        System.out.println( s1.startWith(&quot;hel&quot;)); // true</span><br><span class="line">        System.out.println( s1.startWith(&quot;DeeJay&quot;)); // false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="String类常用的获取功能"><a href="#String类常用的获取功能" class="headerlink" title="String类常用的获取功能"></a>String类常用的获取功能</h3><ul>
+<li>int length()</li>
+<li>char charAt(int index)</li>
+<li>int indexOf(String str)</li>
+<li>String subString(int start)</li>
+<li>String subString(int start, int end)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s1 = &quot;hello&quot;;</span><br><span class="line">        </span><br><span class="line">        System.out.println( s1.length() ); // 5</span><br><span class="line">        System.out.println( s1.charAt(0)); // h</span><br><span class="line">        System.out.println( s1.indexOf(&quot;h&quot;)); // 0</span><br><span class="line">        System.out.println( s1.subString(2)); // llo</span><br><span class="line">        System.out.println( s1.subString(2,4));  // ll</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="String类常见的转换功能"><a href="#String类常见的转换功能" class="headerlink" title="String类常见的转换功能"></a>String类常见的转换功能</h3><ul>
+<li>char[] toCharArray()</li>
+<li>String toLowerCase()</li>
+<li>String toUpperCase()</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s1 = &quot;Hello&quot;;</span><br><span class="line">        char[] chs = s1.toCharArray();</span><br><span class="line">        for(int i = 0; i &lt; chs.length; i ++) &#123;</span><br><span class="line">            System.out.println(chs[i]); // 依次输出 H e l l o</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        System.out.println( s1.toLowerCase() ); // hello</span><br><span class="line">        System.out.println( s1.toUpperCase() ); // HELLO</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>字符串的遍历方法：<br>    1. <code>length()</code>加上<code>charAt()</code><br>    2. 把字符串转换为字符数组<code>toCharArray()</code>，然后遍历数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s1 = &quot;hello wrold&quot;;</span><br><span class="line">        for(int i = 0; i &lt; s1.length(); i ++) &#123;</span><br><span class="line">            System.out.println(s1.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        // 或者也可以使用toCharArray()</span><br><span class="line">        char[] chs = s1.toCharArray();</span><br><span class="line">        for(int i = 0; i &lt; chs.length; i ++) &#123;</span><br><span class="line">            System.out.println(chs[i]);            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="String类的其他常用api"><a href="#String类的其他常用api" class="headerlink" title="String类的其他常用api"></a>String类的其他常用api</h3><ul>
+<li>String trim()</li>
+<li>String[] split(String str)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String str = &quot;a,b,c&quot;;</span><br><span class="line">        String[] strArr = str.split(&quot;,&quot;);</span><br><span class="line">        </span><br><span class="line">        for(int i = 0; i &lt; strArr.length; i ++) &#123;</span><br><span class="line">            System.out.println(strArr[i]);  // 依次输出 a b c           </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="关于StringBuilder"><a href="#关于StringBuilder" class="headerlink" title="关于StringBuilder"></a>关于StringBuilder</h3><p>对于简单的字符串拼接问题，由于String不可变，每次进行拼接的时候，其实本质上是在先在常量池中新增一个空间存放”world”,然后在新增一个空间存放<code>&quot;helloworld&quot;</code>,最后把str指向这个<code>&quot;helloworld&quot;</code>，而之前常量池中的<code>&quot;hello&quot;</code>和<code>&quot;world&quot;</code>就变成了垃圾。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class TestString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String str = &quot;hello&quot;;</span><br><span class="line">        str += &quot;world&quot;;</span><br><span class="line">        </span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而StringBuilder就可以解决这个问题，StringBuilder是一个<strong>可变的</strong>字符序列.</p>
+<p><strong>String的内容是固定不可变的，而StringBuilder是可变的</strong></p>
+<p>####关于StringBuilder的使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class TestStringBuilder &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        StringBuilder sb = new StringBuilder(); // 默认的无参的构造方法 创建的容量为16</span><br><span class="line">        </span><br><span class="line">        System.out.println(sb.capaticy()); // 16</span><br><span class="line">        System.out.println(sb.length()); // 0</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="StringBuilder类常见操作"><a href="#StringBuilder类常见操作" class="headerlink" title="StringBuilder类常见操作"></a>StringBuilder类常见操作</h3><ul>
+<li>public StringBuilder append(任意类型)</li>
+<li>public StringBuilder reverse()</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class TestStringBuilder &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        StringBuilder sb = new StringBuilder(); </span><br><span class="line">        StringBuilder sb2 = sb.append(&quot;Hello&quot;) ;</span><br><span class="line">        System.out.println(sb); // Hello</span><br><span class="line">        System.out.println(sb2); // Hello</span><br><span class="line">        System.out.println(sb == sb2); // true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>来看这个例子 ，append返回的也是一个StringBuilder类的值，同时调用append()之后，原来的那个sb的值也发生了改变，最后发现sb 和 sb2 指向的是同一块地址，即说明StringBuilder是可变的(可修改)。</p>
+<p>对于<code>append()</code>，其改变了自身之后，又返回了其自身，所以支持链式调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class TestStringBuilder &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        StringBuilder sb = new StringBuilder(); </span><br><span class="line">        sb.append(&quot;Hello&quot;).append(&quot;World&quot;).append(true);</span><br><span class="line">        System.out.println(sb); // HelloWorldtrue</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>reverse()</code>就是反转StringBuilder类的对象。</p>
+<h3 id="String和StringBuilder类的相互转换"><a href="#String和StringBuilder类的相互转换" class="headerlink" title="String和StringBuilder类的相互转换"></a>String和StringBuilder类的相互转换</h3><ul>
+<li><p>StringBuilder ====&gt; String:<br>使用<code>public String toString()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class TestStringBuilder &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        StringBuilder sb = new StringBuilder(); </span><br><span class="line">        sb.append(&quot;hello&quot;).append(&quot;world&quot;);</span><br><span class="line">        </span><br><span class="line">        String s = sb.toString();</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>String  ====&gt; StringBuilder:<br>使用构造函数 <code>StringBuilder(String str)</code></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class TestStringBuilder &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s = &quot;Hello world&quot;;</span><br><span class="line">        StringBuilder sb = new StringBuilder(s); </span><br><span class="line">        System.out.println(sb); // Hello world        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

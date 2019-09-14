@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Http的一些知识点复习">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Http的一些知识点复习</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-07-29</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Http/">#Http</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Http的一些知识点复习</p>
+<a id="more"></a>
+
+<p>之前学习过的<a href="https://www.jianshu.com/p/e6a8a05c77b8" target="_blank" rel="noopener">http的基本知识</a>，在学习Spring boot的时候复习一下相关概念</p>
+<p>相关阅读：<br><a href="https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81" title="null" target="_blank" rel="noopener">HTTP状态码</a><br><a href="http://www.ruanyifeng.com/blog/2016/08/http.html" title="null" target="_blank" rel="noopener">HTTP协议入门 - 阮一峰</a><br><a href="http://www.ruanyifeng.com/blog/2016/08/http.html" title="null" target="_blank" rel="noopener">HTTP协议WIKI</a><br><a href="https://tools.ietf.org/html/rfc7230" title="null" target="_blank" rel="noopener">HTTP RFC</a></p>
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><h2 id="HTTP协议是互联网的基础协议"><a href="#HTTP协议是互联网的基础协议" class="headerlink" title="HTTP协议是互联网的基础协议"></a>HTTP协议是互联网的基础协议</h2><ul>
+<li>本质上是Web前端程序和Web后端程序的通信的协议</li>
+<li>定义了前端给后端发送请求的格式</li>
+<li>同时也定义了后端解析前端发来的请求(HTTP请求)的方式</li>
+<li>使用程序语言来描述, HTTP协议给后端程序定义了一个接口</li>
+</ul>
+<h2 id="HTTP协议格式"><a href="#HTTP协议格式" class="headerlink" title="HTTP协议格式"></a>HTTP协议格式</h2><h3 id="HTTP请求格式"><a href="#HTTP请求格式" class="headerlink" title="HTTP请求格式"></a>HTTP请求格式</h3><h4 id="基本元素"><a href="#基本元素" class="headerlink" title="基本元素"></a>基本元素</h4><ul>
+<li>请求路径 — URL, 例如: <code>https://xxx.com/yyy/123</code></li>
+<li>请求操作命令(动词): GET, POST, PUT, DELETE, TRACE, OPTIONS, CONNECT, PATCH</li>
+<li>客户端标记 User-Agent, 值的例子: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5)</li>
+<li>传输的内容格式: Content-Type: application/json</li>
+<li>接收类型 Accept, 值的例子: text/plain, text/html, image/jpeg</li>
+<li>Cookie: 用于传送和状态相关的信息的键值对</li>
+</ul>
+<h2 id="HTTP回应格式"><a href="#HTTP回应格式" class="headerlink" title="HTTP回应格式"></a>HTTP回应格式</h2><h3 id="基本元素-1"><a href="#基本元素-1" class="headerlink" title="基本元素"></a>基本元素</h3><ul>
+<li>HTTP协议版本: HTTP/1.1</li>
+<li>返回状态 Status: 200, 201, 404 (详细示例看后文)</li>
+<li>时间, 例如: Sat, 29 Sep 2018 07:24:53 GMT</li>
+<li>返回内容类型: text/plain, text/html, image/jpeg</li>
+</ul>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Sat, 29 Sep 2018 07:24:53 GMT</span><br><span class="line">Content-Type: image/vnd.microsoft.icon</span><br><span class="line">Content-Length: 3638</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Server: nginx/1.6.2</span><br><span class="line">Last-Modified: Thu, 24 May 2018 05:56:53 GMT</span><br><span class="line">ETag: &quot;e36-56ced517f0753&quot;</span><br><span class="line">Cache-Control: max-age=2592000, public</span><br><span class="line">X-ORCA-Accelerator: HIT from 006.mul.lax01.us.krill.zenlogic.net</span><br><span class="line">X-Cache: HIT from 006.mul.lax01.us.krill.zenlogic.net</span><br><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>一个HTTP请求在语义上表达对一个互联网资源(URL)的操作(GET, POST, PUT)</li>
+<li>然后Web后端返回资源操作的结果和相关信息</li>
+</ul>
+<h2 id="常见的Content-Type字段值"><a href="#常见的Content-Type字段值" class="headerlink" title="常见的Content-Type字段值"></a>常见的Content-Type字段值</h2><ul>
+<li>text/plain</li>
+<li>text/html</li>
+<li>text/css</li>
+<li>image/jpeg</li>
+<li>image/png</li>
+<li>image/svg+xml</li>
+<li>audio/mp4</li>
+<li>video/mp4</li>
+<li>application/javascript</li>
+<li>application/pdf</li>
+<li>application/zip</li>
+<li>application/atom+xml</li>
+</ul>
+<h2 id="HTTP状态码-Status"><a href="#HTTP状态码-Status" class="headerlink" title="HTTP状态码 Status"></a>HTTP状态码 Status</h2><p><a href="https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81" title="null" target="_blank" rel="noopener">HTTP状态码</a></p>
+<ul>
+<li>1xx消息——请求已被服务器接收，继续处理</li>
+<li>2xx成功——请求已成功被服务器接收、理解、并接受</li>
+<li>3xx重定向——需要后续操作才能完成这一请求</li>
+<li>4xx请求错误——请求含有词法错误或者无法被执行</li>
+<li>5xx服务器错误——服务器在处理某个正确请求时发生错误</li>
+</ul>
+<h2 id="如何理解HTTP协议是无状态"><a href="#如何理解HTTP协议是无状态" class="headerlink" title="如何理解HTTP协议是无状态"></a>如何理解HTTP协议是无状态</h2><h3 id="HTTP请求的实现应该是无状态的"><a href="#HTTP请求的实现应该是无状态的" class="headerlink" title="HTTP请求的实现应该是无状态的"></a>HTTP请求的实现应该是无状态的</h3><ul>
+<li>每个请求都是独立的</li>
+<li>每个请求都需要显示的附带状态信息. 比如告诉后端, 我是谁 (认证), 我现在在什么状态</li>
+</ul>
+<h3 id="Spring实现响应GET-POST-PUT-DELETE操作请求"><a href="#Spring实现响应GET-POST-PUT-DELETE操作请求" class="headerlink" title="Spring实现响应GET, POST, PUT, DELETE操作请求"></a>Spring实现响应GET, POST, PUT, DELETE操作请求</h3><ul>
+<li>GET /users HTTP/1.1<h3 id="使用Postman发送GET-POST-PUT-DELETE操作请求"><a href="#使用Postman发送GET-POST-PUT-DELETE操作请求" class="headerlink" title="使用Postman发送GET, POST, PUT, DELETE操作请求"></a>使用Postman发送GET, POST, PUT, DELETE操作请求</h3></li>
+<li>操作相关注解 @PostMapping, @GetMapping, @PutMapping, Deletemapping</li>
+<li>参数相关注解 @RequestBody, @PathVariable</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

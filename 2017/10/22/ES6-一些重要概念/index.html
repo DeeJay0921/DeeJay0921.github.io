@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="ES6-一些重要概念">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">ES6-一些重要概念</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-10-22</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/ES6/">#ES6</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>ES6-一些重要概念</p>
+<a id="more"></a>
+
+<h1 id="一，let-const的理解"><a href="#一，let-const的理解" class="headerlink" title="一，let/const的理解"></a>一，let/const的理解</h1><p><a href="https://zhuanlan.zhihu.com/p/28140450" target="_blank" rel="noopener">方应航：我用了两个月的时间才理解 let</a></p>
+<p>##let 添加了for if等块级作用域</p>
+<p>通过例子来分析：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (var i = 0; i &lt; 10; i ++) &#123;</span><br><span class="line">    console.log(i)</span><br><span class="line">&#125;</span><br><span class="line">console.log(i) //10</span><br></pre></td></tr></table></figure>
+
+<p>对于var来说，js只有函数作用域，所以上述for循环中的i就是全局的i，输出为10</p>
+<p>for循环中换为let声明后： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (let i = 0; i &lt; 10; i ++) &#123;</span><br><span class="line">    console.log(i)</span><br><span class="line">&#125;</span><br><span class="line">console.log(i) //此时i为undefined</span><br></pre></td></tr></table></figure>
+
+<p>let将for的{}也视为一个作用域，外部拿不到这个i，为undefined</p>
+<p>那么使用let之后具体内部的实现通过babel编译后为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (var _i = 0; _i &lt; 10; _i ++) &#123;</span><br><span class="line">    console.log(_i)</span><br><span class="line">&#125;</span><br><span class="line">console.log(i)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到是通过替换变量名称实现的这个效果。</p>
+<p>同样的，对于if判断，lt也实现了对应的块级作用域</p>
+<p>一样，先看常规var声明的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function fn () &#123;</span><br><span class="line">    var n = 0</span><br><span class="line">    if (true) &#123;</span><br><span class="line">        var n = 1</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(n) //1</span><br><span class="line">&#125;</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+
+<p>由于if没有块级作用域，所以输出的是n为1</p>
+<p>那么将var替换为let之后的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function fn () &#123;</span><br><span class="line">    let n = 0</span><br><span class="line">    if (true) &#123;</span><br><span class="line">        let n = 1</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(n) // 0</span><br><span class="line">&#125;</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+
+<p>使用let之后，if中的n就变为if块级作用域中的局部n，所以输出的n还是fn函数的n，不是if中的n</p>
+<p>通过babel编译之后的代码为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function fn () &#123;</span><br><span class="line">    var n = 0 // 这里的let编译成var 因为es5本身函数就是作用域</span><br><span class="line">    if (true) &#123;</span><br><span class="line">        var _n = 1 //这里的let就是通过替换变量生成了if的作用域</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(n) // 0</span><br><span class="line">&#125;</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+
+<p>这样就很能理解let到底做了什么事</p>
+<p>##const  定义常量</p>
+<p>const指令定义一个常量 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const b = 0;</span><br><span class="line"></span><br><span class="line">// b = 1; //报错 常量不能再进行改写 为read-only</span><br></pre></td></tr></table></figure>
+
+<p>####const定义对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const c = &#123;</span><br><span class="line">    a: 1</span><br><span class="line">&#125;</span><br><span class="line">c.a = 2 // 不报错 因为JS中的对象仅仅是个指针，c中存储的地址并没有改变</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c = &#123;</span><br><span class="line">    a: 2</span><br><span class="line">&#125; // 此时就会报错 因为地址变为了另外一个对象的地址</span><br></pre></td></tr></table></figure>
+
+<h1 id="二，解构赋值-（Destructing）"><a href="#二，解构赋值-（Destructing）" class="headerlink" title="二，解构赋值 （Destructing）"></a>二，解构赋值 （Destructing）</h1><p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值。 </p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let a = 1,</span><br><span class="line">    b = 2,</span><br><span class="line">    c = 3</span><br><span class="line">//编译为</span><br><span class="line">var a = 1,</span><br><span class="line">    b = 2,</span><br><span class="line">    c = 3</span><br></pre></td></tr></table></figure>
+
+<p>上述例子使用解构赋值： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let [a, b, c] = [1, 2, 3]</span><br><span class="line">//编译为</span><br><span class="line">var a = 1,</span><br><span class="line">    b = 2,</span><br><span class="line">    c = 3</span><br></pre></td></tr></table></figure>
+
+<p>对于对象的解构赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let &#123; d,e &#125; = &#123; d: 1,e: 2 &#125;</span><br><span class="line">//编译为</span><br><span class="line">var _d$e = &#123; d: 1,e: 2 &#125;,</span><br><span class="line">    d = _d$e.d,</span><br><span class="line">    e = _d$e.e;</span><br></pre></td></tr></table></figure>
+
+<p>所以对象的解构赋值是按照这个key的名字来进行的。</p>
+<p>进行深度解构： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    p: [</span><br><span class="line">        &apos;Hello&apos;,</span><br><span class="line">        &#123;y: &apos;World&apos;&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br><span class="line">let &#123; p: [x, &#123; y &#125;] &#125; = obj;</span><br><span class="line">// 编译为</span><br><span class="line">var obj = &#123;</span><br><span class="line">    p: [&apos;Hello&apos;, &#123; y: &apos;World&apos; &#125;]</span><br><span class="line">&#125;;</span><br><span class="line">var _obj$p = _slicedToArray(obj.p,2),</span><br><span class="line">    x = _obj$p[0],</span><br><span class="line">    y = _obj$p[1].y;</span><br></pre></td></tr></table></figure>
+
+<p>先克隆这个数据结构，按照数据结构进行层级展开，进行赋值。</p>
+<p>###解构赋值的应用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//解构赋值的应用</span><br><span class="line"></span><br><span class="line">function add ([x,y]) &#123;</span><br><span class="line">    return x + y;</span><br><span class="line">&#125;</span><br><span class="line">add([1,2]);  //3</span><br><span class="line">// 编译为</span><br><span class="line">function add(_ref) &#123;</span><br><span class="line">    var _ref2 = _slicedToArray(_ref, 2),</span><br><span class="line">        x = _ref2[0],</span><br><span class="line">        y = _ref2[1];</span><br><span class="line"></span><br><span class="line">    return x + y;</span><br><span class="line">&#125;</span><br><span class="line">add([1, 2]); //3</span><br></pre></td></tr></table></figure>
+
+<p>在ES6中，我们可以通过解构赋值，进行<code>function ([x,y])</code>的传参，如果是ES5，那么只能写成<code>function(x,y)</code></p>
+<p>###字符串的解构赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 字符串的解构赋值</span><br><span class="line">const [a,b,c,d,e] = &apos;hello&apos;;</span><br><span class="line"> -----------------------------</span><br><span class="line">var _hello = &apos;hello&apos;,</span><br><span class="line">    _hello2 = _slicedToArray(_hello, 5),</span><br><span class="line">    a = _hello2[0],</span><br><span class="line">    b = _hello2[1],</span><br><span class="line">    c = _hello2[2],</span><br><span class="line">    d = _hello2[3],</span><br><span class="line">    e = _hello2[4];</span><br></pre></td></tr></table></figure>
+
+<h3 id="rest解构"><a href="#rest解构" class="headerlink" title="rest解构"></a>rest解构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const &#123;p,...rest &#125; = &#123;p: 1,a: 2,c: 3&#125;</span><br><span class="line">---------------------------------------</span><br><span class="line"></span><br><span class="line">    var _p$a$c = &#123; p: 1, a: 2, c: 3 &#125;,</span><br><span class="line">    p = _p$a$c.p,</span><br><span class="line">    rest = _objectWithoutProperties(_p$a$c, [&quot;p&quot;]);</span><br></pre></td></tr></table></figure>
+
+<h1 id="三，函数扩展"><a href="#三，函数扩展" class="headerlink" title="三，函数扩展"></a>三，函数扩展</h1><p>##函数参数的默认值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function log (x,y) &#123;</span><br><span class="line">    x = x ? x : true; //x没有就拿true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述函数中设置默认值为true的方法</p>
+<p>下面例子就是设置参数y的默认值为 ‘world’的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function log (x, y = &apos;world&apos;) &#123; // 这就实现了 y=y?y:&apos;world&apos;</span><br><span class="line">    console.log(x, y)</span><br><span class="line">&#125;</span><br><span class="line">-----------------------</span><br><span class="line">function log(x) &#123;</span><br><span class="line">    var y = arguments.length &gt; 1 &amp;&amp; arguments[1] !== undefined ? arguments[1] : &apos;world&apos;;</span><br><span class="line"></span><br><span class="line">    console.log(x, y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="rest参数"><a href="#rest参数" class="headerlink" title="rest参数"></a>rest参数</h2><p>ES6中引入了rest参数，用于获取函数的多余参数，这样就不需要使用arguments对象了。rest参数搭配的变量是一个数组，该变量将多余的参数放入数组中。</p>
+<p>举个求和函数的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function add (...values) &#123;</span><br><span class="line">    let sum = 0;</span><br><span class="line">    for (var val of values) &#123;</span><br><span class="line">        sum += val</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br><span class="line">add (2,5,3);</span><br></pre></td></tr></table></figure>
+
+<p>通过一个简单的例子来理解values：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function add (...values) &#123;</span><br><span class="line">    let sum = 0;</span><br><span class="line">    console.log(values)</span><br><span class="line">&#125;</span><br><span class="line">add (2,5,3);</span><br><span class="line">-------------------------------------</span><br><span class="line">function add() &#123; // 这边是没有传参的，而是通过下面的for循环遍历arguments得到的values</span><br><span class="line">    var sum = 0;</span><br><span class="line"></span><br><span class="line">    for (var _len = arguments.length, values = Array(_len), _key = 0; _key &lt; _len; _key++) &#123;</span><br><span class="line">        values[_key] = arguments[_key];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    console.log(values);</span><br><span class="line">&#125;</span><br><span class="line">add(2, 5, 3);</span><br></pre></td></tr></table></figure>
+
+<h4 id="…values前面还有参数的情况"><a href="#…values前面还有参数的情况" class="headerlink" title="…values前面还有参数的情况"></a>…values前面还有参数的情况</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function add (a,...values) &#123;</span><br><span class="line">    console.log(values)</span><br><span class="line">&#125;</span><br><span class="line">add (2,5,3); //[5,3]</span><br><span class="line">-------------------------------------------</span><br><span class="line">function add(a) &#123; //前面写定参数的话，那么参数就传入</span><br><span class="line">    for (var _len = arguments.length, values = Array(_len &gt; 1 ? _len - 1 : 0), _key = 1; _key &lt; _len; _key++) &#123;   //此时的_key序数号为1</span><br><span class="line">        values[_key - 1] = arguments[_key];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    console.log(values);</span><br><span class="line">&#125;</span><br><span class="line">add(2, 5, 3);</span><br></pre></td></tr></table></figure>
+
+<p>其他更多传入的参数同理。</p>
+<h2 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h2><p>扩展运算符就是三个点(…),好比<strong>rest参数的逆运算</strong>，将一个数组转为用逗号分隔的参数序列</p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>ES6允许使用箭头 <code>=&gt;</code>定义函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var f = v =&gt; v;</span><br><span class="line">------------------------</span><br><span class="line">var f = function f(v) &#123;</span><br><span class="line">  return v;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var f1 = v =&gt; &#123;</span><br><span class="line">    return v</span><br><span class="line">&#125;</span><br><span class="line">-------------------------</span><br><span class="line">var f1 = function f1(v) &#123;</span><br><span class="line">    return v;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>##箭头函数中的注意点</p>
+<ul>
+<li>this<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var f1 = () =&gt; &#123;</span><br><span class="line">    console.log(this) //undefined</span><br><span class="line">&#125;</span><br><span class="line">var f2 = function () &#123;</span><br><span class="line">    console.log(this)  //window</span><br><span class="line">&#125;</span><br><span class="line">//es6和es5的函数比较</span><br><span class="line">---------------------------------------</span><br><span class="line">var f1 = function f1() &#123;</span><br><span class="line">    console.log(undefined); //undefined</span><br><span class="line">&#125;;</span><br><span class="line">var f2 = function f2() &#123;</span><br><span class="line">    console.log(this); //window</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>这里的<strong>箭头函数中的this指向的是当前作用域所在的上下文的this</strong>。再看一个例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var f3 = function () &#123;</span><br><span class="line">    return () =&gt; &#123;</span><br><span class="line">        console.log(this)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">-----------------------------</span><br><span class="line">var f3 = function f3() &#123;</span><br><span class="line">    var _this = this;</span><br><span class="line"></span><br><span class="line">    return function () &#123;</span><br><span class="line">        console.log(_this);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>从这个例子分析，当前箭头函数的作用域为自身的这个{},这个{}所在的上下文即为f3函数的作用域的，所以这个箭头函数的this为f3中的this,<strong>即上一级的this</strong></p>
+<p>###绑定this<br>箭头函数可以绑定this对象，大大减少了显式绑定this对象的写法（call、apply、bind）。<br>函数绑定运算符是<strong>并排的两个冒号（::），双冒号左边是一个对象，右边是一个函数</strong>。该运算符会自动将左边的对象，作为上下文环境（即this对象），绑定到右边的函数上面。</p>
+<p>#Promise对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let p = new Promise( (resolve,reject) =&gt; &#123;</span><br><span class="line">    resolve(1)</span><br><span class="line">&#125;)</span><br><span class="line">console.log(p)</span><br><span class="line">// p ===&gt; fulfilled 1</span><br><span class="line">// Promise的状态 fulfilled pending rejected</span><br><span class="line">// Promise的值  有值 一直为空 有值</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">let p = new Promise( (resolve,reject) =&gt; &#123;</span><br><span class="line">    resolve(1)</span><br><span class="line">&#125;)</span><br><span class="line">console.log(p)</span><br><span class="line">// // p ===&gt; fulfilled 1</span><br><span class="line">// // Promise的状态 fulfilled pending rejected</span><br><span class="line">// // Promise的值  有值 一直为空 有值</span><br><span class="line"></span><br><span class="line">let p1 = p.then(val =&gt; &#123; //如果是then 那么这个函数作为resolve进行执行</span><br><span class="line">    console.log(val) //1</span><br><span class="line">&#125;)</span><br><span class="line">let p2 = p.then(val =&gt; &#123;</span><br><span class="line">    console.log(val) //1  再调用一次 值还是1 只要状态不是pending时，这个状态就永久的保持并且不会改变了</span><br><span class="line">//    所以再次调用也不会改变p，只是将其值输出</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>只要p的状态不是pending，而是确定有值了，这边p无论调用多少次，都不会改变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let p = new Promise( (resolve,reject) =&gt; &#123;</span><br><span class="line">    // resolve(1);</span><br><span class="line">    reject(2);</span><br><span class="line">&#125;)</span><br><span class="line">let p3 = p.catch(val =&gt; &#123; //catch时，作为reject执行</span><br><span class="line">    console.log(val) //2</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let p = new Promise((resolve,reject) =&gt; &#123;</span><br><span class="line">    resolve(1)</span><br><span class="line">&#125;)</span><br><span class="line">let p1 = p.then(val =&gt; &#123; //如果then里面的回调函数return出来一个值，那么这个值作为p1的promise value，并且状态变为fulfilled</span><br><span class="line">    return 2</span><br><span class="line">//    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果then里面的回调函数return出来一个值，那么这个值作为p1的值，并且状态变为fulfilled。如果在回调中不写return，那么就把函数默认return 的undefined作为p1的值。</p>
+<h1 id="Iterator-遍历器"><a href="#Iterator-遍历器" class="headerlink" title="Iterator(遍历器)"></a>Iterator(遍历器)</h1><p>Iterator的作用： </p>
+<ul>
+<li>为各种数据结构提供一个统一简便的访问接口</li>
+<li>使得各种数据结构的成员能够按某种次序排列</li>
+<li>ES6创造了一种新的for…of循环，Iterator接口主要用于for…of</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// const s = (...rest) =&gt; &#123;</span><br><span class="line">//     for(let val of rest) &#123; // 可以遍历数组</span><br><span class="line">//         console.log(val)</span><br><span class="line">//     &#125;</span><br><span class="line">// &#125;</span><br><span class="line">// s(1,2,3,4)</span><br><span class="line"></span><br><span class="line">// const s = function() &#123;</span><br><span class="line">//     for(let val of arguments) &#123;  //可以遍历 类数组对象</span><br><span class="line">//         console.log(val)</span><br><span class="line">//     &#125;</span><br><span class="line">// &#125;</span><br><span class="line">// s(1,2,3,4)</span><br><span class="line"></span><br><span class="line">// const s = &#123;</span><br><span class="line">//     a: 1,</span><br><span class="line">//     b: 2</span><br><span class="line">// &#125;</span><br><span class="line">// for (let val of s) &#123; //报错</span><br><span class="line">//     console.log(val)</span><br><span class="line">// &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="class"><a href="#class" class="headerlink" title="class"></a>class</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Test &#123;</span><br><span class="line">    constructor () &#123;</span><br><span class="line">        this.a = &apos;a&apos;;</span><br><span class="line">        this.b = &apos;b&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    c () &#123;</span><br><span class="line">        console.log(&apos;C&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">--------------------------------</span><br><span class="line">var Test = function () &#123;</span><br><span class="line">    function Test() &#123;</span><br><span class="line">        _classCallCheck(this, Test);</span><br><span class="line"></span><br><span class="line">        this.a = &apos;a&apos;;</span><br><span class="line">        this.b = &apos;b&apos;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    _createClass(Test, [&#123;</span><br><span class="line">        key: &apos;c&apos;,</span><br><span class="line">        value: function c() &#123;</span><br><span class="line">            console.log(&apos;C&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;]);</span><br><span class="line"></span><br><span class="line">    return Test;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+
+<p>上述例子，es5的写法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//es5的写法为：</span><br><span class="line">var Test = function () &#123;</span><br><span class="line">    this.a = &apos;a&apos;;</span><br><span class="line">    this.b = &apos;b&apos;;</span><br><span class="line">&#125;</span><br><span class="line">Test.prototype.c = function () &#123;</span><br><span class="line">    console.log(&apos;c&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>#module</p>
+<p>先将export import关键字处理为require函数（nodejs），在浏览器环境下没有require，只能通过webpack来进行处理require函数</p>
+<p>#Generator (原则上在Nodejs中使用)<br>Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为与传统函数完全不同。<br>形式上，Generator 函数是一个普通函数，但是有两个特征。一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function* helloWorldGenerator () &#123;</span><br><span class="line">    yield &apos;hello&apos;; // 碰到yield会停止执行，需要手动next进行执行</span><br><span class="line">    yield &apos;world&apos;;</span><br><span class="line">    return &apos;ending&apos;</span><br><span class="line">&#125;</span><br><span class="line">var hw = helloWorldGenerator()</span><br><span class="line">let a = hw.next();</span><br><span class="line">let b = hw.next();</span><br><span class="line">let c = hw.next();</span><br><span class="line">console.log(a,b,c)</span><br><span class="line">//&#123; value: &apos;hello&apos;, done: false &#125; //done 为false代表还可以往下next()</span><br><span class="line">// &#123; value: &apos;world&apos;, done: false &#125;</span><br><span class="line">// &#123; value: &apos;ending&apos;, done: true &#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

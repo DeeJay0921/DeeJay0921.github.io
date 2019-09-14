@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java-集合与泛型">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java-集合与泛型</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-02-22</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/集合/">#集合</a> <a class="tag" href="/tags/Collection/">#Collection</a> <a class="tag" href="/tags/泛型/">#泛型</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java-集合与泛型</p>
+<a id="more"></a>
+
+
+<h1 id="泛型编程"><a href="#泛型编程" class="headerlink" title="泛型编程"></a>泛型编程</h1><ul>
+<li>为什么需要泛型<br>当如果有不同数据类型的数据要进行相同操作的时候，就可以使用泛型</li>
+<li>使用举例<br>我们用ArrayList来实现一个简单的stack数据结构，其中这个stack数据结构可以接收任意类型的数据对象，并且拥有<code>push</code>和<code>pop</code>方法。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class testStack&lt;T&gt; &#123; // 这里的T表示type 表示泛型  任意类型</span><br><span class="line">    ArrayList&lt;T&gt; store = new ArrayList&lt;T&gt;();</span><br><span class="line"></span><br><span class="line">    public void push(T item) &#123;</span><br><span class="line">        store.add(item);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public T pop() &#123;</span><br><span class="line">        T lastElement = store.get(store.size() - 1);</span><br><span class="line">        store.remove(store.size() - 1);</span><br><span class="line">        return lastElement;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>泛型解决的问题是：<strong>代码逻辑一样，只是数据类型不一样</strong>， 这时候就可以使用泛型。</p>
+<blockquote>
+<p>上述例子中的testStack类也被称为泛型类，内部的<code>public T pop(){}</code>也被称为泛型方法，当单独定义泛型方法的时候一般用E来代表Element。</p>
+</blockquote>
+<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><ul>
+<li><a href="https://juejin.im/entry/58fc6a07a0bb9f0065be95cc" target="_blank" rel="noopener">集合详解</a></li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/7113407-b03ac1fd1d1e007e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="详细结构表"></p>
+<ul>
+<li>主要类型<br>集合主要类型有Collection和Map</li>
+</ul>
+<h4 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h4><p>Collection是一个接口，是<code>List</code>, <code>Set</code>以及<code>Queue</code>等接口的父接口。</p>
+<p>任何实现了Collection接口的集合都支持增删改查。</p>
+<ul>
+<li>List<ul>
+<li>有序并且可以重复</li>
+<li>可以精确的控制每个元素的插入位置，或删除某个位置元素</li>
+<li>常用的子类有：<code>ArrayList</code>， <code>LinkedList</code>， <code>Vector</code>，<code>Stack</code></li>
+</ul>
+</li>
+<li>Set<ul>
+<li>不能加入重复元素，无序</li>
+<li>常用的子类有：<code>HashSet</code>， <code>TreeSet</code><h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3>Map中的元素是一种Key-Value形式的映射。Key不可重复，Value可以重复。</li>
+</ul>
+</li>
+<li>HashMap<ul>
+<li>基于哈希表实现的一个Map的子类。</li>
+<li>无序排列，并且可以有并且也只可以有一个Key为null</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>对于链表来说，插入和删除的时间复杂度为<code>O(1)</code>（因为只需要调整指针就可以）,但是查找特定的元素或者查找第N个元素的复杂度为<code>O(n)</code></p>
+</blockquote>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

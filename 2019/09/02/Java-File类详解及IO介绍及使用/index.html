@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java-File类详解及IO介绍及使用">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java-File类详解及IO介绍及使用</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-09-02</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/File/">#File</a> <a class="tag" href="/tags/IO/">#IO</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java-File类详解及IO介绍及使用</p>
+<a id="more"></a>
+
+<p><a href="https://www.itcodemonkey.com/article/2110.html" target="_blank" rel="noopener">我是一个CPU：这个世界慢！死！了！ </a>，可以感受到CPU，内存和硬盘之间的速度比较。</p>
+<h2 id="文件的本质"><a href="#文件的本质" class="headerlink" title="文件的本质"></a>文件的本质</h2><p>OS（操作系统）的目的就是可以让上层程序可以通过一种统一的方式去拿到无论什么磁盘里的文件（即<strong>一段字节流</strong>）。<br>一切文件的本质：</p>
+<ul>
+<li>一段字节流<ul>
+<li>文本文件（txt,代码，html等）</li>
+<li>二进制文件</li>
+</ul>
+</li>
+<li>每个程序负责解释文件中的字节流</li>
+</ul>
+<p>即文件本身就是一段字节流，不管是图片、音频还是文本等等，文件的展示形式取决于用什么软件打开，例如播放器可以解析mp3文件等，但是本质上这个文件就是一段字节流。</p>
+<h2 id="文件和IO"><a href="#文件和IO" class="headerlink" title="文件和IO"></a>文件和IO</h2><p>程序和文件之间的双向流读取和输出，和网络连接时，从机器到远程主机上的双向的读取输出流十分相似，所以Java针对这种流抽象出了InputStream和OutputStream。</p>
+<h3 id="InputStream-OutputStream"><a href="#InputStream-OutputStream" class="headerlink" title="InputStream/OutputStream"></a>InputStream/OutputStream</h3><ul>
+<li>抽象的输入/输出流，无论是：<ul>
+<li>从文件中读取字节流</li>
+<li>从网络中读取字节流</li>
+<li>从任何地方读取字节流</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>输入和输出都是以程序为基准来判定的</p>
+</blockquote>
+<blockquote>
+<p>对于文件读取，永远建议使用绝对路径。</p>
+</blockquote>
+<h2 id="Java中的File类"><a href="#Java中的File类" class="headerlink" title="Java中的File类"></a>Java中的File类</h2><ul>
+<li>File并不代表一个“文件”，它只代表一个“路径”</li>
+<li>抽象的“文件”路径： 可以指文件也可以指文件夹</li>
+<li>File的常见方法<br><code>isFile()</code> <code>isDirectory()</code> <code>exists()</code> <code>getAbsolutePath()</code>等等</li>
+<li>绝对路径和相对路径<br>相对路径相对的是JVM当前的工作目录，永远建议使用绝对路径。</li>
+<li>读写文件</li>
+</ul>
+<h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><ul>
+<li>NIO是Java7之后引入的，解释为：1.new IO 2.Non-blocking IO非阻塞的IO</li>
+<li>NIO中的Path其实就是旧版的File，可以通过toFile方法进行转换</li>
+<li>NIO的Files工具类，提供了walkFileTree等方法</li>
+</ul>
+<p>NIO解决的问题是，对于旧版的流式读取，因为其是通过字节流的形式传输的，一个字节一个字节的进行读写，没法插队等等，速度较慢。NIO改为了按块读写，中间块和块是也是没有顺序的，是比旧版IO快的。</p>
+<h4 id="IO太慢的解决方法"><a href="#IO太慢的解决方法" class="headerlink" title="IO太慢的解决方法"></a>IO太慢的解决方法</h4><p>使用BufferedReader/BufferedWriter</p>
+<h3 id="不用重复造轮子"><a href="#不用重复造轮子" class="headerlink" title="不用重复造轮子"></a>不用重复造轮子</h3><p><a href="http://commons.apache.org/proper/commons-io/javadocs/api-2.5/org/apache/commons/io/FileUtils.html" target="_blank" rel="noopener">FileUtils</a></p>
+<p><a href="http://commons.apache.org/proper/commons-io/javadocs/api-2.5/org/apache/commons/io/IOUtils.html" target="_blank" rel="noopener">IOutils</a></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

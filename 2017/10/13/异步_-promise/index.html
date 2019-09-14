@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="异步_-promise">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">异步_-promise</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-10-13</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/异步/">#异步</a> <a class="tag" href="/tags/Promise/">#Promise</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>异步_-promise</p>
+<a id="more"></a>
+
+<p><a href="http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html" target="_blank" rel="noopener">阮一峰  js的4种异步编程方法</a><br><a href="https://zhuanlan.zhihu.com/p/25562598" target="_blank" rel="noopener">其他的一些异步编程方法</a></p>
+<p>#js 异步编程方法</p>
+<p>##一，回调函数</p>
+<p>假定有两个函数f1和f2，后者等待前者的执行结果。</p>
+<p>如果f1是一个很耗时的任务，可以考虑改写f1，把f2写成f1的回调函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">　　function f1(callback)&#123;  //注意这时候因为有setTimeout,f1就不会阻塞后面的程序运行了</span><br><span class="line">　　　　setTimeout(function () &#123;</span><br><span class="line">　　　　　　// f1的任务代码</span><br><span class="line">　　　　　　callback();</span><br><span class="line">　　　　&#125;, 1000);</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行代码就变成下面这样：<br>  　<code>f1(f2);</code></p>
+<p>采用这种方式，我们把同步操作变成了异步操作，f1不会堵塞程序运行，相当于先执行程序的主要逻辑，将耗时的操作推迟执行。</p>
+<p>回调函数的总结:</p>
+<ul>
+<li>优点是简单、容易理解和部署。</li>
+<li>缺点是不利于代码的阅读和维护，各个部分之间高度<a href="http://en.wikipedia.org/wiki/Coupling_(computer_programming)" target="_blank" rel="noopener">耦合</a>（Coupling），流程会很混乱，而且每个任务只能指定一个回调函数。</li>
+</ul>
+<p>##二，事件监听</p>
+<p>另一种思路是采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生。<br>还是以f1和f2为例。首先，为f1绑定一个事件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　f1.on(&apos;done&apos;, f2); //监听f1的done事件，事件出发之后进行执行f2</span><br></pre></td></tr></table></figure>
+
+<p>上面这行代码的意思是，当f1发生done事件，就执行f2。然后，对f1进行改写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">　　function f1()&#123;</span><br><span class="line">　　　　setTimeout(function () &#123;</span><br><span class="line">　　　　　　// f1的任务代码</span><br><span class="line">　　　　　　f1.trigger(&apos;done&apos;);</span><br><span class="line">　　　　&#125;, 1000);</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>f1.trigger(‘done’)表示，执行完成后，立即触发done事件，从而开始执行f2。</p>
+<p>这种方法的优点是比较容易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以<a href="http://en.wikipedia.org/wiki/Decoupling" target="_blank" rel="noopener">“去耦合”</a>（Decoupling），有利于实现<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="noopener">模块化</a>。缺点是整个程序都要变成事件驱动型，运行流程会变得很不清晰。</p>
+<h2 id="三，事件的发布订阅模式"><a href="#三，事件的发布订阅模式" class="headerlink" title="三，事件的发布订阅模式"></a>三，事件的发布订阅模式</h2><p>这种设计模式将事件理解为一个信号，某个任务执行完成，就向信号中心”发布”（publish）一个信号，其他任务可以向信号中心”订阅”（subscribe）这个信号，从而知道什么时候自己可以开始执行。 </p>
+<p><a href="https://deejay0921.github.io/demos/senior/task6.js">js 事件发布订阅模式范列</a></p>
+<p>这种方法的性质与”事件监听”类似，但是明显优于后者。因为我们可以通过查看”消息中心”，了解存在多少信号、每个信号有多少订阅者，从而监控程序的运行</p>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><p>Promises对象是CommonJS工作组提出的一种规范，目的是为异步编程提供统一接口</p>
+<p>单说，它的思想是，每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。比如，f1的回调函数f2,可以写成：</p>
+<p><code>f1().then(f2);</code></p>
+<p>f1要进行如下改写（这里使用的是jQuery的实现)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function f1()&#123;</span><br><span class="line">　　　　var dfd = $.Deferred();</span><br><span class="line">　　　　setTimeout(function () &#123;</span><br><span class="line">　　　　　　// f1的任务代码</span><br><span class="line">　　　　　　dfd.resolve();</span><br><span class="line">　　　　&#125;, 500);</span><br><span class="line">　　　　return dfd.promise; // return出一个promise对象</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样写的优点在于，回调函数变成了链式写法，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。<br>比如，指定多个回调函数：</p>
+<p>　　<code>f1().then(f2).then(f3);</code></p>
+<p>再比如，指定发生错误时的回调函数：</p>
+<p><code>f1().then(f2).fail(f3);</code></p>
+<p>而且，它还有一个前面三种方法都没有的好处：如果一个任务已经完成，再添加回调函数，该回调函数会立即执行。所以，你不用担心是否错过了某个事件或信号。这种方法的缺点就是编写和理解，都相对比较难。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

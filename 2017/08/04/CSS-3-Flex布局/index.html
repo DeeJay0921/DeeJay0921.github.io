@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="CSS-3-Flex布局">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">CSS-3-Flex布局</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-04</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/CSS/">#CSS</a> <a class="tag" href="/tags/Flex/">#Flex</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>CSS-3-Flex布局</p>
+<a id="more"></a>
+
+<p>#Flex布局</p>
+<p>flex布局可以实现空间自动分配自动对齐，适用于简单的线性布局。</p>
+<h3 id="flex基本概念"><a href="#flex基本概念" class="headerlink" title="flex基本概念"></a>flex基本概念</h3><p><img src="http://upload-images.jianshu.io/upload_images/7113407-ad8776b7aadb6185.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="flex基本概念"></p>
+<ol>
+<li>flex container的属性</li>
+</ol>
+<ul>
+<li>flex-direction 方向（row和column）</li>
+<li>flex-wrap 换行（默认nowrap,设置wrap后换行）</li>
+<li>flex-flow 方向和换行的简写</li>
+<li>justify-content 主轴(main axis)方向对齐方式（space-between,space-around,flex-starr,flex-end,center）</li>
+<li>align-item 侧轴对齐方式 (stretch,flex-start,flex-end,center)</li>
+<li>align-content 多行/列内容对齐方式（不常见）</li>
+</ul>
+<p>`2. flex item属性</p>
+<ul>
+<li>flex-grow 增长比例（空间过多时）</li>
+<li>flex-shrink  收缩比例（空间不够时）</li>
+<li>flex-basis 默认大小（一般不用）</li>
+<li>flex 上面三个的缩写</li>
+<li>order 顺序（代替双飞翼）</li>
+<li>align-self自身对齐方式</li>
+</ul>
+<h3 id="使用flex布局"><a href="#使用flex布局" class="headerlink" title="使用flex布局"></a>使用flex布局</h3><ul>
+<li>手机页面布局（topbar+main+tabs）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    *&#123;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">        box-sizing: border-box;</span><br><span class="line">        list-style: none;</span><br><span class="line">    &#125;</span><br><span class="line">    .container&#123;</span><br><span class="line">        height: 100vh;</span><br><span class="line">        display: flex;</span><br><span class="line">        flex-direction: column;</span><br><span class="line">        /*使用列布局*/</span><br><span class="line">    &#125;</span><br><span class="line">    .header&#123;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background: #98ff79;</span><br><span class="line">    &#125;</span><br><span class="line">    .main&#123;</span><br><span class="line">        flex-grow: 1;</span><br><span class="line">        /*将剩下的空间分配给main*/</span><br><span class="line"></span><br><span class="line">        overflow: auto;</span><br><span class="line">        /*中间内容超出时增加滚动条，不用给下面ul&gt;li增加fix定位*/</span><br><span class="line">    &#125;</span><br><span class="line">    .footer&#123;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background: #e69dff;</span><br><span class="line">    &#125;</span><br><span class="line">    .footer ul&#123;</span><br><span class="line">        width: 100%;</span><br><span class="line">        height: 100%;</span><br><span class="line">        display: flex;</span><br><span class="line">    &#125;</span><br><span class="line">    .footer ul li&#123;</span><br><span class="line">        width: 25%;</span><br><span class="line">        height: 100%;</span><br><span class="line">        border: 1px solid black;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;header&quot;&gt;header&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;footer&quot;&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>产品列表（li*9）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    *&#123;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">        box-sizing: border-box;</span><br><span class="line">        list-style: none;</span><br><span class="line">    &#125;</span><br><span class="line">    ul&#123;</span><br><span class="line">        display: flex;</span><br><span class="line">        flex-wrap: wrap;</span><br><span class="line">        width: 350px;</span><br><span class="line">        margin: 0 auto;</span><br><span class="line">        border: 1px solid red;</span><br><span class="line">        justify-content: space-between;</span><br><span class="line">    &#125;</span><br><span class="line">    li&#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background: #83ffe6;</span><br><span class="line">        border: 1px solid black;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>PC页面布局</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    *&#123;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">    &#125;</span><br><span class="line">    .header&#123;</span><br><span class="line">        height: 50px;</span><br><span class="line">        background: #a4ff6a;</span><br><span class="line">    &#125;</span><br><span class="line">    .footer&#123;</span><br><span class="line">        height: 50px;</span><br><span class="line">        background: #ff7cf4;</span><br><span class="line">    &#125;</span><br><span class="line">    .content&#123;</span><br><span class="line">        display: flex;</span><br><span class="line">    &#125;</span><br><span class="line">    .left&#123;</span><br><span class="line">        width: 200px;</span><br><span class="line">        background: #c4beff;</span><br><span class="line">    &#125;</span><br><span class="line">    .main&#123;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background: #ffb894;</span><br><span class="line">        flex-grow: 1;</span><br><span class="line">    &#125;</span><br><span class="line">    .right&#123;</span><br><span class="line">        width: 200px;</span><br><span class="line">        background: #ff988a;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;header&quot;&gt;header&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;content&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;right&quot;&gt;right&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;footer&quot;&gt;footer&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>完美居中</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    .parent&#123;</span><br><span class="line">        min-height: 400px;</span><br><span class="line">        background: #efafff;</span><br><span class="line">        display: flex;</span><br><span class="line">        justify-content: center;</span><br><span class="line">        /*主轴居中*/</span><br><span class="line">        align-items: center;</span><br><span class="line">        /*侧轴居中*/</span><br><span class="line">    &#125;</span><br><span class="line">    .child&#123;</span><br><span class="line">        border: 1px solid red;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;parent&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;child&quot;&gt;</span><br><span class="line">        jdashfjasdfah覅好僵啊时代峰峻爱世界净空法师大恒科技凤凰健康设计费</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

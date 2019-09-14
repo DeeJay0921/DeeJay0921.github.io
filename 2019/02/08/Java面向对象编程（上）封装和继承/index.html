@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java面向对象编程（上）封装和继承">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java面向对象编程（上）封装和继承</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-02-08</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/面向对象/">#面向对象</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java面向对象编程（上）封装和继承</p>
+<a id="more"></a>
+
+<h2 id="java类型模型"><a href="#java类型模型" class="headerlink" title="java类型模型"></a>java类型模型</h2><ul>
+<li>类： 类是一个模板，描述一类对象的行为和形态；</li>
+<li>对象： 对象是一个类的实例，有具体的状态；</li>
+<li>方法： 类中定义的该类的实例对象所具有的行为；</li>
+<li>静态方法: 隶属于类本身的方法；<blockquote>
+<p>Java中的常量和变量都可以对应于一个对象，这个对象所具有的行为和所具有的属性是由类来进行定义的。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>Java程序的基本结构就是一系列类的定义，类之间的关系和具体类的对象之间的互相操作。</p>
+</blockquote>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><ul>
+<li>类和外部的关系</li>
+<li>在面向对象程式设计方法中，封装是指将类的实现细节部分包装，隐藏起来的方式</li>
+<li>封装方式： 类</li>
+<li>对象的内部状态的访问进行控制，只提供该提供的信息</li>
+<li>把代码分为2个部分：接口和实现</li>
+<li>接口因为涉及到和外部的交互，对用户暴露，所以应该保持稳定，例如API和库</li>
+<li>内部实现不要暴露给用户，在接口功能不影响的前提下，可以随意修改和重构</li>
+<li>良好的封装是解耦的基础<blockquote>
+<p>写代码时一开始就要从封装的角度来进行思考，将代码分为暴露出来的接口和内部的具体实现。该暴露的暴露出去，不该暴露的就不暴露(一般从private开始写起，如果需要暴露再改)。</p>
+</blockquote>
+</li>
+</ul>
+<p>main.java:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        FileTest file = new FileTest();</span><br><span class="line">        System.out.println(file.console(&quot;src/com/DeeJay/test.txt&quot;)); // Breaking News!</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>FileTest.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">public class FileTest &#123;</span><br><span class="line">    private String title; // 这边将不需要暴露出去的变量隐藏掉</span><br><span class="line"></span><br><span class="line">    public String console (String fileUrl) throws IOException &#123; // 外部只需要通过调用console方法来获取相应信息</span><br><span class="line">        BufferedReader bf = new BufferedReader(new FileReader(new File(fileUrl)));</span><br><span class="line">        this.title = bf.readLine();</span><br><span class="line">        return this.title;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="封装的概念"><a href="#封装的概念" class="headerlink" title="封装的概念"></a>封装的概念</h1><p>封装指的是将类内部的实现细节包装，隐藏起来的方式</p>
+<h1 id="封装的好处"><a href="#封装的好处" class="headerlink" title="封装的好处"></a>封装的好处</h1><ul>
+<li>安全性： 例如对于类内部的成员变量进行私有化，设置getter setter等限制外部对其进行直接修改</li>
+<li>便捷性： 对于一些重复逻辑，可以写一个方法将其封装起来多次调用即可。</li>
+<li>降低代码耦合程度</li>
+<li>对于类的内部代码可以随意修改，只需要保证对外接口的一致性即可。<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2></li>
+<li>类和下一级类的关系</li>
+<li>继承是面向对象编程技术的基石，因为它允许创建分等级层次的类封装方式</li>
+<li>子类继承父类的特征和行为，使得子类对象具有父类对象的特征和方法</li>
+<li>继承需要符合一个关系，子类是更加具体的父类</li>
+<li>在声明子类时，通过关键字<code>extends</code>表达继承<blockquote>
+<p>一般写代码时，一开始是没法知道整个完整的分层结构的，对于不同的东西有不同的处理逻辑，当写完代码发现2者之间有部分重复的逻辑时，即可以将其重复的代码提取出来，作为父类，然后让这2者继承即可。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="继承代码举例"><a href="#继承代码举例" class="headerlink" title="继承代码举例"></a>继承代码举例</h1><p>来看继承的一个例子： 现有一个News.java类，只允许通过构造方法来进行传入标题和内容, 用户通过调用display方法获取到信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">public class News &#123;</span><br><span class="line">    private final String title;</span><br><span class="line">    private final String content; // 不对外暴露成员变量</span><br><span class="line">//    设置为final是为了达到只在构造函数中改变成员变量的目的</span><br><span class="line">//    设置为final之后  不可以通过设置setter来修改成员变量</span><br><span class="line"></span><br><span class="line">//    将构造的自由和责任交给用户</span><br><span class="line">    public News(String title, String content) &#123;</span><br><span class="line">        this.title = title;</span><br><span class="line">        this.content = content;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getTitle() &#123;</span><br><span class="line">        return title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getContent() &#123;</span><br><span class="line">        return content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//    控制如何显示  这部分是开发自己负责的</span><br><span class="line">    public String display() &#123;</span><br><span class="line">        return  title + &quot;\n&quot; + content;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们现在需要从其他来源中获取标题和内容时，我们要对News这个类进行拓展，就可以写一个子类进行扩展，现在来定义一个FileNews类来支持从文件中获取标题和内容。</p>
+<p>写的时候我们发现，在子类中无法获取到父类的成员变量title和content，这是因为我们将其设为了private，此时要进行扩展，需要获取到成员变量，即需要将其改为protected, 同时取消掉final.<br>News.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">protected String title;</span><br><span class="line">protected String content; //  子类需要继承到成员变量  所以需要修改为protected</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对于可能被继承的类来说，如果子类需要获取到父类的成员变量，那么定义父类的时候要考虑写成protected</p>
+</blockquote>
+<p>这时候将子类代码写完<br>FileNews.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">public class FileNews extends News &#123;</span><br><span class="line">    public FileNews() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    public FileNews(String title, String content) &#123;</span><br><span class="line">        super(title, content); // 对于父类有参的构造方法  必须显示的调用super</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void readFromFile(String fileUrl) throws IOException &#123; // 从文件中进行读取</span><br><span class="line">        BufferedReader bf = new BufferedReader(new FileReader(new File(fileUrl)));</span><br><span class="line">        title = bf.readLine(); // 继承自News 成员变量也继承了过来  可以直接使用</span><br><span class="line">        content = bf.readLine();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>进行调用试试看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        FileNews news = new FileNews();</span><br><span class="line">        news.readFromFile(&quot;src/com/DeeJay/test.txt&quot;);</span><br><span class="line">        System.out.println(news.display()); // FileNews类继承自News类，所以具有display方法，可以直接调用</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然子类也可以override父类的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public String display() &#123;</span><br><span class="line">    return &quot;subTitle: &quot; + title + &quot;\n&quot; + &quot;subContent: &quot; + content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再次运行就可以看到输出已经改变了。</p>
+<h3 id="继承的一些特性"><a href="#继承的一些特性" class="headerlink" title="继承的一些特性"></a>继承的一些特性</h3><ol>
+<li>子类会拥有父类的<strong>非private</strong>的成员变量和方法</li>
+<li>子类可以拥有自己的成员变量和方法，即可以对父类进行扩展</li>
+<li>子类可以重新实现父类的方法，即<code>override</code></li>
+<li>java中只支持单继承</li>
+<li><code>super</code>关键字:  可以通过super关键字来实现对于父类成员的访问，用来引用当前对象的父类</li>
+<li><code>this</code>关键字：指向自己的引用</li>
+</ol>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><ol>
+<li>子类<strong>不可以继承</strong>父类的构造方法，如果父类的构造方法带有参数，则必须在子类的构造函数中显示的通过<code>super</code>关键字调用父类的构造函数并配以相应的参数。</li>
+<li>如果父类构造函数中没有参数，那么子类的构造函数中可以不用显示的使用<code>super</code>来调用父类的构造函数，系统会自动调用父类的无参的构造函数。</li>
+</ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

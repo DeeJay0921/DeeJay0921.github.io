@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的面向对象的简单介绍（五）包和修饰符以及内部类">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的面向对象的简单介绍（五）包和修饰符以及内部类</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-07-18</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/面向对象/">#面向对象</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的面向对象的简单介绍（五）包和修饰符以及内部类</p>
+<a id="more"></a>
+
+<p>###包<br>特点：</p>
+<ul>
+<li>可以有多层</li>
+<li>不同包下面的文件名可以重复</li>
+<li>包的声明必须要在第一行</li>
+</ul>
+<h3 id="不同包下的相互访问"><a href="#不同包下的相互访问" class="headerlink" title="不同包下的相互访问"></a>不同包下的相互访问</h3><p>相同包下的类可以直接访问，不需要其他的操作。</p>
+<p>那么不同包下的类的相互访问的方式有：</p>
+<ol>
+<li>使用类的<strong>全名</strong>（即包名+类名），举例：<code>java.util.ArrayList list1 = new java.util.ArrayList();</code></li>
+<li>使用关键字<code>import</code>直接把这个类名导入进来，举例：<code>import java.util.ArrayList;</code></li>
+</ol>
+<p><em>也可以写`import java.util.</em>;`代表把这个包下的所有类都导入，但是并没有导入这个包的子包下的类*</p>
+<h3 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h3><p><code>public</code> <code>default</code>  <code>private</code> <code>protected</code></p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>当前类中的权限</th>
+<th>相同包下不同类中权限</th>
+<th>不同包下的权限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>可以访问</td>
+<td>可以访问</td>
+<td>可以访问</td>
+</tr>
+<tr>
+<td>default</td>
+<td>可以访问</td>
+<td>可以访问</td>
+<td>不可以访问</td>
+</tr>
+<tr>
+<td>private</td>
+<td>可以访问</td>
+<td>不可以访问</td>
+<td>不可以访问</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>可以访问</td>
+<td>可以访问</td>
+<td>不可以访问</td>
+</tr>
+</tbody></table>
+<p>这么一看default和protected的差别没体现出来</p>
+<p>default是当前包下使用，而protected是让子类对象使用。（super.protectedMethod();）</p>
+<h2 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h2><p>顺便总结一下所有的修饰符,true为可以修饰，false为不可以修饰</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>类</th>
+<th>成员变量</th>
+<th>成员方法</th>
+<th>构造方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>default</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>private</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>abstract</td>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>static</td>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>final</td>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+</tr>
+</tbody></table>
+<p>###一般常见的规则：</p>
+<ul>
+<li>类： 一般使用public 修饰类，原则上一个java文件中只能有一个类，但是如果有多个类的话，类名和文件名相同的那个类，必须要用public修饰，并且其他类不可以使用public修饰</li>
+</ul>
+<ul>
+<li><p>成员变量： 一般使用private修饰，并且提供getXxx()和setXxx()供外部使用。</p>
+</li>
+<li><p>成员方法： 一般方法都用public修饰，不想暴露出的话就用private,想让子类用就使用protected</p>
+</li>
+<li><p>构造方法： 一般也使用public修饰，但是如果不想让当前类实例化，可以private构造函数。</p>
+</li>
+</ul>
+<h3 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h3><p>在另外一个类的内部的类</p>
+<p>分类：</p>
+<ul>
+<li>成员内部类</li>
+<li>局部内部类</li>
+<li>匿名内部类</li>
+</ul>
+<p>内部类虽然在别的类的内部，但是编译时会有单独的class文件。</p>
+<h4 id="成员内部类："><a href="#成员内部类：" class="headerlink" title="成员内部类："></a>成员内部类：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class InnerClass &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Outer o = new Outer();</span><br><span class="line">		o.method(); // Inner Function  3  </span><br><span class="line">		</span><br><span class="line">		// 如果想直接在外部调用Inner的对象调用方法的话  可以直接import 包名.Outer.Inner</span><br><span class="line">		// 也可以直接写类的全名来创建对象</span><br><span class="line">		Outer.Inner i = new Outer().new Inner();</span><br><span class="line">		i.func(); // 这样就可以直接创建Inner的对象了</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Outer &#123;</span><br><span class="line">	private int num = 3;</span><br><span class="line">	public void method() &#123;</span><br><span class="line">		Inner i = new Inner();</span><br><span class="line">		i.func();</span><br><span class="line">	&#125;</span><br><span class="line">	class Inner &#123; // 在类的内部定义的类  成员内部类  可以访问Outer类中的成员</span><br><span class="line">		public void func() &#123;</span><br><span class="line">			System.out.println(&quot;Inner Function&quot;);</span><br><span class="line">			System.out.println(num);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="成员内部类的修饰符"><a href="#成员内部类的修饰符" class="headerlink" title="成员内部类的修饰符"></a>成员内部类的修饰符</h3><p>关于成员内部类的修饰符，有几个特殊情况：</p>
+<ul>
+<li><p>private,如果使用private修饰内部类，那么只能在当前类中访问，不可以在外部使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class InnerClass2 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		 // Outer.Inner i = new Outer().new Inner(); //  由于Inner被private修饰 提示Outer.Inner不可见</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Outer &#123;</span><br><span class="line">    private int num = 3;</span><br><span class="line">    public void method() &#123;</span><br><span class="line">        Inner i = new Inner();</span><br><span class="line">        i.func();</span><br><span class="line">    &#125;</span><br><span class="line">    private class Inner &#123;  // 使用private修饰了成员内部类之后  外部不可见</span><br><span class="line">        public void func() &#123;</span><br><span class="line">            System.out.println(&quot;Inner Function&quot;);</span><br><span class="line">            System.out.println(num);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>static, 如果使用static修饰，那么不需要创建Outer类的实例就可以创建Inner的实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class InnerClass2 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">		 Outer.Inner2 i = new Outer.Inner2(); // 由于Inner被static修饰  所以不用创建Outer的实例  直接new Outer.Inner2()就可以创建这个实例了</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Outer &#123;</span><br><span class="line">    private int num = 3;</span><br><span class="line">    public void method() &#123;</span><br><span class="line">        Inner i = new Inner();</span><br><span class="line">        i.func();</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	static class Inner2 &#123;  // 使用static修饰了成员内部类之后  创建对象就不用创建Outer类的实例了。</span><br><span class="line">        public void func() &#123;</span><br><span class="line">            System.out.println(&quot;Inner Function&quot;);</span><br><span class="line">            System.out.println(num);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>当然也可以使用其他修饰符如abstract, final等修饰内部类，但是没什么太大的实际意义。</p>
+<h4 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h4><p>局部内部类的使用较少，在成员方法内部定义类，在方法外部就不可用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 局部内部类</span><br><span class="line">public class InnerClass3 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Outer o = new Outer();</span><br><span class="line">		o.method(); // Inner Function</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Outer &#123;</span><br><span class="line">    private int num = 3;</span><br><span class="line">    public void method() &#123;</span><br><span class="line">		class Inner &#123;  // 局部内部类 在方法内部定义</span><br><span class="line">			public void func() &#123;</span><br><span class="line">				System.out.println(&quot;Inner Function&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		Inner i = new Inner(); // 先定义类后实例化</span><br><span class="line">		i.func();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h4><p>可以看做是一个没有名字的局部内部类，也是定义在方法当中。</p>
+<p>必须要在定义匿名内部类的时候创建其对象。</p>
+<p>原理是：创建了继承这个类的子类或者是实现了这个接口的子类的对象。</p>
+<p>举例来说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// 匿名内部类</span><br><span class="line">public class InnerClass4 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Outer o = new Outer();</span><br><span class="line">        o.method(); // Inner Function</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Inner &#123; // 创建一个接口或者类</span><br><span class="line">	public abstract void func();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Outer &#123;</span><br><span class="line">    public void method() &#123;</span><br><span class="line">		new Inner() &#123; // 定义内部类</span><br><span class="line">			@Override</span><br><span class="line">			public void func() &#123;</span><br><span class="line">				System.out.println(&quot;Inner Function&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;.func(); // 可以直接调用方法，前面的就是一个实例对象了</span><br><span class="line">		</span><br><span class="line">		// 也可以这么写</span><br><span class="line">		Inner i = new Inner() &#123; // 由于实现了接口  可以向上转型</span><br><span class="line">			@Override</span><br><span class="line">			public void func() &#123;</span><br><span class="line">				System.out.println(&quot;Inner Function&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">		i.func();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

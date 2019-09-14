@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Python中的__new__(cls)-以及-单例模式">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Python中的__new__(cls)-以及-单例模式</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-06-09</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Python/">Python</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Python/">#Python</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Python中的<strong>new</strong>(cls)-以及-单例模式</p>
+<a id="more"></a>
+
+<h1 id="new-cls-方法"><a href="#new-cls-方法" class="headerlink" title="__new__(cls)方法"></a><code>__new__(cls)</code>方法</h1><p><code>__new__(cls)</code><strong>必须要有</strong>一个参数cls,代表着要实例化的类，而且<strong>必须要有</strong>返回值，返回实例化出来的实例对象.</p>
+<ul>
+<li><code>__new__(cls)</code>和<code>__init__(self)</code>的区别：</li>
+</ul>
+<p><code>__init__(self)</code>有一个参数self,就是这个<code>__new__(cls)</code>返回来的实例，<code>__init__(self)</code>可以再<code>__new__(cls)</code>的基础上进行其他一些初始化的操作，而且不需要返回值。</p>
+<p><code>__new__(cls)</code>好比制造产品之前的原材料采购环节，而<code>__init__(self)</code>好比在买回来的原材料上进行加工的环节</p>
+<p>来看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Dog:</span><br><span class="line">    def __new__(cls): # 这里传入的cls就是Dog这个类指向的类对象</span><br><span class="line">        print(&apos;new&apos;)</span><br><span class="line">    </span><br><span class="line">    def __init__(self):</span><br><span class="line">        print(&apos;init&apos;)</span><br><span class="line">    </span><br><span class="line">dog = Dog() # new </span><br><span class="line"></span><br><span class="line">print(dog) # None</span><br></pre></td></tr></table></figure>
+
+<p>在Python3中，class定义的时候，如果不显式的写继承object，也是会默认自动继承object的，所以也会有<code>__new__(cls)</code>。</p>
+<p>在上述例子中，为什么<code>__init__(self)</code>没有触发呢，是因为这个<code>__new__(cls)</code>就是创建对象的方法，一般就是通过<code>object.__new__(cls)</code>来进行实例化的，但是我们在Dog这个类里面把这个方法又重写了，重写的这个<code>__new__(cls)</code>方法并没有真正的创建一个对象(即没有返回实例化的实例对象)，所以上面例子没有触发<code>__init__(self)</code></p>
+<p>那么来改成上面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Dog:</span><br><span class="line">    def __new__(cls):</span><br><span class="line">        print(&apos;new&apos;)</span><br><span class="line">        return object.__new__(cls) </span><br><span class="line">        # object.__new__()方法返回的就是实例对象的引用  </span><br><span class="line">        # 我们在重写的__new__()中也return 这个引用</span><br><span class="line">    </span><br><span class="line">    def __init__(self):</span><br><span class="line">        print(&apos;init&apos;)</span><br><span class="line">    </span><br><span class="line">dog = Dog() # new init</span><br><span class="line"></span><br><span class="line">print(dog) # &lt;__main__.Dog object at 0x7f8a273d3b00&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这么一来，对象就被成功创建了。 那么通过上面的例子，可以重新梳理一下Py中一个对象的创建流程：</p>
+<ol>
+<li>调用<code>__new__()</code>方法来进行<strong>创建对象</strong>，这个new方法可以是object的，也可以是自己重写的，最后<strong>必须要</strong>return这个创建好的对象的引用。</li>
+<li>调用<code>__init__()</code>方法来进行<strong>实例对象的初始化</strong>，<code>__init__(self)</code>接收的就是new方法return出来的那个创建好的对象的引用。</li>
+<li>返回对象的引用。</li>
+</ol>
+<p>所以我们可以很好的理解，<code>__new__()</code>只负责创建对象，而<code>__init__()</code>对创建好的对象进行初始化。</p>
+<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p>单例模式指的是，不管创建多少次，都仅仅只有一个对象</p>
+<p>先来解释单例的含义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Dog(object):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">a = Dog()</span><br><span class="line">b = Dog()</span><br><span class="line">print( id(a) == id(b))  # False 所以指向的不是一个对象</span><br></pre></td></tr></table></figure>
+
+<p>在上述例子中，a和b分别都指向创建好的2个不同的Dog类的实例对象。而单例模式指的就是，让a和b指向的是同一个对象，即不管重复创建Dog类的实例对象多少次，都只有一个实例对象。</p>
+<p>那么实现这个模式的思路就是，第一次创建对象，第二次开始就沿用第一次创建好的对象，那么结合上面对<code>__new__()</code>的介绍，很容易想到是在new方法中进行处理的。</p>
+<p>我们来使用类属性来表示当前是否是第一次创建：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Dog(object):</span><br><span class="line">    __instance = True # True表示是第一次创建</span><br><span class="line">    __firstObj = None</span><br><span class="line">    def __new__(cls):</span><br><span class="line">        if cls.__instance:</span><br><span class="line">            cls.__instance = False</span><br><span class="line">            cls.__firstObj = object.__new__(cls)</span><br><span class="line">            return cls.__firstObj # 如果是第一次创建 返回这个创建好的实例对象引用</span><br><span class="line">        else:</span><br><span class="line">            # 不是第一次创建  那么返回第一次创建好的对象引用</span><br><span class="line">            return cls.__firstObj   </span><br><span class="line"></span><br><span class="line">a = Dog()</span><br><span class="line">b = Dog()</span><br><span class="line">print( id(a) == id(b) )  # True</span><br></pre></td></tr></table></figure>
+
+<p>这样就实现了功能，但是我们注意到里面有两个类属性，简化一下，其实可以写成一个，直接让<code>__instance</code>为None值，第一次创建好对象之后将引用赋给<code>__instance</code>即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Dog(object):</span><br><span class="line">    __instance = None</span><br><span class="line">    def __new__(cls):</span><br><span class="line">        if cls.__instance == None: # None 就表示还没创建过对象</span><br><span class="line">            cls.__instance = object.__new__(cls)</span><br><span class="line">            return cls.__instance # 如果是第一次创建 返回这个创建好的实例对象引用</span><br><span class="line">        else:</span><br><span class="line">            # 不是第一次创建  那么返回第一次创建好的对象引用</span><br><span class="line">            return cls.__instance   </span><br><span class="line"></span><br><span class="line">a = Dog()</span><br><span class="line">b = Dog()</span><br><span class="line">print( id(a) == id(b) )</span><br></pre></td></tr></table></figure>
+
+<p>这样就实现了Python中的单例模式。</p>
+<p>实现了单例模式之后，再来看一个问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Dog(object):</span><br><span class="line">    __instance = None</span><br><span class="line">    def __new__(cls):</span><br><span class="line">        if cls.__instance == None:</span><br><span class="line">            cls.__instance = object.__new__(cls)</span><br><span class="line">            return cls.__instance</span><br><span class="line">        else:</span><br><span class="line">            return cls.__instance</span><br><span class="line">    </span><br><span class="line">    def __init__(self):</span><br><span class="line">        print(&apos;----init------&apos;)</span><br><span class="line"></span><br><span class="line">a = Dog() # ----init------</span><br><span class="line">b = Dog() # ----init------</span><br></pre></td></tr></table></figure>
+
+<p>如上例所示，单例模式中，进行多次初始化实例对象的时候，虽然只会创建一次实例对象，但是<code>__init__()</code><strong>会被重复调用</strong>来初始化实例对象。</p>
+<p>我们现在如果只想让实例对象初始化一次，可以这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Dog(object):</span><br><span class="line">    __instance = None</span><br><span class="line">    __hasInit = False # 思路也是一样的  新增一个类属性表示是否第一次初始化</span><br><span class="line">    def __new__(cls):</span><br><span class="line">        if cls.__instance == None:</span><br><span class="line">            cls.__instance = object.__new__(cls)</span><br><span class="line">            return cls.__instance</span><br><span class="line">        else:</span><br><span class="line">            return cls.__instance</span><br><span class="line">    </span><br><span class="line">    def __init__(self):</span><br><span class="line">        if self.__hasInit == False:</span><br><span class="line">            print(&apos;----init------&apos;)</span><br><span class="line">            self.__hasInit = True</span><br><span class="line"></span><br><span class="line">a = Dog() # ----init------</span><br><span class="line">b = Dog() # 不在重复初始化</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

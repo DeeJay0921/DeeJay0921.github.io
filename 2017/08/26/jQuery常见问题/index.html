@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="jQuery常见问题">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">jQuery常见问题</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-26</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/jQuery/">#jQuery</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>jQuery常见问题</p>
+<a id="more"></a>
+
+<p>###1， jQuery 能做什么？</p>
+<ul>
+<li>选择网页元素</li>
+<li>改变结果集</li>
+<li>元素的操作：取值和赋值</li>
+<li>元素的操作：移动</li>
+<li>元素的操作： 复制，删除和创建</li>
+<li>工具方法</li>
+<li>特殊效果</li>
+<li>ajax</li>
+</ul>
+<p>###2， jQuery 对象和 DOM 原生对象有什么区别？如何转化？</p>
+<p>jQuery对象和DOM原生对象的区别<br>对于jquery对象，<strong>只能使用jquery提供的API</strong><br>原生对象需要去使用原生对象的属性和方法</p>
+<ul>
+<li>jQuery对象和DOM原生对象的转换<br>jquery对象可以通过加下标的方法来变成DOM原生对象，从而使用原生对象的方法。而一个原生对象，也可以通过用$包裹一下原生的对象，就能变为jquery对象。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;container&quot;&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li&gt;001&lt;/li&gt;</span><br><span class="line">        &lt;li class=&quot;active&quot;&gt;002&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;003&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    $(&apos;#container li&apos;);//[li,li.active,li]</span><br><span class="line">    $(&apos;#container li&apos;)[0]; //变为原生DOM对象 &lt;li&gt;001&lt;/li&gt;</span><br><span class="line">    document.querySelector(&apos;.active&apos;); //原生DOM对象 &lt;li class=&quot;active&quot;&gt;002&lt;/li&gt;</span><br><span class="line">    $(document.querySelector(&apos;.active&apos;));// 变为jquery对象  [li.active, context: li.active]</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>对于上述例子，如果想得到第二项的元素，又不想将其变为DOM元素对象的话，可以使用.eq()方法。<br><code>$(&#39;#container li&#39;).eq(1); //[li.active, prevObject: n.fn.init(3), context: document]</code><br>依然是jquery对象</p>
+<p>###3，jQuery中如何绑定事件？bind、unbind、delegate、live、on、off都有什么作用？推荐使用哪种？使用on绑定事件使用事件代理的写法？</p>
+<ul>
+<li><p>在jQuery中，绑定事件的方法包括：.bind()，.delegate()，.live()，.on()等。</p>
+</li>
+<li><p>.bind()：绑定事件，这是一个相对而言比较高效、快捷，且兼容性较好的绑定方法；<br>.unbind()：解绑事件，与.bind()方法相对应；<br>.delegate()：绑定事件，它可以自行选择它要附加的DOM元素进行绑定；<br>.live()：绑定事件，这种方法的原理相当于直接使用根一级的document来进行事件代理，目前该方法已被废弃；<br>.on()：绑定事件，在jQuery1.8版本之后，我们基本统一使用.on()替代其它的方法来进行事件的绑定；<br>.off()：解绑事件，与.on()方法相对应。</p>
+</li>
+<li><p>在目前的jQuery版本中通常推荐使用on/off来对事件进行绑定和解绑。</p>
+</li>
+<li><p>#####on(event[,selector][,data],handler(eventObject))<br>on()方法的各个参数的意思</p>
+</li>
+</ul>
+<p>1.event<br>一个或多个空格分隔的事件类型和可选的命名空间，或仅仅是命名空间，例如： “click” , “keydown.myPlugin”  或者”.myPlugin”<br>2.selector<br>一个选择器字符串，用于过滤出被选中元素中能触发事件的后代元素。如果选择器是null或者忽略了该选择器，那么被选中的元素总是能触发事件<br>3.data<br>当一个事件被触发时，要传递给事件处理函数的<strong>event.data</strong><br>4.handler(eventObject)<br>当事件被触发时，执行的函数。若该函数只是要执行return false的话，那么参数位置可以简写成false</p>
+<p>使用举例：</p>
+<ul>
+<li><p>普通事件绑定，最简单的用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;div&apos;).on(&apos;click&apos;,function (e) &#123;//可以简写为$(&apos;div&apos;).click(...)</span><br><span class="line">    console.log(this);</span><br><span class="line">    console.log(e);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>事件委托或者事件代理，想让div下面所有的span绑定事件，可以把事件绑定到div上</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;div&apos;).on(&apos;click&apos;,&apos;span&apos;,function (e) &#123;</span><br><span class="line">    console.log(this);</span><br><span class="line">    console.log(e);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以在绑定的时候给事件处理程序传递一些参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;div&apos;).on(&apos;click&apos;,&#123;name: &apos;byron&apos;,age: 24&#125;,function (e)&#123;</span><br><span class="line">    console.log(e.data);</span><br><span class="line">    console.log(e.data.name);</span><br><span class="line">    console.log(e.data.age);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>需要注意的是，<strong>要用this或者e.target的话，因为这两个都是原生的DOM对象，所以要使用jquery的时候，要转换成jquery对象在使用</strong>。例如<code>var $this = $(this);</code></p>
+<p>###4，jQuery 如何展示/隐藏元素？</p>
+<p>####.hide([duration][,easing][,complete])<br>用于隐藏元素，没有参数的时候等同于直接设置display属性<br><code>.css(&#39;display&#39;,&#39;none&#39;)</code><br>1.duration    动画持续多久<br>2.easing   表示过渡使用哪种缓动函数，jq自身提供”linear”和”swing”<br>3.complete  在动画完成时执行的函数</p>
+<p>####.show([duration][,easing][,complete])<br>显示元素，使用和hide类似</p>
+<p>####.toggle([duration][,easing][,complete])<br>用来切换元素的隐藏，显示。类似于toggleClass,使用方法和hide show一样</p>
+<p>###渐变</p>
+<p>####.fadeIn([duration][,easing][,complete])<br>通过淡入的方式显示匹配元素</p>
+<p>####.fadeOut([duration][,easing][,complete])<br>淡出的方式隐藏匹配元素</p>
+<p>####.fadeToggle([duration][,easing][,complete])</p>
+<p>###滑动</p>
+<p>####.slideDown([duration][,easing][,complete])<br>用滑动动画显示一个元素，方法将会给匹配元素的高度的动画，这会导致页面的下面部分滑下去，弥补了显示的方式</p>
+<p>####.slideUp([duration][,easing][,complete])</p>
+<p>###5，jQuery 动画如何使用？</p>
+<p>####.animate(properties [duration][,easing][,complete])</p>
+<ul>
+<li><p>properties是一个css属性和值的对象，动画将根据这组对象移动。</p>
+</li>
+<li><p>duration：动画过程持续的时长。默认值为”normal”，可以将其设置为”slow”或 “fast”，也可以直接设置数值来规定时长，单位为毫秒</p>
+</li>
+<li><p>easing：过渡使用哪种缓动函数。jQuery自身提供”linear” 和 “swing”，其他效果可以使用jQuery Easing Plugin插件</p>
+</li>
+<li><p>complete：在动画完成时执行的函数。</p>
+</li>
+<li><p>停止动画 finish() 和 stop()<br>当一个元素调用.stop()时，当前正在运行的动画将会立即停止。例如，一个元素正在被.slideUp()隐藏的过程中，调用.stop()，该元素依然会有一部分是处于显示状态的。由于元素上的动画尚未执行完成，所以动画完成时执行的回调函数是不会被调用的。<br>如果同一元素调用多个动画方法，尚未被执行的动画被放置在元素的效果队列中，这些动画不会开始，直到第一个完成。当调用.stop()的时候，队列中的下一个动画立即开始。如果clearQueue参数提供true值，那么在队列中的动画其余被删除并永远不会运行。<br>如果提供jumpToEnd参数，并且值为true时，当前动画将停止，但该元素上的 CSS 属性会被立刻修改成动画的目标值。用上面的.slideUp()为例子，该元素将立即隐藏。如果提供回调函数将立即被调用。</p>
+</li>
+</ul>
+<p>###6，如何设置和获取元素内部 HTML 内容？如何设置和获取元素内部文本？</p>
+<p>######html()<br>html()方法读写两用，可以修改和获取元素的innerHTML</p>
+<ul>
+<li>没有传递参数的时候，返回元素的innerHTML</li>
+<li>传递了参数时，修改元素的innerHTML为传递的参数</li>
+</ul>
+<p>读写两用的方法基本都类似。</p>
+<ul>
+<li>如果结果是多个赋值操作，会给每个结果都赋值</li>
+<li>如果结果多个，获取值的时候，返回结果集中的第一个对象的相应值</li>
+</ul>
+<p>######text()<br>和html()类似，对应DOM的innerText</p>
+<p>###7，如何设置和获取表单用户输入或者选择的内容？如何设置和获取元素属性？</p>
+<p>######.val([value])<br>读写双用，用于处理input的value。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; value=&quot;hello&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    console.log($(&apos;input&apos;).val());</span><br><span class="line">    $(&apos;input&apos;).val(&apos;world&apos;);</span><br><span class="line">    console.log($(&apos;input&apos;).val());</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>#####.attr()<br>获取/修改元素特定属性的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; value=&quot;hello&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    $(&apos;input&apos;).attr(&apos;type&apos;); //text 获取目标元素的type属性的值</span><br><span class="line">    $(&apos;input&apos;).attr(&apos;type&apos;,&apos;checkbox&apos;); //设置type属性值为checkbox</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>移除属性用removeArrt()方法</strong></p>
+<p>######css()<br>和arrt()很像，用来处理元素的css</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    $(&apos;.box&apos;).css(&#123;</span><br><span class="line">        width: &apos;30px&apos;,</span><br><span class="line">        height: &apos;30px&apos;,</span><br><span class="line">        border: &apos;1px solid red&apos;,</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

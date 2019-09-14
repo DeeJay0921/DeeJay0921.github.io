@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的Set和Map集合">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的Set和Map集合</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-07-19</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/集合/">#集合</a> <a class="tag" href="/tags/Collection/">#Collection</a> <a class="tag" href="/tags/Set/">#Set</a> <a class="tag" href="/tags/Map/">#Map</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的Set和Map集合</p>
+<a id="more"></a>
+
+<p>###Set<br>Set作为Collection的子体系，有一些特点：</p>
+<ul>
+<li>Set是无序的，存储和读取的顺序有可能不一样</li>
+<li>不允许重复，要求每个元素是唯一的</li>
+<li>无序所以没有索引</li>
+</ul>
+<p>其中Set中的<code>add()</code>方法，在添加的时候,先比较元素的哈希值,如果和已有的元素相同则不添加，如果哈希值不一样，则再进行比较<code>==</code>或者<code>equals()</code>方法来进行比较，如果有一个为true即重复，则也不添加。</p>
+<h5 id="HashSet存储自定义类型数据并实现去重"><a href="#HashSet存储自定义类型数据并实现去重" class="headerlink" title="HashSet存储自定义类型数据并实现去重"></a>HashSet存储自定义类型数据并实现去重</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package SetAndMapDemo;</span><br><span class="line"></span><br><span class="line">import java.util.HashSet;</span><br><span class="line"></span><br><span class="line">public class HashSetDemo1 &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// 有自定义的Stu类</span><br><span class="line">		Stu s1 = new Stu(&quot;Yang&quot;, 23);</span><br><span class="line">		Stu s2 = new Stu(&quot;DeeJay&quot;, 22);</span><br><span class="line">		Stu s3 = new Stu(&quot;DeeJay&quot;, 22);</span><br><span class="line">		// 创建HashSet对象</span><br><span class="line">		HashSet&lt;Stu&gt; hs = new HashSet&lt;Stu&gt;();</span><br><span class="line">		hs.add(s1);</span><br><span class="line">		hs.add(s2);</span><br><span class="line">		hs.add(s3);</span><br><span class="line">		</span><br><span class="line">		System.out.println(hs); // [Stu [name=DeeJay, age=22], Stu [name=DeeJay, age=22], Stu [name=Yang, age=23]]</span><br><span class="line">		</span><br><span class="line">		// 可以看到s2和s3是重复的，但是也被加进了HashSet中</span><br><span class="line">		// 造成这种情况的原因是因为Set中add()方法的特殊性</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Stu &#123;</span><br><span class="line">	String name;</span><br><span class="line">	int age;</span><br><span class="line">	</span><br><span class="line">	public Stu(String name, int age) &#123;</span><br><span class="line">		super();</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Stu [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>出现这种情况的原因是add()方法的特殊性：<br>其中Set中的<code>add()</code>方法，在添加的时候,先比较元素的哈希值,如果和已有的元素相同则不添加，如果哈希值不一样，则再进行比较<code>==</code>或者<code>equals()</code>方法来进行比较，如果有一个为true即重复，则也不添加。</p>
+<p>如果要避免这种情况，需要重写一下equals方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">package SetAndMapDemo;</span><br><span class="line"></span><br><span class="line">import java.util.HashSet;</span><br><span class="line"></span><br><span class="line">public class HashSetDemo1 &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// 有自定义的Stu类</span><br><span class="line">		Stu s1 = new Stu(&quot;Yang&quot;, 23);</span><br><span class="line">		Stu s2 = new Stu(&quot;DeeJay&quot;, 22);</span><br><span class="line">		Stu s3 = new Stu(&quot;DeeJay&quot;, 22);</span><br><span class="line">		// 创建HashSet对象</span><br><span class="line">		HashSet&lt;Stu&gt; hs = new HashSet&lt;Stu&gt;();</span><br><span class="line">		hs.add(s1);</span><br><span class="line">		hs.add(s2);</span><br><span class="line">		hs.add(s3);</span><br><span class="line">		</span><br><span class="line">		System.out.println(hs); // [Stu [name=DeeJay, age=22], Stu [name=DeeJay, age=22], Stu [name=Yang, age=23]]</span><br><span class="line">		</span><br><span class="line">		// 可以看到s2和s3是重复的，但是也被加进了HashSet中</span><br><span class="line">		// 造成这种情况的原因是因为Set中add()方法的特殊性</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Stu &#123;</span><br><span class="line">	String name;</span><br><span class="line">	int age;</span><br><span class="line">	</span><br><span class="line">	public Stu(String name, int age) &#123;</span><br><span class="line">		super();</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Stu [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public boolean equals(Object obj) &#123;</span><br><span class="line">		Stu other = (Stu)obj; // 先做类型转换  否则拿不到子类型的对象的成员</span><br><span class="line">		if(other.name.equals(this.name) &amp;&amp; other.age == this.age) &#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重写了equals方法之后，还是可以重复添加，这是因为add()方法在进行添加时，是先进行hashCode的比较，如果hash值一样就不会进行equals的比较。</p>
+<p>所以一般有约定：<strong>重写了equals()，一定也要重写相应的hashCode()!!!</strong></p>
+<p>所以我们还需要重写hashCode():</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">package SetAndMapDemo;</span><br><span class="line"></span><br><span class="line">import java.util.HashSet;</span><br><span class="line"></span><br><span class="line">public class HashSetDemo1 &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// 有自定义的Stu类</span><br><span class="line">		Stu s1 = new Stu(&quot;Yang&quot;, 23);</span><br><span class="line">		Stu s2 = new Stu(&quot;DeeJay&quot;, 22);</span><br><span class="line">		Stu s3 = new Stu(&quot;DeeJay&quot;, 22);</span><br><span class="line">		// 创建HashSet对象</span><br><span class="line">		HashSet&lt;Stu&gt; hs = new HashSet&lt;Stu&gt;();</span><br><span class="line">		hs.add(s1);</span><br><span class="line">		hs.add(s2);</span><br><span class="line">		hs.add(s3);</span><br><span class="line">		</span><br><span class="line">		System.out.println(hs); // [Stu [name=Yang, age=23], Stu [name=DeeJay, age=22]]</span><br><span class="line">		</span><br><span class="line">		// 重写了equals() 和 hashCode() 之后    做到了自定义类的不重复添加</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Stu &#123;</span><br><span class="line">	String name;</span><br><span class="line">	int age;</span><br><span class="line">	</span><br><span class="line">	public Stu(String name, int age) &#123;</span><br><span class="line">		super();</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Stu [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public boolean equals(Object obj) &#123;</span><br><span class="line">		Stu other = (Stu)obj; // 先做类型转换  否则拿不到子类型的对象的成员</span><br><span class="line">		if(other.name.equals(this.name) &amp;&amp; other.age == this.age) &#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int hashCode() &#123;</span><br><span class="line">		return -1; // 直接给所有的元素都返回-1的hash值</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="关于上例重写hashCode-和equals-的优化"><a href="#关于上例重写hashCode-和equals-的优化" class="headerlink" title="关于上例重写hashCode()和equals()的优化"></a>关于上例重写hashCode()和equals()的优化</h5><p>上述例子中重写equals()和hashCode()值只是做一个实例，可以进一步优化重写的方法</p>
+<p>hashCode():</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public int hashCode() &#123;</span><br><span class="line">	final int prime = 31;</span><br><span class="line">	int result = 1;</span><br><span class="line">	result = prime * result + age;</span><br><span class="line">	result = prime * result + ((name == null) ? 0 : name.hashCode());</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>equals():</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public boolean equals(Object obj) &#123;</span><br><span class="line">	// 判断是否同一元素</span><br><span class="line">	if (this == obj)</span><br><span class="line">		return true;</span><br><span class="line">	// 判断是否为null</span><br><span class="line">	if (obj == null)</span><br><span class="line">		return false;</span><br><span class="line">	// 判断运行时类是否一直</span><br><span class="line">	if (getClass() != obj.getClass())</span><br><span class="line">		return false;</span><br><span class="line">	Stu other = (Stu) obj;</span><br><span class="line">	if (age != other.age)</span><br><span class="line">		return false;</span><br><span class="line">	if (name == null) &#123;</span><br><span class="line">		if (other.name != null) // name为String,是引用类型，有可能为null</span><br><span class="line">			return false;</span><br><span class="line">	&#125; else if (!name.equals(other.name))</span><br><span class="line">		return false;</span><br><span class="line">	return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Collections-工具类"><a href="#Collections-工具类" class="headerlink" title="Collections 工具类"></a>Collections 工具类</h3><p>先来看Collection和Collections的区别:</p>
+<p>Collection是集合体系的最顶层,包含了所有集合的共性.Interface Collection<e><br>Collections则是个工具类.Class Collections</e></p>
+<p>Collections工具类的方法,就是为了操作Colleciton.</p>
+<p><code>static int binarySearch(List list, T key)</code>二分查找<br><code>static void copy(List dest, List src)</code> 把源列表中的数据覆盖到目标列表,注意目标列表dest的长度要大于等于源列表的长度<br><code>static void fill(List list, Object obj)</code> 使用制定的元素填充制定的列表<br><code>static void reverse(List list)</code><br><code>static void shuffle(List list)</code>随机置换<br><code>static void sort(List&lt;T&gt; list)</code> 按照列表中元素的自然顺序进行按升序进行排序<br><code>static void sort(List&lt;T&gt; list, Comparator&lt;? super T&gt; c)</code><br><code>static void swap(List list, int i, int j)</code> 指定索引的元素进行互换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code</span><br></pre></td></tr></table></figure>
+
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>java.util.Map</p>
+<p>接口Map结构用来存储键值对</p>
+<h4 id="Map和Collection的区别："><a href="#Map和Collection的区别：" class="headerlink" title="Map和Collection的区别："></a>Map和Collection的区别：</h4><ul>
+<li>Map不是Collection的子结构</li>
+<li>Map是一个双列集合，常用处理有对应关系的数据</li>
+<li>Collection是一个单列集合，下面有不同的子体系，有的有索引有的没索引，有的允许重复有的不允许重复</li>
+</ul>
+<p>####Map的常用功能</p>
+<p><code>int size()</code><br><code>void clear()</code><br><code>boolean isEmpty()</code><br><code>V remove(Object key)</code><br><code>boolean containsKey(Object key)</code><br><code>boolean containsValue(Object value)</code><br><code>Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</code><br><code>V get(Object key)</code><br><code>Set&lt;K&gt; keySet()</code><br><code>V put(K key, V value)</code><br><code>Collection&lt;V&gt; values()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">code</span><br><span class="line">put 添加及修改  返回值为null和value</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">code</span><br><span class="line"></span><br><span class="line">Set&lt;K&gt; keySet()</span><br><span class="line">Collection&lt;V&gt; values()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">code </span><br><span class="line">遍历Map</span><br><span class="line">1.获取所有的Key，遍历获得所有的values,  keySet() values()</span><br><span class="line">2.Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用HashMap存储数据并进行遍历"><a href="#使用HashMap存储数据并进行遍历" class="headerlink" title="使用HashMap存储数据并进行遍历"></a>使用HashMap存储数据并进行遍历</h4><ul>
+<li><p>第一种情况，String作为Key：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种情况，自定义类型作为Key：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">code</span><br><span class="line">类的定义</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">code</span><br><span class="line">自定义相同成员的类添加时可以重复添加</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

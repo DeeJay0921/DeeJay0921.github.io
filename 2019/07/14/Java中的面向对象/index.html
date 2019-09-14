@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的面向对象">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的面向对象</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-07-14</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/面向对象/">#面向对象</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的面向对象</p>
+<a id="more"></a>
+
+<p>一些好用的插件:</p>
+<blockquote>
+<p>key Promoter X<br>builder generator</p>
+</blockquote>
+<h1 id="对象基本概念"><a href="#对象基本概念" class="headerlink" title="对象基本概念"></a>对象基本概念</h1><ul>
+<li>对象就是数据和行为的集合（主观能动性）<h2 id="方法的重载-overload"><a href="#方法的重载-overload" class="headerlink" title="方法的重载(overload)"></a>方法的重载(overload)</h2></li>
+<li>重载(overload)和重写/覆盖(override)的区别<br>overload是相同方法名，不同参数，而override指的是子类重写父类的相同方法</li>
+<li>如何区分同名的不同重载方法<ul>
+<li>根据传参类型</li>
+<li>隐式转换？</li>
+<li>如果能匹配到多个的情况下，会遵循最匹配的原则，如果传入的为null需要强制类型转换。<br>最匹配的原则举例：在下述例子中，正常情况下直接调用<code>print(1)</code>的时候会去找最匹配的<code>print(int i)</code>方法执行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 强制令其选中方法print(Number i)</span><br><span class="line">        print((Number) 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(int i) &#123;</span><br><span class="line">        System.out.println(&quot;I&apos;m int!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(Integer i) &#123;</span><br><span class="line">        System.out.println(&quot;I&apos;m Integer!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(Number i) &#123;</span><br><span class="line">        System.out.println(&quot;I&apos;m Number!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(Object i) &#123;</span><br><span class="line">        System.out.println(&quot;I&apos;m Object!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p>对于传入null的时候，如果匹配到多个方法的情况时，需要强制指定类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import java.util.HashMap;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123; </span><br><span class="line">        // print(null); // 在这直接调用会报错 因为null的类型不明，所以需要强制指定类型</span><br><span class="line">        // 例如强制要调用HashMap的方法</span><br><span class="line">        print((HashMap) null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(int i) &#123;</span><br><span class="line">        System.out.println(&quot;I&apos;m int!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(Integer i) &#123;</span><br><span class="line">        System.out.println(&quot;I&apos;m Integer!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(Number i) &#123;</span><br><span class="line">        System.out.println(&quot;I&apos;m Number!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(Object i) &#123;</span><br><span class="line">        System.out.println(&quot;I&apos;m Object!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(HashMap i) &#123;</span><br><span class="line">        System.out.println(&quot;I&apos;m HashMap!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>java里面无法做到给参数赋上默认值，但是利用重载可以实现这一功能。<blockquote>
+<p>另外值得一提的是，重载<strong>不支持</strong>只修改返回值。</p>
+</blockquote>
+<h2 id="对象的初始化顺序："><a href="#对象的初始化顺序：" class="headerlink" title="对象的初始化顺序："></a>对象的初始化顺序：</h2><blockquote>
+<p>基本的原则是：static方法=&gt; static块 =&gt; 初始化成员变量 =&gt; 非static块 =&gt; constructor</p>
+</blockquote>
+</li>
+</ul>
+<p>详见以下例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class Cat &#123;</span><br><span class="line">    public static int count = initStaticCount();</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        System.out.println(2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int age = initAge();</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(4);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(5);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int initAge() &#123;</span><br><span class="line">        System.out.println(3);</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static int initStaticCount() &#123;</span><br><span class="line">        System.out.println(1);</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Cat(String name) &#123;</span><br><span class="line">        this(0, name);</span><br><span class="line">        System.out.println(7);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Cat(int age, String name) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.name = name;</span><br><span class="line">        System.out.println(6);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Builder模式"><a href="#Builder模式" class="headerlink" title="Builder模式"></a>Builder模式</h2><p>当一个类拥有了太多的成员属性的时候，如果我们直接使用<code>new ClassName(member1, member2, member3....，memberN)</code>创建新的对象的时候，容易造成成员变量的错位或者丢失，如果没有IDE帮助的话也很难阅读，Builder模式就是为了解决这种情况。</p>
+<p>来看具体的使用，<br>首先有如下的User类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class User &#123;</span><br><span class="line">    /** 用户的名 */</span><br><span class="line">    private final String firstName;</span><br><span class="line"></span><br><span class="line">    /** 用户的姓 */</span><br><span class="line">    private final String lastName;</span><br><span class="line"></span><br><span class="line">    /** 用户的电话 */</span><br><span class="line">    private final String phoneNumber;</span><br><span class="line"></span><br><span class="line">    /** 用户的地址 */</span><br><span class="line">    private final String address;</span><br><span class="line"></span><br><span class="line">    public String getFirstName() &#123;</span><br><span class="line">        return firstName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getLastName() &#123;</span><br><span class="line">        return lastName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPhoneNumber() &#123;</span><br><span class="line">        return phoneNumber;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getAddress() &#123;</span><br><span class="line">        return address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    User(String firstName, String lastName, String phoneNumber, String address) &#123;</span><br><span class="line">        this.firstName = firstName;</span><br><span class="line">        this.lastName = lastName;</span><br><span class="line">        this.phoneNumber = phoneNumber;</span><br><span class="line">        this.address = address;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以建立一个Builder去清晰的初始化User的每一个属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class UserBuilder &#123;</span><br><span class="line">    private String firstName;</span><br><span class="line">    private String lastName;</span><br><span class="line">    private String phoneNumber;</span><br><span class="line">    private String address;</span><br><span class="line">    </span><br><span class="line">    public UserBuilder firstName(String firstName) &#123;</span><br><span class="line">        this.firstName = firstName;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    public UserBuilder lastName(String lastName) &#123;</span><br><span class="line">        this.lastName = lastName;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    public UserBuilder phoneNumber(String phoneNumber) &#123;</span><br><span class="line">        this.phoneNumber = phoneNumber;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    public UserBuilder address(String address) &#123;</span><br><span class="line">        this.address = address;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public User build() &#123;</span><br><span class="line">        return new User(firstName, lastName, phoneNumber, address);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样我们可以通过如下方式获取一个User对象:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">User user = new UserBuilder()</span><br><span class="line">                       .firstName(&quot;德华&quot;)</span><br><span class="line">                       .lastName(&quot;刘&quot;)</span><br><span class="line">                       .phoneNumber(&quot;我也不知道&quot;)</span><br><span class="line">                       .address(&quot;可能在地球上吧&quot;)</span><br><span class="line">                       .build();</span><br></pre></td></tr></table></figure>
+
+<p>而不是只能<code>new User(&quot;德华&quot;, &quot;刘&quot;, &quot;我也不知道&quot;, &quot;可能在地球上吧&quot;);</code>这样去获取新的对象。</p>
+<h2 id="静态工厂方法模式"><a href="#静态工厂方法模式" class="headerlink" title="静态工厂方法模式"></a>静态工厂方法模式</h2><p>静态工厂模式的核心思想有2点</p>
+<ol>
+<li>使用静态工厂方法代替构造器</li>
+<li>将常规的构造器<strong>私有化</strong>（这一点很重要）</li>
+</ol>
+<p>使用工厂模式优点有：</p>
+<ol>
+<li>工厂方法可以自行命名，可读性良好，不像构造器的命名并没有什么实质性意义一样</li>
+<li>工厂方法内部处理非常灵活，可以有自己的一些判空逻辑等等。</li>
+</ol>
+<p>来看一个使用例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Cat &#123;</span><br><span class="line">    private static final Cat INVALID_CAT = new Cat(&quot;Invalid cat&quot;, -1);</span><br><span class="line">    private String name;</span><br><span class="line">    private int age;</span><br><span class="line">    </span><br><span class="line">    // 工厂方法还可以自主命名 提高可读性</span><br><span class="line">    public static Cat newCat(String name, int age) &#123;</span><br><span class="line">        if(age &lt; 0 || name == null || &quot;&quot;.equals(name)) &#123;</span><br><span class="line">            // 工厂方法可以在内部很灵活的做一些判空处理等等 本例中如果age小于0或者name是空字符串或者null时 返回预先创建好的INVALID_CAT</span><br><span class="line">            return INVALID_CAT;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return new Cat(name, age);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 构造器要私有化</span><br><span class="line">    private Cat(String name, int age) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样外部直接调用<code>Cat.newCat(name, age)</code>就可以创建新的对象。</p>
+<blockquote>
+<p>在上述例子中，有个地方需要注意下，如果要判断name是不是””，如果我们写出<code>name.equals(&quot;&quot;)</code>当name为null会出异常，所以可以写成<code>&quot;&quot;.equals(name)</code> 这样就避免了出现异常</p>
+</blockquote>
+<h1 id="组合和继承"><a href="#组合和继承" class="headerlink" title="组合和继承"></a>组合和继承</h1><h2 id="什么是继承"><a href="#什么是继承" class="headerlink" title="什么是继承"></a>什么是继承</h2><ul>
+<li>继承的本质就是提取出公用代码，避免重复（DRY原则）</li>
+</ul>
+<h2 id="Java的继承体系"><a href="#Java的继承体系" class="headerlink" title="Java的继承体系"></a>Java的继承体系</h2><blockquote>
+<p>在Java中的所有对象，其实都隐式的继承了Object类</p>
+<ul>
+<li>单根继承<ul>
+<li>单根继承的好处<br>因为所有对象都是Object类的子类，所以可以保证<strong>所有的对象都有相同的行为，可以方便处理</strong><br>且Java是单一继承，一个类最多只能继承一个类</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<pre><code>- 对于C/C ++的多重继承
+其他非Java语言可以允许继承多个类，存在的问题是对于继承的类中存在相同方法时的处理。</code></pre><ul>
+<li><p>Object类中有哪些需要了解的方法</p>
+<ul>
+<li><p>equals()<br>一般重写equals到时候也要重写hashCode()</p>
+</li>
+<li><p>toString()<br>输出一个对象的时候会默认隐式的调用同toString()</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="类的结构和初始化顺序"><a href="#类的结构和初始化顺序" class="headerlink" title="类的结构和初始化顺序"></a>类的结构和初始化顺序</h2><ul>
+<li>子类拥有父类的一切数据和行为</li>
+<li>父类先于子类<br>一定是从最开始的基类开始初始化创建一直到目标类</li>
+<li>必须拥有匹配的构造器<ul>
+<li><code>super</code>关键字</li>
+</ul>
+</li>
+</ul>
+<h2 id="实例方法的覆盖（Override）"><a href="#实例方法的覆盖（Override）" class="headerlink" title="实例方法的覆盖（Override）"></a>实例方法的覆盖（Override）</h2><ul>
+<li>覆盖/重写 要使用@Override注解 来进行检查</li>
+</ul>
+<h2 id="向上-向下转型"><a href="#向上-向下转型" class="headerlink" title="向上/向下转型"></a>向上/向下转型</h2><ul>
+<li><p>一个子类类型的对象永远是一个父类类型的对象</p>
+<ul>
+<li>一只猫同时也是一个动物，同时也是一个对象（Object）</li>
+<li><code>instanceof</code>判断类型<br>instaceof右边一定是一个类</li>
+<li>null instanceof ?<br>null instanceof XXX<strong>永远返回</strong>false</li>
+</ul>
+</li>
+<li><p>因此，当需要一个父类型的时候，总是可以传递一个子类型</p>
+</li>
+<li><p>也有些情况需要强制进行转型</p>
+<ul>
+<li>有些情况需要从父类转为子类，和其他强制类型转换是一样的。但是可能会发生转型失败的情况。</li>
+</ul>
+</li>
+</ul>
+<h2 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h2><ul>
+<li>final声明变量，变量为<strong>不可变的</strong>（必须初始化）<ul>
+<li>局部变量/方法参数</li>
+<li>成员变量</li>
+<li>常量与单例<br>常量的命名约定是<strong>全大写用下划线分割</strong>，如<code>final int MAX_VALUE = 100;</code><blockquote>
+<p>final声明的变量只能被赋值一次，一旦被赋值就不可以再被改写，可以保证该变量是线程安全的。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>对于final声明对象的情况，也是一样的，不代表对象的内容不可以多次改写，仅仅代表着对象的地址不可变，即该地址只能指向目标对象。</p>
+<ul>
+<li>final在方法上的声明：</li>
+</ul>
+<p><strong>禁止继承/重写此方法</strong>，同时这个方法运行的时候是确定的，没有多态。</p>
+<ul>
+<li>final在类上的声明：</li>
+</ul>
+<p><strong>禁止此类被别的类继承</strong><br>继承提供了灵活性，但是也埋下了隐患，String/Integer等类是final的原因就在于如果允许继承，那么可能会有其他类破坏这些类本身内部的一些约定。</p>
+</blockquote>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><h2 id="什么是多态"><a href="#什么是多态" class="headerlink" title="什么是多态"></a>什么是多态</h2><ul>
+<li><p>实例方法<strong>默认就是多态</strong>的</p>
+<ul>
+<li>在运行时根据this来决定调用哪个方法</li>
+<li>静态方法是<strong>没有多态</strong>的</li>
+<li>参数静态绑定，接受者动态绑定(Baseparam的例子)<ul>
+<li>即多态只选择接收者的类型，而不会去选择参数的类型</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>例子： </p>
+<ul>
+<li>例子1：Shape的多态<br>假设现在有如下情况：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Shape &#123;</span><br><span class="line">    // 返回当前&quot;形状&quot;(Shape)的面积</span><br><span class="line">    public double getArea() &#123;</span><br><span class="line">        return 0d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class Square extends Shape&#123;</span><br><span class="line">    // 正方形的边长1</span><br><span class="line">    private double sideLength;</span><br><span class="line"></span><br><span class="line">    public Square(double sideLength) &#123;</span><br><span class="line">        this.sideLength = sideLength;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public double getArea() &#123;</span><br><span class="line">        return sideLength * sideLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class Rectangle extends Shape&#123;</span><br><span class="line">    // 长方形的长</span><br><span class="line">    private double a;</span><br><span class="line">    // 长方形的宽</span><br><span class="line">    private double b;</span><br><span class="line"></span><br><span class="line">    public Rectangle(double a, double b) &#123;</span><br><span class="line">        this.a = a;</span><br><span class="line">        this.b = b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public double getArea() &#123;</span><br><span class="line">        return a * b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有如上Shape父类，其2个子类分别Overide了父类的方法，在进行调用的时候：<code>new Square(1.0).getArea()</code>和<code>new Rectangle(1.0, 2.0).getArea()</code>时分别调用的是子类的方法，即<strong>运行时根据this来决定调用哪个方法</strong></p>
+<ul>
+<li>例子2：HashSet的<code>addAll()</code><br> 对于HashSet,其内部并没有override addAll()，其中的addAll()是继承自AbstractCollection，所以调用addAll()时会调用AbstractCollection中的addAll()，<br>但是AbstractCollection中的addAll()中调用了一下add()方法，而HashSet是自己override了add()的，所以依靠原则，实例方法都是多态的，以及运行时是根据this来判断调用哪个方法的，可以得到调用的是Hashset中的add()而不是AbstractCollection中的add()</li>
+</ul>
+<h2 id="多态的应用：设计模式之策略模式"><a href="#多态的应用：设计模式之策略模式" class="headerlink" title="多态的应用：设计模式之策略模式"></a>多态的应用：设计模式之策略模式</h2><p>来看策略模式的一个例子，假设现在有一个打折业务，需要判断用户是哪种折扣从而计算价格:<br>我们有3种情况，<br>    // NoDiscountStrategy 不打折<br>    // Discount95Strategy 全场95折<br>    // OnlyVipDiscountStrategy 只有VIP打95折，其他人保持原价<br>如果不使用策略模式，我们的代码实现大概像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class PriceCalculator &#123;</span><br><span class="line">    public static int calculatePrice(String discountStrategy, int price, User user) &#123;</span><br><span class="line">        switch (discountStrategy) &#123;</span><br><span class="line">            case &quot;NoDiscount&quot;:</span><br><span class="line">                return price;</span><br><span class="line">            case &quot;Discount95&quot;:</span><br><span class="line">                return (int) (price * 0.95);</span><br><span class="line">            case &quot;OnlyVip&quot;:</span><br><span class="line">                &#123;</span><br><span class="line">                    if (user.isVip()) &#123;</span><br><span class="line">                        return (int) (price * 0.95);</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        return price;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            default:</span><br><span class="line">                throw new IllegalStateException(&quot;Should not be here!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样的实现以后每次要加一个策略就要改一次PriceCalculator这个计算类，如果这个类已经发布，那改动代价就太大了，所以可以使用策略模式进行优化：<br>优化的核心思路是创建一个父级策略类，然后所有的折扣情况都是这个类的子类，调用的时候通过多态判断到底是调用哪个具体的子类折扣类。<br>顶级策略父类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public abstract class DiscountStrategy &#123;</span><br><span class="line">//    顶级策略父类 强制要求子类实现discount方法去计算折扣</span><br><span class="line">    abstract int discount(int price, User user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>95折策略子类实现举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Discount95Strategy extends DiscountStrategy&#123;</span><br><span class="line">    @Override</span><br><span class="line">    int discount(int price, User user) &#123;</span><br><span class="line">        return (int) (price * 0.95);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时PriceCalculator里的实现就可以改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class PriceCalculator &#123;</span><br><span class="line">     public static int calculatePrice(DiscountStrategy strategy, int price, User user) &#123;</span><br><span class="line">//         现在只需要直接调用strategy.discount(price, user);即可，就算之后有其他策略，新建一个DiscountStrategy的子类即可，无需修改此处代码</span><br><span class="line">         return strategy.discount(price, user);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在只需要直接调用strategy.discount(price, user);即可，就算之后有其他策略，新建一个DiscountStrategy的子类即可，无需修改此处代码</p>
+<h1 id="抽象类和接口"><a href="#抽象类和接口" class="headerlink" title="抽象类和接口"></a>抽象类和接口</h1><h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><ul>
+<li>不可实例化</li>
+<li>可以包含抽象方法 - 非private/static</li>
+<li>可以包含成员变量</li>
+<li>可以包含普通类的任何东西</li>
+</ul>
+<blockquote>
+<p>抽象类和其他类没什么区别，仅仅是可以声明抽象方法，迫使其子类去强制override该方法。</p>
+</blockquote>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
+<li>接口部分的实现了多继承</li>
+<li>接口不是类</li>
+<li>接口的扩展</li>
+<li>接口只代表一种功能</li>
+<li>一个类只能继承一个类，但是却能实现若干个接口</li>
+</ul>
+<blockquote>
+<p>接口中的成员 <code>int a = 1;</code>等价于<code>public static final int a = 1;</code>即为常量，所以要遵循命名常量命名规则<code>int A  
+ = 1;</code><br>方法<code>void f();</code>则等价于<code>public void f();</code></p>
+</blockquote>
+<h3 id="接口可以包含什么？"><a href="#接口可以包含什么？" class="headerlink" title="接口可以包含什么？"></a>接口可以包含什么？</h3><p>-<br> 若干个方法(默认为public)</p>
+<ul>
+<li>若干个常量(默认为public static final)</li>
+<li>extends 另一个接口</li>
+<li>默认方法（java 8 之后）<blockquote>
+<p>接口的特性决定了只要一个接口发布后，就<strong>不可以再进行修改</strong>了，否则所有实现该接口的类都会报错。<br>这就抛出了一个问题，之前已经发布过的接口如果想再增加一个方法同时又不影响之前实现了这个接口的那些类正常工作的话，Java8之前是没办法做到的。Java8之后可以使用默认方法，让接口内的方法有方法体同时又不需要实现了该接口的类强制Override该方法。</p>
+</blockquote>
+</li>
+</ul>
+<p>基于上述的原因，Java8之后想给List接口增加一个sort()方法，就是基于这样的原理，默认方法是一种妥协的产物。</p>
+<p>但是默认方法的出现带来了新的问题，如果InterfaceA 和InterfaceB都有default void f(){}；的实现，这2个接口被一个类同时实现了的话，其实就出现了类似于C++中的菱形继承的问题（二义性）。这时候编译会不通过，不过可以选择在类中override该方法。</p>
+<h2 id="抽象类-vs-接口"><a href="#抽象类-vs-接口" class="headerlink" title="抽象类 vs 接口"></a>抽象类 vs 接口</h2><h3 id="先看相同点："><a href="#先看相同点：" class="headerlink" title="先看相同点："></a>先看相同点：</h3><ol>
+<li>都是抽象的，都不可以实例化</li>
+<li>都可以包含抽象方法(即没有方法体，且非static/private/final的方法)<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3></li>
+<li>抽象类是类，可以包含类包含的一切东西，但是接口可以包含受限的成员(public static final)变量和(public)方法</li>
+<li>抽象类只能单一继承，但是接口是可以多继承的，甚至可以继承多次。</li>
+</ol>
+<blockquote>
+<p>Java设计的思想原则就是： 为了达到最大程度的灵活性以及最大程度的代码复用性。</p>
+</blockquote>
+<h3 id="Comparable接口"><a href="#Comparable接口" class="headerlink" title="Comparable接口"></a>Comparable接口</h3><p><a href="https://www.jianshu.com/p/7e03dc3ea7b7" target="_blank" rel="noopener">Java中的Collections工具类及Comparator和Comparable的区别</a></p>
+<blockquote>
+<p>关于TreeSet和Comparable的小坑：对于TreeSet而言，如果其实现的Comparable的compareTo()对于2个不同的元素返回了0的话，那么TreeSet会视为为同一个元素，加入集合的时候就会去掉其中的一个。</p>
+</blockquote>
+<h3 id="自定义一个过滤器"><a href="#自定义一个过滤器" class="headerlink" title="自定义一个过滤器"></a>自定义一个过滤器</h3><p>假设现在有如下需求，有如下User类，有一些过滤条件要过滤出符合条件的User，比如filterUsersWithEvenId，filterZhangUsers，filterWangUsers。其中代码很明显存在大量重复，可以借助多态进行优化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.function.Predicate;</span><br><span class="line"></span><br><span class="line">public class User &#123;</span><br><span class="line">    /** 用户ID，数据库主键，全局唯一 */</span><br><span class="line">    private final Integer id;</span><br><span class="line"></span><br><span class="line">    /** 用户名 */</span><br><span class="line">    private final String name;</span><br><span class="line"></span><br><span class="line">    public User(Integer id, String name) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Integer getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 过滤ID为偶数的用户</span><br><span class="line">    public static List&lt;User&gt; filterUsersWithEvenId(List&lt;User&gt; users) &#123;</span><br><span class="line">        List&lt;User&gt; results = new ArrayList&lt;&gt;();</span><br><span class="line">        for (User user : users) &#123;</span><br><span class="line">            if (user.id % 2 == 0) &#123;</span><br><span class="line">                results.add(user);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return results;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 过滤姓张的用户</span><br><span class="line">    public static List&lt;User&gt; filterZhangUsers(List&lt;User&gt; users) &#123;</span><br><span class="line">        List&lt;User&gt; results = new ArrayList&lt;&gt;();</span><br><span class="line">        for (User user : users) &#123;</span><br><span class="line">            if (user.name.startsWith(&quot;张&quot;)) &#123;</span><br><span class="line">                results.add(user);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return results;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 过滤姓王的用户</span><br><span class="line">    public static List&lt;User&gt; filterWangUsers(List&lt;User&gt; users) &#123;</span><br><span class="line">        List&lt;User&gt; results = new ArrayList&lt;&gt;();</span><br><span class="line">        for (User user : users) &#123;</span><br><span class="line">            if (user.name.startsWith(&quot;王&quot;)) &#123;</span><br><span class="line">                results.add(user);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return results;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析上面代码，三个过滤方法中不同的地方仅仅在于判断的条件不同，我们可以使用Predicate谓词(判定)接口来进行多态的应用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">public class User &#123;</span><br><span class="line">    /** 用户ID，数据库主键，全局唯一 */</span><br><span class="line">    private final Integer id;</span><br><span class="line"></span><br><span class="line">    /** 用户名 */</span><br><span class="line">    private final String name;</span><br><span class="line"></span><br><span class="line">    public User(Integer id, String name) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Integer getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        public static List&lt;User&gt; filterUsersWithEvenId(List&lt;User&gt; users) &#123;</span><br><span class="line">        return filter(users, new filterUsersWithEvenId());</span><br><span class="line">    &#125;</span><br><span class="line">    static class filterUsersWithEvenId implements Predicate&lt;User&gt; &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public boolean test(User o) &#123;</span><br><span class="line">            return o.getId() % 2 == 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static List&lt;User&gt; filterZhangUsers(List&lt;User&gt; users) &#123;</span><br><span class="line">        return filter(users, new filterZhangUsers());</span><br><span class="line">    &#125;</span><br><span class="line">    static class filterZhangUsers implements Predicate&lt;User&gt; &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public boolean test(User o) &#123;</span><br><span class="line">            return o.getName().startsWith(&quot;张&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static List&lt;User&gt; filterWangUsers(List&lt;User&gt; users) &#123;</span><br><span class="line">        return filter(users, new filterWangUsers());</span><br><span class="line">    &#125;</span><br><span class="line">    static class filterWangUsers implements Predicate&lt;User&gt; &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public boolean test(User o) &#123;</span><br><span class="line">            return o.getName().startsWith(&quot;王&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public static List&lt;User&gt; filter(List&lt;User&gt; users, Predicate&lt;User&gt; predicate) &#123;</span><br><span class="line">        List&lt;User&gt; results = new ArrayList&lt;&gt;();</span><br><span class="line">        for (User user : users) &#123;</span><br><span class="line">            if (predicate.test(user)) &#123; // 此处应用多态</span><br><span class="line">                results.add(user);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return results;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="内部类详解"><a href="#内部类详解" class="headerlink" title="内部类详解"></a>内部类详解</h3><h4 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h4><p>即定义在一个外围类内部的类</p>
+<ul>
+<li>用途：实现更加精细的封装</li>
+<li>可以访问外围类的实例方法</li>
+<li>非静态内部类<ul>
+<li>和一个外围类<strong>实例</strong>相绑定<ul>
+<li>可以访问外围类<strong>实例</strong>的方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>静态内部类<ul>
+<li><strong>不和</strong>外围类实例相绑定</li>
+<li><strong>不可以</strong>访问外围实例的方法</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>非静态内部类中，其实JDK悄悄的声明了一个外围类的实例，所以才可以访问到实例方法</p>
+</blockquote>
+<p>使用原则： <strong>永远使用</strong>静态内部类，除非会报错（即要使用实例方法），因为非静态会占用额外的空间。</p>
+<h4 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h4><p>就是直接通过new的方式去创建一个匿名的继承了目标类或者接口的类。</p>
+<blockquote>
+<p>匿名类没有名字，在mvn compile之后去查看字节码文件，可以看到其命名就是根据主类名加是第几个匿名类来命名的。</p>
+</blockquote>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

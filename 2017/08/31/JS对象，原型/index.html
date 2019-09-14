@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JS对象，原型">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JS对象，原型</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-31</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/原型/">#原型</a> <a class="tag" href="/tags/prototype/">#prototype</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>JS对象，原型</p>
+<a id="more"></a>
+
+<p>##面向对象<br>是一种思维方式<br>三大特点：继承，多态，封装<br>几个概念: 类，对象，属性，方法，成员，类成员，实例成员，静态类，抽象类</p>
+<p>##创建对象的几种方式：</p>
+<p>###1，工厂模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    function createObj (name,age) &#123;</span><br><span class="line">        var obj = &#123;</span><br><span class="line">            name: name,</span><br><span class="line">            age: age,</span><br><span class="line">            printName: function () &#123;</span><br><span class="line">                console.log(this.name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return obj;</span><br><span class="line">    &#125;</span><br><span class="line">    var obj = createObj(&apos;zhangsan&apos;,20);</span><br><span class="line">    obj.printName();</span><br><span class="line">//    解决了构造过程复杂，需要了解对象细节的问题，但是构造出来的对象类型都是Object，没有识别度。</span><br></pre></td></tr></table></figure>
+
+<p>解决了构造过程复杂，需要了解对象细节的问题，但是构造出来的对象类型都是Object，没有识别度。</p>
+<p>###2,构造函数创建实例</p>
+<p>####关于function的一些知识：</p>
+<ul>
+<li>function作为构造函数（通过new操作符调用）的时候会返回一个类型为function的name的对象</li>
+<li>function可以接受参数，可以根据参数来创建相同类型不同值的对象</li>
+<li>function实例作用域内有一个constructor属性，这个属性就可以指示其构造器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//      构造函数创建实例</span><br><span class="line">    function People (name,age) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.sayName = function () &#123;</span><br><span class="line">            console.log(this.name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    var p1 = new People(&apos;deejay&apos;,21); // new People表示将People函数作为构造函数来创建对象</span><br><span class="line">    p1.sayName();</span><br><span class="line">//构造函数在解决了上面的问题，同时为实例带来了类型，但可以注意到每个实例sayName方法实际上作用一样，但是每个实例要重复一遍，大量对象存在的时候是浪费内存</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>####关于new操作符：<br>new运算符接受一个函数F及其参数： new F(arguments)，这一过程分为3步：</p>
+<ul>
+<li>1.创建类的实例。这步是把一个空的对象的proto属性设为F.prototype   p1 = {};</li>
+<li>2.初始化实例。函数F被传入参数并调用，关键字this被设定为该实例  p1.name = ‘deejay’ p1.sayName=…  此时的this为这个p1实例</li>
+<li><ol start="3">
+<li>返回实例   return p1<br>构造函数内部一般不写return，默认return这个实例，但是如果写了return并且return的不是简单类型的话，就会真的return这个复杂类型<br>####关于instanceof 操作符<br>instanceof 是一个操作符，可以判断对象是否为某个类型的实例<br>p1 instanceof  People; // true<br>p1 instanceof  Object; // true<br>instanceof判断的是<strong>对象</strong><br>1 instanceof  Number; // false</li>
+</ol>
+</li>
+</ul>
+<p>构造函数在解决了上面的问题，同时为实例带来了类型，但可以注意到每个实例sayName方法实际上作用一样，但是每个实例要重复一遍，大量对象存在的时候是浪费内存。</p>
+<p>###构造函数</p>
+<ul>
+<li><p>任何函数使用new表达式就是构造函数</p>
+</li>
+<li><p>每个<strong>函数</strong>都自动添加一个名称为prototype属性，这是一个对象</p>
+</li>
+<li><p>每个<strong>对象</strong>都有一个内部属性<em>proto</em>(规范中没有指定这个名称，但是浏览器都是这么实现的)指向其类型的prototype属性，类的实例也是对象，其_proto_属性指向<strong>类</strong>的prototype</p>
+</li>
+<li><p>prototype图解：<br><img src="http://upload-images.jianshu.io/upload_images/7113407-83dd4fddab077144.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="prototype"></p>
+</li>
+</ul>
+<p>对于实例中的属性，如果存在则输出，不存在就会向构造函数的prototype中寻找。所以对于刚才的问题，可以这样解决：</p>
+<ul>
+<li>所有实例都会通过原型链引用到类型的prototype</li>
+<li>prototype相当于特定类型所有实例都可以访问到的一个<strong>公共容器</strong></li>
+<li>重复的东西移动到公共容器里放一份就好了</li>
+</ul>
+<p>所以对于刚才的构造函数，可以这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function People (name,age) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    People.prototype.sayName = function () &#123;</span><br><span class="line">        console.log(this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var p1 = new People(&apos;deejay&apos;,21);</span><br><span class="line">p1.sayName();</span><br></pre></td></tr></table></figure>
+
+<p>这个时候的对应关系是这样的：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7113407-9063a4ebdf3b2191.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

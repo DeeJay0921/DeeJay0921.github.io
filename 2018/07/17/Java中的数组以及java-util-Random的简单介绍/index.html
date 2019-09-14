@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java中的数组以及java-util-Random的简单介绍">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java中的数组以及java-util-Random的简单介绍</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-07-17</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/数组/">#数组</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java中的数组以及java-util-Random的简单介绍</p>
+<a id="more"></a>
+
+<h1 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.util.Random;</span><br><span class="line">public class RandomDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Random r = new Random();</span><br><span class="line">		</span><br><span class="line">		int randomNumber = r.nextInt(10); // 可以选定范围 为 [0,10) 的一个区间</span><br><span class="line">		System.out.println(randomNumber);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>Java中的数组是存储<strong>同一种数据类型</strong>多个元素的容器。</p>
+<p>数组既可以存储基本数据类型，也可以存储引用数据类型。</p>
+<h2 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// define:</span><br><span class="line">int[] arr1; // 1.推荐的定义方法  定义了一个int类型的数组，数组名为arr1</span><br><span class="line">int arr2[]; // 2.定义了一个int类型的变量，变量名是数组arr2</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组的初始化"><a href="#数组的初始化" class="headerlink" title="数组的初始化"></a>数组的初始化</h2><p>即 开辟内存空间，给数组中每个元素赋值</p>
+<p>数组初始化分为动态初始化和静态初始化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 数组初始化（开辟内存空间，给数组中每个元素赋值）</span><br><span class="line">// 1.动态初始化（给定长度，由系统给出初始值）</span><br><span class="line">int[] arr3 = new int[10];</span><br><span class="line">/*</span><br><span class="line"> * new 代表为数组申请内存分配 ， 10 代表数组的长度</span><br><span class="line"> * */</span><br><span class="line">System.out.println(arr3); // [I@299a06ac 为arr3的地址值</span><br><span class="line">for(int i = 0; i &lt; arr3.length; i ++) &#123;</span><br><span class="line">	System.out.println(arr3[i]); // 输出10个 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 2.静态初始化 （给出初始值，由系统决定长度）</span><br><span class="line">// 静态初始化的语法举例：</span><br><span class="line">int[] arr4 = new int[] &#123;1,2,3,4,5&#125;;</span><br><span class="line">for(int i = 0; i &lt; arr4.length; i++) &#123;</span><br><span class="line">	System.out.println(arr4[i]); // 输出1 2 3 4 5</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于上述静态初始化的例子  可以简写为  <code>int[] arr5 = {1,2,3,4,5};</code> </p>
+<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><h3 id="二维数组的定义"><a href="#二维数组的定义" class="headerlink" title="二维数组的定义"></a>二维数组的定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//define</span><br><span class="line">int[][] arr1; // 推荐的方式</span><br><span class="line">int arr2[][];</span><br><span class="line">int[] arr3[];</span><br></pre></td></tr></table></figure>
+
+<h3 id="二维数组的初始化"><a href="#二维数组的初始化" class="headerlink" title="二维数组的初始化"></a>二维数组的初始化</h3><p>一样分为动态和静态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 动态初始化</span><br><span class="line">// 写法：  数据类型[][] = new 数据类型[m][n];</span><br><span class="line">// m 代表这个二维数组中一维数组的个数，即二维数组的length, n代表的是一位数组的长度</span><br><span class="line">int[][] arr1 = new int[3][2];</span><br><span class="line">System.out.println(arr1.length); //3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">		// 静态初始化</span><br><span class="line">		// 数据类型[][] = new 数据类型[][]&#123; &#123;&#125;, &#123;&#125;, &#123;&#125;, ...&#125;;</span><br><span class="line">		// 简写 :  数据类型[][] = &#123; &#123;&#125;, &#123;&#125;, &#123;&#125;, ... &#125;;</span><br><span class="line">//		int[][] arr2 = new int[][] &#123;&#123;1,2,3&#125;, &#123;4,5,6&#125;, &#123;7,8,9&#125;&#125;;</span><br><span class="line">		int[][] arr2 = &#123;&#123;1,2,3&#125;, &#123;4,5,6&#125;, &#123;7,8,9&#125;&#125;;</span><br><span class="line"></span><br><span class="line">		for(int i = 0; i &lt; arr2.length; i++) &#123;</span><br><span class="line">			System.out.println(arr2[i]); // 依次输出[I@299a06ac [I@383534aa [I@6bc168e5  代表了三个元素即三个一维数组</span><br><span class="line">			for(int j = 0; j &lt; arr2[i].length; j ++) &#123;</span><br><span class="line">				System.out.println(arr2[i][j]); // 依次输出了这三个一维数组的每个元素</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Java中的栈和堆"><a href="#Java中的栈和堆" class="headerlink" title="Java中的栈和堆"></a>Java中的栈和堆</h1><ul>
+<li>栈中存放的是 <strong>局部变量</strong>（定义在方法内部的变量）；</li>
+<li>堆中存放的是 <strong>new出来的对象</strong>；</li>
+</ul>
+<p><code>int[] arr3 = new int[10];</code> 这句语句，即把堆中的<code>new int[10];</code>创造的对象的地址(即<code>[I@299a06ac</code>)赋值给了这个arr3变量。</p>
+<p>arr3这个变量在栈中，其存储的是一个地址(<code>[I@299a06ac</code>)，指向的是堆中<code>new int[10];</code>创建出来的那一个对象。</p>
+<p>对于堆中的对象，每一种不同的类型的默认值也不一样：<br>类型 | 默认值<br>– | –<br>byte,short,int,long | 0<br>float,double | 0.0<br>char | ‘\u0000’<br>boolean | false<br>引用类型(类，数组，接口) | null</p>
+<p>比如上面的arr3,其每一项元素都为int,所以默认值都为0;</p>
+<p>另外堆中的对象，在使用完毕后， 会在垃圾回收器空闲的时候被回收（不是立即）；<br>而在栈中的局部变量，使用完后是立即被回收的；</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

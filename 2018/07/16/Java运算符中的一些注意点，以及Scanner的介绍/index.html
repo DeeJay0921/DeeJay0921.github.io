@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Java运算符中的一些注意点，以及Scanner的介绍">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Java运算符中的一些注意点，以及Scanner的介绍</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-07-16</span>
+            <span class="time">01:26:21</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>Java运算符中的一些注意点，以及Scanner的介绍</p>
+<a id="more"></a>
+
+<h1 id="一，运算符的一些注意点"><a href="#一，运算符的一些注意点" class="headerlink" title="一，运算符的一些注意点"></a>一，运算符的一些注意点</h1><h3 id="字符和int相加"><a href="#字符和int相加" class="headerlink" title="字符和int相加"></a>字符和int相加</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">		char a = &apos;A&apos;;</span><br><span class="line">		int b = 1;</span><br><span class="line">		</span><br><span class="line">		int res1 = a + b;</span><br><span class="line">		System.out.println(res1); // 66</span><br><span class="line">//		java中字符和int相加 ,  选取字符的值来进行相加,  &apos;A&apos;为65，&apos;a&apos;为97， &apos;0&apos;为48</span><br><span class="line">		System.out.println(&quot;----------&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串和int-相加"><a href="#字符串和int-相加" class="headerlink" title="字符串和int 相加"></a>字符串和int 相加</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">        int c = 10;</span><br><span class="line">        String str = &quot;Hello &quot;;</span><br><span class="line">        String res2 = str + c;</span><br><span class="line">        System.out.println(res2); // Hello 10</span><br><span class="line">//      字符串和int 相加  拼接为字符串</span><br><span class="line">        System.out.println(&quot;----------&quot;);</span><br><span class="line"></span><br><span class="line">        int num1 = 10;</span><br><span class="line">        int num2 = 20;</span><br><span class="line">        String str2 = &quot; testStr &quot;;</span><br><span class="line">        System.out.println(str2 + num1 + num2); // testStr 1020</span><br><span class="line">        System.out.println(num1 + num2 + str2); // 30 testStr</span><br><span class="line">        System.out.println(&quot;----------&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="等赋值运算操作涉及隐式类型转换"><a href="#等赋值运算操作涉及隐式类型转换" class="headerlink" title="+= 等赋值运算操作涉及隐式类型转换"></a>+= 等赋值运算操作涉及隐式类型转换</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//关于 += 等赋值运算操作的时候，涉及到了隐式类型转换</span><br><span class="line">short s1 = 1; // s1 为short型</span><br><span class="line">s1 += 1; // 这时候加的1为int型  实际相当于(short)(s1 + 1);</span><br><span class="line">System.out.println(s1);</span><br><span class="line">System.out.println(&quot;----------&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="amp-amp-和-amp-的区别"><a href="#amp-amp-和-amp-的区别" class="headerlink" title="&amp;&amp; 和 &amp;的区别"></a>&amp;&amp; 和 &amp;的区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// &amp;&amp; 和 &amp;的区别</span><br><span class="line"></span><br><span class="line">int num3 = 10;</span><br><span class="line">int num4 = 20;</span><br><span class="line">System.out.println( (num3++ &gt; 10) &amp; (num4++ &gt; 20) ); // false &amp; false ===&gt; false</span><br><span class="line">System.out.println(num3); // 11</span><br><span class="line">System.out.println(num4); // 21</span><br><span class="line">int num5 = 10;</span><br><span class="line">int num6 = 20;</span><br><span class="line">System.out.println( (num5++ &gt; 10) &amp;&amp; (num5++ &gt; 20) ); // false &amp;&amp; false ===&gt; false</span><br><span class="line">System.out.println(num5); // 11</span><br><span class="line">System.out.println(num6); // 20</span><br><span class="line">// 可以看到结果是一样的，但是&amp;把前后两项都进行了执行，而&amp;&amp;如果前面一项为false时，直接判断为false，后面的不进行执行</span><br><span class="line">System.out.println(&quot;----------&quot;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="二，使用Scanner获取键盘输入"><a href="#二，使用Scanner获取键盘输入" class="headerlink" title="二，使用Scanner获取键盘输入"></a>二，使用Scanner获取键盘输入</h1><h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.util.Scanner; // 1.导入jdk中的Scanner包</span><br><span class="line"></span><br><span class="line">public class ScannerDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// 2.创建一个键盘录入对象</span><br><span class="line">		Scanner sc = new Scanner(System.in);</span><br><span class="line"></span><br><span class="line">		// 3.接收数据</span><br><span class="line">		System.out.println(&quot;input a number: &quot;);</span><br><span class="line">		int inputNumber = sc.nextInt();</span><br><span class="line"></span><br><span class="line">		// 输出结果</span><br><span class="line">		System.out.println(&quot;the Number which u entered is: &quot; + inputNumber);</span><br><span class="line"></span><br><span class="line">		/*</span><br><span class="line">		 * 	运行结果</span><br><span class="line">		 * input a number: 89 </span><br><span class="line">		 * the Number which u entered is: 89</span><br><span class="line">		 */</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="sc-next-和sc-nextLine"><a href="#sc-next-和sc-nextLine" class="headerlink" title="sc.next()和sc.nextLine()"></a>sc.next()和sc.nextLine()</h3><ul>
+<li><p>next():</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.util.Scanner; // 1.导入jdk中的Scanner包</span><br><span class="line"></span><br><span class="line">public class ScannerDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// 创建一个键盘录入对象</span><br><span class="line">		Scanner sc = new Scanner(System.in);</span><br><span class="line"></span><br><span class="line">		// 接收数据</span><br><span class="line">		System.out.println(&quot;input a String: &quot;);</span><br><span class="line">		String inputString = sc.next();</span><br><span class="line">		// 输出结果</span><br><span class="line">		System.out.println(&quot;the String which u entered is: &quot; + inputString);</span><br><span class="line"></span><br><span class="line">		/*</span><br><span class="line">		 * 	运行结果</span><br><span class="line">		 * input a String: hello DeeJay</span><br><span class="line">		 * the String which u entered is: hello</span><br><span class="line">		 */</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>nextLine():</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.DeeJay;</span><br><span class="line"></span><br><span class="line">import java.util.Scanner; // 1.导入jdk中的Scanner包</span><br><span class="line"></span><br><span class="line">public class ScannerDemo &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// 创建一个键盘录入对象</span><br><span class="line">		Scanner sc = new Scanner(System.in);</span><br><span class="line"></span><br><span class="line">		// 接收数据</span><br><span class="line">		System.out.println(&quot;input a String: &quot;);</span><br><span class="line">		String inputString = sc.nextLine();</span><br><span class="line">		// 输出结果</span><br><span class="line">		System.out.println(&quot;the String which u entered is: &quot; + inputString);</span><br><span class="line"></span><br><span class="line">		/*</span><br><span class="line">		 * 	运行结果</span><br><span class="line">		 * input a String: hello DeeJay</span><br><span class="line">		 * the String which u entered is: hello DeeJay</span><br><span class="line">		 */</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="next-与-nextLine-区别"><a href="#next-与-nextLine-区别" class="headerlink" title="next() 与 nextLine() 区别"></a>next() 与 nextLine() 区别</h4><ul>
+<li><p>next():<br>1、一定要读取到有效字符后才可以结束输入。<br>2、对输入有效字符之前遇到的空白，next() 方法会自动将其去掉。<br>3、只有输入有效字符后才将其后面输入的空白作为分隔符或者结束符。<br>next() 不能得到带有空格的字符串。</p>
+</li>
+<li><p>nextLine()：<br>1、以Enter为结束符,也就是说 nextLine()方法返回的是输入回车之前的所有字符。<br>2、可以获得空白。</p>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

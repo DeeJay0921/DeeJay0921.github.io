@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JS数据类型，运算符，流程控制语句">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JS数据类型，运算符，流程控制语句</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-11</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>JS数据类型，运算符，流程控制语句</p>
+<a id="more"></a>
+
+
+<p>##1.JavaScript 定义了几种数据类型? 哪些是原始类型?哪些是复杂类型?原始类型和复杂类型的区别是什么?</p>
+<p>JS语言中定义了6种数据类型：</p>
+<ul>
+<li>number：整数和小数(例如1，3.14等)</li>
+<li>string：字符组成的文本，(“hello,world”)</li>
+<li>boolean： true和false两个特定值</li>
+<li>undefined： 表示“<strong>未定义</strong>”或者不存在，即目前<strong>此处没有任何值</strong></li>
+<li>null： 表示“<strong>空缺</strong>”，即<strong>此处本来应该有值，但是目前为空</strong>。</li>
+<li>object：对象，即表示各种值组成的集合。</li>
+</ul>
+<p>其中，<strong>number,string,boolean为原始类型</strong>(primitive type)，不可以再细分了。<br><strong>object对象类型为复杂类型</strong>(complex type)，一个对象往往是多个原始类型的值的合成，可以看做是一个存放各种值的容器。<br>另外，undefined和null一般视为两个特殊值。</p>
+<p>对象的细分，对象又可以分为三个子类型：</p>
+<ul>
+<li>狭义的对象(object)</li>
+<li>数组(array)</li>
+<li>函数(function)</li>
+<li>正则表达式(regexp)</li>
+</ul>
+<p>对于null和undefined的区别<br>对于null和undefined：null表示空值，即该处现在的值为空，一般用法为：</p>
+<ul>
+<li>作为函数的参数，表示该函数的参数是一个没有任何内容的对象</li>
+<li>作为对象原型链的终点</li>
+</ul>
+<p>undefined表示的是不存在值，就是此处目前不存在任何值，一般用法：</p>
+<ul>
+<li>变量声明了，但是没有赋值，为undefined</li>
+<li>调用函数时，应该提供的参数没有提供，该参数等于undefined</li>
+<li>对象没有赋值的属性，该属性的值默认为undefined</li>
+<li>函数没有返回值时，默认返回undefined<br>举例说明：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var i;  // i声明了但是没有赋值 为undefined</span><br><span class="line"></span><br><span class="line">function f(x) &#123;</span><br><span class="line">    console.log(x)</span><br><span class="line">&#125;</span><br><span class="line">f(); // 运行f()后，函数return的就是undefined，因为默认没有提供参数</span><br><span class="line"></span><br><span class="line">var obj = new Object();</span><br><span class="line">console.log(obj.p); // 调用一个对象不存在的属性，该属性的值默认是undefined</span><br><span class="line"></span><br><span class="line">var x = f();</span><br><span class="line">console.log(x); // 函数没有返回值的时候，默认返回的也是undefined</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>另外关于null和undefined还有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log( undefined == null); //true</span><br><span class="line">console.log( undefined === null); //false</span><br><span class="line"></span><br><span class="line">console.log(typeof undefined); //undefined</span><br><span class="line">console.log(typeof null)//object</span><br></pre></td></tr></table></figure>
+
+<p>Boolean<br>布尔值代表真假两个状态，只有true和false两个值<br>下列运算符会返回布尔值：</p>
+<ul>
+<li>两元逻辑运算符： &amp;&amp;(and), ||(or)</li>
+<li>前置逻辑元素符： !(not)</li>
+<li>相等运算符： ===，!==, ==,!=</li>
+<li>比较运算符： &gt;, &gt;=,&lt;,&lt;=</li>
+</ul>
+<p>可以转换为false的类型<br>如果JS某个位置上应该是布尔值，会将现有的值转换成布尔值，<strong>除了下列的6个值，其他值都被转换为true</strong>，转换为false的值有：</p>
+<ul>
+<li>undefined</li>
+<li>null</li>
+<li>false</li>
+<li>0</li>
+<li>NaN</li>
+<li>“”（空字符串）</li>
+</ul>
+<p><strong>只有空字符串为false，但是空数组，空对象对应的布尔值都是true</strong></p>
+<p>##2.typeof和instanceof的作用和区别?</p>
+<p>JS有三种方法可以确定一个值到底是什么类型：</p>
+<ul>
+<li>typeof运算符</li>
+<li>instanceof 运算符</li>
+<li>Object.prototype.toString 方法</li>
+</ul>
+<p>typeof运算符可以返回一个值的数据类型</p>
+<ul>
+<li>对于原始类型返回number， string或者boolean</li>
+<li>对于<strong>函数返回function</strong></li>
+<li>对于<strong>数组，狭义对象，正则表达式都返回object</strong></li>
+<li>对于<strong>undefined返回undefined</strong></li>
+<li>对于<strong>null返回object</strong></li>
+</ul>
+<p><strong>instanceof运算符是判断某个对象是不是某个构造函数创建的实例</strong>，<strong>在上面的例子中，除了原始类型，函数和undefined，其他的通过typeof运算符都返回object</strong>，所以需要instaceof来区分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr = [];</span><br><span class="line">var obj = &#123;&#125;;</span><br><span class="line">console.log( arr instanceof  Array); //true</span><br><span class="line">console.log( obj instanceof Array); //false</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>typeof undefined使用范例<br>typeof可以用来检查一个没有声明的变量，而不报错，实际应用中通常可以用在if判断语句条件中。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (typeof a === &quot;undefined&quot;) &#123;console.log(&apos;deejay&apos;);&#125; //deejay</span><br><span class="line">if (a) &#123;console.log*(&apos;deejay&apos;);&#125;  //Uncaught ReferenceError: a is not defined</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>所示代码中，正确的写法为上面的。</p>
+<p>##3.如何判断一个变量是否是数字、字符串、布尔、函数</p>
+<p>number,string,boolean都是原始类型，可以通过typeof运算符判断，typeof运算符判断函数时也会返回function，所以可以通过typeof运算符进行判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var num = 100;</span><br><span class="line">console.log(typeof num); //number</span><br><span class="line">var str = &apos;hello,deejay&apos;;</span><br><span class="line">console.log(typeof str); //string</span><br><span class="line">var bool = false;</span><br><span class="line">console.log(typeof bool); //boolean</span><br><span class="line">var a = function () &#123;</span><br><span class="line">    console.log(&quot;hello,deejay&quot;);</span><br><span class="line">&#125;</span><br><span class="line">console.log(typeof a); //function</span><br></pre></td></tr></table></figure>
+
+<p>##4.NaN是什么? 有什么特别之处?</p>
+<p>NaN即Not a Number,表示非数字，<strong>NaN和任何值都不相等，包括NaN</strong><br><code>console.log(NaN == NaN); //false</code></p>
+<p>##5.如何把非数值转化为数值?</p>
+<p>JS的数字类型没有整型和浮点数的区别，统一都是number类型，可以表示十进制，八进制，十六进制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = 10; //十进制</span><br><span class="line">var b = 073 //八进制</span><br><span class="line">var c = 0xf3 //十六进制</span><br></pre></td></tr></table></figure>
+
+<p>浮点数:<br>浮点数是指数字包含小数点并且至少有以为数字的例如： <code>var a =.57;</code><br>浮点数的精度不如整数，所以在进行小数运算的时候不要直接判断相等，尽量换成整数来进行判断</p>
+<p>Infinity<br><strong>也是number类型</strong>，代表无穷数</p>
+<p>数值的转换：<br>有三个函数可以把非数值转换为数值：</p>
+<ul>
+<li>Number()</li>
+<li>parseInt()</li>
+<li>parseFloat()<br>一般使用parseInt()和parseFloat(),具体用法举例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">parseInt(&apos;0&apos;); // 0 字符串为数字，直接转换为数字</span><br><span class="line">parseInt(&apos;0x11&apos;); // 17 十六进制转换为十进制 1+1*16 = 17</span><br><span class="line">parseInt(&apos;0abc&apos;);//0</span><br><span class="line">parseInt(&apos;a234abc&apos;); // 234 上述两种情况，以数字开头的截止到不是数字的那一位，转换成数字</span><br><span class="line">//其余情况转换结果全为NaN</span><br><span class="line">parseInt(&apos;010&apos;); //10</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>但是有<code>parseInt(&#39;3.4&#39;)//转换为3</code>的情况，所以对于浮点数，要通过parseFloat()来进行转换。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parseFloat(&apos;3.4&apos;) //3.4</span><br><span class="line">parseFloat(&apos;3.4abc&apos;) //3.4</span><br></pre></td></tr></table></figure>
+
+<p>在转换的过程中，开头0会被当成八进制，开头0x会被当成十六进制来转换。对于开头是0的情况，如果要按照十进制转换，可以使用第二个参数来指定。</p>
+<p>##6.==与===有什么区别</p>
+<p>==为近似相等,===为严格相等。<br>在使用==的时候，JS会做类型转换，有可能出现一些意料之外的效果。具体类型转换的规则为：</p>
+<ul>
+<li>如果两个值的类型相同，那么执行严格意义上的相等</li>
+<li>如果两个值的类型不同：</li>
+</ul>
+<ol>
+<li>一个是null一个是undefined，那么相等</li>
+<li>一个数字，一个字符串，将字符串转换为数字，然后比较</li>
+<li>如果一个值为true/false，转换为1/0比较</li>
+<li>如果一个值是对象，一个是数字或者字符串，则调用valueOf和toString进行转换然后比较</li>
+<li>其他情况皆不相等。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(NaN == NaN);  //false</span><br><span class="line">console.log(NaN === NaN);  //false</span><br><span class="line">console.log(null == undefined); //true</span><br><span class="line">console.log(2 == &apos;2&apos;); // true</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>##7.break与continue有什么区别</p>
+<ul>
+<li>break用于<strong>强制退出循环体，执行整个循环体后面的语句</strong>；</li>
+<li>continue 用于<strong>退出当前的这次循环，执行下次循环</strong>。</li>
+</ul>
+<p>举例说明区别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  for (var i = 1; i &lt; 10; i ++) &#123;</span><br><span class="line">    if (i % 4 === 0) &#123;</span><br><span class="line">        break; // 当i循环到4时，直接break跳出整个循环体，执行整个for循环体后面的代码，不会继续输出</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(i); //所以结果为： 1，2,3   循环到4时，跳出整个for循环，所以没有console.log(4)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for (var j = 1; j &lt; 10; j ++) &#123;</span><br><span class="line">    if (j % 4 === 0) &#123;</span><br><span class="line">        continue;  // 当j循环到4时， continue跳出本次的for循环， 进行下一次for循环，所以当j=4,j=8时，跳出了for循环不会输出</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(j);  // 所以输出结果为1,2,3,5,6,7,9</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>##8.void 0 和 undefined在使用场景上有什么区别</p>
+<p>void运算符的作用是 执行一个表达式，然后返回undefined。<br>在某些场景下(出现函数等)，undefined是可以被赋值的，举例说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  function fn () &#123;</span><br><span class="line">    var undefined = 3;</span><br><span class="line">    var a;</span><br><span class="line">    if (a === undefined) &#123;</span><br><span class="line">        console.log(&quot;a === undefined&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        console.log(&apos;a !== undefined&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">fn(); // a !== undefined  说明这个undefined是可以被赋值的。</span><br></pre></td></tr></table></figure>
+
+<p>而对于 void 0来说，返回的始终是真实的undefined，不存在上述的这个问题，所以可以重写上述例子的函数为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  function fn () &#123;</span><br><span class="line">    var undefined = 3;</span><br><span class="line">    var a;</span><br><span class="line">    if (a === void 0) &#123;  //void 0 返回的永远都是真实的undefined</span><br><span class="line">        console.log(&quot;a === undefined&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        console.log(&apos;a !== undefined&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">fn(); // a === undefined</span><br></pre></td></tr></table></figure>
+
+<p>##9.以下代码的输出结果是?为什么?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(1+1);    </span><br><span class="line">console.log(&quot;2&quot;+&quot;4&quot;);  </span><br><span class="line">console.log(2+&quot;4&quot;); </span><br><span class="line">console.log(+&quot;4&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>+操作符对不同的数据类型有不同的含义，例如:</p>
+<ul>
+<li>两个操作数都是数字，做加法运算</li>
+<li>都是字符串或者有一个是字符串，<strong>会将另一个不是字符串的转换为字符串然后进行拼接</strong></li>
+<li>有对象的时候会调用valueOf或者toString</li>
+<li><strong>只有一个字符串的时候会尝试进行数值转换</strong>，转换为数字</li>
+<li>只有一个数字的时候会返回其正数值<br>另外，特别地，有<code>true+true == 2;false+false ==0;</code></li>
+</ul>
+<p>所以上述代码的运行结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(1+1); //2</span><br><span class="line">console.log(&quot;2&quot; + &quot;4&quot;) // 24 转换为字符串 &apos;24&apos;</span><br><span class="line">console.log(2 + &apos;4&apos;); // 24 转换为字符串 &apos;24&apos;</span><br><span class="line">console.log(+ &apos;4&apos;); // 4 转换为数值4</span><br></pre></td></tr></table></figure>
+
+<p>##10.以下代码的输出结果是?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;  </span><br><span class="line">a+++a;  </span><br><span class="line">typeof a+2;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对于自增自减运算符(++和–)，举例说明：</li>
+</ul>
+<p><strong>自增在前面，意味着先进行自增，再进行赋值;自增在后面，意味着先进行赋值语句，然后再执行自增运算</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var a = 100;</span><br><span class="line">var b = a ++; // 此时b的值为100，先执行赋值之后再进行自增。</span><br><span class="line">console.log(a,b); //101，100  自增在后面，意味着先进行赋值语句，然后再执行自增运算</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var c = 100;</span><br><span class="line">var d = ++c; //此时先进行c的自增，然后再进行赋值，所以d也为101</span><br><span class="line">console.log(c,d); // 101,101  自增在前面，意味着先进行自增，再进行赋值</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在本例中，还涉及到自增运算符和加号运算符的权重问题，<strong>自增的权重是大于+的</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//自增的权重是大于+的，所以有a+++b时，等价于(a++) + b；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>typeof的优先级，typeof的优先级相当高，比加减乘除的优先级要高，所以有：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">typeof 2*3; // NaN</span><br><span class="line">//由于typeof的优先级较高，等价于 (typeof 2) * 3;而(typeof 2)的结果是一个字符串&apos;number&apos;,字符串&apos;number&apos;和3相乘，结果自然为NaN</span><br><span class="line"></span><br><span class="line">typeof (2*3); // &apos;number&apos;</span><br><span class="line">// 同理 这下先计算2 *3 ，等价于 typeof 6; 运行结果为字符串&apos;number&apos;</span><br><span class="line"></span><br><span class="line">typeof 2+3;//   &apos;number3&apos;</span><br><span class="line">// 同理，这下等价于 (typeof 2) + 3,(typeof 2)的运行结果为字符串的&apos;number&apos;,在通过+运算符，将字符串连接，结果为&apos;number3&apos;</span><br><span class="line"></span><br><span class="line">typeof &apos;abc&apos; + &apos;def&apos;; // &apos;stringdef</span><br><span class="line">// 同理，等价于 (typeof &apos;abc&apos;) + &apos;def&apos;; 而 (typeof &apos;abc&apos;)的结果为字符串的&apos;string&apos;,在和字符串&apos;def&apos;用+运算符进行连接，结果为字符串的&apos;stringdef&apos;</span><br></pre></td></tr></table></figure>
+
+<p>总结：<strong>typeof的优先级较高，另外运行结果为字符串形式的数据类型</strong>。<br>进行代码的分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">a+++a;   //等价于 (a++) + a 即1 + 1 =2，运行完成后a的值变为2</span><br><span class="line">typeof a+2; //此时a为2， 等价于 (typeof 2) + 2，运行结果为字符串的&apos;number&apos; + 2,结果为字符串的 &apos;number2&apos;</span><br></pre></td></tr></table></figure>
+
+<p>##11.以下代码的输出结果是? 为什么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var b = 3;</span><br><span class="line">console.log( a+++b );</span><br></pre></td></tr></table></figure>
+
+<p>运行结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var b = 3;</span><br><span class="line">console.log(a+++b);  //自增权重大于加号运算符，所以a+++b等价于 (a++) + b ,即1 + 3 = 4，运行完成后，a的值变为2，输出结果为4</span><br></pre></td></tr></table></figure>
+
+<p>##12.遍历数组，把数组里的打印数组每一项的平方</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var arr = [3,4,5]</span><br></pre></td></tr></table></figure>
+
+<p>解决方法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  var arr =[3,4,5];</span><br><span class="line">  for (var i = 0; i &lt; arr.length; i ++) &#123;</span><br><span class="line">      console.log(Math.pow(arr[i],2));</span><br><span class="line">  &#125;</span><br><span class="line">//输出结果为9,16,25</span><br></pre></td></tr></table></figure>
+
+<p>##13.遍历 JSON, 打印里面的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line"> name: &apos;hunger&apos;, </span><br><span class="line"> sex: &apos;male&apos;, </span><br><span class="line"> age: 28 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决方法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">      var obj = &#123;</span><br><span class="line">        name: &apos;deejay&apos;,</span><br><span class="line">        age: 21,</span><br><span class="line">        sex: &apos;male&apos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (var deejay_value in obj) &#123;</span><br><span class="line">        console.log(obj[deejay_value]);</span><br><span class="line">    &#125;</span><br><span class="line">//输出结果为 deejay 21 male</span><br></pre></td></tr></table></figure>
+
+<p>##14.以下代码输出结果是? 为什么 ?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var a = 1, b = 2, c = 3;</span><br><span class="line">var val = typeof a + b || c &gt;0</span><br><span class="line">console.log(val) </span><br><span class="line"></span><br><span class="line">var d = 5;</span><br><span class="line">var data = d ==5 &amp;&amp; console.log(&apos;bb&apos;)</span><br><span class="line">console.log(data)</span><br><span class="line"></span><br><span class="line">var data2 = d = 0 || console.log(&apos;haha&apos;)</span><br><span class="line">console.log(data2)</span><br><span class="line"> </span><br><span class="line">var x = !!&quot;Hello&quot; + (!&quot;world&quot;, !!&quot;from here!!&quot;);</span><br><span class="line">console.log(x)</span><br></pre></td></tr></table></figure>
+
+<p>代码分析：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var a = 1, b = 2, c = 3;</span><br><span class="line">var val = typeof a + b || c &gt;0</span><br><span class="line">console.log(val) ; // 输出结果为 &apos;number2&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var d = 5;</span><br><span class="line">var data = d ==5 &amp;&amp; console.log(&apos;bb&apos;)</span><br><span class="line">console.log(data) ; // bb          (d == 5) &amp;&amp; &apos;bb&apos;  ---&gt;&apos;bb&apos;  data的值为undefined</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var data2 = d = 0 || console.log(&apos;haha&apos;)</span><br><span class="line">console.log(data2);   // haha  data2的值为undefined</span><br><span class="line"></span><br><span class="line">var x = !!&quot;Hello&quot; + (!&quot;world&quot;, !!&quot;from here!!&quot;);</span><br><span class="line">console.log(x); // !!&apos;hello&apos; + (false,true)  ----&gt;  !!&apos;hello&apos; + true    ----&gt; true + true ----&gt; 2</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

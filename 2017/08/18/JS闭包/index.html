@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JS闭包">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JS闭包</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2017-08-18</span>
+            <span class="time">01:26:22</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/JS/">#JS</a> <a class="tag" href="/tags/闭包/">#闭包</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>JS闭包</p>
+<a id="more"></a>
+
+<p>#一些基础概念</p>
+<p>###变量的生命周期</p>
+<ul>
+<li><p>全局作用域下的变量，定义的时候开始存在，页面关闭或者刷新就消失。</p>
+</li>
+<li><p>函数内部的变量，在你写的时候是不存在的，一般来说，只有调用这个函数的时候，这个变量才会被声明。那么这个函数内部的a什么时候消失呢，当a所在的作用域不见的时候a就消失。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function fn () &#123;</span><br><span class="line">    var a = 1;</span><br><span class="line">    // return undefined; 所有函数不写return时，默认有这一句</span><br><span class="line">&#125;</span><br><span class="line">// 浏览器执行到这一行，此时a不存在</span><br><span class="line"></span><br><span class="line">fn();//这个时候a就诞生了</span><br><span class="line">//fn()执行完了之后，a就消失了</span><br><span class="line">fn();//这时候会产生一个新的a，并不是原来的a</span><br><span class="line">//fn() 执行完成后，新的a又消失了</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>如果这个变量被引用着，就不能回收</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function fn () &#123;</span><br><span class="line">    var a = 1;</span><br><span class="line">    var b = 2;</span><br><span class="line">    window.xxx = a;</span><br><span class="line">    // return undefined; 所有函数不写return时，默认有这一句</span><br><span class="line">&#125;</span><br><span class="line">// 浏览器执行到这一行，此时a不存在</span><br><span class="line"></span><br><span class="line">fn();//这个时候a就诞生了</span><br><span class="line">//此时fn()执行完，b消失，a还存在，因为a被引用了。</span><br><span class="line">console.log(window.xxx); //1</span><br><span class="line">//等window消失a也就消失了</span><br><span class="line">//其实可以认为函数执行完成后，a这个变量名是消失了的，只是这段内存没消失，还在继续被引用，等window消失的时候再释放这段内存</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>###var作用域</p>
+<ul>
+<li><p>就近原则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var a;</span><br><span class="line">function fn1 () &#123;</span><br><span class="line">    var a;</span><br><span class="line">    function fn2 () &#123;</span><br><span class="line">        var a;</span><br><span class="line">        a = 1; //给f2的a赋值</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function f2() &#123;&#125;;</span><br><span class="line">function f1 () &#123;</span><br><span class="line">    function f2 () &#123;&#125;</span><br><span class="line">    f2(); //调用的是f1内部的f2</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>词法作用域</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var a;</span><br><span class="line">function fn1 () &#123;</span><br><span class="line">    var a;</span><br><span class="line">    function fn2 () &#123;</span><br><span class="line">        var a;</span><br><span class="line">        a = 1; //给f2的a赋值</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>不需要执行代码，分析语句的词法就能判断作用域叫词法作用域</p>
+<ul>
+<li>同名的不同变量</li>
+</ul>
+<p>###立即执行函数</p>
+<ul>
+<li><p>如果想得到一个独立的作用域，必须要声明一个函数</p>
+</li>
+<li><p><strong>如果想运行函数内部的代码，必须要执行函数</strong><br>立即执行函数即创建一个匿名函数作用域并且立即执行。前面可以是! + - 等符号。</p>
+</li>
+<li><p>关于有没有var声明的区别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var a = 100;</span><br><span class="line"></span><br><span class="line">!function() &#123;</span><br><span class="line">    var a = 1;</span><br><span class="line">    !function() &#123;</span><br><span class="line">        a = 2; // 没有用var声明，所以不是当前作用域的a，而是上一级的作用域的a，所以改变了上一级a的值</span><br><span class="line">        console.log(a);//2</span><br><span class="line">    &#125;();</span><br><span class="line">    console.log(a);//2   a的值被改变 输出2</span><br><span class="line">&#125;();</span><br><span class="line">console.log(a);//100</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>立即执行函数的传参:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">!function(a) &#123; //这里的a是个形参</span><br><span class="line">    console.log(a); //外面传入一个a，里面的作用域输出2</span><br><span class="line">&#125;(2);</span><br><span class="line">console.log(a); //全局作用域下的a还是1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//上面的形参a其实相当于下面这么写</span><br><span class="line">!function()&#123;</span><br><span class="line">    var a = arguments[0];</span><br><span class="line">    console.log(a);//外面传入一个a，里面的作用域输出2</span><br><span class="line">&#125;(2);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>传参例子2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var a = 100;</span><br><span class="line"></span><br><span class="line">!function(a)&#123;</span><br><span class="line">    console.log(a);</span><br><span class="line">&#125;(a);</span><br><span class="line">//这里的两个a，传入的a是外部传入的值，全局变量a，而匿名函数的a仅仅是个形参  等于不写参数，里面一个var a = arguments[0];</span><br><span class="line">//只是在执行函数的时候恰好把传入参数的a赋值给了内部的a</span><br></pre></td></tr></table></figure>
+
+<p>###变量（声明）提升</p>
+<ul>
+<li><p>浏览器在执行代码之前，会把所有声明提升到作用域的顶部</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var a = 100;</span><br><span class="line">var a = function () &#123;&#125;;</span><br><span class="line">function a() &#123;&#125;;</span><br><span class="line">console.log(a); //function</span><br><span class="line">//等价于</span><br><span class="line">var a;</span><br><span class="line">var a;</span><br><span class="line">function a () &#123;&#125;;</span><br><span class="line">a = 100;</span><br><span class="line">a = function() &#123;&#125;;</span><br><span class="line">console.log(a); // 所以是function</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数内部的变量提升</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//函数内部的声明提升，不会提升到全局或者外部的作用域的，就只会提升到当前作用域顶部</span><br><span class="line">function f1() &#123;</span><br><span class="line">    // var a = 100; 变量提升等价于</span><br><span class="line">    var a;</span><br><span class="line">    a = 100;</span><br><span class="line">&#125;</span><br><span class="line">f1();</span><br><span class="line">//另外，上述代码和下面的是一样的</span><br><span class="line">function f1() &#123;</span><br><span class="line">    a = 100;</span><br><span class="line">    var a;</span><br><span class="line">&#125;</span><br><span class="line">//只有在当前作用域中有var，就不会跑出当前作用域</span><br><span class="line">//如果是</span><br><span class="line">var a = 1;</span><br><span class="line">function f1 () &#123;</span><br><span class="line">    a = 100;</span><br><span class="line">//    后面语句里没有用var声明a，那么这个a就不是当前f1下的a。会在f1的上级作用域中寻找a，并且改变a的值</span><br><span class="line">&#125;</span><br><span class="line">f1();</span><br><span class="line">console.log(a); //100</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>带有迷惑性的变量提升</p>
+</li>
+</ul>
+<p><strong>先进行提升，在考虑代码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var a = 100;  // 第一个a</span><br><span class="line">function f1 () &#123;</span><br><span class="line">    var b =2;</span><br><span class="line">    if (b === 1) &#123;</span><br><span class="line">        var a; //第二个a</span><br><span class="line">    &#125;</span><br><span class="line">    a = 99;</span><br><span class="line">&#125;</span><br><span class="line">//上述例子中，f1内部写的a = 99指的是谁？ </span><br><span class="line">// 进行变量提升，首先明确JS没有块级作用域，所以什么if for都不是新的作用域，变量提升的时候也不用考虑if的判断条件</span><br><span class="line">//总而言之，先进行提升，在考虑代码，即f1内部等价于</span><br><span class="line">var a = 100;</span><br><span class="line">function f1 () &#123;</span><br><span class="line">    var b;</span><br><span class="line">    var a;</span><br><span class="line">    b = 2;</span><br><span class="line">    if(b === 1)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    a = 99;</span><br><span class="line">&#125;</span><br><span class="line">//提升之后自然发现指的是f1内部的a</span><br></pre></td></tr></table></figure>
+
+<p>#闭包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var items = document.querySelectorAll(&apos;li&apos;);</span><br><span class="line">for(var i = 0; i &lt; items.length; i ++) &#123;</span><br><span class="line">    items[i].onclick = function () &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述例子分析：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">var items = document.querySelectorAll(&apos;li&apos;);</span><br><span class="line">for(var i = 0; i &lt; items.length; i ++) &#123;</span><br><span class="line">    items[i].onclick = function () &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(i);</span><br><span class="line"></span><br><span class="line">//进行变量提升</span><br><span class="line">var items;</span><br><span class="line">var i;</span><br><span class="line">//这里提升了i，整个作用域中只有这一个i，所以循环到6之后，所有的i的值都为6</span><br><span class="line">items = document.querySelectorAll(&apos;li&apos;);</span><br><span class="line">for(i = 0; i &lt; items.length; i ++) &#123;</span><br><span class="line">    items[i].onclick = function () &#123;</span><br><span class="line">        console.log(i); //C</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(i); // D</span><br><span class="line">// 变量提升完成后 D是一定比C先执行的</span><br><span class="line">// 当D执行时 i已经循环为6，所以后面C输出的都是6</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//所以如果要想使得每次输出的值不一样，就得使得每次的i不是同一个i</span><br><span class="line">//要取得不同的i,就要创建新的作用域,那么我们来创建新的作用域:</span><br><span class="line">var items;</span><br><span class="line">var i;</span><br><span class="line">items = document.querySelectorAll(&apos;li&apos;);</span><br><span class="line">for(i = 0; i &lt; items.length; i ++) &#123;</span><br><span class="line">    function temp (i) &#123;//创建一个新的函数作用域，在这个作用域中传入每次循环得到的i的值，就能得到不一样的i了</span><br><span class="line">    //    还要注意前面提到的问题，temp(i);中的i和函数的形参i不是同一个东西，具体见立即执行函数的传参</span><br><span class="line">        items[i].onclick = function () &#123;</span><br><span class="line">            console.log(i); //接收到每次的i值然后赋给i，这样每次循环的i的值就不一样了</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    temp(i); // 传入每次循环的i值</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//那么前面提到的立即执行函数可以简化代码，不用写temp()，直接写个立即执行函数并且传入i就好了</span><br><span class="line">var items;</span><br><span class="line">var i;</span><br><span class="line">items = document.querySelectorAll(&apos;li&apos;);</span><br><span class="line">for(i = 0; i &lt; items.length; i ++) &#123;</span><br><span class="line">    !function(i) &#123;  //写成立即执行函数简化代码</span><br><span class="line">        items[i].onclick = function () &#123;</span><br><span class="line">            console.log(i); //接收到每次的i值然后赋给i，这样每次循环的i的值就不一样了</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;(i);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//上述代码就等价于下面的，temp函数时一个返回函数的函数，创造一个函数用于绑定事件</span><br><span class="line">var items;</span><br><span class="line">var i;</span><br><span class="line">items = document.querySelectorAll(&apos;li&apos;);</span><br><span class="line">for(i = 0; i &lt; items.length; i ++) &#123;</span><br><span class="line">    function temp(i) &#123;  // 这里temp(i)其实也是要提升的，但是只要知道内部的i跟外部i不一样就好了</span><br><span class="line">        return function () &#123;</span><br><span class="line">            console.log(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var fn = temp(i); //传入每次的i的值  fn必须为一个函数才能赋给onclick事件，所以temp的返回值必须也是一个函数</span><br><span class="line"></span><br><span class="line">    items[i].onclick = fn;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 有了返回值为一个函数的思想，我们可以直接给onclick赋给一个返回函数的函数，这样创建了一个新的作用域保存每次循环的i值，如下：</span><br><span class="line">var items;</span><br><span class="line">var i;</span><br><span class="line">items = document.querySelectorAll(&apos;li&apos;);</span><br><span class="line">for(i = 0; i &lt; items.length; i ++) &#123;</span><br><span class="line">    items[i].onclick = function(i) &#123;</span><br><span class="line">        //函数内部作用域的i和外部的i不同</span><br><span class="line">        return function ()&#123;</span><br><span class="line">            console.log(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;(i); //传入每次循环的i值</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结一下思路：</p>
+<ul>
+<li><strong>要得到每次循环的i值，就必须得创建新的作用域。</strong>因为全局作用域当中只有一个i，是不会变的，需要一个新的作用域来获取每次循环的i的值。</li>
+<li>我们给onclick绑定的一定是一个函数，所以赋给onclick一个立即执行函数之后，这个立即执行的值，即<strong>return的东西一定是一个函数</strong>。这就是为什么一定要return一个函数。</li>
+</ul>
+<p>###通过作用域链理解闭包<br>第一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">    //通过作用域链理解闭包</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //下例中定义一个数组，遍历数组给每一项赋给一个函数，最后输出的 fnArr[1]的执行结果（）   发现结果都是2，不管是fnArr[1]还是fnArr[0]</span><br><span class="line">    // var fnArr = [];</span><br><span class="line">    // for (var i = 0; i &lt; 2; i ++) &#123;</span><br><span class="line">    //     fnArr[i] = function() &#123;</span><br><span class="line">    //         return i;</span><br><span class="line">    //     &#125;</span><br><span class="line">    // &#125;</span><br><span class="line">    // console.log( fnArr[0]() ); //2</span><br><span class="line">    // console.log( fnArr[1]() ); //2</span><br><span class="line">    //分析： 当我们写一段函数体或者函数名的时候，就是一段代码，一个指针或者一个地址，只有后面加了括号（），它才会真正的去执行</span><br><span class="line">    //没有执行的话，就相当于没有任何的作用，就是一段代码。</span><br><span class="line">    //所以在上面的for循环中，赋给fnArr[i]的时候没有执行，当循环结束时,i的值为2，此时调用fnArr[1]()或者fnArr[0]并且输出,</span><br><span class="line">    // 此时函数才会真正的执行，但是这个是函数里面没有i，只会向外部的全局作用域中寻找i，即for循环中的i，为2，所以不管fnArr[0]还是fnArr[1]都输出2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //针对上面的例子，我们提出了对代码的改装要求，要求fnArr[0]就是输出0，fnArr[1]就是输出1。要做到这个效果，就要用到闭包</span><br><span class="line">    // 第一种改装方法：</span><br><span class="line">    // var fnArr = [];</span><br><span class="line">    // for (var i = 0;i &lt; 2; i ++) &#123;</span><br><span class="line">    //     (function(i)&#123;</span><br><span class="line">    //         fnArr[i] = function () &#123;</span><br><span class="line">    //             return i;</span><br><span class="line">    //         &#125;</span><br><span class="line">    //     &#125;)(i);</span><br><span class="line">    // &#125;</span><br><span class="line">    // console.log( fnArr[0]() ); //0</span><br><span class="line">    // console.log( fnArr[1]() ); //1</span><br><span class="line">//    针对第一种改装方法，就等价于下面这么写，</span><br><span class="line">//    第一种改装方法的改写1,去掉for循环：</span><br><span class="line">//     var fnArr = [];</span><br><span class="line">//     (function(i)&#123;</span><br><span class="line">//         fnArr[i] = function () &#123;</span><br><span class="line">//             return i;</span><br><span class="line">//         &#125;</span><br><span class="line">//     &#125;)(0);</span><br><span class="line">//     (function(i)&#123;</span><br><span class="line">//         fnArr[i] = function () &#123;</span><br><span class="line">//             return i;</span><br><span class="line">//         &#125;</span><br><span class="line">//     &#125;)(1);</span><br><span class="line">//     console.log( fnArr[0]() );</span><br><span class="line">//     console.log( fnArr[1]() );</span><br><span class="line">//    这种写法还有立即执行函数，不好理解，接着改写2，去掉立即执行函数,就等价于：</span><br><span class="line">//    第一种改装方法的改写2：</span><br><span class="line">    var fnArr = [];</span><br><span class="line">    function fn1 (i) &#123;</span><br><span class="line">        fnArr[i] = function fn11() &#123;</span><br><span class="line">            return i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    function fn2 (i) &#123;</span><br><span class="line">        fnArr[i] = function fn22 () &#123;</span><br><span class="line">            return i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1(0);</span><br><span class="line">    fn2(1);</span><br><span class="line"></span><br><span class="line">    console.log( fnArr[0]() );</span><br><span class="line">    console.log( fnArr[1]() );</span><br><span class="line"></span><br><span class="line">//    那么通过作用域链来分析改写2:</span><br><span class="line">    globalContext = &#123;</span><br><span class="line">        AO : &#123;</span><br><span class="line">        //    活动对象,变量提升</span><br><span class="line">            fnArr: undefined,</span><br><span class="line">            fn1: function,</span><br><span class="line">            fn2: function,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1.[[scope]] = globalContext.AO;</span><br><span class="line">    fn2.[[scope]] = globalContext.AO;</span><br><span class="line"></span><br><span class="line">    fn1Context = &#123;</span><br><span class="line">        AO: &#123;</span><br><span class="line">            i: 0,</span><br><span class="line">            fn11: function,</span><br><span class="line">        &#125;,</span><br><span class="line">        scope: fn1.[[scope]]</span><br><span class="line">    &#125;</span><br><span class="line">    fn11.[[scope]] = fn1Context.AO;</span><br><span class="line">    //运行到fn1的时候，没有自身的AO里面没有fnArr，所以就要到scope里面去找，fn1.[[scope]]是globalContext的AO，找到了fnArr</span><br><span class="line">    //此时globalContext的AO的fnArr的值就由undefined变为[fn11]，然后什么都没发生，退出来进入fn2</span><br><span class="line">    fn2Context = &#123;</span><br><span class="line">        AO : &#123;</span><br><span class="line">            i: 1,</span><br><span class="line">            fn22: function,</span><br><span class="line">        &#125;,</span><br><span class="line">        scope: fn2.[[scope]],</span><br><span class="line">    &#125;</span><br><span class="line">    fn22.[[scope]] = fn2Context.AO;</span><br><span class="line">    //此时进入fn2，寻找fnArr和上面一样，过程结束后，globalContext的AO里面的fnArr的值为[fn11,fn22];</span><br><span class="line">    //现在    console.log( fnArr[0]() ); 要输出fnArr[0]() ，即在globalContext中找到AO里面的fnArr[0]并且执行，此时进入fn11的context</span><br><span class="line">    fn11Context = &#123;</span><br><span class="line">        AO: &#123;</span><br><span class="line">        //    AO是空的</span><br><span class="line">        &#125;,</span><br><span class="line">        scope: fn11.[[scope]],</span><br><span class="line">    &#125;</span><br><span class="line">    // fn11没有AO,所以只能通过scope来寻找i，fn11.[[scope]]就是fn1Context.AO, 所以找到了i，i为0，</span><br><span class="line">    // 一样的，当你输出fnArr[i]的时候，结果是调用fn22，然后找到fn2中的AO的i，为1</span><br><span class="line">    fn22Context = &#123;</span><br><span class="line">        AO: &#123;</span><br><span class="line">            //    AO是空的</span><br><span class="line">        &#125;,</span><br><span class="line">        scope: fn22.[[scope]],</span><br><span class="line">    &#125;</span><br><span class="line">    //那么对比我们一开始没有达成效果的例子，那个例子是因为在当前函数中找不到i，所以直接去全局中找到了i</span><br><span class="line">    //我们现在改写了之后，在函数和全局之间又加了一层包装，在scope的中途就能获取到i，所以能够达成效果，这就是闭包</span><br></pre></td></tr></table></figure>
+
+<p>第二个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">    //</span><br><span class="line">    function fn () &#123;</span><br><span class="line">        var s  = 1;</span><br><span class="line">        function sum () &#123;</span><br><span class="line">            ++s;</span><br><span class="line">            console.log(s);</span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">    var mySum = fn();</span><br><span class="line">    mySum(); //2</span><br><span class="line">    mySum(); //3</span><br><span class="line">    mySum(); //4</span><br><span class="line">    var mySum2 = fn();</span><br><span class="line">    mySum2(); //2</span><br><span class="line">    mySum2(); //3</span><br><span class="line">    //上述写法等价于</span><br><span class="line">    // function fn () &#123;</span><br><span class="line">    //     var s = 1;</span><br><span class="line">    //     return function () &#123;</span><br><span class="line">    //         ++s;</span><br><span class="line">    //         console.log(s);</span><br><span class="line">    //     &#125;</span><br><span class="line">    // &#125;</span><br><span class="line">    //同样的，使用作用域链的伪代码来分析：</span><br><span class="line">    globalContext = &#123;</span><br><span class="line">        AO : &#123;</span><br><span class="line">            fn: function,</span><br><span class="line">            mySum: undefined,</span><br><span class="line">            mySum2: undefined,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fn.[[scope]] = globalContext.AO;</span><br><span class="line">    //mySum = fn()时，进入fn的执行上下文</span><br><span class="line">    fnContext = &#123;</span><br><span class="line">        AO: &#123;</span><br><span class="line">            s: 1,</span><br><span class="line">            sum: function,</span><br><span class="line">        &#125;</span><br><span class="line">        scope: fn.[[scope]]</span><br><span class="line">    &#125;</span><br><span class="line">    sum.[[scope]] = fnContext.AO;</span><br><span class="line">    //执行完成之后退出fn,此时globalContext的AO里面的mySum的值由undefined变为fn（），即sum，调用mySum（），即执行sum，此时进入sum的context</span><br><span class="line">    sumContext = &#123;</span><br><span class="line">        AO : &#123;</span><br><span class="line">        //    为空</span><br><span class="line">        &#125;,</span><br><span class="line">        scope: sum.[[scope]],</span><br><span class="line">    &#125;</span><br><span class="line">//    sum没有AO，找不到s，所以到scope里面，即fn的AO里面找到s，此时s的值由1变为2.</span><br><span class="line">//    再次执行mySum（），此时sum还是没有s，继续到scope中去找，即找到了fnContext的AO的s，此时s为2，所以由2变为3</span><br><span class="line"></span><br><span class="line">//    然后执行到了mySum2 = fn(),此时，会初始化一个执行上下文，此时的s为1</span><br><span class="line">    fnContext = &#123;</span><br><span class="line">        AO: &#123;</span><br><span class="line">            s: 1,</span><br><span class="line">            sum: function,</span><br><span class="line">        &#125;</span><br><span class="line">        scope: fn.[[scope]],</span><br><span class="line">    &#125;</span><br><span class="line">    sum.[[scope]] = fnContext.AO;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>另外闭包的概念： 就是外面作用域里一个变量，内部作用域里在使用这个变量。<br><a href="https://zhuanlan.zhihu.com/p/22486908" target="_blank" rel="noopener">闭包 参考资料</a><br><a href="https://zhuanlan.zhihu.com/p/22685960" target="_blank" rel="noopener">异步 参考资料</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
