@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="TypeScript 中的模块系统">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">TypeScript 中的模块系统</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-11-08</span>
+            <span class="time">18:00:31</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/TS/">#TS</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>TypeScript 中的模块系统的简单介绍</p>
+<a id="more"></a>
+
+<p>TypeScript沿用了ECMAScript中模块的概念，直接来看相关使用：</p>
+<h1 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h1><h2 id="导出声明"><a href="#导出声明" class="headerlink" title="导出声明"></a>导出声明</h2><p>对于任何声明，都能通过添加<code>export</code>关键字来导出</p>
+<blockquote>
+<p>任何声明指的是（变量， 函数， 类， 类型别名， 接口）</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> T &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="built_in">string</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> Person &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="built_in">string</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> p: <span class="built_in">string</span> = <span class="string">"abc"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">s: <span class="built_in">string</span></span>):<span class="title">number</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s.length;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> unionType = <span class="built_in">string</span> | <span class="built_in">number</span>;</span><br></pre></td></tr></table></figure>
+
+<p>要进行使用时即可直接<code>import</code>:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;unionType&#125; <span class="keyword">from</span> <span class="string">"./module/TestModule"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> s: unionType = <span class="string">"abc"</span>;</span><br><span class="line"></span><br><span class="line">s = <span class="number">123</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对于接口和类型别名这种声明，不可以使用<code>export default</code>来进行导出，因为其后面只能跟value而非type</p>
+</blockquote>
+<h2 id="导出语句"><a href="#导出语句" class="headerlink" title="导出语句"></a>导出语句</h2><p>导出语句的方式允许在模块中重新定义导出的部分的名字：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="built_in">string</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;Person <span class="keyword">as</span> P&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;P&#125; <span class="keyword">from</span> <span class="string">"./module/TestModule"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p: P = &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="string">"zZ"</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="重新导出"><a href="#重新导出" class="headerlink" title="重新导出"></a>重新导出</h2><p>重新导出指的是可以在一个模块内部导出别的模块导出的部分：</p>
+<p>比如说有模块1：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="built_in">string</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; Person &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>现有模块2对模块1的导出进行了重新导出且重命名了一下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;Person <span class="keyword">as</span> P &#125; <span class="keyword">from</span> <span class="string">"./TestModule"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>此时别的模块可以直接使用模块2的重新导出：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;P&#125; <span class="keyword">from</span> <span class="string">"./module/TestModule2"</span>; <span class="comment">// 导出部分重命名过了  所以这块是P</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p: P = &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="string">"zZ"</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>值得注意的是：这种重新导出的方式，并没有在<code>TestModule2</code>中导入<code>TestModule</code>模块或定义一个新的局部变量。</p>
+</blockquote>
+<p>对于一个模块有多个导出部分的情况而言，可以使用<code>export * from module</code>的方式全部导出：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// TestModule</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="built_in">string</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> T &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">s: <span class="built_in">string</span></span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.name = s;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; Person, T &#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// TestModule2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">from</span> <span class="string">"./TestModule"</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;Person&#125; <span class="keyword">from</span> <span class="string">"./module/TestModule2"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;T&#125; <span class="keyword">from</span> <span class="string">"./module/TestModule2"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p: Person = &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="string">"zZ"</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> t: T = <span class="keyword">new</span> T(<span class="string">"ttt"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(t.name);</span><br></pre></td></tr></table></figure>
+
+<h1 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h1><p>可以使用以下几种<code>import</code>方式来进行导入其他模块导出的内容</p>
+<h2 id="导入一个模块中的某个导出内容"><a href="#导入一个模块中的某个导出内容" class="headerlink" title="导入一个模块中的某个导出内容"></a>导入一个模块中的某个导出内容</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;Person&#125; <span class="keyword">from</span> <span class="string">"./module/TestModule"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p: Person = &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="string">"zZ"</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>导入的时候也可以进行重命名：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;Person <span class="keyword">as</span> P&#125; <span class="keyword">from</span> <span class="string">"./module/TestModule"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p: P = &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="string">"zZ"</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将整个模块导入到一个变量，并通过它来访问模块的导出部分"><a href="#将整个模块导入到一个变量，并通过它来访问模块的导出部分" class="headerlink" title="将整个模块导入到一个变量，并通过它来访问模块的导出部分"></a>将整个模块导入到一个变量，并通过它来访问模块的导出部分</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="keyword">module</span> from "./<span class="keyword">module</span>/TestModule";</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let p: <span class="keyword">module</span>.Person = &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="string">"zZ"</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="具有副作用的导入模块（不推荐）"><a href="#具有副作用的导入模块（不推荐）" class="headerlink" title="具有副作用的导入模块（不推荐）"></a>具有副作用的导入模块（不推荐）</h2><p>当一些模块设置了一些没有导出的全局变量时，如果想要访问这些变量，可以通过这种方法来进行导入：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"./module/TestModule"</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="默认导出"><a href="#默认导出" class="headerlink" title="默认导出"></a>默认导出</h1><p>每个模块都有一个<code>default</code>导出，默认导出使用<code>default</code>关键字标记，并且每个模块都只能有一个<code>default</code>导出</p>
+<p>对于默认导出，需要一种特殊的导入形式来导入<code>default</code>导出</p>
+<p>对于一些工具类库，通常会使用默认导出，如jQuery等：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">declare</span> <span class="keyword">let</span> $: jQuery;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> $;</span><br></pre></td></tr></table></figure>
+
+<p>在其他地方就可以直接<code>import</code>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">"jQuery"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>而对于<strong>类</strong>和<strong>函数声明</strong>可以直接被标记为默认导出，且类和函数声明的名字可以省略掉：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (s: <span class="built_in">string</span>): <span class="function"><span class="params">number</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s.length;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> fn <span class="keyword">from</span> <span class="string">"./module/TestModule"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a: <span class="built_in">number</span> = fn(<span class="string">"abc"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>当然<code>default</code>也可以是一个值</p>
+<h1 id="export-和import-require"><a href="#export-和import-require" class="headerlink" title="export =和import = require()"></a><code>export =</code>和<code>import = require()</code></h1><p>针对CommonJS和AMD的<code>exports</code>变量,ts提供了<code>export =</code>语法来进行导出</p>
+<p>同时通过<code>export =</code>语法导出的模块，必须要用特定的<code>import module = require(&quot;module&quot;)</code>来进行导入</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="built_in">string</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> = Person;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> Person = <span class="built_in">require</span>(<span class="string">"./module/TestModule"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p: Person = &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="string">"zZ"</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

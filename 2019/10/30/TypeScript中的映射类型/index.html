@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="DeeJay">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="TypeScript中的映射类型及常见工具映射类型">
+  <meta property="og:description" content="web前端 Java后端">
+  <meta property="og:site_name" content="DeeJay&#39;s Blog">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deejay0921.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="DeeJay&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.jpg">
+  
+
+  <!-- Site Title -->
+  <title>DeeJay's Blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/blog-banner2.png)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">TypeScript中的映射类型及常见工具映射类型</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/DeeJay0921">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1018805743@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By DeeJay</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-10-30</span>
+            <span class="time">18:00:31</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/前端/">前端</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/前端/">#前端</a> <a class="tag" href="/tags/TS/">#TS</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>TypeScript中的映射类型允许我们基于旧类型创建一个新类型，从而有一些很有用的使用方法</p>
+<a id="more"></a>
+
+
+<h2 id="TS中的映射类型"><a href="#TS中的映射类型" class="headerlink" title="TS中的映射类型"></a>TS中的映射类型</h2><p>假设我们现在有一个<code>Person</code>类型的接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Person &#123;</span><br><span class="line"></span><br><span class="line">    name: string;</span><br><span class="line"></span><br><span class="line">    age: number;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们经常会遇到一种需求是将其内部所有的属性都变为可选：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface PersonPartial &#123;</span><br><span class="line"></span><br><span class="line">    name?: string;</span><br><span class="line"></span><br><span class="line">    age?: number;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者是将其内部属性都设置为只读:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface PersonReadonly &#123;</span><br><span class="line"></span><br><span class="line">    readonly name: string;</span><br><span class="line"></span><br><span class="line">    readonly age: number;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>针对这种从一个<strong>旧类型中创建一个新类型</strong>的需求，TS提供了<strong>映射类型</strong>。</p>
+<blockquote>
+<p>在映射类型里，新类型以<strong>相同的形式</strong>去转换旧类型里每个属性</p>
+</blockquote>
+<p>针对上述的2种需求，使用映射类型可以直接生成一个新的类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Person &#123;</span><br><span class="line"></span><br><span class="line">    name: string;</span><br><span class="line"></span><br><span class="line">    age: number;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">type usrDefinedPartial&lt;T&gt; = &#123;</span><br><span class="line"></span><br><span class="line">    [P in keyof T]?: T[P];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let p: usrDefinedPartial&lt;Person&gt; = &#123;&#125;; // 都为可选属性了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">type usrDefinedReadonly&lt;T&gt; = &#123;</span><br><span class="line"></span><br><span class="line">    readonly [P in keyof T]: T[P];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let p2: usrDefinedReadonly&lt;Person&gt; = &#123;</span><br><span class="line"></span><br><span class="line">    name: &quot;p2&quot;,</span><br><span class="line"></span><br><span class="line">    age: 20</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// p2.name = &quot;p22&quot;; // Cannot assign to &apos;name&apos; because it is a read-only property.</span><br></pre></td></tr></table></figure>
+
+<p>当然针对上面定义的<code>usrDefinedPartial&lt;Person&gt;</code>和<code>usrDefinedReadonly&lt;Person&gt;</code>,完全可以定义一个别名来方便使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">type PartialPerson = usrDefinedPartial&lt;Person&gt;;</span><br><span class="line"></span><br><span class="line">type ReadonlyPerson = usrDefinedReadonly&lt;Person&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>如果想要在上面的类型的基础上新增一些属性的话，注意这个语法描述的<strong>是类型而非成员</strong>，所以我们不能直接这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 不能这么写</span><br><span class="line"></span><br><span class="line">type addNewPropertyPerson&lt;T&gt; = &#123;</span><br><span class="line"></span><br><span class="line">    readonly [P in keyof T]: T[P];</span><br><span class="line"></span><br><span class="line">    test: string; // &apos;string&apos; only refers to a type, but is being used as a value here.</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>而是应该采用交叉类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface TestAble &#123;test: string&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">type addNewPropertyPerson&lt;T&gt; = &#123;</span><br><span class="line"></span><br><span class="line">    readonly [P in keyof T]: T[P];</span><br><span class="line"></span><br><span class="line">&#125; &amp; TestAble;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let p: addNewPropertyPerson&lt;Person&gt; = &#123;</span><br><span class="line"></span><br><span class="line">    name: &quot;Yang&quot;,</span><br><span class="line"></span><br><span class="line">    age: 21,</span><br><span class="line"></span><br><span class="line">    test: &quot;abc&quot;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// p.name = &quot;123&quot;; // Cannot assign to &apos;name&apos; because it is a read-only property.</span><br></pre></td></tr></table></figure>
+
+<p>也可以省略定义类型，直接使用字面量类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">type addNewPropertyPerson&lt;T&gt; = &#123;</span><br><span class="line"></span><br><span class="line">    readonly [P in keyof T]: T[P];</span><br><span class="line"></span><br><span class="line">&#125; &amp; &#123;test: string&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>看完映射类型的简单使用，接下来看一下映射类型的组成部分</p>
+<p>现有如下2个类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">type Keys = &apos;option1&apos; | &apos;option2&apos;;</span><br><span class="line"></span><br><span class="line">type Flags = &#123; [K in Keys]: boolean &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>其内部使用了<code>for ... in</code>，分为3个部分：</p>
+<ol>
+<li><p>类型变量<code>K</code>，其会在遍历时依次绑定到每个属性</p>
+</li>
+<li><p>字符串联合类型变量<code>Keys</code>,提供了要迭代的属性名的集合（一般也会使用泛型）</p>
+</li>
+<li><p>属性的结果类型，本例中为<code>boolean</code></p>
+</li>
+</ol>
+<p>上述例子中定义的<code>Flags</code>类型，等价于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">type Flags = &#123;</span><br><span class="line"></span><br><span class="line">    option1: boolean;</span><br><span class="line"></span><br><span class="line">    option2: boolean;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在实际的开发中，遇到的情况不止这么简单，经常会基于一些已经存在的类型，且按照一定的方式进行转换字段,</p>
+<p>假设现在有如下类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Person &#123;</span><br><span class="line"></span><br><span class="line">    name: string;</span><br><span class="line"></span><br><span class="line">    age: number</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在要基于<code>Person</code>类型，在<code>--strictNullChecks</code>下，创建一个允许属性值有<code>null</code>的新类型:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">type NullAblePerson = &#123;</span><br><span class="line"></span><br><span class="line">    [P in keyof Person]: Person[P] | null;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let p: NullAblePerson = &#123;</span><br><span class="line"></span><br><span class="line">    name: null,</span><br><span class="line"></span><br><span class="line">    age: null</span><br><span class="line"></span><br><span class="line">&#125;; // 在strictNullChecks也无报错</span><br></pre></td></tr></table></figure>
+
+<p>当然我们一般会选用更通用的泛型来进行声明映射类型:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">type NullAble&lt;T&gt; = &#123;</span><br><span class="line"></span><br><span class="line">    [P in keyof T]: T[P] | null</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">type NullAblePerson = NullAble&lt;Person&gt;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="一些实用的工具类型"><a href="#一些实用的工具类型" class="headerlink" title="一些实用的工具类型"></a>一些实用的工具类型</h2><p>TS内置了一些工具映射类型方便我们进行操作：</p>
+<h3 id="Partial-lt-T-gt"><a href="#Partial-lt-T-gt" class="headerlink" title="Partial&lt;T&gt;"></a><code>Partial&lt;T&gt;</code></h3><p>并将它所有的属性设置为可选的。它的返回类型表示输入类型的所有子类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Person &#123;</span><br><span class="line"></span><br><span class="line">    name: string;</span><br><span class="line"></span><br><span class="line">    age: number</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let p: Partial&lt;Person&gt; = &#123;&#125;; // check pass</span><br></pre></td></tr></table></figure>
+
+<h3 id="Readonly-lt-T-gt"><a href="#Readonly-lt-T-gt" class="headerlink" title="Readonly&lt;T&gt;"></a><code>Readonly&lt;T&gt;</code></h3><p>构造类型T，并将它所有的属性设置为readonly，也就是说构造出的类型的属性不能被再次赋值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Person &#123;</span><br><span class="line"></span><br><span class="line">    name: string;</span><br><span class="line"></span><br><span class="line">    age: number</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let p: Readonly&lt;Person&gt; = &#123;</span><br><span class="line"></span><br><span class="line">   name: &quot;Y&quot;, age: 20</span><br><span class="line"></span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.name = &quot;Z&quot;; // Cannot assign to &apos;name&apos; because it is a read-only property.</span><br></pre></td></tr></table></figure>
+
+<p>还可用来表示在运行时会失败的赋值表达式（比如，当尝试给冻结对象的属性再次赋值时）:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//Object.freeze</span><br><span class="line"></span><br><span class="line">function freeze&lt;T&gt;(obj: T): Readonly&lt;T&gt;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Record-lt-K-T-gt"><a href="#Record-lt-K-T-gt" class="headerlink" title="Record&lt;K,T&gt;"></a>Record&lt;K,T&gt;</h3><p>构造一个类型，其属性名的类型为K，属性值的类型为T。这个工具可用来将某个类型的属性映射到另一个类型上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface LineInfo &#123;</span><br><span class="line"></span><br><span class="line">    line: string</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">type lines = &quot;line1&quot; | &quot;line2&quot; | &quot;line3&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let article: Record&lt;lines, LineInfo&gt; = &#123;</span><br><span class="line"></span><br><span class="line">    line1: &#123;line: &quot;line1&quot;&#125;,</span><br><span class="line"></span><br><span class="line">    line2: &#123;line: &quot;line2&quot;&#125;,</span><br><span class="line"></span><br><span class="line">    line3: &#123;line: &quot;line3&quot;&#125;,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Pick-lt-T-K-gt"><a href="#Pick-lt-T-K-gt" class="headerlink" title="Pick&lt;T,K&gt;"></a>Pick&lt;T,K&gt;</h3><p>从类型T中挑选部分属性K来构造类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Person &#123;</span><br><span class="line"></span><br><span class="line">    name: string,</span><br><span class="line"></span><br><span class="line">    age: number,</span><br><span class="line"></span><br><span class="line">    gender: string</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let p: Pick&lt;Person, &quot;name&quot; | &quot;gender&quot;&gt; = &#123;</span><br><span class="line"></span><br><span class="line">    name: &quot;Y&quot;,</span><br><span class="line"></span><br><span class="line">    gender: &quot;Male&quot;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
